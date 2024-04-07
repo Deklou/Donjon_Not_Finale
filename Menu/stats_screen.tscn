@@ -1,0 +1,130 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjtet3hw20c5s"]
+
+[ext_resource type="Script" path="res://Menu/stats_screen.gd" id="1_nlobg"]
+
+[node name="stats_screen" type="CanvasLayer"]
+script = ExtResource("1_nlobg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -192.0
+offset_right = 808.0
+offset_bottom = 192.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Etage fini"
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Armes légendaires obtenues"
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Ennemis vaincus"
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Secret"
+
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Temps"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 168.0
+offset_right = 960.0
+offset_bottom = 520.0
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/1"
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/3"
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/20"
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/1"
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -192.0
+offset_right = 88.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Commencer"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -464.0
+offset_top = -192.0
+offset_right = -208.0
+offset_bottom = 153.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

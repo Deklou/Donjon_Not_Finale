@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6owu1lcf7nw"]
+
+[ext_resource type="Script" path="res://Objects/Chest.gd" id="1_1ul1u"]
+[ext_resource type="Texture2D" uid="uid://d21dq5gk3p48e" path="res://Sprites/Objects/locked_chest.png" id="1_q1p3u"]
+[ext_resource type="Texture2D" uid="uid://bufopnj0pcgfq" path="res://Sprites/Objects/unlocked_chest.png" id="2_ymece"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n064e"]
+size = Vector2(64, 29)
+
+[node name="Chest" type="RigidBody2D"]
+collision_mask = 2
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_1ul1u")
+
+[node name="Locked_Chest_Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_q1p3u")
+
+[node name="Interaction_Area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Interaction_Area"]
+position = Vector2(0, 16)
+build_mode = 1
+polygon = PackedVector2Array(40, -24, 40, 16, 32, 16, 32, 24, -32, 24, -32, 16, -40, 16, -40, -24)
+
+[node name="Chest_Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14.5)
+shape = SubResource("RectangleShape2D_n064e")
+
+[node name="Unlocked_Chest_Sprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_ymece")
+
+[connection signal="body_entered" from="Interaction_Area" to="." method="_on_interaction_area_body_entered"]
