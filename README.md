@@ -23,7 +23,7 @@ $$ |      $$$$$$\ $$ | \$$ |$$ |  $$ |$$$$$$$$\ $$$$$$$$\
 
 ## About Donjon Not Finale
 
-Donjon Not Finale is a demo of Donjon Finale 2, the sequel of captivating top-down 2D adventure that blends strategy and combat, where every move counts. 
+Donjon Not Finale is a demo of Donjon Finale 2, the sequel of the captivating top-down 2D adventure that blends strategy and combat, where every move counts. 
 Developed using Godot Engine, this turn-based game invites players to navigate through mysterious dungeons filled with merciless enemies, where every resource is a critical decision waiting to be made.
 
 
