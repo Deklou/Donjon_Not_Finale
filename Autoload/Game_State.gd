@@ -34,6 +34,10 @@ var player_position : Vector2 #position du joueur
 
 var ending_triggered : bool = false #fin relative à la demo
 
+#Player interface down
+
+signal show_attack_button #cache le bouton d'attaque quand le joueur n'entre pas en combat
+
 func player_has_moved(): #c'est ici qu'est régit le comportement des points de mouvements quand le joueur se déplace
 	if GameData.player_current_movement_point > 0:
 		GameData.player_current_movement_point = GameData.player_current_movement_point - 1
@@ -53,6 +57,7 @@ func player_turn_end():
 	else:
 		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0:
 			GameData.player_current_movement_point = GameData.player_MAX_movement_point
+	show_attack_button.emit() #envoi à interface down
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
 

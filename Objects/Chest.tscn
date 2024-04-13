@@ -22,7 +22,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Interaction_Area"]
 position = Vector2(0, 16)
 build_mode = 1
-polygon = PackedVector2Array(40, -24, 40, 16, 32, 16, 32, 24, -32, 24, -32, 16, -40, 16, -40, -24)
+polygon = PackedVector2Array(40, -24, 40, 16, 32, 16, 32, 24, -32, 24, -32, 16, -40, 16, -40, -24, -31.8342, -24, -32, -56, 32, -56, 32, -24)
 
 [node name="Chest_Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14.5)

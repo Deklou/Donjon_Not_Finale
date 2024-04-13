@@ -381,15 +381,10 @@ theme_override_constants/separation = 120
 alignment = 1
 
 [node name="Attack_button" type="Button" parent="MarginContainer_down/interface_down/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "Attaquer
-"
-
-[node name="Pick_up_button" type="Button" parent="MarginContainer_down/interface_down/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Ramasser
 "
 
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
