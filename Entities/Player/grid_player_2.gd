@@ -16,6 +16,7 @@ func _input(event):
 			if not $RayCast2D.is_colliding():
 				currPos.x += distance
 				self.position = Vector2(currPos.x,currPos.y)
+				GameState.player_has_moved()
 				GameState.player_turn_end()
 		elif event.is_action_pressed("left"):
 			$AnimationPlayer.play("walk_left")
@@ -24,6 +25,7 @@ func _input(event):
 			if not $RayCast2D.is_colliding():
 				currPos.x -= distance
 				self.position = Vector2(currPos.x,currPos.y)
+				GameState.player_has_moved()
 				GameState.player_turn_end()
 		elif event.is_action_pressed("up"):
 			$AnimationPlayer.play("walk_up")
@@ -33,6 +35,7 @@ func _input(event):
 				currPos.y -= distance
 				$AnimationPlayer.play("walk_up")
 				self.position = Vector2(currPos.x,currPos.y)
+				GameState.player_has_moved()
 				GameState.player_turn_end()
 		elif event.is_action_pressed("down"):
 			$AnimationPlayer.play("walk_down")
@@ -41,5 +44,6 @@ func _input(event):
 			if not $RayCast2D.is_colliding():
 				currPos.y += distance
 				self.position = Vector2(currPos.x,currPos.y)
+				GameState.player_has_moved()
 				GameState.player_turn_end()
 		GameState.player_position = self.position

@@ -3,7 +3,7 @@ extends Node
 #Script contenant toutes les datas du jeu
 
 
-#stats de base du joueur
+#variables de base du joueur
 
 var player_MAX_HP : int = 22 #Limite haute des points de vie
 var player_HP : int = 1 #valeur qui peut varier entre 0 et les points de vie maximals
@@ -11,18 +11,18 @@ var player_STR : int = 6 #Nombre de points de vie qu'on retire à la cible
 var player_DEX : float = 5 #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
 var player_DEF : int = 5 #Valeur qui sera soustraite aux dégâts reçus
 
-#stats relatives au niveau du joueur
+#variables relatives au niveau du joueur
 
 var player_LVL : int = 1 #Niveau
 var player_XP : int = 0 #expérience
 var player_CP : int = 0 #point de compétence
 
-#valeurs calculés du joueur
+#variables calculées du joueur
 
 var player_MT : int = player_STR #dégâts totaux
 var player_CRT : int = 0 #% de coup critique
 
-#valeur tampons
+#variables tampons
 
 var player_LVL_buffer : int = player_LVL
 var player_XP_buffer : int = player_XP
@@ -34,6 +34,13 @@ var player_CRT_buffer : int = player_CRT #nécéssaire car la stat évolue selon
 var player_STR_buffer : int = player_STR #nécéssaire car le joueur peut augmenter et baisser cette stat
 var player_DEX_buffer : float = player_DEX #nécéssaire car le joueur peut augmenter et baisser cette stat
 var player_DEF_buffer : int = player_DEF #nécéssaire car le joueur peut augmenter et baisser cette stat
+
+#variables relatives au tour du joueur
+
+var player_MAX_movement_point: int = 2 #points max de mouvement possibles
+var player_MAX_action_point: int = 1 #points max d'actions possibles
+var player_current_movement_point: int = 1 #points de mouvements actuels du joueur
+var player_current_action_point: int = 1 #points d'actions actuels du joueur
 
 ############################################################################################
 
@@ -53,7 +60,7 @@ var enemy_DEF : int = 5 #Valeur qui sera soustraite aux dégâts reçus
 var enemy_LVL : int = 1 #Niveau
 var enemy_XP : int = 10 #expérience reçu si l'ennemi est vaincu
 
-#valeurs calculés de l'ennemi
+#valeurs calculées de l'ennemi
 
 var enemy_MT : int = enemy_STR #dégâts totaux
 var enemy_CRT : int = 0 #% de coup critique
@@ -67,6 +74,13 @@ var enemy_CRT_buffer : int = enemy_CRT #% de coup critique
 var enemy_STR_buffer : int = enemy_STR #Nombre de points de vie qu'on retire à la cible
 var enemy_DEX_buffer : float = enemy_DEX #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
 var enemy_DEF_buffer : int = enemy_DEF #Valeur qui sera soustraite aux dégâts reçus
+
+#variables relatives au tour du joueur
+
+var enemy_MAX_movement_point: int = 1 #points max de mouvement possibles
+var enemy_MAX_action_point: int = 1 #points max d'actions possibles
+var enemy_current_movement_point: int = 1 #points de mouvements actuels de l'ennemi
+var enemy_current_action_point: int = 1 #points d'actions actuels de l'ennemu
 
 ############################################################################################
 

@@ -30,15 +30,28 @@ var is_ennemy_turn : bool = false #on contrôle si c'est au tour de l'ennemi d'a
 
 #Player
 
-var player_position : Vector2
+var player_position : Vector2 #position du joueur
 
-var ending_triggered : bool = false
+var ending_triggered : bool = false #fin relative à la demo
+
+func player_has_moved(): #c'est ici qu'est régit le comportement des points de mouvements quand le joueur se déplace
+	if GameData.player_current_movement_point > 0:
+		GameData.player_current_movement_point = GameData.player_current_movement_point - 1
+	else:
+		GameData.player_current_movement_point = 0
 
 func player_turn_end():
-	if GameState.is_ennemy_turn == false:
-		GameState.is_ennemy_turn = true
+	if not EntitiesState.enemy_triggered_list.is_empty():
+		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0:
+			GameState.is_ennemy_turn = true
+	StatsSystem.update_stats()
+	EntitiesState.update_stats.emit()
 
 func enemy_turn_end():
 	if GameState.is_ennemy_turn == true:
 		GameState.is_ennemy_turn = false
 		GameData.turn_number = GameData.turn_number + 1
+		GameData.player_current_movement_point = GameData.player_MAX_movement_point
+	await get_tree().create_timer(0.5).timeout
+	StatsSystem.update_stats()
+	EntitiesState.update_stats.emit()

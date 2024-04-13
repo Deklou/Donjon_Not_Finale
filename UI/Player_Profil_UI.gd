@@ -14,6 +14,8 @@ extends Control
 @onready var UI_stat_DEX : Label = $Player_Stats/DEX
 @onready var UI_stat_DEF : Label = $Player_Stats/DEF
 
+@onready var UI_stat_MVT : Label = $Player_Stats/MVT
+
 ############### ControlNode ##################
 
 @onready var Button_Stats_Control : Control = $Player_Stats/Button_Stat
@@ -75,6 +77,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_STR.text = "STR: " + str(GameData.player_STR)
 	UI_stat_DEX.text = "DEX: " + str(GameData.player_DEX)
 	UI_stat_DEF.text = "DEF: " + str(GameData.player_DEF)
+	
+	
+	UI_stat_MVT.text = "MVT: " + str(GameData.player_current_movement_point)
 	
 	
 func stat_modifier():
