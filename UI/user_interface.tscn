@@ -168,6 +168,10 @@ text = "DEF:"
 layout_mode = 2
 text = "MVT:"
 
+[node name="ACT" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+text = "ACT:"
+
 [node name="Button_Stat" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 visible = false
 layout_mode = 2

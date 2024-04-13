@@ -24,7 +24,7 @@ func update_inventory(inventory: Array):
 		item_button.pressed.connect(func():validation_menu(item_button, item_name)) #si on sélectionne l'objet
 
 func validation_menu(item_button, item_name):
-	if GameState.is_ennemy_turn == false:
+	if GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		if GameState.Ui_Inventory_is_locked == true : #Si le flag est vrai, on désactive l'interface
 			return
 		for child in vbox_node.get_children(): #on désactive tous les boutons
@@ -49,7 +49,7 @@ func validation_menu(item_button, item_name):
 		cancel_button.pressed.connect(func():_cancel_button())
 		
 func _use_button(item_button,item_name): #note: en principe il suffirait juste d'appeler la fonction _remove_button, mais godot veut pas
-	if item_button !=null:  #vérifie si l'item existe
+	if item_button !=null and GameData.player_current_action_point > 0:  #vérifie si l'item existe
 		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true: #Si une arme est équipée, alors on arrête la fonction
 			Logs._log_item("Already_Equiped",item_name)
 			return
@@ -64,7 +64,7 @@ func _use_button(item_button,item_name): #note: en principe il suffirait juste d
 		validation_node.visible = false #on cache le sous menu
 	
 func _remove_button(item_button,item_name):
-	if item_button !=null: #vérifie si l'item existe
+	if item_button !=null and GameData.player_current_action_point > 0: #vérifie si l'item existe
 		Inventory._remove_item(item_name) #on le retire de l'inventaire
 		item_button = null #par précaution de pas delete un bouton déjà supprimé
 		validation_node.visible = false #on cache le sous menu

@@ -15,6 +15,7 @@ extends Control
 @onready var UI_stat_DEF : Label = $Player_Stats/DEF
 
 @onready var UI_stat_MVT : Label = $Player_Stats/MVT
+@onready var UI_stat_ACT : Label = $Player_Stats/ACT
 
 ############### ControlNode ##################
 
@@ -80,6 +81,7 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	
 	
 	UI_stat_MVT.text = "MVT: " + str(GameData.player_current_movement_point)
+	UI_stat_ACT.text = "ACT: " + str(GameData.player_current_action_point)
 	
 	
 func stat_modifier():
@@ -91,55 +93,61 @@ func stat_modifier():
 	Button_Stats_Control.visible = true	
 
 func _on_plus_str_button_pressed():
-	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false:
+	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_STR_buffer = GameData.player_STR_buffer + 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer - 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 func _on_minus_str_button_pressed():
-	if GameData.player_CP >= 0 and GameData.player_STR_buffer > base_player_STR and GameState.is_ennemy_turn == false:
+	if GameData.player_CP >= 0 and GameData.player_STR_buffer > base_player_STR and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_STR_buffer = GameData.player_STR_buffer - 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer + 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 
 
 func _on_plus_dex_button_pressed():
-	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false:
+	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer + 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer - 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 func _on_minus_dex_button_pressed():
-	if GameData.player_CP >= 0 and GameData.player_DEX_buffer > base_player_DEX and GameState.is_ennemy_turn == false:
+	if GameData.player_CP >= 0 and GameData.player_DEX_buffer > base_player_DEX and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer - 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer + 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 
 
 func _on_plus_def_button_pressed():
-	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false:
+	if GameData.player_CP > 0 and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEF_buffer = GameData.player_DEF_buffer + 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer - 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 func _on_minus_def_button_pressed():
-	if GameData.player_CP >= 0 and GameData.player_DEF_buffer > base_player_DEF and GameState.is_ennemy_turn == false:
+	if GameData.player_CP >= 0 and GameData.player_DEF_buffer > base_player_DEF and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEF_buffer = GameData.player_DEF_buffer - 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer + 1
+		GameState.player_has_acted()
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 
@@ -150,6 +158,7 @@ func _on_validation_button_pressed():
 	GameState.Ui_Inventory_is_locked = false #on réactive l'accès à l'inventaire
 	Button_Stats_Control.visible = false
 	Hbox_Validation.visible = false
+	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
 
@@ -161,5 +170,6 @@ func _on_cancel_button_pressed():
 	GameData.player_STR_buffer = base_player_STR
 	GameData.player_DEX_buffer = base_player_DEX
 	GameData.player_DEF_buffer = base_player_DEF
+	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()

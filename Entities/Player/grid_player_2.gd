@@ -8,7 +8,7 @@ func _ready():
 	currPos = $".".position
 
 func _input(event):
-	if GameState.is_ennemy_turn == false:
+	if GameState.is_ennemy_turn == false and GameData.player_current_movement_point > 0:
 		if event.is_action_pressed("right"):
 			$AnimationPlayer.play("walk_right")
 			$RayCast2D.target_position = Vector2(distance,0)

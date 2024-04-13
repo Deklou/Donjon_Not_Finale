@@ -25,6 +25,7 @@ func _remove_item(item_name): #jeter un item de l'inventaire
 				GameData.Item[item_name].Equiped = false
 				GameState.weapon_equipped = false
 		GameState.double_remove_call = true
+	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
 	
@@ -40,6 +41,7 @@ func _use_item(item_name): #utiliser un item.
 		GameState.weapon_equipped_name = item_name
 		GameData.player_MT_buffer = GameData.player_STR_buffer + GameData.Item[item_name].Value[0]
 		GameData.player_CRT_buffer = GameData.player_CRT_buffer + GameData.Item[item_name].Value[1]
+	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
 

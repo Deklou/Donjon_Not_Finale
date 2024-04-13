@@ -39,11 +39,20 @@ func player_has_moved(): #c'est ici qu'est régit le comportement des points de 
 		GameData.player_current_movement_point = GameData.player_current_movement_point - 1
 	else:
 		GameData.player_current_movement_point = 0
+		
+func player_has_acted(): #c'est ici qu'est régit le comportement des points d'actions quand le joueur agit
+	if GameData.player_current_action_point > 0:
+		GameData.player_current_action_point = GameData.player_current_action_point - 1
+	else:
+		GameData.player_current_action_point = 0
 
 func player_turn_end():
 	if not EntitiesState.enemy_triggered_list.is_empty():
-		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0:
+		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0 and GameData.player_current_action_point == 0:
 			GameState.is_ennemy_turn = true
+	else:
+		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0:
+			GameData.player_current_movement_point = GameData.player_MAX_movement_point
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
 
@@ -52,6 +61,7 @@ func enemy_turn_end():
 		GameState.is_ennemy_turn = false
 		GameData.turn_number = GameData.turn_number + 1
 		GameData.player_current_movement_point = GameData.player_MAX_movement_point
+		GameData.player_current_action_point = GameData.player_MAX_action_point
 	await get_tree().create_timer(0.5).timeout
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
