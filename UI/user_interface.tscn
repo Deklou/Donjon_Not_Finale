@@ -113,22 +113,30 @@ offset_bottom = 69.0
 theme_override_font_sizes/font_size = 18
 text = "Point de compétence:"
 
+[node name="XP_bar_bg" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+custom_minimum_size = Vector2(67, 10)
+layout_mode = 0
+offset_top = 72.0
+offset_right = 66.0
+offset_bottom = 81.0
+
 [node name="XP_bar" type="TextureProgressBar" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 0
 offset_left = 2.0
-offset_top = 73.0
+offset_top = 74.0
 offset_right = 86.0
-offset_bottom = 81.0
+offset_bottom = 82.0
 texture_under = ExtResource("1_3aabu")
 texture_progress = ExtResource("1_3aabu")
 tint_under = Color(0, 0, 0, 1)
+tint_over = Color(0, 0, 0, 1)
 script = ExtResource("4_wb5qm")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 0
 offset_top = 89.0
-offset_right = 40.0
-offset_bottom = 169.0
+offset_right = 116.0
+offset_bottom = 175.0
 
 [node name="HP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/VBoxContainer2"]
 layout_mode = 2

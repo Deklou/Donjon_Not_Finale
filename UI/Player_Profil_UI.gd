@@ -72,6 +72,12 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_CP.text = "Point de compétence: " + str(GameData.player_CP)
 	
 	UI_stat_HP.text = "HP: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
+	
+	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
+		UI_stat_HP.modulate = Color(1, 0, 0)  # Rouge
+	else:
+		UI_stat_HP.modulate = Color(1, 1, 1)  # Blanc
+	
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
 	
