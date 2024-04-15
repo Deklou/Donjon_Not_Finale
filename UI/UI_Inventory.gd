@@ -17,13 +17,18 @@ func update_inventory(inventory: Array):
 		child.queue_free() # Supprimer tous les enfants du VBoxContainer avant de les recréer
 	for item_name in inventory: #Pour chaque objet de l'inventaire, on appelle la scène de l'item
 		var item_button = preload("res://UI/Inventory_Item.tscn").instantiate()
+		var item_icon = item_button.get_node("Icon")
 		vbox_node.add_child(item_button)
 		item_button.text = item_name
 		item_button.name = item_name #pour debug plus facilement
 		
-		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name:
-			var equipped_label = item_button.get_node("Equipped_Label")
-			equipped_label.visible = true
+		if GameData.Item[item_name].Type == "Weapon":
+			item_icon.texture = preload("res://Sprites/UI_icon/weapon.PNG")
+			if GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name:
+				var equipped_label = item_button.get_node("Equipped_Label")
+				equipped_label.visible = true
+		else:
+			item_icon.texture = preload("res://Sprites/UI_icon/consumable.PNG")
 			
 		item_button.pressed.connect(func():validation_menu(item_button, item_name)) #si on sélectionne l'objet
 
