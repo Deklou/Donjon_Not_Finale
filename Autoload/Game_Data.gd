@@ -38,9 +38,9 @@ var player_DEF_buffer : int = player_DEF #nécéssaire car le joueur peut augmen
 #variables relatives au tour du joueur
 
 var player_MAX_movement_point: int = 2 #points max de mouvement possibles
-var player_MAX_action_point: int = 1 #points max d'actions possibles
-var player_current_movement_point: int = 1 #points de mouvements actuels du joueur
-var player_current_action_point: int = 1 #points d'actions actuels du joueur
+var player_MAX_action_point: int = 2 #points max d'actions possibles
+var player_current_movement_point: int = 2 #points de mouvements actuels du joueur
+var player_current_action_point: int = 2 #points d'actions actuels du joueur
 
 ############################################################################################
 
