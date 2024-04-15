@@ -57,6 +57,7 @@ func _ready():
 	EntitiesState.update_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
 	StatsSystem.update_player_stats.connect(update_player_UI)
 	XpSystem.UI_stat_button.connect(stat_modifier) 
+	GameState.show_mvt_act_stats.connect(update_player_UI)
 	update_player_UI()
 	
 func update_player_UI(): #update l'interface avec les valeurs du joueur
@@ -88,6 +89,13 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	
 	UI_stat_MVT.text = "MVT: " + str(GameData.player_current_movement_point)
 	UI_stat_ACT.text = "ACT: " + str(GameData.player_current_action_point)
+	
+	if not EntitiesState.enemy_triggered_list.is_empty():
+		$Player_Stats/MVT.visible = true
+		$Player_Stats/ACT.visible = true
+	else:
+		$Player_Stats/MVT.visible = false
+		$Player_Stats/ACT.visible = false
 	
 	
 func stat_modifier():
