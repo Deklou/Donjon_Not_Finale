@@ -21,6 +21,7 @@ var player_CP : int = 0 #point de compétence
 
 var player_MT : int = player_STR #dégâts totaux
 var player_CRT : int = 0 #% de coup critique
+var player_base_CRT : int = 0 #sert de valeur étalon pour la comparaison avec le crit
 
 #variables tampons
 

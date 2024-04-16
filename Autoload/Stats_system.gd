@@ -39,6 +39,7 @@ func update_stats():
 		GameData.player_MT = GameData.player_STR
 		
 	GameData.player_CRT = GameData.player_CRT + (GameData.player_DEX/4) -1
+	GameData.player_base_CRT = GameData.player_base_CRT + (GameData.player_DEX/4) -1
 	
 	
 	########################################################################################################################

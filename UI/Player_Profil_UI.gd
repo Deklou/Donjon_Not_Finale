@@ -3,12 +3,13 @@ extends Control
 #On va chercher les différents label de l'interface droite
 
 @onready var UI_stat_LVL: Label = $LVL
+@onready var UI_stat_XP_bar : TextureProgressBar = $XP_bar
 @onready var UI_stat_XP : Label = $XP
 @onready var UI_stat_CP : Label = $CP
 
 @onready var UI_stat_HP : Label = $VBoxContainer2/HP
-@onready var UI_stat_MT : Label = $VBoxContainer2/MT
-@onready var UI_stat_CRT : Label = $VBoxContainer2/CRT
+@onready var UI_stat_MT : RichTextLabel = $VBoxContainer2/MT
+@onready var UI_stat_CRT : RichTextLabel = $VBoxContainer2/CRT
 
 @onready var UI_stat_STR : Label = $Player_Stats/STR
 @onready var UI_stat_DEX : Label = $Player_Stats/DEX
@@ -66,18 +67,13 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	############### XP ################
 	
 	UI_stat_XP.text = "Exp: " + str(GameData.player_XP)
-	$XP_bar.update_xp_progress(GameData.player_XP)
+	UI_stat_XP_bar.update_xp_progress(GameData.player_XP)
 	
 	###################################
 	
 	UI_stat_CP.text = "Point de compétence: " + str(GameData.player_CP)
 	
 	UI_stat_HP.text = "HP: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
-	
-	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
-		UI_stat_HP.modulate = Color(1, 0, 0)  # Rouge
-	else:
-		UI_stat_HP.modulate = Color(1, 1, 1)  # Blanc
 	
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
@@ -91,12 +87,29 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_ACT.text = "ACT: " + str(GameData.player_current_action_point)
 	
 	if not EntitiesState.enemy_triggered_list.is_empty():
-		$Player_Stats/MVT.visible = true
-		$Player_Stats/ACT.visible = true
+		UI_stat_MVT.visible = true
+		UI_stat_ACT.visible = true
 	else:
-		$Player_Stats/MVT.visible = false
-		$Player_Stats/ACT.visible = false
+		UI_stat_MVT.visible = false
+		UI_stat_ACT.visible = false
+		
+	########################### Couleurs ###########################
 	
+	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
+		UI_stat_HP.modulate = Color(1, 0, 0)  # Rouge
+	else:
+		UI_stat_HP.modulate = Color(1, 1, 1)  # Blanc
+		
+	if GameState.weapon_equipped == true:
+		if GameData.player_MT > GameData.player_STR:
+			UI_stat_MT.text = "Dégâts Totaux: [color=green]" + str(GameData.player_MT) + "[/color]"
+			print(GameData.player_CRT)
+			print(GameData.player_base_CRT)
+		if GameData.player_CRT > GameData.player_base_CRT:
+			UI_stat_CRT.text = "Critique: [color=green]" + str(GameData.player_CRT) + "[/color]"
+
+	################################################################
+		
 	
 func stat_modifier():
 	base_player_CP = GameData.player_CP_buffer #chaque montée de niveau, on copie les anciennes stats du joueur
