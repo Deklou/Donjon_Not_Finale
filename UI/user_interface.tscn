@@ -402,6 +402,11 @@ size_flags_vertical = 4
 text = "Attaquer
 "
 
+[node name="Wait_button" type="Button" parent="MarginContainer_down/interface_down/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Attendre"
+
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/minus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX/plus_DEX_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_dex_button_pressed"]
@@ -411,3 +416,4 @@ text = "Attaquer
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Validation_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_validation_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Cancel_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/HBoxContainer/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
+[connection signal="pressed" from="MarginContainer_down/interface_down/HBoxContainer/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]

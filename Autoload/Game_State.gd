@@ -36,7 +36,8 @@ var ending_triggered : bool = false #fin relative à la demo
 
 #Player interface down
 
-signal show_attack_button #cache le bouton d'attaque quand le joueur n'entre pas en combat
+signal show_wait_button #cache le bouton d'attente quand le joueur n'entre pas en combat
+signal show_attack_button #cache le bouton d'attaque quand le joueur n'est pas à proximité d'un ennemi
 signal show_mvt_act_stats #cache les stats de mvt et act si le joueur n'est pas en combat
 
 func player_has_moved(): #c'est ici qu'est régit le comportement des points de mouvements quand le joueur se déplace
@@ -61,7 +62,7 @@ func player_turn_end():
 				GameData.player_current_movement_point = GameData.player_MAX_movement_point
 			elif GameData.player_current_action_point == 0:
 				GameData.player_current_action_point = GameData.player_MAX_action_point
-	show_attack_button.emit() #envoi à interface down
+	show_wait_button.emit() #envoi à interface down
 	show_mvt_act_stats.emit() #envoi vers Player_profil_UI
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
@@ -74,3 +75,6 @@ func enemy_turn_end():
 		GameData.player_current_action_point = GameData.player_MAX_action_point
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
+	
+func _show_attack_button():
+	show_attack_button.emit() #envoi à interface down

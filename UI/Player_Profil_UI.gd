@@ -103,8 +103,6 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:
 			UI_stat_MT.text = "Dégâts Totaux: [color=green]" + str(GameData.player_MT) + "[/color]"
-			print(GameData.player_CRT)
-			print(GameData.player_base_CRT)
 		if GameData.player_CRT > GameData.player_base_CRT:
 			UI_stat_CRT.text = "Critique: [color=green]" + str(GameData.player_CRT) + "[/color]"
 

@@ -42,8 +42,6 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 			
 func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour calculer les dégâts reçus par un ennemi
 	if randf() < GameData.player_CRT/float(100):
-		print(min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2))
-		print(max(1,GameData.player_MT*2 - GameData.enemy_stats[EntitiesState.enemy_id].DEF))
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
 		Logs._log_entity_deal_critical_damage("Enemy",entity_name)
 	else:

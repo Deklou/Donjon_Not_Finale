@@ -6,6 +6,7 @@ signal enemy_death #signal pour avertir de la mort de l'ennemi
 
 signal hide_inventory_UI
 
+
 ########## A SUPPRIMER PLUS TARD ##########
 
 var libération : bool = false
