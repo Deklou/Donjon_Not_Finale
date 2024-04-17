@@ -1,7 +1,7 @@
 extends Control
 
-@onready var attack_button  : Button = $HBoxContainer/Attack_button
-@onready var wait_button  : Button = $HBoxContainer/Wait_button
+@onready var attack_button  : Button = $Attack_button
+@onready var wait_button  : Button = $Wait_button
 
 func _ready():
 	GameState.show_wait_button.connect(player_has_entered_combat)

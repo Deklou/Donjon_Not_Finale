@@ -23,12 +23,12 @@ func update_inventory(inventory: Array):
 		item_button.name = item_name #pour debug plus facilement
 		
 		if GameData.Item[item_name].Type == "Weapon":
-			item_icon.texture = preload("res://Sprites/UI_icon/weapon.PNG")
+			item_icon.texture = preload("res://Sprites/UI_icon/weapon.png")
 			if GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name:
 				var equipped_label = item_button.get_node("Equipped_Label")
 				equipped_label.visible = true
 		else:
-			item_icon.texture = preload("res://Sprites/UI_icon/consumable.PNG")
+			item_icon.texture = preload("res://Sprites/UI_icon/consumable.png")
 			
 		item_button.pressed.connect(func():validation_menu(item_button, item_name)) #si on sélectionne l'objet
 

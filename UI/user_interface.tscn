@@ -98,9 +98,9 @@ text = "Niveau:"
 
 [node name="XP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = 135.0
+offset_left = 112.0
 offset_top = 8.0
-offset_right = 191.0
+offset_right = 168.0
 offset_bottom = 37.0
 theme_override_font_sizes/font_size = 18
 text = "Exp:"
@@ -134,9 +134,9 @@ script = ExtResource("4_wb5qm")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = 1.0
 offset_top = 88.0
-offset_right = 207.0
+offset_right = 209.0
 offset_bottom = 174.0
 theme_override_constants/separation = 7
 alignment = 1
@@ -159,10 +159,10 @@ fit_content = true
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = -1.0
+offset_left = 3.0
 offset_top = 184.0
-offset_right = 35.0
-offset_bottom = 300.0
+offset_right = 42.0
+offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 14
@@ -280,7 +280,6 @@ script = ExtResource("4_wenhx")
 layout_mode = 2
 
 [node name="Enemy_Profil" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
-visible = false
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 280.0
@@ -290,33 +289,40 @@ script = ExtResource("5_xsdpy")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 81.0
-offset_right = 116.0
-offset_bottom = 194.0
+offset_top = 80.0
+offset_right = 192.0
+offset_bottom = 202.0
+theme_override_constants/separation = 7
+alignment = 1
 
 [node name="HP" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
 layout_mode = 2
 text = "HP:"
 
-[node name="MT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="MT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
 layout_mode = 2
+bbcode_enabled = true
 text = "Dégâts Totaux:"
+fit_content = true
 
-[node name="CRT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="CRT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
 layout_mode = 2
+bbcode_enabled = true
 text = "Critique:"
+fit_content = true
 
 [node name="Label" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = 1.0
 offset_top = 178.0
-offset_right = 35.0
-offset_bottom = 264.0
+offset_right = 37.0
+offset_bottom = 284.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme_override_constants/separation = 14
 
 [node name="STR" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
 layout_mode = 2
@@ -339,7 +345,7 @@ theme_override_constants/separation = 20
 
 [node name="Name" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/HBoxContainer"]
 layout_mode = 2
-text = "Name"
+text = "Nom:"
 
 [node name="LVL" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/HBoxContainer"]
 layout_mode = 2
@@ -349,14 +355,15 @@ text = "Niveau:"
 visible = false
 anchors_preset = 0
 offset_left = 24.0
-offset_top = 544.0
+offset_top = 576.0
 offset_right = 192.0
-offset_bottom = 640.0
+offset_bottom = 672.0
 script = ExtResource("7_clhvp")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI"]
 layout_mode = 0
-offset_right = 168.0
+offset_left = 1.0
+offset_right = 169.0
 offset_bottom = 96.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI/ScrollContainer"]
@@ -378,33 +385,29 @@ grow_vertical = 0
 layout_mode = 2
 script = ExtResource("6_tu6kf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_down/interface_down"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -224.0
-offset_top = -56.0
-offset_right = 224.0
-offset_bottom = -25.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-theme_override_constants/separation = 120
-alignment = 1
-
-[node name="Attack_button" type="Button" parent="MarginContainer_down/interface_down/HBoxContainer"]
-visible = false
+[node name="Attack_button" type="Button" parent="MarginContainer_down/interface_down"]
 layout_mode = 2
+anchor_left = 0.225
+anchor_right = 0.225
+offset_left = 80.4
+offset_right = 216.4
+offset_bottom = 36.0
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
 text = "Attaquer
 "
 
-[node name="Wait_button" type="Button" parent="MarginContainer_down/interface_down/HBoxContainer"]
-visible = false
+[node name="Wait_button" type="Button" parent="MarginContainer_down/interface_down"]
 layout_mode = 2
+anchor_left = 0.029
+anchor_top = 0.4
+anchor_right = 0.029
+anchor_bottom = 0.4
+offset_left = 392.336
+offset_top = -16.0
+offset_right = 528.336
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 20
 text = "Attendre"
 
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
@@ -415,5 +418,5 @@ text = "Attendre"
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF/minus_DEF_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_def_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Validation_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_validation_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Cancel_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="MarginContainer_down/interface_down/HBoxContainer/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
-[connection signal="pressed" from="MarginContainer_down/interface_down/HBoxContainer/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]
+[connection signal="pressed" from="MarginContainer_down/interface_down/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
+[connection signal="pressed" from="MarginContainer_down/interface_down/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]

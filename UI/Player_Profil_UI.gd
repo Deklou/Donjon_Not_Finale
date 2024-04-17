@@ -62,16 +62,16 @@ func _ready():
 	update_player_UI()
 	
 func update_player_UI(): #update l'interface avec les valeurs du joueur
-	UI_stat_LVL.text = "Niveau: " + str(GameData.player_LVL)
+	UI_stat_LVL.text = "Niveau:   " + str(GameData.player_LVL)
 	
 	############### XP ################
 	
-	UI_stat_XP.text = "Exp: " + str(GameData.player_XP)
+	UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
 	UI_stat_XP_bar.update_xp_progress(GameData.player_XP)
 	
 	###################################
 	
-	UI_stat_CP.text = "Point de compétence: " + str(GameData.player_CP)
+	UI_stat_CP.text = "Point de compétence:   " + str(GameData.player_CP)
 	
 	UI_stat_HP.text = "HP: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
 	
@@ -102,9 +102,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:
-			UI_stat_MT.text = "Dégâts Totaux: [color=green]" + str(GameData.player_MT) + "[/color]"
+			UI_stat_MT.text = "Dégâts Totaux: [color=#66B2FF]" + str(GameData.player_MT) + "[/color]"
 		if GameData.player_CRT > GameData.player_base_CRT:
-			UI_stat_CRT.text = "Critique: [color=green]" + str(GameData.player_CRT) + "[/color]"
+			UI_stat_CRT.text = "Critique: [color=#66B2FF]" + str(GameData.player_CRT) + "[/color]"
 
 	################################################################
 		

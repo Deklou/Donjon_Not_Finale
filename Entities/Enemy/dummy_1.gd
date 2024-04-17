@@ -44,6 +44,8 @@ func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instanc
 	dummy_stats.DEX += dummy_DEX_offset
 	dummy_stats.DEF += dummy_DEF_offset
 	
+	GameData.enemy_base_CRT = GameData.enemy_CRT + dummy_DEX_offset/4
+	
 	#On check l'inventaire
 
 	if not dummy_inventory.is_empty(): #A chaque fois qu'on instancie un ennemi, la première chose qu'on fait est de lui équipper son arme

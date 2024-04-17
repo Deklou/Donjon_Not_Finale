@@ -65,6 +65,7 @@ var enemy_XP : int = 10 #expérience reçu si l'ennemi est vaincu
 
 var enemy_MT : int = enemy_STR #dégâts totaux
 var enemy_CRT : int = 0 #% de coup critique
+var enemy_base_CRT : int = 0 #sert de valeur étalon pour la comparaison avec le crit
 
 #valeur tampons
 

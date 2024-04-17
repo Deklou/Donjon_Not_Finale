@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c30khy4sq8v87"]
+
+[node name="Inventory_Label" type="Label"]
+offset_right = 8.0
+offset_bottom = 23.0
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.125
+anchor_top = 0.413043
+anchor_right = 1.125
+anchor_bottom = 0.413043
+offset_left = 12.0
+offset_top = -14.0
+offset_right = 28.0
+offset_bottom = 2.0
+grow_horizontal = 0
+
+[node name="Equipped_Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = -6.0
+offset_right = 14.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "E"
+horizontal_alignment = 2

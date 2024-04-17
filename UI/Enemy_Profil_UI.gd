@@ -32,6 +32,20 @@ func update_enemy_UI():
 		UI_enemy_DEX_stat.text = "DEX: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEX)
 		UI_enemy_DEF_stat.text = "DEF: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEF)
 	
+	########################### Couleurs ###########################
+	
+		if float(GameData.enemy_stats[EntitiesState.selected_id].HP)/float(GameData.enemy_stats[EntitiesState.selected_id].MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
+			UI_enemy_HP_stat.modulate = Color(1, 0, 0)  # Rouge
+		else:
+			UI_enemy_HP_stat.modulate = Color(1, 1, 1)  # Blanc
+			
+		if GameData.enemy_stats[EntitiesState.selected_id].MT > GameData.enemy_stats[EntitiesState.selected_id].STR:
+			UI_enemy_MT_stat.text = "Dégâts Totaux: [color=#66B2FF]" + str(GameData.enemy_stats[EntitiesState.selected_id].MT) + "[/color]"	
+		if GameData.enemy_stats[EntitiesState.selected_id].CRT > GameData.enemy_base_CRT:
+			UI_enemy_CRT_stat.text = "Critique: [color=#66B2FF]" + str(GameData.enemy_stats[EntitiesState.selected_id].CRT) + "[/color]"
+			
+	################################################################
+	
 func show_enemy_UI():
 	ennemy_profil.visible = true
 	
