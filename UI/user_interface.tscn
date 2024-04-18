@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=10 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Texture2D" uid="uid://i6djldglvotl" path="res://UI/Assets/xp_bar.png" id="1_3aabu"]
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
 [ext_resource type="Script" path="res://UI/XP_bar.gd" id="4_wb5qm"]
 [ext_resource type="Script" path="res://UI/UI_logs.gd" id="4_wenhx"]
+[ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
 [ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="5_xsdpy"]
 [ext_resource type="Script" path="res://UI/interface_down.gd" id="6_tu6kf"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
@@ -131,6 +132,16 @@ texture_progress = ExtResource("1_3aabu")
 tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0, 0, 0, 1)
 script = ExtResource("4_wb5qm")
+
+[node name="MT_ARROW_TEST" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+layout_mode = 2
+offset_left = 125.0
+offset_top = 122.0
+offset_right = 147.0
+offset_bottom = 137.0
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 0
@@ -280,6 +291,7 @@ script = ExtResource("4_wenhx")
 layout_mode = 2
 
 [node name="Enemy_Profil" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
+visible = false
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 280.0

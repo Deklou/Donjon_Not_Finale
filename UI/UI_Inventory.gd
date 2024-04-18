@@ -59,9 +59,11 @@ func validation_menu(item_button, item_name):
 		
 func _use_button(item_button,item_name): #note: en principe il suffirait juste d'appeler la fonction _remove_button, mais godot veut pas
 	if item_button !=null and GameData.player_current_action_point > 0:  #vérifie si l'item existe
-		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true: #Si une arme est équipée, alors on arrête la fonction
+		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name: #Si une arme est équipée, alors on arrête la fonction
 			Logs._log_item("Already_Equiped",item_name)
 			return
+		elif GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true and GameState.weapon_equipped_name != item_name:
+			Inventory._exchange_item(item_name)
 		else:
 			Inventory._use_item(item_name)
 		if GameData.Item[item_name].Type == "Item":

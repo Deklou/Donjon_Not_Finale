@@ -44,7 +44,7 @@ func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instanc
 	dummy_stats.DEX += dummy_DEX_offset
 	dummy_stats.DEF += dummy_DEF_offset
 	
-	GameData.enemy_base_CRT = GameData.enemy_CRT + dummy_DEX_offset/4
+	GameData.enemy_base_CRT += dummy_DEX_offset/4
 	
 	#On check l'inventaire
 
@@ -61,9 +61,14 @@ func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instanc
 func _process(_delta):
 	
 	if GameState.mouse_select_states == true: #si la souris se trouve dans la zone de l'ennemi
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id == dummy_id: #si le joueur appui sur clic gauche
-				EntitiesState.enemy_selected() #on aeppelle la fonction pour rendre visible l'interface ennemi
-				GameState.mouse_select_states = false #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id == dummy_id: #si le joueur appui sur clic gauche
+			EntitiesState.enemy_selected() #on aeppelle la fonction pour rendre visible l'interface ennemi
+			$selector.visible = true
+			GameState.mouse_select_states = false #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
+		elif EntitiesState.selected_id == dummy_id and $selector.visible == true:
+			$selector.visible = true
+		else:
+			$selector.visible = false
 	
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		XpSystem.gain_xp()

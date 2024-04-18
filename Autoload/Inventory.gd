@@ -44,6 +44,20 @@ func _use_item(item_name): #utiliser un item.
 	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
+	
+func _exchange_item(item_name): #échanger d'arme
+	if GameData.Item[item_name].Type == "Weapon":
+		if GameState.weapon_equipped == true and GameState.weapon_equipped_name != item_name:
+			GameData.Item[GameState.weapon_equipped_name].Equiped = false
+			GameData.player_MT_buffer = GameData.player_STR_buffer
+			GameData.player_CRT_buffer = GameData.player_CRT_buffer - GameData.Item[GameState.weapon_equipped_name].Value[1]
+			GameData.Item[item_name].Equiped = true
+			GameState.weapon_equipped_name = item_name
+			GameData.player_MT_buffer = GameData.player_STR_buffer + GameData.Item[item_name].Value[0]
+			GameData.player_CRT_buffer = GameData.player_CRT_buffer + GameData.Item[item_name].Value[1]
+	GameState.player_has_acted()
+	StatsSystem.update_stats()
+	GameState.player_turn_end()
 
 ########################################################################################################################
 
