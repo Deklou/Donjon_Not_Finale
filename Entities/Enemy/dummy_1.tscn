@@ -13,12 +13,12 @@ radius = 448.071
 [node name="dummy_1" type="CharacterBody2D"]
 script = ExtResource("1_2chy6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_hwgxb")
-
 [node name="selector" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("3_fkhx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hwgxb")
 
 [node name="dummy_collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2f5qy")

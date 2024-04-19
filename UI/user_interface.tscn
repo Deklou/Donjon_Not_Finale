@@ -133,40 +133,61 @@ tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0, 0, 0, 1)
 script = ExtResource("4_wb5qm")
 
-[node name="MT_ARROW_TEST" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
-layout_mode = 2
-offset_left = 125.0
-offset_top = 122.0
-offset_right = 147.0
-offset_bottom = 137.0
-texture = ExtResource("5_lewjm")
-expand_mode = 2
-stretch_mode = 3
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
-layout_mode = 0
+[node name="Player_Calculated_Stats" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+anchors_preset = 0
 offset_left = 1.0
 offset_top = 88.0
-offset_right = 209.0
+offset_right = 208.0
 offset_bottom = 174.0
-theme_override_constants/separation = 7
-alignment = 1
 
-[node name="HP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/VBoxContainer2"]
+[node name="HP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 2
+offset_right = 207.0
+offset_bottom = 26.0
 text = "HP:"
 
-[node name="MT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/VBoxContainer2"]
-layout_mode = 2
-bbcode_enabled = true
-text = "Dégâts Totaux:"
-fit_content = true
+[node name="HBoxContainer_CRT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
+offset_left = -1.0
+offset_top = 61.0
+offset_right = 199.0
+offset_bottom = 84.0
+theme_override_constants/separation = -2
 
-[node name="CRT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/VBoxContainer2"]
+[node name="CRT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_CRT"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Critique:"
 fit_content = true
+autowrap_mode = 0
+
+[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_CRT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 29.0
+offset_right = 199.0
+offset_bottom = 52.0
+theme_override_constants/separation = -2
+
+[node name="MT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Dégâts Totaux:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 2
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
@@ -299,7 +320,7 @@ offset_right = 216.0
 offset_bottom = 704.0
 script = ExtResource("5_xsdpy")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+[node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 192.0
@@ -307,26 +328,50 @@ offset_bottom = 202.0
 theme_override_constants/separation = 7
 alignment = 1
 
-[node name="HP" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="HP" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
 layout_mode = 2
 text = "HP:"
 
-[node name="MT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="MT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Dégâts Totaux:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="CRT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="HBoxContainer_CRT" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="CRT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_CRT"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Critique:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer2"]
+[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_CRT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+[node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 178.0
@@ -336,15 +381,15 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 14
 
-[node name="STR" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
+[node name="STR" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
 text = "STR:"
 
-[node name="DEX" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
+[node name="DEX" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
 text = "DEX:"
 
-[node name="DEF" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
+[node name="DEF" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
 text = "DEF:"
 

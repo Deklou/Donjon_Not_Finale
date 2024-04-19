@@ -7,9 +7,9 @@ extends Control
 @onready var UI_stat_XP : Label = $XP
 @onready var UI_stat_CP : Label = $CP
 
-@onready var UI_stat_HP : Label = $VBoxContainer2/HP
-@onready var UI_stat_MT : RichTextLabel = $VBoxContainer2/MT
-@onready var UI_stat_CRT : RichTextLabel = $VBoxContainer2/CRT
+@onready var UI_stat_HP : Label = $Player_Calculated_Stats/HP
+@onready var UI_stat_MT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_MT/MT
+@onready var UI_stat_CRT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_CRT/CRT
 
 @onready var UI_stat_STR : Label = $Player_Stats/STR
 @onready var UI_stat_DEX : Label = $Player_Stats/DEX
@@ -53,6 +53,10 @@ var base_player_STR : int #sert de limite minimum et de mémoire lors du changem
 var base_player_DEX : float #sert de limite minimum et de mémoire lors du changement de stats
 var base_player_DEF : int #sert de limite minimum et de mémoire lors du changement de stats
 
+############### icône de buff ##################
+
+@onready var MT_Arrow_Up : TextureRect = $Player_Calculated_Stats/HBoxContainer_MT/Arrow_Up
+@onready var CRT_Arrow_Up : TextureRect = $Player_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
 
 func _ready(): 
 	EntitiesState.update_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
@@ -92,6 +96,11 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	else:
 		UI_stat_MVT.visible = false
 		UI_stat_ACT.visible = false
+	
+	########################### flèches ###########################
+	
+	MT_Arrow_Up.visible = false
+	CRT_Arrow_Up.visible = false
 		
 	########################### Couleurs ###########################
 	
@@ -103,8 +112,10 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:
 			UI_stat_MT.text = "Dégâts Totaux: [color=#66B2FF]" + str(GameData.player_MT) + "[/color]"
+			MT_Arrow_Up.visible = true
 		if GameData.player_CRT > GameData.player_base_CRT:
 			UI_stat_CRT.text = "Critique: [color=#66B2FF]" + str(GameData.player_CRT) + "[/color]"
+			CRT_Arrow_Up.visible = true
 
 	################################################################
 		
