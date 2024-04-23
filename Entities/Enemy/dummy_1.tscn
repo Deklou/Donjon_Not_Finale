@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct12uae2y1l0e"]
+[gd_scene load_steps=5 format=3 uid="uid://ct12uae2y1l0e"]
 
 [ext_resource type="Script" path="res://Entities/Enemy/dummy_1.gd" id="1_2chy6"]
 [ext_resource type="Texture2D" uid="uid://b46k3o8vws1gc" path="res://Sprites/Enemy/dummy_1_sprite.png" id="1_hwgxb"]
-[ext_resource type="Texture2D" uid="uid://c8gxuxteoyi0r" path="res://Sprites/UI_icon/enemy_selector.png" id="3_fkhx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f5qy"]
 size = Vector2(64, 64)
@@ -12,10 +11,6 @@ radius = 448.071
 
 [node name="dummy_1" type="CharacterBody2D"]
 script = ExtResource("1_2chy6")
-
-[node name="selector" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_fkhx4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hwgxb")

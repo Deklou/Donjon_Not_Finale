@@ -25,10 +25,7 @@ var dummy_stats = {"Name": "",
 }
 
 var dummy_inventory = []
-var normalized_enemy_distance : Vector2 #Vector modélisant la distance entre le joueur et l'ennemi
-var entity_targeted : bool = false
-var dummy_range_entered : bool = false 
-var dummy_previous_position : Vector2
+var mouse_click_count : int = 0
 
 func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instancié
 	
@@ -56,110 +53,16 @@ func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instanc
 	dummy_stats.Name = dummy_name #On assigne le nom de l'ennemi maintenant sinon l'export de la variable n'est pas instancié
 	GameData.enemy_stats[dummy_id] = dummy_stats #Dès qu'on instancie un ennemi, on envoie les stats dans GameData
 
-func _process(_delta):
-	
-	if GameState.mouse_select_states == true: #si la souris se trouve dans la zone de l'ennemi
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id == dummy_id: #si le joueur appui sur clic gauche
-				EntitiesState.enemy_selected() #on aeppelle la fonction pour rendre visible l'interface ennemi
-				GameState.mouse_select_states = false #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
-	
-	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
-		XpSystem.gain_xp()
-		$".".queue_free()
-		GameData.enemy_stats.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime sa clé et valeur dans le dictionnaire de stats
-		GameData.enemy_inventory.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime son inventaire
-		return
-			
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:	
-			
-			
-		if dummy_range_entered == true and GameState.is_ennemy_turn == true and EntitiesState.selected_id == dummy_id: #si le joueur entre en contact avec l'ennemi et que c'est au tour de l'ennemi, l'ennemi attaque le joueur
-			EntitiesState.selected_id = EntitiesState.enemy_id #Pour s'assurer de la cohérence entre l'affichage et les datas
-			EntitiesState.enemy_selected() #Si on entre en contact avec un ennemi, c'est son interface qui s'affichera
-			EntitiesState.take_enemy_action()
-			
-		if dummy_id in  EntitiesState.enemy_triggered_list and GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:
-			_enemy_movement()
-			if dummy_previous_position == self.position and dummy_id not in EntitiesState.enemy_turn_ended_list:
-				EntitiesState.enemy_turn_ended_list.append(dummy_id)
-				print(dummy_name + " n'a pas bougé")
-				print(EntitiesState.enemy_turn_ended_list)
-				print(EntitiesState.enemy_triggered_list)
-				if dummy_range_entered == true: 
-					EntitiesState.take_enemy_action() 
-		
-		if EntitiesState.enemy_triggered_list.is_empty(): #faire passer le tour quand aucun ennemi n'a été trigger
-			GameState.enemy_turn_end()
-			
-		if len(EntitiesState.enemy_triggered_list) == len(EntitiesState.enemy_turn_ended_list):
-			EntitiesState.enemy_turn_ended_list.clear()
-			GameState.enemy_turn_end()
-		
-#si un body entre et sort de l'area
-
-func _on_area_2d_body_entered(body): 
-	if body is Node2D:
-		dummy_range_entered = true
-		GameState.enemy_range_entered = true
-		EntitiesState.enemy_id = dummy_id
-		EntitiesState.selected_id = EntitiesState.enemy_id
-	
-func _on_area_2d_body_exited(body):
-	if body is Node2D:
-		dummy_range_entered = false 
-		GameState.enemy_range_entered = false
-
-#update l'état de la souris (à l'intérieur de la zone ou non) 
-
 func _on_area_2d_mouse_entered():
-	GameState.mouse_select_states = true
 	EntitiesState.selected_id = dummy_id
 
-func _on_area_2d_mouse_exited():
-	GameState.mouse_select_states = false
-
-
-func _on_trigger_range_body_entered(body):
-	if body is Node2D:
-		entity_targeted = true
-		EntitiesState.enemy_triggered_list.append(dummy_id)
-		
-func _on_trigger_range_body_exited(body):
-	if body is Node2D:
-		entity_targeted = false
-		EntitiesState.enemy_triggered_list.remove_at(EntitiesState.enemy_triggered_list.find(dummy_id))
-
-func _enemy_movement():
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:	
-		normalized_enemy_distance = self.position.direction_to(GameState.player_position)
-		dummy_previous_position = self.position
-		if abs(normalized_enemy_distance.x) > abs(normalized_enemy_distance.y):
-			if normalized_enemy_distance.x > 0:
-				$RayCast2D.target_position = Vector2(64,0)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(64,0)
-					EntitiesState.enemy_turn_ended_list.append(dummy_id)
-					print(dummy_name + " a bougé en haut")
-			else:
-				$RayCast2D.target_position = Vector2(-64,0)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(-64,0)
-					EntitiesState.enemy_turn_ended_list.append(dummy_id)
-					print(dummy_name + " a bougé en bas")
-		else:
-			if normalized_enemy_distance.y > 0:
-				$RayCast2D.target_position = Vector2(0,64)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(0,64)
-					EntitiesState.enemy_turn_ended_list.append(dummy_id)
-					print(dummy_name + " a bougé à gauche")
-			else:
-				$RayCast2D.target_position = Vector2(0,-64)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(0,-64)
-					EntitiesState.enemy_turn_ended_list.append(dummy_id)
-					print(dummy_name + " a bougé à droite")
+func _on_area_2d_input_event(_viewport, _event, _shape_idx):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true:
+		EntitiesState.enemy_selected(get_position()) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
+		mouse_click_count +=1
+		if EntitiesState.selected_id != EntitiesState.enemy_id:
+			mouse_click_count = 1
+		if mouse_click_count == 2:
+			EntitiesState.enemy_is_deselected()
+			mouse_click_count = 0
+		EntitiesState.enemy_id = dummy_id

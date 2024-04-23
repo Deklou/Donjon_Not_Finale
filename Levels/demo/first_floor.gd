@@ -14,6 +14,6 @@ func _process(_delta):
 		Logs._add_log("De l'autre côté...")
 		event = false
 
-func _on_secret_body_entered(body):
+func _on_secret_body_entered(_ddbody):
 	if GameData.all_objective_completed == true:
 		to_secret.emit()

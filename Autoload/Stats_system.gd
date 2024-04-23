@@ -6,7 +6,6 @@ signal enemy_death #signal pour avertir de la mort de l'ennemi
 
 signal hide_inventory_UI
 
-
 ########## A SUPPRIMER PLUS TARD ##########
 
 var libération : bool = false
@@ -60,6 +59,7 @@ func update_stats():
 	if EntitiesState.enemy_id in GameData.enemy_stats and GameData.enemy_stats[EntitiesState.enemy_id].HP < 1 and EntitiesState.enemy_id not in EntitiesState.enemy_states:
 		EntitiesState.enemy_states[EntitiesState.enemy_id] = true
 		EntitiesState.selected_id = ""
+		EntitiesState.enemy_is_deselected()
 		enemy_death.emit() #envoi du signal vers Enemy_Profil_UI
 		hide_inventory_UI.emit() #vers enemy_inventory_ui
 		GameData.enemy_defeated +=1

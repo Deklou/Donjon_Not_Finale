@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var dummy_id : String = "" #Identifiant unique pour chaque ennemi
+@export var caca_id : String = "" #CACA
 @export var dummy_name : String = "" #Identifiant unique pour chaque ennemi
 @export var dummy_LVL_offset : int 
 @export var dummy_MAX_HP_offset : int
@@ -57,18 +58,23 @@ func _ready(): #check l'état de l'ennemi à chaque fois que l'objet est instanc
 
 	dummy_stats.Name = dummy_name #On assigne le nom de l'ennemi maintenant sinon l'export de la variable n'est pas instancié
 	GameData.enemy_stats[dummy_id] = dummy_stats #Dès qu'on instancie un ennemi, on envoie les stats dans GameData
-
+	
+	
+	
 func _process(_delta):
 	
-	if GameState.mouse_select_states == true: #si la souris se trouve dans la zone de l'ennemi
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id == dummy_id: #si le joueur appui sur clic gauche
-			EntitiesState.enemy_selected() #on aeppelle la fonction pour rendre visible l'interface ennemi
-			$selector.visible = true
-			GameState.mouse_select_states = false #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
-		elif EntitiesState.selected_id == dummy_id and $selector.visible == true:
-			$selector.visible = true
-		else:
-			$selector.visible = false
+	################## Interface et Sélection ##################
+	
+	if GameState.mouse_select_states == true and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id == dummy_id: #si le joueur appui sur clic gauche: #si la souris se trouve dans la zone de l'ennemi
+		#EntitiesState.enemy_selected() #on aeppelle la fonction pour rendre visible l'interface ennemi
+		GameState.mouse_select_states = false #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
+	elif GameState.mouse_select_states == true and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and EntitiesState.selected_id != dummy_id:
+		print("###################################")
+		print("selected id = " + EntitiesState.selected_id)
+		print("enemy id =" + EntitiesState.enemy_id)
+		print("dummy id = " + dummy_id)
+		
+	################## Défaite de l'ennemi ##################
 	
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		XpSystem.gain_xp()
@@ -82,7 +88,7 @@ func _process(_delta):
 			
 		if dummy_range_entered == true and GameState.is_ennemy_turn == true and EntitiesState.selected_id == dummy_id: #si le joueur entre en contact avec l'ennemi et que c'est au tour de l'ennemi, l'ennemi attaque le joueur
 			EntitiesState.selected_id = EntitiesState.enemy_id #Pour s'assurer de la cohérence entre l'affichage et les datas
-			EntitiesState.enemy_selected() #Si on entre en contact avec un ennemi, c'est son interface qui s'affichera
+			#EntitiesState.enemy_selected() #Si on entre en contact avec un ennemi, c'est son interface qui s'affichera
 			EntitiesState.take_enemy_action()
 			
 		if dummy_id in  EntitiesState.enemy_triggered_list and GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:
@@ -106,7 +112,7 @@ func _on_area_2d_body_entered(body):
 		dummy_range_entered = true
 		GameState.enemy_range_entered = true
 		EntitiesState.enemy_id = dummy_id
-		EntitiesState.selected_id = EntitiesState.enemy_id
+		#EntitiesState.selected_id = EntitiesState.enemy_id
 	
 func _on_area_2d_body_exited(body):
 	if body is Node2D:
@@ -163,3 +169,5 @@ func _enemy_movement():
 				if not $RayCast2D.is_colliding():
 					self.position += Vector2(0,-64)
 					EntitiesState.enemy_turn_ended_list.append(dummy_id)
+					
+
