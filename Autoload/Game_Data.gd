@@ -7,7 +7,7 @@ extends Node
 
 var player_MAX_HP : int = 22 #Limite haute des points de vie
 var player_HP : int = 22 #valeur qui peut varier entre 0 et les points de vie maximals
-var player_STR : int = 6 #Nombre de points de vie qu'on retire à la cible
+var player_STR : int = 66 #Nombre de points de vie qu'on retire à la cible
 var player_DEX : float = 5 #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
 var player_DEF : int = 5 #Valeur qui sera soustraite aux dégâts reçus
 
@@ -27,6 +27,7 @@ var player_base_CRT : int = 0 #sert de valeur étalon pour la comparaison avec l
 
 var player_LVL_buffer : int = player_LVL
 var player_XP_buffer : int = player_XP
+var player_XP_over_level : int = 0 #au cas où on passe plusieurs niveaux d'un coup
 var player_MAX_HP_buffer : int = player_MAX_HP
 var player_HP_buffer : int = player_HP
 var player_CP_buffer : int = player_CP #nécéssaire car on doit comparer la valeur de base et la valeur gagnée

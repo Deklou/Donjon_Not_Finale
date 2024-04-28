@@ -4,7 +4,11 @@ signal update_player_stats #signal utilisé dès que l'on veut mettre à jour le
 signal update_enemy_stats #signal utilisé dès que l'on veut mettre à jour les stats de l'ennemi
 signal enemy_death #signal pour avertir de la mort de l'ennemi
 
+signal hide_UI #cache l'entièreté de l'interface utilisateur
 signal hide_inventory_UI
+
+var Root = null
+var Root_instance = null
 
 ########## A SUPPRIMER PLUS TARD ##########
 
@@ -26,11 +30,15 @@ func update_stats():
 	GameData.player_DEX = GameData.player_DEX_buffer
 	GameData.player_DEF = GameData.player_DEF_buffer
 	
+	
 	if GameData.player_HP < 1 :
 		if GameData.secret_triggered == true:
 			get_tree().change_scene_to_file("res://Menu/stats_screen.tscn")
 		else:
-			get_tree().change_scene_to_file("res://Menu/game_over.tscn")
+			Root = get_tree().root
+			Root_instance = preload("res://Menu/game_over.tscn").instantiate()
+			Root.add_child(Root_instance)
+			hide_UI.emit() #Vers user_interface
 			return
 	
 	if GameState.weapon_equipped == true:

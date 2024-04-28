@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=11 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Texture2D" uid="uid://i6djldglvotl" path="res://UI/Assets/xp_bar.png" id="1_3aabu"]
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
+[ext_resource type="Script" path="res://UI/user_interface.gd" id="1_xgc7s"]
 [ext_resource type="Script" path="res://UI/XP_bar.gd" id="4_wb5qm"]
 [ext_resource type="Script" path="res://UI/UI_logs.gd" id="4_wenhx"]
 [ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
 
 [node name="User_Interface" type="CanvasLayer"]
+script = ExtResource("1_xgc7s")
 metadata/_edit_vertical_guides_ = [784.0]
 
 [node name="MarginContainer_right" type="MarginContainer" parent="."]

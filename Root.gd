@@ -65,3 +65,4 @@ func _to_secret():
 	Root_instance = preload("res://Levels/demo/secret.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	GameState.ending_triggered = true
+	

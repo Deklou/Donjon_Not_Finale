@@ -413,7 +413,11 @@ enemy_item_1 = "Epée courte"
 position = Vector2(1824, 96)
 dummy_id = "99"
 dummy_name = "caca"
+dummy_LVL_offset = 1
 dummy_MAX_HP_offset = 100
+dummy_STR_offset = 1
+dummy_DEX_offset = 1
+dummy_DEF_offset = 1
 enemy_item_1 = "Pain"
 
 [node name="selector_UI" parent="." instance=ExtResource("6_adjsq")]

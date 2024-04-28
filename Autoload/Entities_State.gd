@@ -10,7 +10,8 @@ signal hide_selector_UI #cache le selecteur
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
 var selected_id : String = "" #identifiant dont on se sert pour afficher l'interface de l'ennemi
 var enemy_id : String = "" #identifirant dont on se sert pour calculer les dégâts
-var enemy_is_selected : bool = false #boolen se chargeant de l'état de la sélection et d'afficher le sélecteur
+var enemy_can_be_attacked_id : String = "" #identifiant de l'ennemi qui peut être attaqué par le joueur
+var enemy_can_be_attacked_position : Vector2 #Position de l'ennemi qui peut être attaqué
 
 var enemy_triggered_list = [] #liste des ennemis qui ciblent le joueur
 var enemy_turn_ended_list = [] #liste des ennemis qui ont déjà agi
@@ -43,7 +44,7 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 			#GameState.enemy_turn_end()
 			EntitiesState.enemy_turn_ended_list.append(enemy_id)
 			
-func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour calculer les dégâts reçus par un ennemi
+func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus par un ennemi
 	if randf() < GameData.player_CRT/float(100):
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
 		Logs._log_entity_deal_critical_damage("Enemy",entity_name)
@@ -56,7 +57,6 @@ func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour
 	update_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
 
 func enemy_selected(position : Vector2):
-	EntitiesState.enemy_is_selected = true
 	Inventory._load_enemy_inventory_UI() ##On charge l'interface à dès qu'on souhaite afficher les informations de l'ennemi
 	visible_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
 	update_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
@@ -67,7 +67,11 @@ func enemy_is_deselected():
 	hide_selector_UI.emit() #vers selector_UI
 	StatsSystem.enemy_death.emit() #vers enemy_inventory_ui
 	StatsSystem.hide_inventory_UI.emit() #vers enemy_inventory_ui
-	EntitiesState.enemy_is_selected = false
 
 func enemy_is_dead(dummy_id: String) -> bool: #retourne si l'état est présent, et quel état
 	return enemy_states.has(dummy_id) and enemy_states[dummy_id]
+
+func enemy_death(dummy_id : String):
+	XpSystem.gain_xp()
+	GameData.enemy_stats.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime sa clé et valeur dans le dictionnaire de stats
+	GameData.enemy_inventory.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime son inventaire

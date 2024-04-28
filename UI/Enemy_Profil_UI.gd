@@ -55,7 +55,6 @@ func update_enemy_UI():
 		if GameData.enemy_stats[EntitiesState.selected_id].CRT > GameData.enemy_base_CRT:
 			UI_enemy_CRT_stat.text = "Critique: [color=#66B2FF]" + str(GameData.enemy_stats[EntitiesState.selected_id].CRT) + "[/color]"
 			CRT_Arrow_Up.visible = true
-			
 	################################################################
 	
 func show_enemy_UI():

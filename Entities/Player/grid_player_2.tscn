@@ -104,3 +104,5 @@ libraries = {
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = false
 target_position = Vector2(0, 64)
+
+[node name="Timer" type="Timer" parent="."]

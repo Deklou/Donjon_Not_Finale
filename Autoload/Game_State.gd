@@ -63,6 +63,7 @@ func player_turn_end():
 			elif GameData.player_current_action_point == 0:
 				GameData.player_current_action_point = GameData.player_MAX_action_point
 	show_wait_button.emit() #envoi à interface down
+	show_attack_button.emit() #envoi à interface down
 	show_mvt_act_stats.emit() #envoi vers Player_profil_UI
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
@@ -75,6 +76,3 @@ func enemy_turn_end():
 		GameData.player_current_action_point = GameData.player_MAX_action_point
 	StatsSystem.update_stats()
 	EntitiesState.update_stats.emit()
-	
-func _show_attack_button():
-	show_attack_button.emit() #envoi à interface down
