@@ -4,8 +4,8 @@ extends Control
 
 func _ready():
 	Inventory.update_enemy_inventory_UI.connect(update_enemy_inventory)
-	EntitiesState.enemy_inventory_UI.connect(show_enemy_inventory)
-	StatsSystem.hide_inventory_UI.connect(hide_enemy_inventory)
+	EntitiesState.show_enemy_inventory_UI.connect(show_enemy_inventory)
+	EntitiesState.hide_enemy_inventory_UI.connect(hide_enemy_inventory)
 
 func show_enemy_inventory():
 	$".".visible = true

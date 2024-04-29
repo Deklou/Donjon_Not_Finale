@@ -19,10 +19,9 @@ extends Control
 @onready var CRT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
 
 func _ready():
-	EntitiesState.visible_enemy_UI.connect(show_enemy_UI)
 	StatsSystem.update_enemy_stats.connect(update_enemy_UI)
-	StatsSystem.enemy_death.connect(hide_enemy_UI)
-	EntitiesState.update_enemy_UI.connect(update_enemy_UI)
+	EntitiesState.show_enemy_UI.connect(show_enemy_UI)
+	EntitiesState.hide_enemy_UI.connect(hide_enemy_UI)
 	
 func update_enemy_UI():
 	if EntitiesState.selected_id in GameData.enemy_stats:

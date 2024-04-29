@@ -31,7 +31,6 @@ var is_ennemy_turn : bool = false #on contrôle si c'est au tour de l'ennemi d'a
 #Player
 
 var player_position : Vector2 #position du joueur
-
 var ending_triggered : bool = false #fin relative à la demo
 
 #Player interface down
@@ -66,7 +65,6 @@ func player_turn_end():
 	show_attack_button.emit() #envoi à interface down
 	show_mvt_act_stats.emit() #envoi vers Player_profil_UI
 	StatsSystem.update_stats()
-	EntitiesState.update_stats.emit()
 
 func enemy_turn_end():
 	if GameState.is_ennemy_turn == true:
@@ -75,4 +73,3 @@ func enemy_turn_end():
 		GameData.player_current_movement_point = GameData.player_MAX_movement_point
 		GameData.player_current_action_point = GameData.player_MAX_action_point
 	StatsSystem.update_stats()
-	EntitiesState.update_stats.emit()

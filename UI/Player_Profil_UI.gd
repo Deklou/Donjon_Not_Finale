@@ -59,8 +59,7 @@ var base_player_DEF : int #sert de limite minimum et de mémoire lors du changem
 @onready var CRT_Arrow_Up : TextureRect = $Player_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
 
 func _ready(): 
-	EntitiesState.update_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
-	StatsSystem.update_player_stats.connect(update_player_UI)
+	StatsSystem.update_player_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
 	XpSystem.UI_stat_button.connect(stat_modifier) 
 	GameState.show_mvt_act_stats.connect(update_player_UI)
 	update_player_UI()

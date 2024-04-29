@@ -4,11 +4,7 @@ signal update_player_stats #signal utilisé dès que l'on veut mettre à jour le
 signal update_enemy_stats #signal utilisé dès que l'on veut mettre à jour les stats de l'ennemi
 signal enemy_death #signal pour avertir de la mort de l'ennemi
 
-signal hide_UI #cache l'entièreté de l'interface utilisateur
 signal hide_inventory_UI
-
-var Root = null
-var Root_instance = null
 
 ########## A SUPPRIMER PLUS TARD ##########
 
@@ -35,11 +31,7 @@ func update_stats():
 		if GameData.secret_triggered == true:
 			get_tree().change_scene_to_file("res://Menu/stats_screen.tscn")
 		else:
-			Root = get_tree().root
-			Root_instance = preload("res://Menu/game_over.tscn").instantiate()
-			Root.add_child(Root_instance)
-			hide_UI.emit() #Vers user_interface
-			return
+			EntitiesState.player_is_dead()
 	
 	if GameState.weapon_equipped == true:
 		GameData.player_MT = GameData.player_STR + GameData.Item[GameState.weapon_equipped_name].Value[0]
@@ -65,13 +57,8 @@ func update_stats():
 	GameData.enemy_DEF = GameData.enemy_DEF_buffer
 	
 	if EntitiesState.enemy_id in GameData.enemy_stats and GameData.enemy_stats[EntitiesState.enemy_id].HP < 1 and EntitiesState.enemy_id not in EntitiesState.enemy_states:
-		EntitiesState.enemy_states[EntitiesState.enemy_id] = true
-		EntitiesState.selected_id = ""
-		EntitiesState.enemy_is_deselected()
-		enemy_death.emit() #envoi du signal vers Enemy_Profil_UI
-		hide_inventory_UI.emit() #vers enemy_inventory_ui
-		GameData.enemy_defeated +=1
-	
+		EntitiesState.enemy_death(EntitiesState.enemy_id)
+		
 	if "Libération" in Inventory.inventory and libération == false:
 		GameData.legendary_weapon_acquired += 1
 		libération = true

@@ -97,7 +97,6 @@ func _on_area_2d_body_exited(body):
 
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
-		EntitiesState.enemy_death(dummy_id)
 		$".".queue_free()
 		return
 	
