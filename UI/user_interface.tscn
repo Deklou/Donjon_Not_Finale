@@ -311,8 +311,16 @@ offset_right = 216.0
 offset_bottom = 296.0
 script = ExtResource("4_wenhx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
 
 [node name="Enemy_Profil" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
 visible = false

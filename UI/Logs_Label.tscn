@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://gykebj3y6qxs"]
+
+[ext_resource type="Texture2D" uid="uid://cjrdosbkwavwl" path="res://Sprites/UI_icon/hyphen.png" id="1_rj4pp"]
+
+[node name="Logs_Label" type="Label"]
+theme_override_font_sizes/font_size = 15
+
+[node name="Sprite_Hyphen" type="Sprite2D" parent="."]
+position = Vector2(-24, -4)
+texture = ExtResource("1_rj4pp")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 196.0
+offset_bottom = 80.0
+color = Color(0, 0, 0, 1)

@@ -5,7 +5,7 @@ extends Node
 
 #variables de base du joueur
 
-var player_MAX_HP : int = 22 #Limite haute des points de vie
+var player_MAX_HP : int = 222 #Limite haute des points de vie
 var player_HP : int = 22 #valeur qui peut varier entre 0 et les points de vie maximals
 var player_STR : int = 66 #Nombre de points de vie qu'on retire à la cible
 var player_DEX : float = 5 #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
@@ -104,7 +104,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	################## Objets de Soins ##################
 	
 	"Pain":{ #On peut accéder aux différentes informations de l'objet grâce à Item[item_name].nom_de_l_information
-	"Type" : "Item",
+	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain",
 	"Description" : "Du pain. Rend 15 PV",
@@ -113,7 +113,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Cost": 0
 	}
 	,"Pain rassis":{
-	"Type" : "Item",
+	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain rassis",
 	"Description" : "Pain rassis. il est dans un\nétat lamentable.\nRend 5 PV",
@@ -125,7 +125,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	################## Objets de Buff ##################
 	
 	,"buff_attaque":{
-	"Type" : "Item",
+	"Type" : "Consumable",
 	"Sous_Type":"Buff" ,
 	"Name" : "",
 	"Description" : "STR +2 jsuqu'à la fin du combat",
@@ -134,7 +134,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Cost": 0
 	}
 	,"buff_defense":{
-	"Type" : "Item",
+	"Type" : "Consumable",
 	"Sous_Type":"Buff" ,
 	"Name" : "",
 	"Description" : "DEF +2 jsuqu'à la fin du combat",

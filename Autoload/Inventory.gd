@@ -13,7 +13,7 @@ func _add_item(item_name): #ajouter un item dans l'inventaire
 func _remove_item(item_name): #jeter un item de l'inventaire
 	if GameState.double_remove_call == false:
 		var index = inventory.find(item_name)
-		if GameData.Item[item_name].Type == "Item" and index >= 0: #si l'inventaire est vide, l'index renvoi -1
+		if GameData.Item[item_name].Type == "Consumable" and index >= 0: #si l'inventaire est vide, l'index renvoi -1
 			inventory.remove_at(index)
 		elif GameData.Item[item_name].Type == "Weapon": #Pour les armes, la fonction jeter a d'autre cas d'utilisations
 			if GameData.Item[item_name].Equiped == false:
@@ -26,12 +26,12 @@ func _remove_item(item_name): #jeter un item de l'inventaire
 				GameState.weapon_equipped = false
 		GameState.double_remove_call = true
 	GameState.player_has_acted()
-	StatsSystem.update_stats()
 	GameState.player_turn_end()
+	StatsSystem.update_stats()
 	
 
 func _use_item(item_name): #utiliser un item.
-	if GameData.Item[item_name].Type == "Item": #Ici on ne s'intéresse qu'aux soins
+	if GameData.Item[item_name].Type == "Consumable": #Ici on ne s'intéresse qu'aux soins
 		GameData.player_HP_buffer = GameData.player_HP_buffer + GameData.Item[item_name].Value
 		if GameData.player_HP_buffer > GameData.player_MAX_HP_buffer:
 			GameData.player_HP_buffer = GameData.player_MAX_HP_buffer

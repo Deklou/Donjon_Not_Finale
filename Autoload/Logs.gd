@@ -6,17 +6,13 @@ signal update_logs(logs)
 #Script qui décrit le fonctionnement du système de log
 
 func _add_log(string): 
-	logs.append(string)
-	if logs.size() >=1 : #si le tableau n'est pas vide
-		if logs.size() >=2: #si le tableau contient au moins deux logs
-			if string == logs[logs.size()-2]: #si deux entrées identiques se suivent
-				logs.remove_at(logs.size()-1) #on supprime le dernière entrée
-		update_logs.emit(logs) #dès qu'on ajoute une entrée, on envoi un signal vers l'interface (UI_logs)
-		await get_tree().create_timer(2.0).timeout
-		logs.remove_at(logs.size()-1) #on supprime les entrées au fur et à mesure 
-		update_logs.emit(logs) #on update une nouvelle fois car l'entrée est supprimée (UI_logs)
-
-
+	logs.insert(0, string) # insère le log en première position
+	update_logs.emit(logs) #dès qu'on ajoute une entrée, on envoi un signal vers l'interface (UI_logs)
+	await get_tree().create_timer(4.0 + logs.size()).timeout
+	if logs.size() >=0:
+		logs.remove_at(logs.size()-1)
+		update_logs.emit(logs)
+			
 func _log_entity_deal_damage(target_type: String, entity_name: String): #on appelle cette fonction quand une entité inflige des dégâts à une autre entité
 	if target_type == "Player":
 		Logs._add_log(entity_name + " vous a \ninfligé " + str(max(1,GameData.enemy_stats[EntitiesState.enemy_id].MT - GameData.player_DEF)) + " dégâts")
@@ -30,7 +26,6 @@ func _log_entity_deal_critical_damage(target_type: String, entity_name: String):
 	elif target_type == "Enemy":
 		Logs._add_log("SMAAAASH!!")
 		Logs._add_log("vous avez infligé\n" + str(max(1,GameData.player_MT*2 - GameData.enemy_stats[EntitiesState.enemy_id].DEF)) + " dégâts")
-
 
 func _log_item(action: String, item_name: String):
 	if action == "Already_Equiped":

@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 func _ready():
 	EntitiesState.hide_UI.connect(hide_UI)
 
