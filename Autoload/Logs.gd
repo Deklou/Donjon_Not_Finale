@@ -1,17 +1,18 @@
 extends Node
 
 var logs = [] #tableau qui contiendra les logs du jeu
-signal update_logs(logs)
+signal add_logs(logs)
+signal remove_logs
 
 #Script qui décrit le fonctionnement du système de log
 
 func _add_log(string): 
 	logs.insert(0, string) # insère le log en première position
-	update_logs.emit(logs) #dès qu'on ajoute une entrée, on envoi un signal vers l'interface (UI_logs)
-	await get_tree().create_timer(4.0 + logs.size()).timeout
+	add_logs.emit(logs)
+	await get_tree().create_timer(3.0 + logs.size()).timeout
 	if logs.size() >=0:
+		remove_logs.emit()
 		logs.remove_at(logs.size()-1)
-		update_logs.emit(logs)
 			
 func _log_entity_deal_damage(target_type: String, entity_name: String): #on appelle cette fonction quand une entité inflige des dégâts à une autre entité
 	if target_type == "Player":

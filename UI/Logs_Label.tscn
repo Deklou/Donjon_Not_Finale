@@ -1,20 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://gykebj3y6qxs"]
+[gd_scene load_steps=5 format=3 uid="uid://gykebj3y6qxs"]
 
 [ext_resource type="Texture2D" uid="uid://cjrdosbkwavwl" path="res://Sprites/UI_icon/hyphen.png" id="1_rj4pp"]
+
+[sub_resource type="Animation" id="Animation_73va8"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hnyy6"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qte7q"]
+_data = {
+"fade_in": SubResource("Animation_hnyy6"),
+"fade_out": SubResource("Animation_73va8")
+}
 
 [node name="Logs_Label" type="Label"]
 theme_override_font_sizes/font_size = 15
 
 [node name="Sprite_Hyphen" type="Sprite2D" parent="."]
-position = Vector2(-24, -4)
+position = Vector2(-26, -4)
 texture = ExtResource("1_rj4pp")
 centered = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
+[node name="ColorRect_Animation" type="ColorRect" parent="."]
 offset_left = -16.0
-offset_top = -8.0
-offset_right = 196.0
-offset_bottom = 80.0
-color = Color(0, 0, 0, 1)
+offset_right = 530.0
+offset_bottom = 164.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer_Fade" type="AnimationPlayer" parent="ColorRect_Animation"]
+libraries = {
+"": SubResource("AnimationLibrary_qte7q")
+}

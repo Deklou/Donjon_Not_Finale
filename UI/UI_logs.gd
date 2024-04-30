@@ -1,14 +1,27 @@
 extends ScrollContainer
 
 @onready var vbox_node = $HBoxContainer/VBoxContainer
+@onready var color_rect = $"../ColorRect_Animation"
+
 
 func _ready():
-	Logs.update_logs.connect(update_logs)
-	
-func update_logs(logs:Array): #se comporte de la même manière que l'interface d'objet
-	for child in vbox_node.get_children(): #on supprimer tous les enfants et on les recrée en fonction de ce qu'il y a dans le tableau logs
-		child.queue_free()
-	for entry in logs:
+	Logs.add_logs.connect(add_logs)
+	Logs.remove_logs.connect(remove_logs)
+		
+func add_logs(logs:Array):
+	if logs.size() > 0:
 		var label = preload("res://UI/Logs_Label.tscn").instantiate()
-		label.text = entry
-		vbox_node.add_child(label)
+		var animation_player_fade_in = label.get_node("ColorRect_Animation/AnimationPlayer_Fade")
+		label.text = logs[0]
+		animation_player_fade_in.play("fade_in")
+		vbox_node.add_child(label, true)
+		vbox_node.move_child(label, 0)
+	
+func remove_logs():
+	if vbox_node.get_child_count() > 0:
+		var Logs_Label_Scene = preload("res://UI/Logs_Label.tscn").instantiate()
+		var last_label = vbox_node.get_child(vbox_node.get_child_count() - 1)
+		var animation_player_fade_out = last_label.get_node("ColorRect_Animation/AnimationPlayer_Fade")
+		animation_player_fade_out.play("fade_out")
+		await get_tree().create_timer(1.0).timeout
+		last_label.queue_free()
