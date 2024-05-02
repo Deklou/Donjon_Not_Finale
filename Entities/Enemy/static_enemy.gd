@@ -12,6 +12,9 @@ extends CharacterBody2D
 @export var enemy_item_2 : String  # Nom de l'objet 2 dans l'inventaire de l'ennemi
 @export var enemy_item_3 : String  # Nom de l'objet 3 dans l'inventaire de l'ennemi
 
+@onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
+@onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
+
 var dummy_stats = {"Name": "",
 "LVL" : GameData.enemy_LVL,
 "XP" : GameData.enemy_XP,
@@ -56,6 +59,9 @@ func _ready():
 	dummy_stats.Name = dummy_name #On assigne le nom de l'ennemi maintenant sinon l'export de la variable n'est pas instancié
 	GameData.enemy_stats[dummy_id] = dummy_stats #Dès qu'on instancie un ennemi, on envoie les stats dans GameData
 	
+##################### SIGNAL #####################
+
+	EntitiesState.take_damage.connect(_entity_take_damage)
 
 ##################### INTERFACE ET SELECTEUR #####################
 
@@ -72,6 +78,8 @@ func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 			EntitiesState.enemy_is_deselected()
 			mouse_click_count = 0
 		EntitiesState.enemy_id = dummy_id
+		EntitiesState.selected_id = dummy_id
+		StatsSystem.update_stats()
 		
 ##################### CONTACT JOUEUR #####################
 		
@@ -92,20 +100,28 @@ func _on_area_2d_body_exited(body):
 		GameState.enemy_range_entered = false
 		EntitiesState.enemy_is_deselected()
 		EntitiesState.enemy_triggered_list.remove_at(EntitiesState.enemy_triggered_list.find(dummy_id))
+		
+##################### DEGAT #####################
 
-##################### IPROCESS #####################
+func _entity_take_damage(Entity_Name: String):
+	if EntitiesState.enemy_id == dummy_id and Entity_Name == "Enemy":
+		damage_sprite_1.visible = true
+		await get_tree().create_timer(0.05).timeout
+		damage_sprite_1.visible = false
+		await get_tree().create_timer(0.05).timeout
+		damage_sprite_2.visible = true
+		await get_tree().create_timer(0.05).timeout
+		damage_sprite_2.visible = false
+
+##################### PROCESS #####################
 
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		$".".queue_free()
 		return
 	
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list: 
+	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list and EntitiesState.enemy_that_can_act == dummy_id: 
 		if dummy_range_entered == true: #si l'ennemi peut choisir une action
 			EntitiesState.selected_id = EntitiesState.enemy_id
 			EntitiesState.take_enemy_action()
 			EntitiesState.enemy_selected(get_position())
-		
-		if len(EntitiesState.enemy_triggered_list) == len(EntitiesState.enemy_turn_ended_list): #si tous les ennemis ont agis
-			EntitiesState.enemy_turn_ended_list.clear()
-			GameState.enemy_turn_end()

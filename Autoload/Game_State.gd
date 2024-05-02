@@ -55,6 +55,12 @@ func player_turn_end():
 	if not EntitiesState.enemy_triggered_list.is_empty():
 		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0 and GameData.player_current_action_point == 0:
 			GameState.is_ennemy_turn = true
+			for i in EntitiesState.enemy_triggered_list:
+				EntitiesState.enemy_that_can_act = i
+				await get_tree().create_timer(0.5).timeout
+			if EntitiesState.enemy_triggered_list == EntitiesState.enemy_turn_ended_list:
+				EntitiesState.enemy_turn_ended_list.clear()
+				GameState.enemy_turn_end()
 	else:
 		if GameState.is_ennemy_turn == false:
 			if GameData.player_current_movement_point == 0:

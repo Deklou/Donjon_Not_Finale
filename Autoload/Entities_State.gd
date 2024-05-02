@@ -7,12 +7,14 @@ signal show_enemy_inventory_UI #affiche l'inventaire ennemi
 signal hide_enemy_inventory_UI #masque l'inventaire ennemi
 signal show_selector_UI(position) #affiche le selecteur
 signal hide_selector_UI #cache le selecteur
+signal take_damage(Entity) #Signale quand une entité prend des dégâts, pour les effets visuels
 
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
 var selected_id : String = "" #identifiant dont on se sert pour afficher l'interface de l'ennemi
 var enemy_id : String = "" #identifirant dont on se sert pour calculer les dégâts
 var enemy_can_be_attacked_id : String = "" #identifiant de l'ennemi qui peut être attaqué par le joueur
 var enemy_can_be_attacked_position : Vector2 = Vector2(0,0) #Position de l'ennemi qui peut être attaqué
+var enemy_that_can_act : String = "" #l'identifiant de l'ennemi qui peut agir parmi tous les ennemis
 
 var enemy_triggered_list = [] #liste des ennemis qui ciblent le joueur
 var enemy_turn_ended_list = [] #liste des ennemis qui ont déjà agi
@@ -24,36 +26,38 @@ var Root_instance = null
 
 func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 	Inventory._load_enemy_inventory_UI() #On charge l'interface à chaqué début de tour
-	if enemy_id in GameData.enemy_stats:
-		var entity_name : String = GameData.enemy_stats[enemy_id].Name
-		if not GameData.enemy_inventory[enemy_id].is_empty():
-			for item_name in GameData.enemy_inventory[enemy_id]:
+	if enemy_that_can_act in GameData.enemy_stats:
+		var entity_name : String = GameData.enemy_stats[enemy_that_can_act].Name
+		if not GameData.enemy_inventory[enemy_that_can_act].is_empty():
+			for item_name in GameData.enemy_inventory[enemy_that_can_act]:
 				if not item_name == "":
 					if GameData.Item[item_name].Type == "Item":
 						if GameData.Item[item_name].Sous_Type == "Soin":
-							if GameData.enemy_stats[enemy_id].MAX_HP - GameData.enemy_stats[enemy_id].HP >= GameData.Item[item_name].Value:
+							if GameData.enemy_stats[enemy_that_can_act].MAX_HP - GameData.enemy_stats[enemy_that_can_act].HP >= GameData.Item[item_name].Value:
 								Inventory._use_enemy_item(item_name)
-								EntitiesState.enemy_turn_ended_list.append(enemy_id)
+								EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 	
-		if enemy_id not in enemy_turn_ended_list:
-			if randf() < GameData.enemy_stats[EntitiesState.enemy_id].CRT/float(100):
-				GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[EntitiesState.enemy_id].MT*2) 
+		if enemy_that_can_act not in enemy_turn_ended_list:
+			if randf() < GameData.enemy_stats[enemy_that_can_act].CRT/float(100):
+				GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT*2) 
 				Logs._log_entity_deal_critical_damage("Player",entity_name)
 			else:
-				GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[EntitiesState.enemy_id].MT)
+				GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT)
 				Logs._log_entity_deal_damage("Player",entity_name)
+			take_damage.emit("Player") #Envoie vers script joueur	
 			StatsSystem.update_stats()
-			EntitiesState.enemy_turn_ended_list.append(enemy_id)
+			EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 			
 ##################### DEGATS JOUEUR ET ENNEMI #####################
 			
-func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus par un ennemi
+func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus
 	if randf() < GameData.player_CRT/float(100):
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
 		Logs._log_entity_deal_critical_damage("Enemy",entity_name)
 	else:
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT)
 		Logs._log_entity_deal_damage("Enemy",entity_name)
+	take_damage.emit("Enemy") #Envoie vers chaque script ennemi	
 	StatsSystem.update_stats()
 	
 	
@@ -68,8 +72,8 @@ func enemy_selected(position : Vector2):
 
 func enemy_is_deselected():
 	hide_selector_UI.emit() #vers selector_UI
-	StatsSystem.enemy_death.emit() #vers enemy_inventory_ui
-	StatsSystem.hide_inventory_UI.emit() #vers enemy_inventory_ui
+	hide_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
+	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
 	
 	
 ##################### MORT #####################

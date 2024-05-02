@@ -20,7 +20,7 @@ extends Control
 
 ############### ControlNode ##################
 
-@onready var Button_Stats_Control : Control = $Player_Stats/Button_Stat
+@onready var Button_Stats_Control : Node2D = $Player_Stats/Button_Stat
 
 ############### HBoxcontainer ##################
 
@@ -74,14 +74,14 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	
 	###################################
 	
-	UI_stat_CP.text = "Point de compétence:   " + str(GameData.player_CP)
+	UI_stat_CP.text = "Point de compétence:  " + str(GameData.player_CP)
 	
-	UI_stat_HP.text = "HP: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
+	UI_stat_HP.text = "PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
 	
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
 	
-	UI_stat_STR.text = "STR: " + str(GameData.player_STR)
+	UI_stat_STR.text = "FRC: " + str(GameData.player_STR)
 	UI_stat_DEX.text = "DEX: " + str(GameData.player_DEX)
 	UI_stat_DEF.text = "DEF: " + str(GameData.player_DEF)
 	
@@ -152,6 +152,7 @@ func _on_plus_dex_button_pressed():
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer + 1
+		GameData.player_base_CRT = GameData.player_base_CRT + 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer - 1
 		GameState.player_has_acted()
 		StatsSystem.update_stats()
@@ -161,6 +162,7 @@ func _on_minus_dex_button_pressed():
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer - 1
+		GameData.player_base_CRT = GameData.player_base_CRT - 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer + 1
 		GameState.player_has_acted()
 		StatsSystem.update_stats()

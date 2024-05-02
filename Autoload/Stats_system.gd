@@ -2,18 +2,6 @@ extends Node
 
 signal update_player_stats #signal utilisé dès que l'on veut mettre à jour les stats du joueur
 signal update_enemy_stats #signal utilisé dès que l'on veut mettre à jour les stats de l'ennemi
-signal enemy_death #signal pour avertir de la mort de l'ennemi
-
-signal hide_inventory_UI
-
-########## A SUPPRIMER PLUS TARD ##########
-
-var libération : bool = false
-var miséricorde : bool = false
-var représailles : bool = false
-
-###########################################
-
 
 func update_stats():
 	GameData.player_LVL = GameData.player_LVL_buffer
@@ -26,12 +14,8 @@ func update_stats():
 	GameData.player_DEX = GameData.player_DEX_buffer
 	GameData.player_DEF = GameData.player_DEF_buffer
 	
-	
 	if GameData.player_HP < 1 :
-		if GameData.secret_triggered == true:
-			get_tree().change_scene_to_file("res://Menu/stats_screen.tscn")
-		else:
-			EntitiesState.player_is_dead()
+		EntitiesState.player_is_dead()
 	
 	if GameState.weapon_equipped == true:
 		GameData.player_MT = GameData.player_STR + GameData.Item[GameState.weapon_equipped_name].Value[0]
@@ -40,7 +24,6 @@ func update_stats():
 		
 	GameData.player_CRT = GameData.player_CRT + (GameData.player_DEX/4) -1
 	GameData.player_base_CRT = GameData.player_base_CRT + (GameData.player_DEX/4) -1
-	
 	
 	########################################################################################################################
 
@@ -58,19 +41,6 @@ func update_stats():
 	
 	if EntitiesState.enemy_id in GameData.enemy_stats and GameData.enemy_stats[EntitiesState.enemy_id].HP < 1 and EntitiesState.enemy_id not in EntitiesState.enemy_states:
 		EntitiesState.enemy_death(EntitiesState.enemy_id)
-		
-	if "Libération" in Inventory.inventory and libération == false:
-		GameData.legendary_weapon_acquired += 1
-		libération = true
-	if "Miséricorde" in Inventory.inventory and miséricorde == false:
-		GameData.legendary_weapon_acquired += 1
-		miséricorde = true
-	if "Représailles" in Inventory.inventory and représailles == false:
-		GameData.legendary_weapon_acquired += 1
-		représailles = true
-		
-	if GameData.legendary_weapon_acquired == 3 and GameData.enemy_defeated >= 20:
-		GameData.all_objective_completed = true
 
 	update_player_stats.emit() #vers Player_Profil_UI
 	update_enemy_stats.emit() #vers Enemy_Profil_UI

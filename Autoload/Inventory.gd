@@ -71,7 +71,6 @@ func _use_enemy_item(item_name):
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].MAX_HP
 	_remove_enemy_item(item_name)
 	StatsSystem.update_stats()
-	GameState.enemy_turn_end()
 	
 func _remove_enemy_item(item_name):
 	var enemy_item_index = GameData.enemy_inventory[EntitiesState.enemy_id].find(item_name)

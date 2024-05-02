@@ -1,8 +1,6 @@
 extends ScrollContainer
 
 @onready var vbox_node = $HBoxContainer/VBoxContainer
-@onready var color_rect = $"../ColorRect_Animation"
-
 
 func _ready():
 	Logs.add_logs.connect(add_logs)
@@ -19,9 +17,9 @@ func add_logs(logs:Array):
 	
 func remove_logs():
 	if vbox_node.get_child_count() > 0:
-		var Logs_Label_Scene = preload("res://UI/Logs_Label.tscn").instantiate()
 		var last_label = vbox_node.get_child(vbox_node.get_child_count() - 1)
 		var animation_player_fade_out = last_label.get_node("ColorRect_Animation/AnimationPlayer_Fade")
 		animation_player_fade_out.play("fade_out")
 		await get_tree().create_timer(1.0).timeout
-		last_label.queue_free()
+		if last_label != null:
+			last_label.queue_free()

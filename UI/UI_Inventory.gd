@@ -42,7 +42,7 @@ func validation_menu(item_button, item_name):
 		if GameData.Item[item_name].Type == "Weapon": #si l'objet est un équipement, on met à jour le nom des boutons en fontion
 			if GameData.Item[item_name].Equiped == false: #on ne veut pas afficher la description de l'objet quand il est déjà équipé
 				Logs._log_item("Description",item_name) #la description des objets est visible dans les logs
-			use_button.text = "Equiper"
+				use_button.text = "Equiper"
 			if GameData.Item[item_name].Equiped == true: #si une arme est équipée, alors on souhaite l'enlever avant de la jeter
 				throw_button.text = "Enlever"
 			else:
@@ -60,11 +60,14 @@ func validation_menu(item_button, item_name):
 		
 func _use_button(item_button,item_name): #note: en principe il suffirait juste d'appeler la fonction _remove_button, mais godot veut pas
 	if item_button !=null and GameData.player_current_action_point > 0:  #vérifie si l'item existe
-		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name: #Si une arme est équipée, alors on arrête la fonction
-			Logs._log_item("Already_Equiped",item_name)
-			return
-		elif GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true and GameState.weapon_equipped_name != item_name:
-			Inventory._exchange_item(item_name)
+		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true: 
+			if GameState.weapon_equipped_name == item_name: #Si une arme est équipée, alors on arrête la fonction
+				Logs._log_item("Already_Equiped",item_name)
+				return
+			else:
+				Inventory._exchange_item(item_name)
+		elif GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == false:
+			Inventory._use_item(item_name) #on utilise l'item
 		elif GameData.Item[item_name].Type == "Consumable":
 			Inventory._use_item(item_name) #on utilise l'item
 			Inventory._remove_item(item_name) #on le retire de l'inventaire

@@ -5,9 +5,9 @@ extends Node
 
 #variables de base du joueur
 
-var player_MAX_HP : int = 222 #Limite haute des points de vie
+var player_MAX_HP : int = 22 #Limite haute des points de vie
 var player_HP : int = 22 #valeur qui peut varier entre 0 et les points de vie maximals
-var player_STR : int = 66 #Nombre de points de vie qu'on retire à la cible
+var player_STR : int = 6 #Nombre de points de vie qu'on retire à la cible
 var player_DEX : float = 5 #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
 var player_DEF : int = 5 #Valeur qui sera soustraite aux dégâts reçus
 

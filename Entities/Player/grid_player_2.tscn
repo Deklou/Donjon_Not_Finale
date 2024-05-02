@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdq0ux4rg1m4q"]
+[gd_scene load_steps=12 format=3 uid="uid://cdq0ux4rg1m4q"]
 
 [ext_resource type="Script" path="res://Entities/Player/grid_player_2.gd" id="1_2fju6"]
 [ext_resource type="Texture2D" uid="uid://i6dahw3f6nk2" path="res://Sprites/Player/chara_sprite.png" id="1_sd1yj"]
+[ext_resource type="Texture2D" uid="uid://db5in2p1yixis" path="res://Sprites/Enemy/damage_frame_1.png" id="3_bdfdx"]
+[ext_resource type="Texture2D" uid="uid://criwc4s3g653j" path="res://Sprites/Enemy/damage_frame_2.png" id="4_6xqgt"]
+[ext_resource type="Texture2D" uid="uid://b46k3o8vws1gc" path="res://Sprites/Enemy/dummy_1_sprite.png" id="5_a73g1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr2mh"]
 size = Vector2(64, 64)
@@ -106,3 +109,15 @@ enabled = false
 target_position = Vector2(0, 64)
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="damage_sprite_1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_bdfdx")
+
+[node name="damage_sprite_2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_6xqgt")
+
+[node name="damage_sprite_3" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_a73g1")

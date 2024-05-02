@@ -24,15 +24,16 @@ func _ready():
 	EntitiesState.hide_enemy_UI.connect(hide_enemy_UI)
 	
 func update_enemy_UI():
-	if EntitiesState.selected_id in GameData.enemy_stats:
+	if EntitiesState.selected_id in GameData.enemy_stats and EntitiesState.enemy_id!= "":
+		EntitiesState.selected_id = EntitiesState.enemy_id
 		UI_enemy_Name.text = str(GameData.enemy_stats[EntitiesState.selected_id].Name)
 		UI_enemy_LVL.text = "Niveau: " + str(GameData.enemy_stats[EntitiesState.selected_id].LVL)
 		
-		UI_enemy_HP_stat.text = "HP: " + str(GameData.enemy_stats[EntitiesState.selected_id].HP) + "/" + str(GameData.enemy_stats[EntitiesState.selected_id].MAX_HP)
+		UI_enemy_HP_stat.text = "PV: " + str(GameData.enemy_stats[EntitiesState.selected_id].HP) + "/" + str(GameData.enemy_stats[EntitiesState.selected_id].MAX_HP)
 		UI_enemy_MT_stat.text = "Dégâts Totaux: " + str(GameData.enemy_stats[EntitiesState.selected_id].MT)
 		UI_enemy_CRT_stat.text = "Critique: " + str(GameData.enemy_stats[EntitiesState.selected_id].CRT)
 		
-		UI_enemy_STR_stat.text = "STR: " + str(GameData.enemy_stats[EntitiesState.selected_id].STR)
+		UI_enemy_STR_stat.text = "FRC: " + str(GameData.enemy_stats[EntitiesState.selected_id].STR)
 		UI_enemy_DEX_stat.text = "DEX: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEX)
 		UI_enemy_DEF_stat.text = "DEF: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEF)
 	
@@ -42,7 +43,6 @@ func update_enemy_UI():
 		CRT_Arrow_Up.visible = false
 	
 	########################### Couleurs ###########################
-	
 		if float(GameData.enemy_stats[EntitiesState.selected_id].HP)/float(GameData.enemy_stats[EntitiesState.selected_id].MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
 			UI_enemy_HP_stat.modulate = Color(1, 0, 0)  # Rouge
 		else:

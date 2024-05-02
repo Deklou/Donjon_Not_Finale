@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
-var currPos
 @export var distance = 64 #taille d'une case
+@onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
+@onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
+@onready var damage_sprite_3 : Sprite2D = $damage_sprite_3 #Sprite temporaire de dégâts
+var currPos
 var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
 
@@ -12,7 +15,13 @@ func _ready():
 	move_timer.one_shot = false  # Répéter le timeout
 	add_child(move_timer)
 	move_timer.timeout.connect(_on_MoveTimer_timeout)
+	
+	##################### SIGNAL #####################
 
+	EntitiesState.take_damage.connect(_player_take_damage)
+	
+##################### DEPLACEMENT #####################
+	
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down"):	
 		GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
@@ -63,3 +72,20 @@ func get_animation_from_direction(direction_vector):
 		return "walk_down"
 	elif direction_vector.y < 0:
 		return "walk_up"
+		
+##################### DEGAT #####################
+
+func _player_take_damage(Entity_Name: String):
+	if Entity_Name == "Player":
+		damage_sprite_1.visible = true
+		await get_tree().create_timer(0.03).timeout
+		damage_sprite_1.visible = false
+		await get_tree().create_timer(0.03).timeout
+		damage_sprite_2.visible = true
+		await get_tree().create_timer(0.03).timeout
+		damage_sprite_2.visible = false
+		await get_tree().create_timer(0.03).timeout
+		damage_sprite_3.visible = true
+		await get_tree().create_timer(0.03).timeout
+		damage_sprite_3.visible = false
+		

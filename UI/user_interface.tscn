@@ -194,9 +194,9 @@ stretch_mode = 2
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = 3.0
+offset_left = 1.0
 offset_top = 184.0
-offset_right = 42.0
+offset_right = 40.0
 offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -222,16 +222,15 @@ text = "MVT:"
 layout_mode = 2
 text = "ACT:"
 
-[node name="Button_Stat" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="Button_Stat" type="Node2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 visible = false
-layout_mode = 2
+position = Vector2(13, 197)
 
 [node name="HBoxContainer_STR" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
-layout_mode = 2
 offset_left = 89.0
-offset_top = -125.0
+offset_top = -202.0
 offset_right = 125.0
-offset_bottom = -94.0
+offset_bottom = -171.0
 
 [node name="plus_STR_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR"]
 layout_mode = 2
@@ -242,11 +241,10 @@ layout_mode = 2
 text = "-"
 
 [node name="HBoxContainer_DEX" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
-layout_mode = 0
 offset_left = 89.0
-offset_top = -85.0
+offset_top = -163.0
 offset_right = 125.0
-offset_bottom = -54.0
+offset_bottom = -132.0
 
 [node name="plus_DEX_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX"]
 layout_mode = 2
@@ -257,11 +255,10 @@ layout_mode = 2
 text = "-"
 
 [node name="HBoxContainer_DEF" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
-layout_mode = 0
 offset_left = 89.0
-offset_top = -45.0
+offset_top = -123.0
 offset_right = 125.0
-offset_bottom = -14.0
+offset_bottom = -92.0
 
 [node name="plus_DEF_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF"]
 layout_mode = 2
@@ -273,10 +270,10 @@ text = "-"
 
 [node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 visible = false
-layout_mode = 0
-offset_left = 41.0
-offset_right = 169.0
-offset_bottom = 24.0
+offset_left = 40.0
+offset_top = -91.0
+offset_right = 177.0
+offset_bottom = -60.0
 
 [node name="Validation_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation"]
 layout_mode = 2
