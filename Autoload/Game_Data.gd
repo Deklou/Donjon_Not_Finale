@@ -81,9 +81,9 @@ var enemy_DEF_buffer : int = enemy_DEF #Valeur qui sera soustraite aux dégâts 
 #variables relatives au tour du joueur
 
 var enemy_MAX_movement_point: int = 1 #points max de mouvement possibles
-var enemy_MAX_action_point: int = 1 #points max d'actions possibles
+var enemy_MAX_action_point: int = 2 #points max d'actions possibles
 var enemy_current_movement_point: int = 1 #points de mouvements actuels de l'ennemi
-var enemy_current_action_point: int = 1 #points d'actions actuels de l'ennemu
+var enemy_current_action_point: int = 2 #points d'actions actuels de l'ennemu
 
 ############################################################################################
 

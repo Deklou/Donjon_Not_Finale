@@ -13,6 +13,9 @@ extends Control
 @onready var UI_enemy_DEX_stat = $Enemy_Stats/DEX
 @onready var UI_enemy_DEF_stat = $Enemy_Stats/DEF
 
+@onready var UI_MVT_stat : Label = $Enemy_Stats/MVT
+@onready var UI_ACT_stat : Label = $Enemy_Stats/ACT
+
 ############### icône de buff ##################
 
 @onready var MT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_MT/Arrow_Up
@@ -36,6 +39,9 @@ func update_enemy_UI():
 		UI_enemy_STR_stat.text = "FRC: " + str(GameData.enemy_stats[EntitiesState.selected_id].STR)
 		UI_enemy_DEX_stat.text = "DEX: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEX)
 		UI_enemy_DEF_stat.text = "DEF: " + str(GameData.enemy_stats[EntitiesState.selected_id].DEF)
+		
+		UI_MVT_stat.text = "MVT: " + str(GameData.enemy_stats[EntitiesState.selected_id].MVT)
+		UI_ACT_stat.text = "ACT: " + str(GameData.enemy_stats[EntitiesState.selected_id].ACT)
 	
 	########################### flèches ###########################
 	

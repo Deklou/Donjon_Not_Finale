@@ -407,6 +407,7 @@ chest_item = "Miséricorde"
 position = Vector2(1824, 224)
 dummy_id = "100"
 dummy_name = "prout"
+dummy_MVT_offset = -1
 enemy_item_1 = "Epée courte"
 
 [node name="static_enemy2" parent="." instance=ExtResource("6_lvhhw")]
@@ -418,6 +419,8 @@ dummy_MAX_HP_offset = 100
 dummy_STR_offset = 1
 dummy_DEX_offset = 1
 dummy_DEF_offset = 1
+dummy_MVT_offset = -1
+dummy_ACT_offset = -1
 enemy_item_1 = "Pain"
 
 [node name="selector_UI" parent="." instance=ExtResource("6_adjsq")]

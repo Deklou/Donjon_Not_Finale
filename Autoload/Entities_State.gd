@@ -25,6 +25,7 @@ var Root_instance = null
 ##################### CHOIX ACTION ENNEMI #####################
 
 func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
+	GameState.enemy_has_acted()
 	Inventory._load_enemy_inventory_UI() #On charge l'interface à chaqué début de tour
 	if enemy_that_can_act in GameData.enemy_stats:
 		var entity_name : String = GameData.enemy_stats[enemy_that_can_act].Name
@@ -44,9 +45,10 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 			else:
 				GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT)
 				Logs._log_entity_deal_damage("Player",entity_name)
-			take_damage.emit("Player") #Envoie vers script joueur	
+			take_damage.emit("Player") #Envoie vers script joueur
+			if GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT == 0:
+				EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 			StatsSystem.update_stats()
-			EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 			
 ##################### DEGATS JOUEUR ET ENNEMI #####################
 			
@@ -59,7 +61,6 @@ func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pou
 		Logs._log_entity_deal_damage("Enemy",entity_name)
 	take_damage.emit("Enemy") #Envoie vers chaque script ennemi	
 	StatsSystem.update_stats()
-	
 	
 ##################### SELECTION #####################
 
@@ -74,8 +75,7 @@ func enemy_is_deselected():
 	hide_selector_UI.emit() #vers selector_UI
 	hide_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
 	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
-	
-	
+		
 ##################### MORT #####################
 
 func player_is_dead():

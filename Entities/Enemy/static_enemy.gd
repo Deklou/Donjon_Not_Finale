@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var dummy_STR_offset : int #Pour modifier la STR de base via l'interface
 @export var dummy_DEX_offset : int #Pour modifier la DEX de base via l'interface
 @export var dummy_DEF_offset : int #Pour modifier la DEF de base via l'interface
+@export var dummy_MVT_offset : int #Pour modifier le mouvement de base via l'interface
+@export var dummy_ACT_offset : int #Pour modifier le nombre d'actions de base via l'interface
 
 @export var enemy_item_1 : String  # Nom de l'objet 1 dans l'inventaire de l'ennemi
 @export var enemy_item_2 : String  # Nom de l'objet 2 dans l'inventaire de l'ennemi
@@ -24,7 +26,11 @@ var dummy_stats = {"Name": "",
 "CRT" : GameData.enemy_CRT,
 "STR" : GameData.enemy_STR,
 "DEX" : GameData.enemy_DEX,
-"DEF" : GameData.enemy_DEF
+"DEF" : GameData.enemy_DEF,
+"MVT" : GameData.enemy_current_movement_point,
+"ACT" : GameData.enemy_current_action_point,
+"MAX_MVT" : GameData.enemy_MAX_movement_point,
+"MAX_ACT" : GameData.enemy_MAX_action_point
 }
 
 var dummy_inventory = [] #Inventaire de l'ennemi
@@ -46,6 +52,10 @@ func _ready():
 	dummy_stats.STR += dummy_STR_offset
 	dummy_stats.DEX += dummy_DEX_offset
 	dummy_stats.DEF += dummy_DEF_offset
+	dummy_stats.MAX_MVT += dummy_MVT_offset
+	dummy_stats.MAX_ACT += dummy_ACT_offset
+	dummy_stats.MVT = dummy_stats.MAX_MVT
+	dummy_stats.ACT = dummy_stats.MAX_ACT
 	
 ##################### INVENTAIRE #####################
 
@@ -62,6 +72,7 @@ func _ready():
 ##################### SIGNAL #####################
 
 	EntitiesState.take_damage.connect(_entity_take_damage)
+	GameState.enemy_can_act.connect(caca)
 
 ##################### INTERFACE ET SELECTEUR #####################
 
@@ -119,9 +130,15 @@ func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		$".".queue_free()
 		return
-	
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list and EntitiesState.enemy_that_can_act == dummy_id: 
+			
+func caca():
+	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list and EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0: 
 		if dummy_range_entered == true: #si l'ennemi peut choisir une action
-			EntitiesState.selected_id = EntitiesState.enemy_id
-			EntitiesState.take_enemy_action()
-			EntitiesState.enemy_selected(get_position())
+			while GameData.enemy_stats[dummy_id].ACT > 0:
+				if dummy_id not in EntitiesState.enemy_turn_ended_list:
+					EntitiesState.selected_id = EntitiesState.enemy_id
+					EntitiesState.take_enemy_action()
+					EntitiesState.enemy_selected(get_position())
+					await get_tree().create_timer(0.35).timeout
+	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
+	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT

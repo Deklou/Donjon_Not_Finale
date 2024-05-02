@@ -330,9 +330,9 @@ script = ExtResource("5_xsdpy")
 
 [node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 80.0
+offset_top = 61.0
 offset_right = 192.0
-offset_bottom = 202.0
+offset_bottom = 177.0
 theme_override_constants/separation = 7
 alignment = 1
 
@@ -381,13 +381,12 @@ layout_mode = 2
 
 [node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 178.0
-offset_right = 37.0
-offset_bottom = 284.0
+offset_top = 151.0
+offset_right = 39.0
+offset_bottom = 309.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/separation = 14
+theme_override_constants/separation = 7
 
 [node name="STR" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
@@ -400,6 +399,14 @@ text = "DEX:"
 [node name="DEF" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
 text = "DEF:"
+
+[node name="MVT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+text = "MVT:"
+
+[node name="ACT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+text = "ACT:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
@@ -419,10 +426,10 @@ text = "Niveau:"
 [node name="Enemy_Inventory_UI" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
 visible = false
 anchors_preset = 0
-offset_left = 24.0
-offset_top = 576.0
-offset_right = 192.0
-offset_bottom = 672.0
+offset_left = 23.0
+offset_top = 597.0
+offset_right = 191.0
+offset_bottom = 693.0
 script = ExtResource("7_clhvp")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI"]
