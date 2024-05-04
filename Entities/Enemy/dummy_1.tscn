@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct12uae2y1l0e"]
+[gd_scene load_steps=7 format=3 uid="uid://ct12uae2y1l0e"]
 
 [ext_resource type="Script" path="res://Entities/Enemy/dummy_1.gd" id="1_2chy6"]
 [ext_resource type="Texture2D" uid="uid://b46k3o8vws1gc" path="res://Sprites/Enemy/dummy_1_sprite.png" id="1_hwgxb"]
+[ext_resource type="Texture2D" uid="uid://db5in2p1yixis" path="res://Sprites/Enemy/damage_frame_1.png" id="3_ee6bt"]
+[ext_resource type="Texture2D" uid="uid://criwc4s3g653j" path="res://Sprites/Enemy/damage_frame_2.png" id="4_ca4m5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f5qy"]
 size = Vector2(64, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jr4dl"]
-radius = 448.071
+radius = 192.666
 
 [node name="dummy_1" type="CharacterBody2D"]
 script = ExtResource("1_2chy6")
@@ -36,9 +38,17 @@ one_way_collision_margin = 0.0
 enabled = false
 target_position = Vector2(0, 64)
 
+[node name="damage_sprite_1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_ee6bt")
+
+[node name="damage_sprite_2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_ca4m5")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="body_entered" from="Trigger_Range" to="." method="_on_trigger_range_body_entered"]
 [connection signal="body_exited" from="Trigger_Range" to="." method="_on_trigger_range_body_exited"]

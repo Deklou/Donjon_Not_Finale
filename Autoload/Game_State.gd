@@ -61,7 +61,7 @@ func player_turn_end():
 			for i in EntitiesState.enemy_triggered_list:
 				EntitiesState.enemy_that_can_act = i
 				enemy_can_act.emit() #Vers les scripts ennemis
-				await get_tree().create_timer(float(GameData.enemy_stats[EntitiesState.enemy_that_can_act].MAX_ACT/2)).timeout #On attend en fonction du nombre d'action de l'ennemi
+				await get_tree().create_timer(float(GameData.enemy_stats[EntitiesState.enemy_that_can_act].MAX_ACT/1.7)).timeout #On attend en fonction du nombre d'action de l'ennemi
 			if EntitiesState.enemy_triggered_list == EntitiesState.enemy_turn_ended_list:
 				EntitiesState.enemy_turn_ended_list.clear()
 				GameState.enemy_turn_end()

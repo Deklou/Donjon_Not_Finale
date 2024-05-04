@@ -72,7 +72,7 @@ func _ready():
 ##################### SIGNAL #####################
 
 	EntitiesState.take_damage.connect(_entity_take_damage)
-	GameState.enemy_can_act.connect(caca)
+	GameState.enemy_can_act.connect(_enemy_ACT)
 
 ##################### INTERFACE ET SELECTEUR #####################
 
@@ -130,15 +130,14 @@ func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		$".".queue_free()
 		return
+		
+##################### ACTION #####################
 			
-func caca():
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list and EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0: 
-		if dummy_range_entered == true: #si l'ennemi peut choisir une action
-			while GameData.enemy_stats[dummy_id].ACT > 0:
-				if dummy_id not in EntitiesState.enemy_turn_ended_list:
-					EntitiesState.selected_id = EntitiesState.enemy_id
-					EntitiesState.take_enemy_action()
-					EntitiesState.enemy_selected(get_position())
-					await get_tree().create_timer(0.35).timeout
+func _enemy_ACT():
+	while EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_range_entered == true and GameState.is_ennemy_turn:
+		EntitiesState.selected_id = EntitiesState.enemy_id
+		EntitiesState.take_enemy_action()
+		EntitiesState.enemy_selected(get_position())
+		await get_tree().create_timer(0.4).timeout
 	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
 	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
