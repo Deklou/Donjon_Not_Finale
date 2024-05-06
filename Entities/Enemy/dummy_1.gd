@@ -38,6 +38,7 @@ var mouse_click_count : int = 0 #Nombre de clics souris pour l'affichage du sele
 var dummy_range_entered : bool = false #Pour détecter si le joueur peut être attaqué
 var normalized_enemy_distance : Vector2
 var dummy_previous_position : Vector2
+var previous_move : Vector2
 
 func _ready(): 
 	
@@ -150,7 +151,7 @@ func _enemy_CHOICE():
 			_enemy_MVT()
 		else:
 			EntitiesState.enemy_turn_ended_list.append(dummy_id)
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.3).timeout
 		StatsSystem.update_stats()
 	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
 	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
@@ -166,32 +167,31 @@ func _enemy_ACT():
 ##################### MOUVEMENT #####################		
 
 func _enemy_MVT():
-	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:	
+	if GameState.is_ennemy_turn == true and dummy_id not in EntitiesState.enemy_turn_ended_list:
 		normalized_enemy_distance = self.position.direction_to(GameState.player_position)
 		dummy_previous_position = self.position
 		if abs(normalized_enemy_distance.x) > abs(normalized_enemy_distance.y):
 			if normalized_enemy_distance.x > 0:
-				$RayCast2D.target_position = Vector2(64,0)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(64,0)
-					GameState.enemy_has_moved()
+				_enemy_move(Vector2(64,0))
 			else:
-				$RayCast2D.target_position = Vector2(-64,0)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(-64,0)
-					GameState.enemy_has_moved()
+				_enemy_move(Vector2(-64,0))
 		else:
 			if normalized_enemy_distance.y > 0:
-				$RayCast2D.target_position = Vector2(0,64)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(0,64)
-					GameState.enemy_has_moved()
+				_enemy_move(Vector2(0,64))
 			else:
-				$RayCast2D.target_position = Vector2(0,-64)
-				$RayCast2D.force_raycast_update()
-				if not $RayCast2D.is_colliding():
-					self.position += Vector2(0,-64)
-					GameState.enemy_has_moved()
+				_enemy_move(Vector2(0,-64))
+		if dummy_previous_position == self.position:
+			if previous_move.x == 0:
+				_enemy_move(Vector2(sign(normalized_enemy_distance.x)*64,0))
+			elif previous_move.y == 0:
+				_enemy_move(Vector2(0,sign(normalized_enemy_distance.y)*64))
+			elif dummy_previous_position == self.position:
+				EntitiesState.enemy_turn_ended_list.append(dummy_id)
+			
+func _enemy_move(distance: Vector2):
+	previous_move = distance
+	$RayCast2D.target_position = distance
+	$RayCast2D.force_raycast_update()
+	if not $RayCast2D.is_colliding():
+		self.position += distance
+		GameState.enemy_has_moved()

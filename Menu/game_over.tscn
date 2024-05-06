@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://c8epwynfcnqbb"]
+[gd_scene load_steps=2 format=3 uid="uid://c8epwynfcnqbb"]
+
+[ext_resource type="Script" path="res://Menu/game_over.gd" id="1_0w1a4"]
 
 [node name="Game_Over" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_0w1a4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -26,10 +29,21 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 70
 text = "GAME OVER"
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="Restart_Button" type="Button" parent="CanvasLayer"]
 offset_left = 551.0
 offset_top = 562.0
 offset_right = 731.0
 offset_bottom = 605.0
 theme_override_font_sizes/font_size = 25
 text = "Recommencer"
+
+[node name="Quit_Button" type="Button" parent="CanvasLayer"]
+offset_left = 552.0
+offset_top = 624.0
+offset_right = 732.0
+offset_bottom = 667.0
+theme_override_font_sizes/font_size = 25
+text = "Quitter"
+
+[connection signal="pressed" from="CanvasLayer/Restart_Button" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Quit_Button" to="." method="_on_quit_button_pressed"]

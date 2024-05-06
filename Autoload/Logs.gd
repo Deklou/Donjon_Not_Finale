@@ -1,16 +1,23 @@
 extends Node
 
-var logs = [] #tableau qui contiendra les logs du jeu
+##################### VARIABLES #####################
+var logs : Array = [] #tableau qui contiendra les logs du jeu
 signal add_logs(logs)
 signal remove_logs
-
-#Script qui décrit le fonctionnement du système de log
+##################### RESET VALUE #####################
+func _reset_logs_value():
+	logs.clear()
+	pass
+##################### READY #####################
+func _ready():
+	_reset_logs_value()
+##################### FONCTIONS #####################
 
 func _add_log(string): 
 	logs.insert(0, string) # insère le log en première position
 	add_logs.emit(logs)
 	await get_tree().create_timer(3.0 + logs.size()).timeout
-	if logs.size() >=0:
+	if logs.size() >0:
 		remove_logs.emit()
 		logs.remove_at(logs.size()-1)
 			

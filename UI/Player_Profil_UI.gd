@@ -62,30 +62,30 @@ func _ready():
 	StatsSystem.update_player_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
 	XpSystem.UI_stat_button.connect(stat_modifier) 
 	GameState.show_mvt_act_stats.connect(update_player_UI)
+	GameState.signal_player_input_cant_move.connect(player_input_cant_move)
 	update_player_UI()
+	
+func player_input_cant_move():
+	if is_inside_tree():
+		UI_stat_MVT.modulate = Color(1, 0, 0)
+		await get_tree().create_timer(0.1).timeout
+		UI_stat_MVT.modulate = Color(1, 1, 1)
+	else:
+		return
 	
 func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_LVL.text = "Niveau:   " + str(GameData.player_LVL)
-	
 	############### XP ################
-	
 	UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
 	UI_stat_XP_bar.update_xp_progress(GameData.player_XP)
-	
 	###################################
-	
 	UI_stat_CP.text = "Point de compétence:  " + str(GameData.player_CP)
-	
 	UI_stat_HP.text = "PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
-	
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
-	
 	UI_stat_STR.text = "FRC: " + str(GameData.player_STR)
 	UI_stat_DEX.text = "DEX: " + str(GameData.player_DEX)
 	UI_stat_DEF.text = "DEF: " + str(GameData.player_DEF)
-	
-	
 	UI_stat_MVT.text = "MVT: " + str(GameData.player_current_movement_point)
 	UI_stat_ACT.text = "ACT: " + str(GameData.player_current_action_point)
 	
@@ -97,10 +97,8 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_ACT.visible = false
 	
 	########################### flèches ###########################
-	
 	MT_Arrow_Up.visible = false
 	CRT_Arrow_Up.visible = false
-		
 	########################### Couleurs ###########################
 	
 	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %

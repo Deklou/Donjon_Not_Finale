@@ -23,6 +23,7 @@ func _ready():
 ##################### DEPLACEMENT #####################
 	
 func _input(event):
+	EntitiesState.player_parent_node = get_parent()
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down"):	
 		GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 		if event.is_action_pressed("right"):
@@ -61,6 +62,8 @@ func handle_movement(direction_vector, animation):
 			currPos += direction_vector
 			self.position = currPos
 			GameState.player_has_moved()
+	elif GameData.player_current_movement_point == 0:
+		GameState.player_input_cant_move()
 	GameState.player_position = self.position
 
 func get_animation_from_direction(direction_vector):

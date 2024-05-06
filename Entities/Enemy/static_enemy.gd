@@ -138,6 +138,6 @@ func _enemy_ACT():
 		EntitiesState.selected_id = EntitiesState.enemy_id
 		EntitiesState.take_enemy_action()
 		EntitiesState.enemy_selected(get_position())
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.3).timeout
 	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
 	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT

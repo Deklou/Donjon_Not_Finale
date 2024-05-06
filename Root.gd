@@ -3,15 +3,13 @@ extends Node2D
 var Root = null
 var Root_instance = null
 
-#Ce script est ce qui appelé en premier par le jeu
-#c'est le fil conducteur du jeu, il se charge de lancer chaque scène
-
 func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	$User_Interface.visible = false
 	Root = get_tree().root
 	Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.to_intro_level.connect(_to_intro_level)
+	GameState.restart_root.connect(_to_intro_level)
 	
 func _to_intro_level():	
 	if Root.has_node("stats_screen"):
@@ -23,7 +21,6 @@ func _to_intro_level():
 	Root_instance = preload("res://Levels/demo/intro_level.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.to_first_floor.connect(_to_first_floor)
-	
 	
 func _to_first_floor():
 	EntitiesState.enemy_triggered_list.clear()

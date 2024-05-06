@@ -20,6 +20,7 @@ func remove_logs():
 		var last_label = vbox_node.get_child(vbox_node.get_child_count() - 1)
 		var animation_player_fade_out = last_label.get_node("ColorRect_Animation/AnimationPlayer_Fade")
 		animation_player_fade_out.play("fade_out")
-		await get_tree().create_timer(1.0).timeout
-		if last_label != null:
+		if last_label != null and last_label.is_inside_tree(): #prévenir lors du rechargement de l'interface
+			var timer = get_tree().create_timer(0.5)	
+			await timer.timeout
 			last_label.queue_free()

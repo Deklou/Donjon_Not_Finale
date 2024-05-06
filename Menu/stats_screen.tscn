@@ -50,6 +50,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Temps"
 
+[node name="Label6" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Morts"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect"]
 layout_mode = 0
 offset_left = 896.0
@@ -77,6 +82,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "/1"
 
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="Label6" type="Label" parent="ColorRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
 [node name="Button" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 7
@@ -85,9 +98,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -96.0
-offset_top = -192.0
+offset_top = -136.0
 offset_right = 88.0
-offset_bottom = -142.0
+offset_bottom = -86.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30

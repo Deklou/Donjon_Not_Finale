@@ -1,7 +1,18 @@
 extends Node
 
+##################### VARIABLE PAR DEFAUT #####################
+var default_game_over_boolean : bool = true
+##################### VARIABLES #####################
+var game_over_boolean : bool #utilisé pour n'instancier qu'une fois la scène de game over
 signal update_player_stats #signal utilisé dès que l'on veut mettre à jour les stats du joueur
 signal update_enemy_stats #signal utilisé dès que l'on veut mettre à jour les stats de l'ennemi
+##################### RESET VALUE #####################
+func _reset_stats_system_value():
+	game_over_boolean = default_game_over_boolean
+##################### READY #####################
+func _ready():
+	_reset_stats_system_value()
+##################### FONCTIONS #####################
 
 func update_stats():
 	GameData.player_LVL = GameData.player_LVL_buffer
@@ -14,8 +25,9 @@ func update_stats():
 	GameData.player_DEX = GameData.player_DEX_buffer
 	GameData.player_DEF = GameData.player_DEF_buffer
 	
-	if GameData.player_HP < 1 :
+	if GameData.player_HP < 1 and game_over_boolean :
 		EntitiesState.player_is_dead()
+		game_over_boolean = false
 	
 	if GameState.weapon_equipped == true:
 		GameData.player_MT = GameData.player_STR + GameData.Item[GameState.weapon_equipped_name].Value[0]

@@ -1,5 +1,15 @@
 extends Node
 
+##################### VARIABLE PAR DEFAUT #####################
+var default_selected_id : String = ""
+var default_enemy_id : String = ""
+var default_enemy_can_be_attacked_id : String = ""
+var default_enemy_can_be_attacked_position : Vector2 = Vector2(0,0)
+var default_enemy_that_can_act : String = ""
+var default_Root = null
+var default_Root_instance = null
+var default_player_parent_node : Node = Node.new()
+##################### VARIABLES #####################
 signal show_enemy_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
 signal hide_enemy_UI #cache le profil de l'ennemi
 signal hide_UI #cache l'entièreté de l'interface utilisateur
@@ -8,20 +18,33 @@ signal hide_enemy_inventory_UI #masque l'inventaire ennemi
 signal show_selector_UI(position) #affiche le selecteur
 signal hide_selector_UI #cache le selecteur
 signal take_damage(Entity) #Signale quand une entité prend des dégâts, pour les effets visuels
-
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
-var selected_id : String = "" #identifiant dont on se sert pour afficher l'interface de l'ennemi
-var enemy_id : String = "" #identifirant dont on se sert pour calculer les dégâts
-var enemy_can_be_attacked_id : String = "" #identifiant de l'ennemi qui peut être attaqué par le joueur
-var enemy_can_be_attacked_position : Vector2 = Vector2(0,0) #Position de l'ennemi qui peut être attaqué
-var enemy_that_can_act : String = "" #l'identifiant de l'ennemi qui peut agir parmi tous les ennemis
-
+var selected_id : String #identifiant dont on se sert pour afficher l'interface de l'ennemi
+var enemy_id : String #identifiant dont on se sert pour calculer les dégâts
+var enemy_can_be_attacked_id : String #identifiant de l'ennemi qui peut être attaqué par le joueur
+var enemy_can_be_attacked_position : Vector2 #Position de l'ennemi qui peut être attaqué
+var enemy_that_can_act : String #l'identifiant de l'ennemi qui peut agir parmi tous les ennemis
 var enemy_triggered_list = [] #liste des ennemis qui ciblent le joueur
 var enemy_turn_ended_list = [] #liste des ennemis qui ont déjà agi
-
-var Root = null
-var Root_instance = null
-
+var Root
+var Root_instance
+var player_parent_node : Node  #On récu^père le parent du noeud joueur, qui est le niveau dans lequel il se trouve
+##################### RESET VALUE #####################
+func _reset_entities_state_value():
+	enemy_states.clear()
+	selected_id = default_selected_id
+	enemy_id = default_enemy_id
+	enemy_can_be_attacked_id = default_enemy_can_be_attacked_id
+	enemy_can_be_attacked_position = default_enemy_can_be_attacked_position
+	enemy_that_can_act = default_enemy_that_can_act
+	enemy_triggered_list.clear()
+	enemy_turn_ended_list.clear()
+	Root = default_Root
+	Root_instance = default_Root_instance
+	player_parent_node = default_player_parent_node
+##################### READY #####################
+func _ready():
+	_reset_entities_state_value()
 ##################### CHOIX ACTION ENNEMI #####################
 
 func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
@@ -80,11 +103,13 @@ func enemy_is_deselected():
 ##################### MORT #####################
 
 func player_is_dead():
+	GameData.player_death_count += 1
 	Root = get_tree().root
+	Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+	EntitiesState.player_parent_node.queue_free()
 	Root_instance = preload("res://Menu/game_over.tscn").instantiate()
 	Root.add_child(Root_instance)
 	hide_UI.emit() #Vers user_interface
-	return
 
 func enemy_is_dead(dummy_id: String) -> bool: #retourne si l'état est présent, et quel état
 	return enemy_states.has(dummy_id) and enemy_states[dummy_id]

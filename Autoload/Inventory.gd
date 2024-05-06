@@ -2,9 +2,17 @@ extends Node
 
 #Script qui se charge de la partie purement fonctionnelle de l'inventaire
 
-var inventory = [] #l'inventaire est un tableau/liste, vide au départ
+##################### VARIABLES #####################
+var inventory : Array = [] #l'inventaire est un tableau/liste, vide au départ
 signal item_added(inventory)
 signal update_enemy_inventory_UI(enemy_inventory) #signal utilisé pour update l'interface de l'inventaire enenmi
+##################### RESET VALUE #####################
+func _reset_inventory_value():
+	inventory.clear()
+##################### READY #####################
+func _ready():
+	_reset_inventory_value()
+##################### FONCTIONS #####################
 
 func _add_item(item_name): #ajouter un item dans l'inventaire
 	inventory.append(GameData.Item[item_name].Name)
