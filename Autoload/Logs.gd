@@ -2,11 +2,13 @@ extends Node
 
 ##################### VARIABLES #####################
 var logs : Array = [] #tableau qui contiendra les logs du jeu
+var logs_histo : Array = [] #historique des logs
 signal add_logs(logs)
 signal remove_logs
 ##################### RESET VALUE #####################
 func _reset_logs_value():
 	logs.clear()
+	logs_histo.clear()
 	pass
 ##################### READY #####################
 func _ready():
@@ -15,6 +17,7 @@ func _ready():
 
 func _add_log(string): 
 	logs.insert(0, string) # insère le log en première position
+	logs_histo.insert(0, string) # insère le log dans l'historique
 	add_logs.emit(logs)
 	await get_tree().create_timer(3.0 + logs.size()).timeout
 	if logs.size() >0:

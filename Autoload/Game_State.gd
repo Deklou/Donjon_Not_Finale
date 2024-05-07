@@ -10,6 +10,7 @@ var default_enemy_range_entered : bool = false
 var default_is_ennemy_turn : bool = false
 var default_player_position : Vector2 = Vector2()
 var default_ending_triggered : bool = false
+var default_level_up : bool = false #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
@@ -26,6 +27,7 @@ var is_ennemy_turn : bool #on contrôle si c'est au tour de l'ennemi d'agir, par
 # Player
 var player_position : Vector2 #position du joueur
 var ending_triggered : bool #fin relative à la demo
+var level_up : bool #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -46,6 +48,7 @@ func _reset_gamestate_value():
 	is_ennemy_turn = default_is_ennemy_turn
 	player_position = default_player_position
 	ending_triggered = default_ending_triggered
+	level_up = default_level_up
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()

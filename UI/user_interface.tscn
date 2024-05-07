@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=12 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Texture2D" uid="uid://i6djldglvotl" path="res://UI/Assets/xp_bar.png" id="1_3aabu"]
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://UI/interface_down.gd" id="6_tu6kf"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwnlq"]
+size = Vector2(144, 41)
+
 [node name="User_Interface" type="CanvasLayer"]
 script = ExtResource("1_xgc7s")
 metadata/_edit_vertical_guides_ = [784.0]
@@ -22,10 +25,11 @@ anchor_bottom = 1.0
 offset_left = 1048.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="white_bg_right" type="ColorRect" parent="MarginContainer_right"]
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="interface_right" type="ColorRect" parent="MarginContainer_right/white_bg_right"]
 layout_mode = 0
@@ -88,16 +92,19 @@ offset_left = 8.0
 offset_top = 272.0
 offset_right = 200.0
 offset_bottom = 704.0
+mouse_filter = 2
 script = ExtResource("1_685e6")
 
-[node name="LVL" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+[node name="LVL" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
 offset_top = 8.0
 offset_right = 64.0
 offset_bottom = 34.0
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 18
+bbcode_enabled = true
 text = "Niveau:"
+fit_content = true
+autowrap_mode = 0
 
 [node name="XP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
@@ -200,9 +207,22 @@ offset_right = 40.0
 offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/separation = 14
 
+[node name="Area2D" type="Area2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+z_index = 1
+z_as_relative = false
+position = Vector2(7, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D"]
+z_index = 1
+z_as_relative = false
+position = Vector2(56, 4.5)
+shape = SubResource("RectangleShape2D_kwnlq")
+
 [node name="STR" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+z_as_relative = false
 layout_mode = 2
 text = "STR:"
 
@@ -300,6 +320,15 @@ offset_right = 224.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
+[node name="histo_logs_button" type="Button" parent="MarginContainer_left/white_bg_left/interface_left"]
+visible = false
+layout_mode = 2
+offset_left = 67.0
+offset_top = 300.0
+offset_right = 157.0
+offset_bottom = 331.0
+text = "Historique"
+
 [node name="UI_logs" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left"]
 layout_mode = 0
 offset_left = 8.0
@@ -323,16 +352,16 @@ theme_override_constants/separation = 17
 visible = false
 anchors_preset = 0
 offset_left = 24.0
-offset_top = 280.0
+offset_top = 296.0
 offset_right = 216.0
-offset_bottom = 704.0
+offset_bottom = 608.0
 script = ExtResource("5_xsdpy")
 
 [node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 61.0
+offset_top = 60.0
 offset_right = 192.0
-offset_bottom = 177.0
+offset_bottom = 176.0
 theme_override_constants/separation = 7
 alignment = 1
 
@@ -427,9 +456,9 @@ text = "Niveau:"
 visible = false
 anchors_preset = 0
 offset_left = 23.0
-offset_top = 597.0
+offset_top = 608.0
 offset_right = 191.0
-offset_bottom = 693.0
+offset_bottom = 704.0
 script = ExtResource("7_clhvp")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI"]
@@ -484,6 +513,8 @@ offset_bottom = 20.0
 theme_override_font_sizes/font_size = 20
 text = "Attendre"
 
+[connection signal="mouse_entered" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_area_2d_mouse_exited"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/minus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX/plus_DEX_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_dex_button_pressed"]
@@ -492,5 +523,6 @@ text = "Attendre"
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF/minus_DEF_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_def_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Validation_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_validation_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Cancel_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="MarginContainer_left/white_bg_left/interface_left/histo_logs_button" to="." method="_on_histo_logs_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]

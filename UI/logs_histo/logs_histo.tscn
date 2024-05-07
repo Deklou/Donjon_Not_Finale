@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca44wayrufo7t"]
+
+[ext_resource type="Script" path="res://UI/logs_histo/logs_histo.gd" id="1_dnn6w"]
+
+[node name="logs_histo" type="Node2D"]
+visible = false
+script = ExtResource("1_dnn6w")
+
+[node name="UI_logs" type="ScrollContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 216.0
+offset_bottom = 296.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI_logs"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="UI_logs/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_logs/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17

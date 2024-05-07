@@ -10,6 +10,7 @@ func gain_xp():
 
 func gain_level():
 	if GameData.player_XP_buffer >=100:
+		GameState.level_up = true
 		GameData.player_XP_over_level = GameData.player_XP_buffer/100
 		GameData.player_XP_buffer = GameData.player_XP_buffer % 100
 		GameData.player_CP_buffer = GameData.player_CP_buffer + GameData.player_XP_over_level
