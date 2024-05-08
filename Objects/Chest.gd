@@ -3,12 +3,18 @@ extends RigidBody2D
 @export var chest_id : String = "" # Identifiant unique pour chaque coffre, à définir dans l'éditeur
 @export var chest_item : String = "" # Nom de l'objet contenu dans le coffre
 @onready var unlocked_chest_sprite : Sprite2D = $Unlocked_Chest_Sprite
+@export var distance = 64 #taille d'une case
+var currPos
 
 func _ready():
 	if GameState.chest_is_open(chest_id): #check l'état du coffre à chaque fois que l'objet est instancié
 		unlocked_chest_sprite.visible = true
 	else:
 		unlocked_chest_sprite.visible = false
+	currPos = $".".position
+	currPos.x = round(currPos.x / distance) * distance - 32
+	currPos.y = round(currPos.y / distance) * distance - 32
+	position = currPos
 
 func _on_interaction_area_body_entered(_body): #ouvre le coffre et change à l'état adéquat
 	if !GameState.chest_is_open(chest_id): #vérifie si le coffre n'a pas déjà été ouvert

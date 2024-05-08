@@ -218,7 +218,7 @@ position = Vector2(7, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D"]
 z_index = 1
 z_as_relative = false
-position = Vector2(56, 4.5)
+position = Vector2(344, -32)
 shape = SubResource("RectangleShape2D_kwnlq")
 
 [node name="STR" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]

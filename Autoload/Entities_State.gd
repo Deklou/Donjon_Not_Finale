@@ -101,13 +101,15 @@ func enemy_is_deselected():
 	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
 		
 ##################### MORT #####################
-
 func player_is_dead():
+	var last_player_position = EntitiesState.player_parent_node.get_node("Grid_player_2").global_position
 	GameData.player_death_count += 1
 	Root = get_tree().root
-	Root.remove_child.call_deferred(EntitiesState.player_parent_node)
-	EntitiesState.player_parent_node.queue_free()
 	Root_instance = preload("res://Menu/game_over.tscn").instantiate()
+	Root.add_child(Root_instance)
+	EntitiesState.player_parent_node.get_node("Grid_player_2").queue_free()
+	Root_instance = preload("res://Entities/Camera/Camera_Death.tscn").instantiate()
+	Root_instance.position = last_player_position
 	Root.add_child(Root_instance)
 	hide_UI.emit() #Vers user_interface
 
@@ -123,4 +125,5 @@ func enemy_death(dummy_id : String):
 	GameData.enemy_stats.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime sa clé et valeur dans le dictionnaire de stats
 	GameData.enemy_inventory.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime son inventaire
 	GameData.enemy_defeated +=1
+	EntitiesState.enemy_id = ""
 	EntitiesState.selected_id = ""

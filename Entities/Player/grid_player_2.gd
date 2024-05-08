@@ -10,6 +10,9 @@ var move_timer = Timer.new()  # Timer pour le mouvement continu
 
 func _ready():
 	currPos = $".".position
+	currPos.x = round(currPos.x / distance) * distance - 32
+	currPos.y = round(currPos.y / distance) * distance - 32
+	position = currPos
 	move_timer.wait_time = 0.15  # Régler l'intervalle entre les mouvements continus
 	move_timer.autostart = false  # Ne pas démarrer automatiquement
 	move_timer.one_shot = false  # Répéter le timeout

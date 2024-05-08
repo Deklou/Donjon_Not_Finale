@@ -1,23 +1,17 @@
 extends Control
 
 @onready var ennemy_profil = $"." #pour avoir un contrôle sur la visibilité de cette partie de l'interface
-
 @onready var UI_enemy_Name = $HBoxContainer/Name
 @onready var UI_enemy_LVL = $HBoxContainer/LVL
-
 @onready var UI_enemy_HP_stat = $Enemy_Calculated_Stats/HP
 @onready var UI_enemy_MT_stat = $Enemy_Calculated_Stats/HBoxContainer_MT/MT
 @onready var UI_enemy_CRT_stat = $Enemy_Calculated_Stats/HBoxContainer_CRT/CRT
-
 @onready var UI_enemy_STR_stat = $Enemy_Stats/STR
 @onready var UI_enemy_DEX_stat = $Enemy_Stats/DEX
 @onready var UI_enemy_DEF_stat = $Enemy_Stats/DEF
-
 @onready var UI_MVT_stat : Label = $Enemy_Stats/MVT
 @onready var UI_ACT_stat : Label = $Enemy_Stats/ACT
-
 ############### icône de buff ##################
-
 @onready var MT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_MT/Arrow_Up
 @onready var CRT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
 

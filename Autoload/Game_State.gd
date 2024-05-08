@@ -129,12 +129,17 @@ func enemy_turn_end():
 ##################### RESTART #####################
 	
 func restart_game():
+	get_tree().root.remove_child.call_deferred(EntitiesState.player_parent_node)
+	EntitiesState.player_parent_node.queue_free()
 	var scene = get_tree().root.get_node("./Game_Over")
 	get_tree().root.remove_child.call_deferred(scene)
+	scene.queue_free()
 	scene = get_tree().root.get_node("./Root/User_Interface")
 	get_tree().root.get_node("Root").remove_child.call_deferred(scene)
 	scene.queue_free()
 	get_tree().root.get_node("Root").add_child.call_deferred(preload("res://UI/user_interface.tscn").instantiate())
+	scene = get_tree().root.get_node("./Camera_Death")
+	scene.queue_free()
 	EntitiesState._reset_entities_state_value()
 	GameData._reset_gamedata_value()
 	GameState._reset_gamestate_value()

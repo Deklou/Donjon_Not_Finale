@@ -9,13 +9,13 @@ extends CharacterBody2D
 @export var dummy_DEF_offset : int #Pour modifier la DEF de base via l'interface
 @export var dummy_MVT_offset : int #Pour modifier le mouvement de base via l'interface
 @export var dummy_ACT_offset : int #Pour modifier le nombre d'actions de base via l'interface
-
 @export var enemy_item_1 : String  # Nom de l'objet 1 dans l'inventaire de l'ennemi
 @export var enemy_item_2 : String  # Nom de l'objet 2 dans l'inventaire de l'ennemi
 @export var enemy_item_3 : String  # Nom de l'objet 3 dans l'inventaire de l'ennemi
-
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
+@export var distance = 64 #taille d'une case
+var currPos
 
 var dummy_stats = {"Name": "",
 "LVL" : GameData.enemy_LVL,
@@ -41,12 +41,9 @@ var dummy_previous_position : Vector2
 var previous_move : Vector2
 
 func _ready(): 
-	
 ##################### STATS #####################
-	
 	dummy_inventory = [enemy_item_1, enemy_item_2, enemy_item_3]
 	GameData.enemy_inventory[dummy_id] = dummy_inventory #Dès qu'on instancie un ennemi, on envoie son inventaire dans GameData
-	
 	dummy_stats.LVL += dummy_LVL_offset
 	dummy_stats.MAX_HP += dummy_MAX_HP_offset
 	dummy_stats.HP += dummy_MAX_HP_offset
@@ -59,9 +56,7 @@ func _ready():
 	dummy_stats.MAX_ACT += dummy_ACT_offset
 	dummy_stats.MVT = dummy_stats.MAX_MVT
 	dummy_stats.ACT = dummy_stats.MAX_ACT
-	
 ##################### INVENTAIRE #####################
-
 	if not dummy_inventory.is_empty(): #A chaque fois qu'on instancie un ennemi, la première chose qu'on fait est de lui équipper son arme
 		for item_name in dummy_inventory:
 			if item_name != "":
@@ -71,11 +66,14 @@ func _ready():
 
 	dummy_stats.Name = dummy_name #On assigne le nom de l'ennemi maintenant sinon l'export de la variable n'est pas instancié
 	GameData.enemy_stats[dummy_id] = dummy_stats #Dès qu'on instancie un ennemi, on envoie les stats dans GameData
-	
 ##################### SIGNAL #####################
-
 	EntitiesState.take_damage.connect(_entity_take_damage)
 	GameState.enemy_can_act.connect(_enemy_CHOICE)
+##################### POSITION #####################
+	currPos = $".".position
+	currPos.x = round(currPos.x / distance) * distance - 32
+	currPos.y = round(currPos.y / distance) * distance - 32
+	position = currPos
 
 ##################### INTERFACE ET SELECTEUR #####################
 
