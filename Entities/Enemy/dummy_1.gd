@@ -170,26 +170,26 @@ func _enemy_MVT():
 		dummy_previous_position = self.position
 		if abs(normalized_enemy_distance.x) > abs(normalized_enemy_distance.y):
 			if normalized_enemy_distance.x > 0:
-				_enemy_move(Vector2(64,0))
+				_enemy_move(Vector2(distance,0))
 			else:
-				_enemy_move(Vector2(-64,0))
+				_enemy_move(Vector2(-distance,0))
 		else:
 			if normalized_enemy_distance.y > 0:
-				_enemy_move(Vector2(0,64))
+				_enemy_move(Vector2(0,distance))
 			else:
-				_enemy_move(Vector2(0,-64))
+				_enemy_move(Vector2(0,-distance))
 		if dummy_previous_position == self.position:
 			if previous_move.x == 0:
-				_enemy_move(Vector2(sign(normalized_enemy_distance.x)*64,0))
+				_enemy_move(Vector2(sign(normalized_enemy_distance.x)*distance,0))
 			elif previous_move.y == 0:
-				_enemy_move(Vector2(0,sign(normalized_enemy_distance.y)*64))
+				_enemy_move(Vector2(0,sign(normalized_enemy_distance.y)*distance))
 			elif dummy_previous_position == self.position:
 				EntitiesState.enemy_turn_ended_list.append(dummy_id)
 			
-func _enemy_move(distance: Vector2):
-	previous_move = distance
-	$RayCast2D.target_position = distance
+func _enemy_move(_enemy_move_distance: Vector2):
+	previous_move = _enemy_move_distance
+	$RayCast2D.target_position = _enemy_move_distance
 	$RayCast2D.force_raycast_update()
 	if not $RayCast2D.is_colliding():
-		self.position += distance
+		self.position += _enemy_move_distance
 		GameState.enemy_has_moved()

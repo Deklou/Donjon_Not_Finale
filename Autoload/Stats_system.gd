@@ -34,8 +34,8 @@ func update_stats():
 	else:
 		GameData.player_MT = GameData.player_STR
 		
-	GameData.player_CRT = GameData.player_CRT + (GameData.player_DEX/4) -1
-	GameData.player_base_CRT = GameData.player_base_CRT + (GameData.player_DEX/4) -1
+	GameData.player_CRT = snapped(GameData.player_CRT + (GameData.player_DEX/4) - 1, 0)
+	GameData.player_base_CRT = snapped((GameData.player_DEX/4) - 1, 0)
 	
 	########################################################################################################################
 

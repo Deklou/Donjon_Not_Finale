@@ -5,13 +5,13 @@ var xp_result : float
 
 func gain_xp():
 	xp_result = (GameData.enemy_stats[EntitiesState.enemy_id].LVL * GameData.enemy_stats[EntitiesState.enemy_id].XP) / GameData.player_LVL
-	GameData.player_XP_buffer = GameData.player_XP + xp_result +200
+	GameData.player_XP_buffer = GameData.player_XP + snapped(xp_result,0) + 200 #arrondis xp_result à l'entier
 	gain_level()
 
 func gain_level():
 	if GameData.player_XP_buffer >=100:
 		GameState.level_up = true
-		GameData.player_XP_over_level = GameData.player_XP_buffer/100
+		GameData.player_XP_over_level = snapped(float(GameData.player_XP_buffer) / 100.0, 0)
 		GameData.player_XP_buffer = GameData.player_XP_buffer % 100
 		GameData.player_CP_buffer = GameData.player_CP_buffer + GameData.player_XP_over_level
 		GameData.player_LVL_buffer = GameData.player_LVL_buffer + GameData.player_XP_over_level

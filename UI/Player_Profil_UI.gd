@@ -32,7 +32,7 @@ extends Control
 @onready var Button_Validation : Button = $Player_Stats/Button_Stat/HBoxContainer_Validation/Validation_button
 @onready var Button_Cancel : Button = $Player_Stats/Button_Stat/HBoxContainer_Validation/Cancel_button
 ############### Valeurs de copie ##################
-var base_player_CP : int #sert de mémoire lors du changement de stats
+var base_player_CP : int #sert de mémoire lors du changement de statsssssdz
 var base_player_STR : int #sert de limite minimum et de mémoire lors du changement de stats
 var base_player_DEX : float #sert de limite minimum et de mémoire lors du changement de stats
 var base_player_DEF : int #sert de limite minimum et de mémoire lors du changement de stats
@@ -133,7 +133,6 @@ func _on_plus_dex_button_pressed():
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer + 1
-		GameData.player_base_CRT = GameData.player_base_CRT + 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer - 1
 		GameState.player_has_acted()
 		StatsSystem.update_stats()
@@ -143,7 +142,6 @@ func _on_minus_dex_button_pressed():
 		Hbox_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
 		GameData.player_DEX_buffer = GameData.player_DEX_buffer - 1
-		GameData.player_base_CRT = GameData.player_base_CRT - 1
 		GameData.player_CP_buffer = GameData.player_CP_buffer + 1
 		GameState.player_has_acted()
 		StatsSystem.update_stats()
