@@ -1,9 +1,9 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
-var default_player_MAX_HP : int = 22 
-var default_player_HP : int = 22 
-var default_player_STR : int = 66
+var default_player_MAX_HP : int = 222
+var default_player_HP : int = 222 
+var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 5 
 var default_player_LVL : int = 1
@@ -23,9 +23,9 @@ var default_player_CRT_buffer : int = default_player_CRT
 var default_player_STR_buffer : int = default_player_STR 
 var default_player_DEX_buffer : float = default_player_DEX 
 var default_player_DEF_buffer : int = default_player_DEF 
-var default_player_MAX_movement_point: int = 2
+var default_player_MAX_movement_point: int = 22
 var default_player_MAX_action_point: int = 2 
-var default_player_current_movement_point: int = 2 
+var default_player_current_movement_point: int = 22
 var default_player_current_action_point: int = 2 
 var default_enemy_MAX_HP : int = 22 
 var default_enemy_HP : int = 22 
@@ -269,6 +269,9 @@ func _reset_gamedata_value():
 	timer = default_timer
 	all_objective_completed = default_all_objective_completed
 	secret_triggered = default_secret_triggered
+	for item in Item:
+		if GameData.Item[item].Type == "Weapon":
+			GameData.Item[item].Equiped = false
 ##################### READY #####################
 func _ready():
 	_reset_gamedata_value()

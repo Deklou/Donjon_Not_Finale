@@ -52,40 +52,41 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 		GameState.enemy_has_acted()
 		Inventory._load_enemy_inventory_UI() #On charge l'interface à chaqué début de tour
 		if enemy_that_can_act in GameData.enemy_stats:
-			var entity_name : String = GameData.enemy_stats[enemy_that_can_act].Name
+			#var entity_name : String = GameData.enemy_stats[enemy_that_can_act].Name
 			if not GameData.enemy_inventory[enemy_that_can_act].is_empty():
 				for item_name in GameData.enemy_inventory[enemy_that_can_act]:
 					if not item_name == "":
-						if GameData.Item[item_name].Type == "Item":
+						if GameData.Item[item_name].Type == "Consumable":
 							if GameData.Item[item_name].Sous_Type == "Soin":
 								if GameData.enemy_stats[enemy_that_can_act].MAX_HP - GameData.enemy_stats[enemy_that_can_act].HP >= GameData.Item[item_name].Value:
 									Inventory._use_enemy_item(item_name)
-									return
-		
-			if enemy_that_can_act not in enemy_turn_ended_list:
-				if randf() < GameData.enemy_stats[enemy_that_can_act].CRT/float(100):
-					GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT*2) 
-					Logs._log_entity_deal_critical_damage("Player",entity_name)
-				else:
-					GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT)
-					Logs._log_entity_deal_damage("Player",entity_name)
-				take_damage.emit("Player") #Envoie vers script joueur
-				if GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT == 0:
-					EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
+									if GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT == 0:
+										EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
+				if enemy_that_can_act not in enemy_turn_ended_list:
+					EntitiesState.take_damage_to_enemy("Player", EntitiesState.enemy_id)
+					if GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT == 0:
+						EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 				StatsSystem.update_stats()
 			
-##################### DEGATS JOUEUR ET ENNEMI #####################
-			
+##################### DEGATS JOUEUR ET ENNEMI #####################	
 func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus
-	if randf() < GameData.player_CRT/float(100):
-		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
-		Logs._log_entity_deal_critical_damage("Enemy",entity_name)
+	if entity_name == "Enemy":
+		if randf() < GameData.player_CRT/float(100):
+			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
+			Logs._log_entity_deal_critical_damage("Enemy",entity_name)
+		else:
+			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT)
+			Logs._log_entity_deal_damage("Enemy",entity_name)
+		take_damage.emit("Enemy") #Envoie vers chaque script ennemi	
 	else:
-		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT)
-		Logs._log_entity_deal_damage("Enemy",entity_name)
-	take_damage.emit("Enemy") #Envoie vers chaque script ennemi	
+		if randf() < GameData.enemy_stats[enemy_that_can_act].CRT/float(100):
+			GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT*2) 
+			Logs._log_entity_deal_critical_damage("Player",GameData.enemy_stats[enemy_that_can_act].Name)
+		else:
+			GameData.player_HP_buffer = GameData.player_HP + min(-1,GameData.player_DEF - GameData.enemy_stats[enemy_that_can_act].MT)
+			Logs._log_entity_deal_damage("Player",GameData.enemy_stats[enemy_that_can_act].Name)
+		take_damage.emit("Player") #Envoi vers script joueur
 	StatsSystem.update_stats()
-	
 ##################### SELECTION #####################
 
 func enemy_selected(position : Vector2):

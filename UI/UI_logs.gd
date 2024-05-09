@@ -23,4 +23,5 @@ func remove_logs():
 		if last_label != null and last_label.is_inside_tree(): #prévenir lors du rechargement de l'interface
 			var timer = get_tree().create_timer(0.5)	
 			await timer.timeout
-			last_label.queue_free()
+			if last_label != null and last_label.is_inside_tree():
+				last_label.queue_free()

@@ -45,7 +45,7 @@ func _ready():
 	dummy_stats.MAX_HP += dummy_MAX_HP_offset
 	dummy_stats.HP += dummy_MAX_HP_offset
 	dummy_stats.MT += dummy_STR_offset
-	dummy_stats.CRT += dummy_DEX_offset/4
+	dummy_stats.CRT += int(round(dummy_DEX_offset / 4.0))
 	dummy_stats.STR += dummy_STR_offset
 	dummy_stats.DEX += dummy_DEX_offset
 	dummy_stats.DEF += dummy_DEF_offset

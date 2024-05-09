@@ -352,17 +352,17 @@ theme_override_constants/separation = 17
 visible = false
 anchors_preset = 0
 offset_left = 24.0
-offset_top = 296.0
+offset_top = 332.0
 offset_right = 216.0
-offset_bottom = 608.0
+offset_bottom = 644.0
 script = ExtResource("5_xsdpy")
 
 [node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 60.0
+offset_top = 4.0
 offset_right = 192.0
-offset_bottom = 176.0
-theme_override_constants/separation = 7
+offset_bottom = 168.0
+theme_override_constants/separation = 3
 alignment = 1
 
 [node name="HP" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
@@ -410,9 +410,9 @@ layout_mode = 2
 
 [node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 151.0
+offset_top = 116.0
 offset_right = 39.0
-offset_bottom = 309.0
+offset_bottom = 274.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 7
@@ -439,9 +439,9 @@ text = "ACT:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 34.0
+offset_top = 4.0
 offset_right = 156.0
-offset_bottom = 60.0
+offset_bottom = 36.0
 theme_override_constants/separation = 20
 
 [node name="Name" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/HBoxContainer"]
