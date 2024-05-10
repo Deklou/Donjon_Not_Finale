@@ -3,19 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://i6djldglvotl" path="res://UI/Assets/xp_bar.png" id="1_3aabu"]
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
-[ext_resource type="Script" path="res://UI/user_interface.gd" id="1_xgc7s"]
-[ext_resource type="Script" path="res://UI/XP_bar.gd" id="4_wb5qm"]
-[ext_resource type="Script" path="res://UI/UI_logs.gd" id="4_wenhx"]
+[ext_resource type="Script" path="res://UI/User_Interface.gd" id="1_v8vxl"]
+[ext_resource type="Script" path="res://UI/XP_Bar.gd" id="5_46kxw"]
 [ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
 [ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="5_xsdpy"]
-[ext_resource type="Script" path="res://UI/interface_down.gd" id="6_tu6kf"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
+[ext_resource type="Script" path="res://UI/UI_Logs.gd" id="7_iij0v"]
+[ext_resource type="Script" path="res://UI/Interface_Down.gd" id="10_lhent"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwnlq"]
 size = Vector2(144, 41)
 
 [node name="User_Interface" type="CanvasLayer"]
-script = ExtResource("1_xgc7s")
+script = ExtResource("1_v8vxl")
 metadata/_edit_vertical_guides_ = [784.0]
 
 [node name="MarginContainer_right" type="MarginContainer" parent="."]
@@ -140,7 +140,7 @@ texture_under = ExtResource("1_3aabu")
 texture_progress = ExtResource("1_3aabu")
 tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0, 0, 0, 1)
-script = ExtResource("4_wb5qm")
+script = ExtResource("5_46kxw")
 
 [node name="Player_Calculated_Stats" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 anchors_preset = 0
@@ -335,7 +335,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 216.0
 offset_bottom = 296.0
-script = ExtResource("4_wenhx")
+script = ExtResource("7_iij0v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs"]
 layout_mode = 2
@@ -484,7 +484,7 @@ grow_vertical = 0
 
 [node name="interface_down" type="Control" parent="MarginContainer_down"]
 layout_mode = 2
-script = ExtResource("6_tu6kf")
+script = ExtResource("10_lhent")
 
 [node name="Attack_button" type="Button" parent="MarginContainer_down/interface_down"]
 visible = false

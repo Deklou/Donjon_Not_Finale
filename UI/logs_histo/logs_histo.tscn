@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ca44wayrufo7t"]
 
-[ext_resource type="Script" path="res://UI/logs_histo/logs_histo.gd" id="1_dnn6w"]
+[ext_resource type="Script" path="res://UI/Logs_Histo/Logs_Histo.gd" id="1_dnn6w"]
 
 [node name="logs_histo" type="Node2D"]
 visible = false

@@ -24,4 +24,8 @@ func remove_logs():
 			var timer = get_tree().create_timer(0.5)	
 			await timer.timeout
 			if last_label != null and last_label.is_inside_tree():
-				last_label.queue_free()
+				vbox_node.remove_child(last_label)
+				if Logs.logs.is_empty(): #prévenur les cas où les dernières entrées ne se suppriment pas
+					if vbox_node.get_child_count() > 0:
+						for child in vbox_node.get_children():
+							vbox_node.remove_child(child)

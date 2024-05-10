@@ -50,9 +50,7 @@ func _ready():
 func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 	if GameData.enemy_stats[enemy_that_can_act].ACT > 0:
 		GameState.enemy_has_acted()
-		Inventory._load_enemy_inventory_UI() #On charge l'interface à chaqué début de tour
 		if enemy_that_can_act in GameData.enemy_stats:
-			#var entity_name : String = GameData.enemy_stats[enemy_that_can_act].Name
 			if not GameData.enemy_inventory[enemy_that_can_act].is_empty():
 				for item_name in GameData.enemy_inventory[enemy_that_can_act]:
 					if not item_name == "":
@@ -118,7 +116,7 @@ func enemy_is_dead(dummy_id: String) -> bool: #retourne si l'état est présent,
 	return enemy_states.has(dummy_id) and enemy_states[dummy_id]
 
 func enemy_death(dummy_id : String):
-	EntitiesState.enemy_states[EntitiesState.enemy_id] = true #sert de check pour le process dans la scène de l'ennemi 
+	EntitiesState.enemy_states[dummy_id] = true #sert de check pour le process dans la scène de l'ennemi 
 	EntitiesState.enemy_is_deselected()
 	hide_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
 	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
@@ -128,3 +126,4 @@ func enemy_death(dummy_id : String):
 	GameData.enemy_defeated +=1
 	EntitiesState.enemy_id = ""
 	EntitiesState.selected_id = ""
+	EntitiesState.enemy_triggered_list.remove_at(EntitiesState.enemy_triggered_list.find(dummy_id))

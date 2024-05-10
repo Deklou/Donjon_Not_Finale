@@ -116,7 +116,7 @@ func _on_trigger_range_body_entered(body):
 		EntitiesState.enemy_triggered_list.append(dummy_id)
 
 func _on_trigger_range_body_exited(body):
-	if body is Node2D:
+	if body is Node2D and dummy_id not in EntitiesState.enemy_states:
 		EntitiesState.enemy_triggered_list.remove_at(EntitiesState.enemy_triggered_list.find(dummy_id))
 		EntitiesState.enemy_is_deselected()
 		

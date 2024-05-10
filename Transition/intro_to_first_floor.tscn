@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dg5q0dpjrreus"]
 
-[ext_resource type="Script" path="res://Transition/intro_to_first_floor.gd" id="1_jy6qt"]
+[ext_resource type="Script" path="res://Transition/Intro_To_First_Floor.gd" id="1_jy6qt"]
 
 [sub_resource type="Animation" id="Animation_uyrsj"]
 resource_name = "fade_in"

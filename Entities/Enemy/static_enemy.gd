@@ -103,7 +103,7 @@ func _on_area_2d_body_entered(body):
 		EntitiesState.enemy_triggered_list.append(dummy_id)
 		
 func _on_area_2d_body_exited(body):
-	if body is Node2D:
+	if body is Node2D and dummy_id not in EntitiesState.enemy_states:
 		dummy_range_entered = false 
 		GameState.enemy_range_entered = false
 		EntitiesState.enemy_is_deselected()
