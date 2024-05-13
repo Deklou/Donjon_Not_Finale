@@ -128,49 +128,43 @@ var secret_triggered : bool #indique si un événement secret a été déclench�
 var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui représentent chacun un objet
 	
 	################## Objets de Soins ##################
-	
 	"Pain":{ #On peut accéder aux différentes informations de l'objet grâce à Item[item_name].nom_de_l_information
 	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain",
-	"Description" : "Du pain. Rend 15 PV",
+	"Description" : "Du pain. Soigne 10 PV",
 	"Icon": preload("res://Sprites/Items/bread.png"),
-	"Value":15,
+	"Value":10,
 	"Cost": 0
 	}
 	,"Pain rassis":{
 	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain rassis",
-	"Description" : "Pain rassis. il est dans un\nétat lamentable.\nRend 5 PV",
+	"Description" : "Pain rassis. Il est dans un\nétat lamentable.\nSoigne 5 PV",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":5,
 	"Cost": 0
 	}
-	
-	################## Objets de Buff ##################
-	
-	,"buff_attaque":{
+	,"Sandwich classique":{
 	"Type" : "Consumable",
-	"Sous_Type":"Buff" ,
-	"Name" : "",
-	"Description" : "STR +2 jsuqu'à la fin du combat",
-	"Icon": "",
-	"Value": [2,0,0], #STR, DEX et DEF
+	"Sous_Type":"Soin" ,
+	"Name" : "Sandwich classique",
+	"Description" : "Sandwich. Certainement\npas la meilleure recette\nqui existe. Soigne 15 PV",
+	"Icon": preload("res://Sprites/Items/stale_bread.png"),
+	"Value":15,
 	"Cost": 0
 	}
-	,"buff_defense":{
-	"Type" : "Consumable",
-	"Sous_Type":"Buff" ,
-	"Name" : "",
-	"Description" : "DEF +2 jsuqu'à la fin du combat",
-	"Icon": "",
-	"Value": [0,0,2], #STR, DEX et DEF
-	"Cost": 0
-	}
-	
 	################## Armes ##################
-	
+	,"Bâton":{
+	"Type" : "Weapon",
+	"Name" : "Bâton",
+	"Description" : "Taillé à partir d'un\nbois solide, mais usé par\nle passage du temps.",
+	"Icon": preload("res://Sprites/Weapon/IronSword.png"),
+	"Value": [1,0,2], #puissance, critique, poids
+	"Cost": 0,
+	"Equiped": false
+	}
 	,"Epée courte":{
 	"Type" : "Weapon",
 	"Name" : "Epée courte",
@@ -180,7 +174,6 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Cost": 0,
 	"Equiped": false
 	}
-	
 	,"Libération":{
 	"Type" : "Weapon",
 	"Name" : "Libération",
@@ -190,7 +183,6 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Cost": 0,
 	"Equiped": false
 	}
-	
 	,"Miséricorde":{
 	"Type" : "Weapon",
 	"Name" : "Miséricorde",
@@ -200,13 +192,22 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Cost": 0,
 	"Equiped": false
 	}
-	
 	,"Représailles":{
 	"Type" : "Weapon",
 	"Name" : "Représailles",
 	"Description" : "Lance légendaire\nvenue d'un monde\nlointain.",
 	"Icon": preload("res://Sprites/Weapon/Trahison.png"),
 	"Value": [9,0,9], #puissance, critique, poids
+	"Cost": 0,
+	"Equiped": false
+	}
+	################## Objets Spéciaux ##################
+	,"Kojirō":{
+	"Type" : "Special",
+	"Name" : "Kojirō",
+	"Description" : "C'est Kojirō !!\nSes plumes bleues\nsont tout à fait charmantes.",
+	"Icon": preload("res://Sprites/Items/kojiro.png"),
+	"Value": [0,0,0], #puissance, critique, poids
 	"Cost": 0,
 	"Equiped": false
 	}

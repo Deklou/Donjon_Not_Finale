@@ -22,7 +22,7 @@ func show_button():
 
 func _on_histo_logs_button_pressed():
 	if histo_is_open == false:
-		logs_histo_button.text = "Logs"
+		logs_histo_button.text = "Retour"
 		interface_left_node.get_child(1).visible = false
 		interface_left_node.get_child(4).visible = true
 		histo_is_open = true
