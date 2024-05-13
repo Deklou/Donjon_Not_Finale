@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://p4y1cpoq2lhu"]
 
 [ext_resource type="Script" path="res://Levels/Demo/First_Floor.gd" id="1_37ep6"]
-[ext_resource type="Texture2D" uid="uid://d2jm2ttr0upvc" path="res://Levels/Level 1/Tileset/tileset.png" id="1_pvd4m"]
+[ext_resource type="Texture2D" uid="uid://d2jm2ttr0upvc" path="res://Levels/Demo/Tileset/tileset.png" id="1_pvd4m"]
 [ext_resource type="PackedScene" uid="uid://cdq0ux4rg1m4q" path="res://Entities/Player/grid_player_2.tscn" id="2_gwp5c"]
 [ext_resource type="PackedScene" uid="uid://ct12uae2y1l0e" path="res://Entities/Enemy/dummy_1.tscn" id="3_kfqht"]
-[ext_resource type="PackedScene" uid="uid://b6owu1lcf7nw" path="res://Objects/Chest.tscn" id="4_q10i3"]
+[ext_resource type="PackedScene" uid="uid://b6owu1lcf7nw" path="res://Objects/Chest/Chest.tscn" id="4_q10i3"]
 [ext_resource type="Texture2D" uid="uid://ds2fn6du2w80b" path="res://Sprites/Enemy/static_enemy_sprite.png" id="6_6flr8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khy1t"]

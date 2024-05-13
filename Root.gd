@@ -19,9 +19,9 @@ func _to_intro_level():
 		lvl.queue_free()
 	user_interface_node.visible = true
 	Root = get_tree().root
-	Root_instance = preload("res://Levels/demo/intro_level.tscn").instantiate()
+	Root_instance = preload("res://Levels/Demo/Tutorial.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_first_floor.connect(_to_first_floor)
+	#Root_instance.to_first_floor.connect(_to_first_floor)
 	
 func _to_first_floor():
 	EntitiesState.enemy_triggered_list.clear()

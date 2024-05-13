@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2b4mdd3ii6y1"]
+
+[ext_resource type="Texture2D" uid="uid://dhbgukpewcowv" path="res://Sprites/Objects/fountain.png" id="1_you6i"]
+
+[node name="Fountain" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(64, 1.90735e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("1_you6i")

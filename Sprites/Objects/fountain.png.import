@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2jm2ttr0upvc"
-path="res://.godot/imported/tileset.png-bd31bd0aca064dd1eda6c93fa6cf45ea.ctex"
+uid="uid://dhbgukpewcowv"
+path="res://.godot/imported/fountain.png-f85f5e45edaf53afd0304156e325af3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Level 0/Tileset/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-bd31bd0aca064dd1eda6c93fa6cf45ea.ctex"]
+source_file="res://Sprites/Objects/fountain.png"
+dest_files=["res://.godot/imported/fountain.png-f85f5e45edaf53afd0304156e325af3a.ctex"]
 
 [params]
 
