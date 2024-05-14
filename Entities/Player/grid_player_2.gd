@@ -9,6 +9,7 @@ var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
 
 func _ready():
+	EntitiesState.player_parent_node = get_parent()
 	currPos = $".".position
 	currPos.x = round(currPos.x / distance) * distance - 32
 	currPos.y = round(currPos.y / distance) * distance - 32
@@ -18,15 +19,12 @@ func _ready():
 	move_timer.one_shot = false  # Répéter le timeout
 	add_child(move_timer)
 	move_timer.timeout.connect(_on_MoveTimer_timeout)
-	
 	##################### SIGNAL #####################
-
 	EntitiesState.take_damage.connect(_player_take_damage)
 	
 ##################### DEPLACEMENT #####################
 	
 func _input(event):
-	EntitiesState.player_parent_node = get_parent()
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down"):	
 		GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 		if event.is_action_pressed("right"):
@@ -58,11 +56,13 @@ func _on_MoveTimer_timeout():
 
 func handle_movement(direction_vector, animation):
 	$AnimationPlayer.play(animation)
+	GameState.player_position = self.position
+	print(GameState.player_position)
 	if not GameState.is_ennemy_turn and GameData.player_current_movement_point > 0:
 		$RayCast2D.target_position = direction_vector
 		$RayCast2D.force_raycast_update()
 		if not $RayCast2D.is_colliding():
-			currPos += direction_vector
+			currPos = GameState.player_position + direction_vector
 			self.position = currPos
 			GameState.player_has_moved()
 	elif GameData.player_current_movement_point == 0:
@@ -80,7 +80,6 @@ func get_animation_from_direction(direction_vector):
 		return "walk_up"
 		
 ##################### DEGAT #####################
-
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
 		damage_sprite_1.visible = true
