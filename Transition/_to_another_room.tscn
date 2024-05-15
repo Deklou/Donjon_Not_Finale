@@ -1,6 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://gykebj3y6qxs"]
-
-[ext_resource type="Texture2D" uid="uid://cjrdosbkwavwl" path="res://Sprites/UI_icon/hyphen.png" id="1_rj4pp"]
+[gd_scene load_steps=4 format=3 uid="uid://bcnv1gr054orx"]
 
 [sub_resource type="Animation" id="Animation_hnyy6"]
 resource_name = "fade_in"
@@ -40,22 +38,17 @@ _data = {
 "fade_out": SubResource("Animation_73va8")
 }
 
-[node name="Logs_Label" type="Label"]
-theme_override_font_sizes/font_size = 15
+[node name="_to_another_room" type="CanvasLayer"]
 
-[node name="Sprite_Hyphen" type="Sprite2D" parent="."]
-position = Vector2(-26, -4)
-texture = ExtResource("1_rj4pp")
-centered = false
+[node name="black_color_rect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
-[node name="ColorRect_Animation" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -16.0
-offset_right = 530.0
-offset_bottom = 164.0
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer_Fade" type="AnimationPlayer" parent="ColorRect_Animation"]
+[node name="AnimationPlayer_Fade" type="AnimationPlayer" parent="black_color_rect"]
 libraries = {
 "": SubResource("AnimationLibrary_qte7q")
 }

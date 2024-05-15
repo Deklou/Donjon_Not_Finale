@@ -51,10 +51,14 @@ func update_enemy_UI():
 		if GameData.enemy_stats[EntitiesState.selected_id].MT > GameData.enemy_stats[EntitiesState.selected_id].STR:
 			UI_enemy_MT_stat.text = "Dégâts Totaux: [color=#66B2FF]" + str(GameData.enemy_stats[EntitiesState.selected_id].MT) + "[/color]"	
 			MT_Arrow_Up.visible = true
-		if GameData.enemy_stats[EntitiesState.selected_id].CRT > GameData.enemy_base_CRT:
+		if GameData.enemy_stats[EntitiesState.selected_id].CRT > GameData.enemy_stats[EntitiesState.selected_id].BASE_CRT:
 			UI_enemy_CRT_stat.text = "Critique: [color=#66B2FF]" + str(GameData.enemy_stats[EntitiesState.selected_id].CRT) + "[/color]"
 			CRT_Arrow_Up.visible = true
 	################################################################
+		if EntitiesState.selected_id == "special":
+			UI_enemy_HP_stat.visible = false
+		else:
+			UI_enemy_HP_stat.visible = true
 	
 func show_enemy_UI():
 	ennemy_profil.visible = true

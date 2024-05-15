@@ -9,6 +9,7 @@ var default_enemy_that_can_act : String = ""
 var default_Root = null
 var default_Root_instance = null
 var default_player_parent_node : Node = Node.new()
+var default_player_is_frozen : bool = false
 ##################### VARIABLES #####################
 signal show_enemy_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
 signal hide_enemy_UI #cache le profil de l'ennemi
@@ -18,6 +19,14 @@ signal hide_enemy_inventory_UI #masque l'inventaire ennemi
 signal show_selector_UI(position) #affiche le selecteur
 signal hide_selector_UI #cache le selecteur
 signal take_damage(Entity) #Signale quand une entité prend des dégâts, pour les effets visuels
+signal hide_enemy_hp_stat_UI #masque les hp de l'ennemi d'entraînement
+signal show_enemy_hp_stat_UI #affiche les hp des ennemis quand on quitte la zone de l'ennemi d'entraînement
+signal show_str_stat_UI #affiche la stat de force pour le joueur et les ennemis
+signal show_def_stat_UI #affiche la stat de force pour le joueur et les ennemis
+signal show_player_xp_level_UI #affiche l'expérience gagné et le niveau du joueur
+signal show_mt_crt_dex_UI #affiche les valeurs calculées et la dex après avoir équipé une arme
+signal disable_player_camera #désactive la caméra embarquée dans la scène joueur
+signal enable_player_camera #active la caméra embarquée dans la scène joueur
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
 var selected_id : String #identifiant dont on se sert pour afficher l'interface de l'ennemi
 var enemy_id : String #identifiant dont on se sert pour calculer les dégâts
@@ -29,6 +38,7 @@ var enemy_turn_ended_list = [] #liste des ennemis qui ont déjà agi
 var Root
 var Root_instance
 var player_parent_node : Node  #On récu^père le parent du noeud joueur, qui est le niveau dans lequel il se trouve
+var player_is_frozen : bool #permet de décider si le joueur peut se déplacer
 ##################### RESET VALUE #####################
 func _reset_entities_state_value():
 	enemy_states.clear()
@@ -42,6 +52,7 @@ func _reset_entities_state_value():
 	Root = default_Root
 	Root_instance = default_Root_instance
 	player_parent_node = default_player_parent_node
+	player_is_frozen = default_player_is_frozen
 ##################### READY #####################
 func _ready():
 	_reset_entities_state_value()
@@ -64,7 +75,9 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 					EntitiesState.take_damage_to_enemy("Player", EntitiesState.enemy_id)
 					if GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT == 0:
 						EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
-				StatsSystem.update_stats()
+	else:
+		EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
+		StatsSystem.update_stats()
 			
 ##################### DEGATS JOUEUR ET ENNEMI #####################	
 func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus

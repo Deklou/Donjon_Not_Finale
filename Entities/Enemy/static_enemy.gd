@@ -24,6 +24,7 @@ var dummy_stats = {"Name": "",
 "HP" : GameData.enemy_HP,
 "MT" : GameData.enemy_MT,
 "CRT" : GameData.enemy_CRT,
+"BASE_CRT" : GameData.enemy_base_CRT,
 "STR" : GameData.enemy_STR,
 "DEX" : GameData.enemy_DEX,
 "DEF" : GameData.enemy_DEF,
@@ -45,10 +46,11 @@ func _ready():
 	dummy_stats.MAX_HP += dummy_MAX_HP_offset
 	dummy_stats.HP += dummy_MAX_HP_offset
 	dummy_stats.MT += dummy_STR_offset
-	dummy_stats.CRT += int(round(dummy_DEX_offset / 4.0))
 	dummy_stats.STR += dummy_STR_offset
 	dummy_stats.DEX += dummy_DEX_offset
 	dummy_stats.DEF += dummy_DEF_offset
+	dummy_stats.CRT = int(round(dummy_stats.DEX / 4.0))
+	dummy_stats.BASE_CRT = dummy_stats.CRT
 	dummy_stats.MAX_MVT += dummy_MVT_offset
 	dummy_stats.MAX_ACT += dummy_ACT_offset
 	dummy_stats.MVT = dummy_stats.MAX_MVT
@@ -131,7 +133,7 @@ func _process(_delta):
 ##################### ACTION #####################
 			
 func _enemy_ACT():
-	while EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_range_entered == true and GameState.is_ennemy_turn:
+	while EntitiesState.enemy_that_can_act == dummy_id and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_range_entered == true and GameState.is_ennemy_turn:
 		EntitiesState.selected_id = EntitiesState.enemy_id
 		EntitiesState.take_enemy_action()
 		EntitiesState.enemy_selected(get_position())

@@ -23,10 +23,10 @@ var default_player_CRT_buffer : int = default_player_CRT
 var default_player_STR_buffer : int = default_player_STR 
 var default_player_DEX_buffer : float = default_player_DEX 
 var default_player_DEF_buffer : int = default_player_DEF 
-var default_player_MAX_movement_point: int = 22
-var default_player_MAX_action_point: int = 2 
-var default_player_current_movement_point: int = 22
-var default_player_current_action_point: int = 2 
+var default_player_MAX_movement_point: int = 1
+var default_player_MAX_action_point: int = 1
+var default_player_current_movement_point: int = 1
+var default_player_current_action_point: int = 1 
 var default_enemy_MAX_HP : int = 22 
 var default_enemy_HP : int = 22 
 var default_enemy_STR : int = 6 
@@ -53,7 +53,7 @@ var default_legendary_weapon_acquired : int
 var default_enemy_defeated : int 
 var default_timer : float = 0 
 var default_all_objective_completed : bool = false 
-var default_secret_triggered : bool = false 
+var default_secret_triggered : bool = false
 ##################### VARIABLES #####################
 #variables de base du joueur
 var player_MAX_HP : int #Limite haute des points de vie
@@ -153,6 +153,15 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Description" : "Sandwich. Certainement\npas la meilleure recette\nqui existe. Soigne 15 PV",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":15,
+	"Cost": 0
+	}
+	,"Concoction":{
+	"Type" : "Consumable",
+	"Sous_Type":"Soin" ,
+	"Name" : "Concoction",
+	"Description" : "Mixture étrange qui\nvous remet sur pied en un\nclin d'oeil.",
+	"Icon": preload("res://Sprites/Items/stale_bread.png"),
+	"Value":100,
 	"Cost": 0
 	}
 	################## Armes ##################

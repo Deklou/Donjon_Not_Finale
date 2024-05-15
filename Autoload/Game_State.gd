@@ -11,6 +11,8 @@ var default_is_ennemy_turn : bool = false
 var default_player_position : Vector2 = Vector2()
 var default_ending_triggered : bool = false
 var default_level_up : bool = false #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
+var default_first_enemy_defeated : bool = false
+var default_first_weapon_equiped : bool = false
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
@@ -28,6 +30,8 @@ var is_ennemy_turn : bool #on contrôle si c'est au tour de l'ennemi d'agir, par
 var player_position : Vector2 #position du joueur
 var ending_triggered : bool #fin relative à la demo
 var level_up : bool #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
+var first_enemy_defeated : bool
+var first_weapon_equiped : bool
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -36,6 +40,7 @@ signal show_mvt_act_stats #cache les stats de mvt et act si le joueur n'est pas 
 signal enemy_can_act #signal lancé au script de l'ennemi pour lui faire choisir une action
 signal signal_player_input_cant_move #lorsque le joueur veut se déplacer alors qu'il n'a plus de point de mouvement
 signal restart_root #recharge le début de Root
+signal tutorial_start #met à jour l'interface si le joueur commence le tuto
 ##################### RESET VALUE #####################
 func _reset_gamestate_value():
 	chest_states.clear()
@@ -49,6 +54,8 @@ func _reset_gamestate_value():
 	player_position = default_player_position
 	ending_triggered = default_ending_triggered
 	level_up = default_level_up
+	first_enemy_defeated = default_first_enemy_defeated
+	first_weapon_equiped = default_first_weapon_equiped
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()

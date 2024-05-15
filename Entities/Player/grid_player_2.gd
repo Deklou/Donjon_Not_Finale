@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
 @onready var damage_sprite_3 : Sprite2D = $damage_sprite_3 #Sprite temporaire de dégâts
+@onready var player_camera : Camera2D = $Camera2D
 var currPos
 var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
@@ -21,33 +22,38 @@ func _ready():
 	move_timer.timeout.connect(_on_MoveTimer_timeout)
 	##################### SIGNAL #####################
 	EntitiesState.take_damage.connect(_player_take_damage)
-	
+	EntitiesState.disable_player_camera.connect(_disable_player_moving_camera)
+	EntitiesState.enable_player_camera.connect(_enable_player_moving_camera)
 ##################### DEPLACEMENT #####################
 	
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down"):	
-		GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
-		if event.is_action_pressed("right"):
-			moving_direction = Vector2(distance, 0)
-			handle_movement(moving_direction, "walk_right")
-			move_timer.start()
-		elif event.is_action_pressed("left"):
-			moving_direction = Vector2(-distance, 0)
-			handle_movement(moving_direction, "walk_left")
-			move_timer.start()
-		elif event.is_action_pressed("up"):
-			moving_direction = Vector2(0, -distance)
-			handle_movement(moving_direction, "walk_up")
-			move_timer.start()
-		elif event.is_action_pressed("down"):
-			moving_direction = Vector2(0, distance)
-			handle_movement(moving_direction, "walk_down")
-			move_timer.start()
-		
-		# Arrêter le timer lorsque la touche est relâchée
-		if event.is_action_released("right") or event.is_action_released("left") or event.is_action_released("up") or event.is_action_released("down"):
+		if EntitiesState.player_is_frozen == false:
+			GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
+			if event.is_action_pressed("right"):
+				moving_direction = Vector2(distance, 0)
+				handle_movement(moving_direction, "walk_right")
+				move_timer.start()
+			elif event.is_action_pressed("left"):
+				moving_direction = Vector2(-distance, 0)
+				handle_movement(moving_direction, "walk_left")
+				move_timer.start()
+			elif event.is_action_pressed("up"):
+				moving_direction = Vector2(0, -distance)
+				handle_movement(moving_direction, "walk_up")
+				move_timer.start()
+			elif event.is_action_pressed("down"):
+				moving_direction = Vector2(0, distance)
+				handle_movement(moving_direction, "walk_down")
+				move_timer.start()
+			
+			# Arrêter le timer lorsque la touche est relâchée
+			if event.is_action_released("right") or event.is_action_released("left") or event.is_action_released("up") or event.is_action_released("down"):
+				move_timer.stop()
+				moving_direction = Vector2.ZERO  # Réinitialiser la direction
+		else:
 			move_timer.stop()
-			moving_direction = Vector2.ZERO  # Réinitialiser la direction
+			moving_direction = Vector2.ZERO
 
 
 func _on_MoveTimer_timeout():
@@ -57,7 +63,6 @@ func _on_MoveTimer_timeout():
 func handle_movement(direction_vector, animation):
 	$AnimationPlayer.play(animation)
 	GameState.player_position = self.position
-	print(GameState.player_position)
 	if not GameState.is_ennemy_turn and GameData.player_current_movement_point > 0:
 		$RayCast2D.target_position = direction_vector
 		$RayCast2D.force_raycast_update()
@@ -93,4 +98,10 @@ func _player_take_damage(Entity_Name: String):
 		damage_sprite_3.visible = true
 		await get_tree().create_timer(0.03).timeout
 		damage_sprite_3.visible = false
+	StatsSystem.update_stats()
 		
+##################### CAMERA #####################
+func _disable_player_moving_camera():
+	player_camera.enabled = false
+func _enable_player_moving_camera():
+	player_camera.enabled = true
