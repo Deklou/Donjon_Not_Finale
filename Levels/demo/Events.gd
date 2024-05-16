@@ -2,10 +2,13 @@ extends Node2D
 
 var first_fall : bool = true
 var inventory_acquired : bool = false
+@onready var gardien_en_chef : CharacterBody2D = $"../Enemies/dummy_9"
+@onready var coffre_liberation : RigidBody2D = $"../Chests/Chest15"
 
 func _ready():
 	GameState.tutorial_start.emit() #vers user_interface
-	EntitiesState.disable_player_camera.emit() #vers script joueur
+	XpSystem.UI_stat_button.connect(_all_enemies_are_defeated) #pas propre mais meilleur solution que j'ai trouvé pour savoir quand tous les ennemis sont morts :/
+	#EntitiesState.disable_player_camera.emit() #vers script joueur
 
 func _on_fall_area_2d_body_entered(body):
 	if body is CharacterBody2D:
@@ -32,3 +35,18 @@ func _on_ui_show_str_area_2d_body_entered(_body):
 
 func _on_ui_show_def_area_2d_body_entered(_body):
 	EntitiesState.show_def_stat_UI.emit() #vers user_interface
+
+func _on_silent_presence_log_area_2d_body_entered(_body):
+	if GameState.silent_presence_log == false:
+		Logs._add_log("Vous sentez une\nprésence silencieuse.")
+		GameState.silent_presence_log = true
+		GameState.intro_level_closed_door.emit() #vers Closed Door
+		gardien_en_chef.global_position = Vector2(3616, 2080)
+		coffre_liberation.global_position = Vector2(3424, 2080)
+		
+func _all_enemies_are_defeated():
+	await get_tree().create_timer(3.0).timeout
+	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 1:
+		Logs._add_log("Un étrange silence\ns'intalle.")
+	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
+		Logs._add_log("...")

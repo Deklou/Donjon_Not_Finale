@@ -13,6 +13,7 @@ var default_ending_triggered : bool = false
 var default_level_up : bool = false #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
 var default_first_enemy_defeated : bool = false
 var default_first_weapon_equiped : bool = false
+var default_silent_presence_log : bool = false
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
@@ -32,6 +33,7 @@ var ending_triggered : bool #fin relative à la demo
 var level_up : bool #Exception pour ne pas mettre à jour le texte de niveau dans update_player_UI
 var first_enemy_defeated : bool
 var first_weapon_equiped : bool
+var silent_presence_log : bool
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -41,6 +43,7 @@ signal enemy_can_act #signal lancé au script de l'ennemi pour lui faire choisir
 signal signal_player_input_cant_move #lorsque le joueur veut se déplacer alors qu'il n'a plus de point de mouvement
 signal restart_root #recharge le début de Root
 signal tutorial_start #met à jour l'interface si le joueur commence le tuto
+signal intro_level_closed_door #fait apparaître la porte fermée au premier niveau
 ##################### RESET VALUE #####################
 func _reset_gamestate_value():
 	chest_states.clear()
@@ -56,6 +59,7 @@ func _reset_gamestate_value():
 	level_up = default_level_up
 	first_enemy_defeated = default_first_enemy_defeated
 	first_weapon_equiped = default_first_weapon_equiped
+	silent_presence_log = default_silent_presence_log
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()

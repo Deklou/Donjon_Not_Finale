@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var dummy_id : String = "" #Identifiant unique pour chaque ennemi
 @export var dummy_name : String = "" #Identifiant unique pour chaque ennemi
 @export var dummy_LVL_offset : int #Pour modifier le niveau de base via l'interface
+@export var dummy_XP_offset : int #Pour modifier l'expérience reçu via l'interface
 @export var dummy_MAX_HP_offset : int #Pour modifier les HP Max de base via l'interface
 @export var dummy_STR_offset : int #Pour modifier la STR de base via l'interface
 @export var dummy_DEX_offset : int #Pour modifier la DEX de base via l'interface
@@ -12,6 +13,8 @@ extends CharacterBody2D
 @export var enemy_item_1 : String  # Nom de l'objet 1 dans l'inventaire de l'ennemi
 @export var enemy_item_2 : String  # Nom de l'objet 2 dans l'inventaire de l'ennemi
 @export var enemy_item_3 : String  # Nom de l'objet 3 dans l'inventaire de l'ennemi
+@export var enemy_sprite_path : String
+@onready var enemy_sprite : Sprite2D = $Sprite2D
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
 @export var distance = 64 #taille d'une case
@@ -46,6 +49,7 @@ func _ready():
 	dummy_inventory = [enemy_item_1, enemy_item_2, enemy_item_3]
 	GameData.enemy_inventory[dummy_id] = dummy_inventory #Dès qu'on instancie un ennemi, on envoie son inventaire dans GameData
 	dummy_stats.LVL += dummy_LVL_offset
+	dummy_stats.XP += dummy_XP_offset
 	dummy_stats.MAX_HP += dummy_MAX_HP_offset
 	dummy_stats.HP += dummy_MAX_HP_offset
 	dummy_stats.MT += dummy_STR_offset
@@ -65,7 +69,6 @@ func _ready():
 				if GameData.Item[item_name].Type == "Weapon":
 					dummy_stats.MT = dummy_stats.STR + GameData.Item[item_name].Value[0]
 					dummy_stats.CRT = dummy_stats.CRT + GameData.Item[item_name].Value[1]
-
 	dummy_stats.Name = dummy_name #On assigne le nom de l'ennemi maintenant sinon l'export de la variable n'est pas instancié
 	GameData.enemy_stats[dummy_id] = dummy_stats #Dès qu'on instancie un ennemi, on envoie les stats dans GameData
 ##################### SIGNAL #####################
@@ -76,7 +79,11 @@ func _ready():
 	currPos.x = round(currPos.x / distance) * distance - 32
 	currPos.y = round(currPos.y / distance) * distance - 32
 	position = currPos
-
+##################### SPRITE #####################
+	if enemy_sprite_path != "":
+		var texture = load(enemy_sprite_path)
+		if texture:
+			enemy_sprite.texture = texture
 ##################### INTERFACE ET SELECTEUR #####################
 
 func _on_area_2d_mouse_entered():
@@ -151,6 +158,7 @@ func _enemy_CHOICE():
 			_enemy_MVT()
 		else:
 			EntitiesState.enemy_turn_ended_list.append(dummy_id)
+		EntitiesState.selector_follows_enemy(get_position())
 		await get_tree().create_timer(0.3).timeout
 		StatsSystem.update_stats()
 	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
@@ -160,9 +168,9 @@ func _enemy_CHOICE():
 			
 func _enemy_ACT():
 	if EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_range_entered == true and GameState.is_ennemy_turn: 
-			EntitiesState.selected_id = EntitiesState.enemy_id
-			EntitiesState.take_enemy_action()
-			EntitiesState.enemy_selected(get_position())
+		EntitiesState.selected_id = EntitiesState.enemy_id
+		EntitiesState.take_enemy_action()
+		EntitiesState.enemy_selected(get_position())
 
 ##################### MOUVEMENT #####################		
 

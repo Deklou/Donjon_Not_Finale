@@ -17,6 +17,7 @@ signal hide_UI #cache l'entièreté de l'interface utilisateur
 signal show_enemy_inventory_UI #affiche l'inventaire ennemi
 signal hide_enemy_inventory_UI #masque l'inventaire ennemi
 signal show_selector_UI(position) #affiche le selecteur
+signal change_selector_position_UI(position) #change la position du sélecteur peut impotte sa visbilité
 signal hide_selector_UI #cache le selecteur
 signal take_damage(Entity) #Signale quand une entité prend des dégâts, pour les effets visuels
 signal hide_enemy_hp_stat_UI #masque les hp de l'ennemi d'entraînement
@@ -80,13 +81,13 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 		StatsSystem.update_stats()
 			
 ##################### DEGATS JOUEUR ET ENNEMI #####################	
-func take_damage_to_enemy(entity_name: String, _dummy_id: String): #fonction pour calculer les dégâts reçus
+func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour calculer les dégâts reçus
 	if entity_name == "Enemy":
 		if randf() < GameData.player_CRT/float(100):
 			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
 			Logs._log_entity_deal_critical_damage("Enemy",entity_name)
 		else:
-			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT)
+			GameData.enemy_stats[dummy_id].HP = GameData.enemy_stats[dummy_id].HP + min(-1,GameData.enemy_stats[dummy_id].DEF - GameData.player_MT)
 			Logs._log_entity_deal_damage("Enemy",entity_name)
 		take_damage.emit("Enemy") #Envoie vers chaque script ennemi	
 	else:
@@ -106,6 +107,11 @@ func enemy_selected(position : Vector2):
 	show_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
 	show_enemy_inventory_UI.emit() #vers Enemy Inventory UI
 	show_selector_UI.emit(position) #vers selector_UI
+	
+func selector_follows_enemy(position : Vector2):
+	Inventory._load_enemy_inventory_UI() ##On charge l'interface à dès qu'on souhaite afficher les informations de l'ennemi
+	StatsSystem.update_stats()
+	change_selector_position_UI.emit(position)
 
 func enemy_is_deselected():
 	hide_selector_UI.emit() #vers selector_UI

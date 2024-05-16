@@ -27,7 +27,7 @@ func _on_to_fourth_room_from_intro_area_2d_2_body_entered(body):
 func _on_to_bonus_1_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(2016, 2592))
 func _on_to_intro_level_room_from_bonus_1_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(5536, 352))
+	_move_to_other_room(body,Vector2(5856, 2272))
 	
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:

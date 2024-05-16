@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh1yfjfmu52ym"]
+
+[ext_resource type="Script" path="res://Objects/Door/Closed_Door.gd" id="1_m0o7o"]
+[ext_resource type="Texture2D" uid="uid://bliryulakg2f7" path="res://Sprites/Objects/door.png" id="1_m2yqu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7jjl"]
+size = Vector2(48, 25)
+
+[sub_resource type="Animation" id="Animation_hnyy6"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_73va8"]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qte7q"]
+_data = {
+"fade_in": SubResource("Animation_hnyy6"),
+"fade_out": SubResource("Animation_73va8")
+}
+
+[node name="Closed_Door" type="Node2D"]
+script = ExtResource("1_m0o7o")
+
+[node name="closed_door_sprite_2d" type="Sprite2D" parent="."]
+position = Vector2(32, 64)
+texture = ExtResource("1_m2yqu")
+
+[node name="closed_door_area_2d" type="Area2D" parent="closed_door_sprite_2d"]
+position = Vector2(-32, -64)
+collision_layer = 0
+collision_mask = 2
+
+[node name="closed_door_collision_shape_2D" type="CollisionShape2D" parent="closed_door_sprite_2d/closed_door_area_2d"]
+position = Vector2(32, 142)
+shape = SubResource("RectangleShape2D_v7jjl")
+debug_color = Color(0.564706, 0.486275, 0.458824, 0.419608)
+
+[node name="ColorRect_Animation" type="ColorRect" parent="."]
+offset_right = 64.0
+offset_bottom = 128.0
+color = Color(0, 0, 0, 0.25)
+
+[node name="AnimationPlayer_Fade" type="AnimationPlayer" parent="ColorRect_Animation"]
+libraries = {
+"": SubResource("AnimationLibrary_qte7q")
+}
+
+[connection signal="body_entered" from="closed_door_sprite_2d/closed_door_area_2d" to="." method="_on_closed_door_area_2d_body_entered"]

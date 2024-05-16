@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var dummy_id : String = "" #Identifiant unique pour chaque ennemi
 @export var dummy_name : String = "" #Identifiant unique pour chaque ennemi
 @export var dummy_LVL_offset : int #Pour modifier le niveau de base via l'interface
+@export var dummy_XP_offset : int #Pour modifier l'expérience reçu via l'interface
 @export var dummy_MAX_HP_offset : int #Pour modifier les HP Max de base via l'interface
 @export var dummy_STR_offset : int #Pour modifier la STR de base via l'interface
 @export var dummy_DEX_offset : int #Pour modifier la DEX de base via l'interface
@@ -43,6 +44,7 @@ func _ready():
 	dummy_inventory = [enemy_item_1, enemy_item_2, enemy_item_3]
 	GameData.enemy_inventory[dummy_id] = dummy_inventory #Dès qu'on instancie un ennemi, on envoie son inventaire dans GameData
 	dummy_stats.LVL += dummy_LVL_offset
+	dummy_stats.XP += dummy_XP_offset
 	dummy_stats.MAX_HP += dummy_MAX_HP_offset
 	dummy_stats.HP += dummy_MAX_HP_offset
 	dummy_stats.MT += dummy_STR_offset
@@ -138,5 +140,6 @@ func _enemy_ACT():
 		EntitiesState.take_enemy_action()
 		EntitiesState.enemy_selected(get_position())
 		await get_tree().create_timer(0.3).timeout
-	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
-	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
+	if dummy_id in GameData.enemy_stats:
+		GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
+		GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT

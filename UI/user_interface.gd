@@ -88,3 +88,11 @@ func show_mt_cp_dex():
 	var UI_mt_cp_dex_array : Array = [player_crt_node,player_mt_node,player_dex_node,enemy_crt_node,enemy_mt_node,enemy_dex_node]
 	for node in UI_mt_cp_dex_array:
 		node.visible = true
+
+func tutorial_end():
+	var UI_player_stats_array : Array = [player_lvl_node,enemy_hp_node,player_xp_node,player_cp_node,player_xp_bar_bg_node,player_xp_bar_node,player_crt_node,player_mt_node,player_str_node,player_dex_node,player_def_node]
+	var UI_enemy_stats_array : Array = [enemy_mt_node,enemy_crt_node,enemy_str_node,enemy_dex_node,enemy_def_node]
+	for node in UI_player_stats_array:
+		node.visible = true
+	for node in UI_enemy_stats_array:
+		node.visible = true
