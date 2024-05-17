@@ -303,6 +303,48 @@ text = "Valider"
 layout_mode = 2
 text = "Annuler"
 
+[node name="Button_Stat_Special" type="Node2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+visible = false
+
+[node name="HBoxContainer_MVT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
+offset_left = 102.0
+offset_top = 116.0
+offset_right = 138.0
+offset_bottom = 147.0
+
+[node name="plus_MVT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT"]
+layout_mode = 2
+text = "+"
+
+[node name="minus_MVT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT"]
+layout_mode = 2
+text = "-"
+
+[node name="HBoxContainer_ACT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
+offset_left = 102.0
+offset_top = 157.0
+offset_right = 138.0
+offset_bottom = 188.0
+
+[node name="plus_ACT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT"]
+layout_mode = 2
+text = "+"
+
+[node name="minus_ACT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT"]
+layout_mode = 2
+text = "-"
+
+[node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
+visible = false
+offset_left = 52.0
+offset_top = 195.0
+offset_right = 189.0
+offset_bottom = 226.0
+
+[node name="Validation_Special_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_Validation"]
+layout_mode = 2
+text = "Valider"
+
 [node name="MarginContainer_left" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -520,6 +562,11 @@ text = "Attendre"
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF/minus_DEF_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_def_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Validation_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_validation_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation/Cancel_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT/plus_MVT_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_mvt_button_pressed"]
+[connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT/minus_MVT_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_mvt_button_pressed"]
+[connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT/plus_ACT_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_act_button_pressed"]
+[connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT/minus_ACT_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_act_button_pressed"]
+[connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_Validation/Validation_Special_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_validation_special_button_pressed"]
 [connection signal="pressed" from="MarginContainer_left/white_bg_left/interface_left/histo_logs_button" to="." method="_on_histo_logs_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]

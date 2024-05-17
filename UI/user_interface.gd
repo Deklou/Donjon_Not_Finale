@@ -25,6 +25,7 @@ func _ready():
 	EntitiesState.hide_UI.connect(hide_UI)
 	Logs.remove_logs.connect(show_button)
 	GameState.tutorial_start.connect(tutorial_begin)
+	GameState.tutorial_end.connect(tutorial_end)
 	EntitiesState.show_str_stat_UI.connect(show_str_stat)
 	EntitiesState.hide_enemy_hp_stat_UI.connect(hide_enemy_hp_stat)
 	EntitiesState.show_enemy_hp_stat_UI.connect(show_enemy_hp_stat)

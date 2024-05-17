@@ -1,6 +1,7 @@
 extends Node
 
 signal UI_stat_button
+signal UI_stat_special_button
 var xp_result : float
 
 func gain_xp():

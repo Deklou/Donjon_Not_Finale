@@ -161,8 +161,9 @@ func _enemy_CHOICE():
 		EntitiesState.selector_follows_enemy(get_position())
 		await get_tree().create_timer(0.3).timeout
 		StatsSystem.update_stats()
-	GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
-	GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
+	if dummy_id in GameData.enemy_stats:
+		GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
+		GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
 
 ##################### ACTION #####################
 			

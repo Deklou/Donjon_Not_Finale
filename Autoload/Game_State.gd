@@ -1,6 +1,8 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
+var default_fountain_id : int = 0
+var default_fountain_current_point : int = 0
 var default_double_remove_call : bool = false
 var default_weapon_equipped : bool = false
 var default_weapon_equipped_name : String = ""
@@ -14,9 +16,14 @@ var default_level_up : bool = false #Exception pour ne pas mettre à jour le tex
 var default_first_enemy_defeated : bool = false
 var default_first_weapon_equiped : bool = false
 var default_silent_presence_log : bool = false
+var default_fountain_is_currently_used : bool = false #check si le joeuur est actuellement en train d'utiliser une fontaine
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
+var fountain_id : int #identifiant unique d'une fontaine
+var fountain_current_point : int #les points restants de la fontaine
+var fountain_attributes = {} #dictionnaire contenant tous les attributs d'une fontaine
+var fountain_states = [] #tableau contenant les fontaines déjà utilisées
 # UI_Inventory States
 var double_remove_call : bool #la fonction remove_button de UI_Inventory est appelée deux fois
 var weapon_equipped : bool #indique si le joueur a une arme équipée
@@ -34,6 +41,7 @@ var level_up : bool #Exception pour ne pas mettre à jour le texte de niveau dan
 var first_enemy_defeated : bool
 var first_weapon_equiped : bool
 var silent_presence_log : bool
+var fountain_is_currently_used : bool
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -43,10 +51,16 @@ signal enemy_can_act #signal lancé au script de l'ennemi pour lui faire choisir
 signal signal_player_input_cant_move #lorsque le joueur veut se déplacer alors qu'il n'a plus de point de mouvement
 signal restart_root #recharge le début de Root
 signal tutorial_start #met à jour l'interface si le joueur commence le tuto
+signal tutorial_end #affiche l'interface finale 
 signal intro_level_closed_door #fait apparaître la porte fermée au premier niveau
+signal fountain_has_been_used(fountain_id) #quand une fontaine a été utilisé, on envoie un signal pour checker son apparence
 ##################### RESET VALUE #####################
 func _reset_gamestate_value():
 	chest_states.clear()
+	fountain_attributes.clear()
+	fountain_states.clear()
+	fountain_id = default_fountain_id
+	fountain_current_point = default_fountain_current_point
 	double_remove_call = default_double_remove_call
 	weapon_equipped = default_weapon_equipped
 	weapon_equipped_name = default_weapon_equipped_name
@@ -60,6 +74,7 @@ func _reset_gamestate_value():
 	first_enemy_defeated = default_first_enemy_defeated
 	first_weapon_equiped = default_first_weapon_equiped
 	silent_presence_log = default_silent_presence_log
+	fountain_is_currently_used = default_fountain_is_currently_used
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()
@@ -100,8 +115,9 @@ func player_turn_end():
 			for i in EntitiesState.enemy_triggered_list:
 				EntitiesState.enemy_that_can_act = i
 				EntitiesState.enemy_id = EntitiesState.enemy_that_can_act
-				enemy_can_act.emit() #Vers les scripts ennemis
-				await get_tree().create_timer(float(GameData.enemy_stats[EntitiesState.enemy_that_can_act].MAX_ACT/1.9)).timeout #On attend en fonction du nombre d'action de l'ennemi
+				if EntitiesState.enemy_id in GameData.enemy_stats:
+					enemy_can_act.emit() #Vers les scripts ennemis
+					await get_tree().create_timer(float(GameData.enemy_stats[EntitiesState.enemy_that_can_act].MAX_ACT/1.9)).timeout #On attend en fonction du nombre d'action de l'ennemi
 			if EntitiesState.enemy_triggered_list == EntitiesState.enemy_turn_ended_list:
 				EntitiesState.enemy_turn_ended_list.clear()
 				GameState.enemy_turn_end()

@@ -50,3 +50,7 @@ func _all_enemies_are_defeated():
 		Logs._add_log("Un étrange silence\ns'intalle.")
 	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
 		Logs._add_log("...")
+
+func _on_tutorial_end_area_2d_body_entered(_body):
+	GameState.tutorial_end.emit() #vers user_interface
+	EntitiesState.enable_player_camera.emit() #vers script joueur

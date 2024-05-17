@@ -1,10 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2b4mdd3ii6y1"]
+[gd_scene load_steps=5 format=3 uid="uid://b2b4mdd3ii6y1"]
 
+[ext_resource type="Script" path="res://Objects/Fountain/Fountain.gd" id="1_r2yqw"]
 [ext_resource type="Texture2D" uid="uid://dhbgukpewcowv" path="res://Sprites/Objects/fountain.png" id="1_you6i"]
+[ext_resource type="Texture2D" uid="uid://dkgsidyotkjye" path="res://Sprites/Objects/fountain_water.png" id="3_6yhjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrkj5"]
+size = Vector2(112, 24)
 
 [node name="Fountain" type="Node2D"]
+script = ExtResource("1_r2yqw")
+fountain_id = 1
+fountain_point = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Fountain_Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(64, 1.90735e-06)
 scale = Vector2(2, 2)
 texture = ExtResource("1_you6i")
+
+[node name="Fountain_Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Fountain_CollisionShape2D" type="CollisionShape2D" parent="Fountain_Area2D"]
+position = Vector2(64, 76)
+shape = SubResource("RectangleShape2D_xrkj5")
+
+[node name="Water_Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(64, 48)
+texture = ExtResource("3_6yhjf")
+
+[connection signal="body_entered" from="Fountain_Area2D" to="." method="_on_fountain_area_2d_body_entered"]
+[connection signal="body_exited" from="Fountain_Area2D" to="." method="_on_fountain_area_2d_body_exited"]
