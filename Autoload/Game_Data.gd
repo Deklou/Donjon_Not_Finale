@@ -3,7 +3,7 @@ extends Node
 ##################### VARIABLE PAR DEFAUT #####################
 var default_player_MAX_HP : int = 22
 var default_player_HP : int = 22
-var default_player_STR : int = 66
+var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 5 
 var default_player_LVL : int = 1
@@ -23,10 +23,10 @@ var default_player_CRT_buffer : int = default_player_CRT
 var default_player_STR_buffer : int = default_player_STR 
 var default_player_DEX_buffer : float = default_player_DEX 
 var default_player_DEF_buffer : int = default_player_DEF 
-var default_player_MAX_movement_point: int = 1
-var default_player_MAX_action_point: int = 1
-var default_player_current_movement_point: int = 1
-var default_player_current_action_point: int = 1 
+var default_player_MAX_movement_point: int = 10
+var default_player_MAX_action_point: int = 10
+var default_player_current_movement_point: int = 10
+var default_player_current_action_point: int = 10
 var default_enemy_MAX_HP : int = 22 
 var default_enemy_HP : int = 22 
 var default_enemy_STR : int = 6 
@@ -135,7 +135,8 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Description" : "Du pain. Soigne 10 PV",
 	"Icon": preload("res://Sprites/Items/bread.png"),
 	"Value":10,
-	"Cost": 0
+	"Cost": 0,
+	"Article" : "du"
 	}
 	,"Pain rassis":{
 	"Type" : "Consumable",
@@ -144,7 +145,8 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Description" : "Pain rassis. Il est dans un\nétat lamentable.\nSoigne 5 PV",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":5,
-	"Cost": 0
+	"Cost": 0,
+	"Article" : "du"
 	}
 	,"Sandwich classique":{
 	"Type" : "Consumable",
@@ -153,7 +155,8 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Description" : "Sandwich. Certainement\npas la meilleure recette\nqui existe. Soigne 15 PV",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":15,
-	"Cost": 0
+	"Cost": 0,
+	"Article" : "un"
 	}
 	,"Concoction":{
 	"Type" : "Consumable",
@@ -162,7 +165,8 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Description" : "Mixture étrange qui\nvous remet sur pied en un\nclin d'oeil.",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":100,
-	"Cost": 0
+	"Cost": 0,
+	"Article" : "une"
 	}
 	################## Armes ##################
 	,"Bâton":{
@@ -172,6 +176,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Icon": preload("res://Sprites/Weapon/IronSword.png"),
 	"Value": [1,0,2], #puissance, critique, poids
 	"Cost": 0,
+	"Article" : "un",
 	"Equiped": false
 	}
 	,"Epée courte":{
@@ -181,6 +186,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Icon": preload("res://Sprites/Weapon/IronSword.png"),
 	"Value": [3,0,2], #puissance, critique, poids
 	"Cost": 0,
+	"Article" : "une",
 	"Equiped": false
 	}
 	,"Libération":{
@@ -188,8 +194,9 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Name" : "Libération",
 	"Description" : "Epée personnelle du\ndragon divin.",
 	"Icon": preload("res://Sprites/Weapon/Liberation.png"),
-	"Value": [6,0,4], #puissance, critique, poids
+	"Value": [5,0,4], #puissance, critique, poids
 	"Cost": 0,
+	"Article" : "",
 	"Equiped": false
 	}
 	,"Miséricorde":{
@@ -197,8 +204,9 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Name" : "Miséricorde",
 	"Description" : "Dague légendaire\nacérée.\n",
 	"Icon": preload("res://Sprites/Weapon/Misericorde.png"),
-	"Value": [2,20,2], #puissance, critique, poids
+	"Value": [3,25,2], #puissance, critique, poids
 	"Cost": 0,
+	"Article" : "",
 	"Equiped": false
 	}
 	,"Représailles":{
@@ -206,8 +214,9 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Name" : "Représailles",
 	"Description" : "Lance légendaire\nvenue d'un monde\nlointain.",
 	"Icon": preload("res://Sprites/Weapon/Trahison.png"),
-	"Value": [9,0,9], #puissance, critique, poids
+	"Value": [7,0,9], #puissance, critique, poids
 	"Cost": 0,
+	"Article" : "",
 	"Equiped": false
 	}
 	################## Objets Spéciaux ##################
@@ -218,7 +227,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Icon": preload("res://Sprites/Items/kojiro.png"),
 	"Value": [0,0,0], #puissance, critique, poids
 	"Cost": 0,
-	"Equiped": false
+	"Article" : "",
 	}
 }
 

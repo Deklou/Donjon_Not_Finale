@@ -44,4 +44,4 @@ func _log_item(action: String, item_name: String):
 	elif action == "Description":
 		Logs._add_log(GameData.Item[item_name].Description)
 	elif action == "Open_Chest":
-		Logs._add_log("Vous avez ouvert un coffre \nil contenait l'objet \n" + item_name)
+		Logs._add_log("Vous avez ouvert un coffre \nil contenait " + GameData.Item[item_name].Article + " " + item_name)

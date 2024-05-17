@@ -85,6 +85,7 @@ func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour
 	if entity_name == "Enemy":
 		if randf() < GameData.player_CRT/float(100):
 			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
+			print(min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2))
 			Logs._log_entity_deal_critical_damage("Enemy",entity_name)
 		else:
 			GameData.enemy_stats[dummy_id].HP = GameData.enemy_stats[dummy_id].HP + min(-1,GameData.enemy_stats[dummy_id].DEF - GameData.player_MT)
