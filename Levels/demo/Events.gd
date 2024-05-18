@@ -2,8 +2,12 @@ extends Node2D
 
 var first_fall : bool = true
 var inventory_acquired : bool = false
+var shortcut_opened : bool = false
 @onready var gardien_en_chef : CharacterBody2D = $"../Enemies/dummy_9"
 @onready var coffre_liberation : RigidBody2D = $"../Chests/Chest15"
+@onready var shortcut_scene : Node2D = $"../Tutorial_Shortcut"
+#var shortcut_scene_demo_tilemap = shortcut_scene.get_node("Demo_TileMap")
+#var shortcut_scene_animation_player = shortcut_scene.get_node("ColorRect_Animation/AnimationPlayer_Fade")
 
 func _ready():
 	GameState.tutorial_start.emit() #vers user_interface
@@ -54,3 +58,10 @@ func _all_enemies_are_defeated():
 func _on_tutorial_end_area_2d_body_entered(_body):
 	GameState.tutorial_end.emit() #vers user_interface
 	EntitiesState.enable_player_camera.emit() #vers script joueur
+
+func _on_shortcut_area_2d_body_entered(_body):
+	if shortcut_opened == false :
+		#shortcut_scene_demo_tilemap.visible = false
+		#shortcut_scene_animation_player.play("fade_out")
+		EntitiesState.player_parent_node.remove_child(shortcut_scene)
+		shortcut_opened = true
