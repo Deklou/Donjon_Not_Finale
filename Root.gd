@@ -10,7 +10,7 @@ func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.to_intro_level.connect(_to_intro_level)
-	GameState.restart_root.connect(_to_intro_level)
+	GameState.restart_root.connect(_to_intro_level) #si on recommence, on commence directement dans le niveau
 	
 func _to_intro_level():	
 	if Root.has_node("stats_screen"):
@@ -21,13 +21,13 @@ func _to_intro_level():
 	Root = get_tree().root
 	Root_instance = preload("res://Levels/Demo/Tutorial.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	#Root_instance.to_first_floor.connect(_to_first_floor)
+	Root_instance.get_node("loading_zones").to_first_floor.connect(_to_first_floor)
 	
 func _to_first_floor():
 	EntitiesState.enemy_triggered_list.clear()
 	EntitiesState.enemy_turn_ended_list.clear()
-	if Root.has_node("intro_level"):
-		var lvl = Root.get_node("intro_level")
+	if Root.has_node("Tutorial"):
+		var lvl = Root.get_node("Tutorial")
 		Root.remove_child.call_deferred(lvl)
 		lvl.queue_free()
 	user_interface_node.visible = false
@@ -37,10 +37,10 @@ func _to_first_floor():
 	lvl_2.queue_free()
 	user_interface_node.visible = true
 	Root = get_tree().root
-	Root_instance = preload("res://Levels/demo/first_floor.tscn").instantiate()
+	Root_instance = preload("res://Levels/Demo/First_Floor.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_the_end.connect(_to_the_end)
-	Root_instance.to_secret.connect(_to_secret)
+	#Root_instance.to_the_end.connect(_to_the_end)
+	#Root_instance.to_secret.connect(_to_secret)
 	
 func _to_the_end():
 	if Root.has_node("first_floor"):
@@ -64,11 +64,12 @@ func _to_secret():
 	Root.add_child.call_deferred(Root_instance)
 	GameState.ending_triggered = true
 	
-func _load_next_level(scene_path : String):
+'func _load_next_level(scene_path : String, signal_name : Signal):
 	if EntitiesState.player_parent_node != null:
 		Root = get_tree().root
 		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
 		EntitiesState.player_parent_node.queue_free()
 	user_interface_node.visible = false
 	Root_instance = load(scene_path).instantiate()
-	Root.add_child.call_deferred(Root_instance)
+	Root.add_child.call_deferred(Root_instance)'
+	

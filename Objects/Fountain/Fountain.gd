@@ -1,6 +1,8 @@
 extends Node2D
 @export var fountain_id : int #Identifiant unique pour chaque fontaine
 @export var fountain_point : int #Identifiant unique pour chaque fontaine
+@export var fountain_sprite_path : String
+@onready var fountain_sprite : Sprite2D = $Fountain_Sprite2D
 @onready var water_sprite : Sprite2D = $Water_Sprite2D
 
 func _ready():
@@ -8,6 +10,10 @@ func _ready():
 	GameState.fountain_attributes[fountain_id] = fountain_point
 	if fountain_id in GameState.fountain_states:
 		water_sprite.visible = false
+	if fountain_sprite_path != "":
+		var texture = load(fountain_sprite_path)
+		if texture:
+			fountain_sprite.texture = texture
 
 func _on_fountain_area_2d_body_entered(_body):
 	if fountain_id not in GameState.fountain_states:

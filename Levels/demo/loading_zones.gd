@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var first_room_camera : Camera2D = $"../first_room_camera"
+signal to_first_floor 
 
 func _on_to_second_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(352, 1376))
@@ -28,7 +29,9 @@ func _on_to_bonus_1_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(2016, 2592))
 func _on_to_intro_level_room_from_bonus_1_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(5856, 2272))
-	
+func _on_to_first_floor_area_2d_body_entered(_body):
+	to_first_floor.emit() #vers Root
+		
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:
 		var transition_scene = preload("res://Transition/_to_another_room.tscn").instantiate()

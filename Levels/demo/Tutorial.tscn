@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b0sg7g3r6f62o"]
+[gd_scene load_steps=25 format=3 uid="uid://b0sg7g3r6f62o"]
 
 [ext_resource type="Texture2D" uid="uid://d2jm2ttr0upvc" path="res://Levels/Demo/Tileset/tileset.png" id="1_ek6mh"]
 [ext_resource type="PackedScene" uid="uid://cdq0ux4rg1m4q" path="res://Entities/Player/grid_player_2.tscn" id="1_n8rk7"]
@@ -783,6 +783,9 @@ size = Vector2(192, 14.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfpmp"]
 size = Vector2(190.5, 17.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d86j"]
+size = Vector2(58.5, 77.75)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fq848"]
 size = Vector2(192, 360)
 
@@ -893,6 +896,13 @@ collision_mask = 2
 [node name="to_intro_level_room_from_bonus_1_collision_shape_2D" type="CollisionShape2D" parent="loading_zones/to_intro_level_room_from_bonus_1_area_2d"]
 position = Vector2(2016.75, 2744.75)
 shape = SubResource("RectangleShape2D_sfpmp")
+
+[node name="to_first_floor_area_2D" type="Area2D" parent="loading_zones"]
+
+[node name="to_first_floor_collision_shape_2D" type="CollisionShape2D" parent="loading_zones/to_first_floor_area_2D"]
+position = Vector2(5728, 1593.13)
+shape = SubResource("RectangleShape2D_2d86j")
+debug_color = Color(0.172549, 0.243137, 1, 0.419608)
 
 [node name="Chests" type="Node2D" parent="."]
 
@@ -1172,10 +1182,10 @@ position = Vector2(352, 360)
 [node name="Closed_Door" parent="." instance=ExtResource("10_c4kfm")]
 position = Vector2(4160, 1856)
 
-[node name="selector_UI" parent="." instance=ExtResource("3_hye6l")]
-
 [node name="Tutorial_Shortcut" parent="." instance=ExtResource("11_ry47v")]
 position = Vector2(4672, 1728)
+
+[node name="selector_UI" parent="." instance=ExtResource("3_hye6l")]
 
 [connection signal="body_entered" from="loading_zones/to_second_room_area_2d" to="loading_zones" method="_on_to_second_room_area_2d_body_entered"]
 [connection signal="body_entered" from="loading_zones/to_first_room_area_2d" to="loading_zones" method="_on_to_first_room_area_2d_body_entered"]
@@ -1187,6 +1197,7 @@ position = Vector2(4672, 1728)
 [connection signal="body_entered" from="loading_zones/to_fourth_room_from_intro_area_2d2" to="loading_zones" method="_on_to_fourth_room_from_intro_area_2d_2_body_entered"]
 [connection signal="body_entered" from="loading_zones/to_bonus_1_room_area_2d" to="loading_zones" method="_on_to_bonus_1_room_area_2d_body_entered"]
 [connection signal="body_entered" from="loading_zones/to_intro_level_room_from_bonus_1_area_2d" to="loading_zones" method="_on_to_intro_level_room_from_bonus_1_area_2d_body_entered"]
+[connection signal="body_entered" from="loading_zones/to_first_floor_area_2D" to="loading_zones" method="_on_to_first_floor_area_2d_body_entered"]
 [connection signal="body_entered" from="Events/fall_area_2D" to="Events" method="_on_fall_area_2d_body_entered"]
 [connection signal="body_entered" from="Events/inventory_log_area_2d" to="Events" method="_on_inventory_log_area_2d_body_entered"]
 [connection signal="body_entered" from="Events/ui_show_str_area_2d" to="Events" method="_on_ui_show_str_area_2d_body_entered"]

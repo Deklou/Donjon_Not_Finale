@@ -14,4 +14,4 @@ func _ready():
 			$ColorRect/VBoxContainer3/Label4.text = " 1"
 
 func _on_button_pressed():
-	to_intro_level.emit()
+	to_intro_level.emit() #vers Root
