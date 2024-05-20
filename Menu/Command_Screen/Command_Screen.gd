@@ -109,13 +109,18 @@ func _process(_delta):
 	cursor_green_sprite_2d.visible = player_has_clicked
 	button_green_sprite_2d.visible = not button_sprite_2d.visible
 	player_has_entered_button = button_green_sprite_2d.visible
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and button_sprite_2d.visible == false:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and button_sprite_2d.visible == false and player_has_clicked == false:
+		player_has_clicked == true
+		var thumbs_up_scene = preload("res://Menu/Thumbs_Up/Thumbs_Up.tscn").instantiate()
+		add_child.call_deferred(thumbs_up_scene)
+		thumbs_up_scene.position = Vector2(832,624)
 		button_sprite_2d.visible = true
 		await get_tree().create_timer(0.1).timeout
 		button_sprite_2d.visible = false
+		'
 		command_animation_player.play("fade_out")
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
+		await get_tree().create_timer(0.7).timeout
+		queue_free()'
 
 func _on_area_2d_mouse_entered():
 	reset_all_sprite()
