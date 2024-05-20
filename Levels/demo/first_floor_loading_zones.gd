@@ -1,5 +1,7 @@
 extends Node2D
 
+signal to_the_end 
+
 func _on_to_bonus_2_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(5280, 2848))
 func _on_to_bonus_3_area_2d_body_entered(body):
@@ -9,7 +11,7 @@ func _on_to_first_floor_from_bonus_2_area_2d_body_entered(body):
 func _on_to_first_floor_from_bonus_3_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(4448, 1056))
 func _on_to_the_end_area_2d_body_entered(_body):
-	pass
+	to_the_end.emit() #Vers Root
 
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:

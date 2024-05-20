@@ -24,13 +24,15 @@ func _to_intro_level():
 	Root_instance.get_node("loading_zones").to_first_floor.connect(_to_first_floor)
 	
 func _to_first_floor():
-	EntitiesState.enemy_triggered_list.clear()
+	EntitiesState.enemy_triggered_list.clear() 
 	EntitiesState.enemy_turn_ended_list.clear()
+	#faudra faire une fonction qui le fait tout seul
 	if Root.has_node("Tutorial"):
 		var lvl = Root.get_node("Tutorial")
 		Root.remove_child.call_deferred(lvl)
 		lvl.queue_free()
 	user_interface_node.visible = false
+	#faire une fonction transition de niveau (donc formaliser la transition
 	var lvl_2 = preload("res://Transition/intro_to_first_floor.tscn").instantiate()
 	Root.add_child.call_deferred(lvl_2)
 	await get_tree().create_timer(4.0).timeout
@@ -39,7 +41,7 @@ func _to_first_floor():
 	Root = get_tree().root
 	Root_instance = preload("res://Levels/Demo/First_Floor.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	#Root_instance.to_the_end.connect(_to_the_end)
+	Root_instance.get_node("loading_zones").to_the_end.connect(_to_the_end)
 	#Root_instance.to_secret.connect(_to_secret)
 	
 func _to_the_end():

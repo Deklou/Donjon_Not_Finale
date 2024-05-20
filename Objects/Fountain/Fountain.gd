@@ -32,3 +32,4 @@ func _on_fountain_area_2d_body_exited(_body):
 func _on_fountain_water_sprite_disabled(id : int):
 	if id == fountain_id:
 		water_sprite.visible = false
+		Logs._add_log("La source s'est asséchée.")
