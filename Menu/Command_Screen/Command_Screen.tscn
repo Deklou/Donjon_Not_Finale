@@ -235,7 +235,6 @@ shape = SubResource("RectangleShape2D_uietf")
 debug_color = Color(0.831373, 0.831373, 0.827451, 0.419608)
 
 [node name="ColorRect_Animation" type="ColorRect" parent="."]
-visible = false
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0
@@ -247,9 +246,6 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_qte7q")
 }
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(832, 624)
 
 [connection signal="mouse_entered" from="Black_Background_ColorRect/Button/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Black_Background_ColorRect/Button/Area2D" to="." method="_on_area_2d_mouse_exited"]

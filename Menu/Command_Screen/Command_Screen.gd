@@ -27,6 +27,7 @@ extends Node2D
 var player_has_moved_mouse : bool = false
 var player_has_clicked : bool = false
 var player_has_entered_button : bool = false
+var player_has_validated : bool = false
 var mouse_movement_timeout : Timer
 
 func _ready():
@@ -109,18 +110,19 @@ func _process(_delta):
 	cursor_green_sprite_2d.visible = player_has_clicked
 	button_green_sprite_2d.visible = not button_sprite_2d.visible
 	player_has_entered_button = button_green_sprite_2d.visible
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and button_sprite_2d.visible == false and player_has_clicked == false:
-		player_has_clicked == true
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and button_sprite_2d.visible == false and player_has_validated == false:
+		reset_all_sprite()
+		player_has_validated = true
 		var thumbs_up_scene = preload("res://Menu/Thumbs_Up/Thumbs_Up.tscn").instantiate()
 		add_child.call_deferred(thumbs_up_scene)
 		thumbs_up_scene.position = Vector2(832,624)
 		button_sprite_2d.visible = true
 		await get_tree().create_timer(0.1).timeout
 		button_sprite_2d.visible = false
-		'
+		await get_tree().create_timer(0.5).timeout
 		command_animation_player.play("fade_out")
 		await get_tree().create_timer(0.7).timeout
-		queue_free()'
+		queue_free()
 
 func _on_area_2d_mouse_entered():
 	reset_all_sprite()
