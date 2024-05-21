@@ -64,14 +64,13 @@ position = Vector2(0, 1)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 560.0
-offset_top = 46.0
-offset_right = 944.0
+offset_left = 549.0
+offset_top = 47.0
+offset_right = 933.0
 offset_bottom = 118.0
 grow_horizontal = 0
 bbcode_enabled = true
 text = "Objectif"
-metadata/_edit_use_anchors_ = true
 
 [node name="Underline_ColorRect" type="ColorRect" parent="Black_Background_ColorRect/Objectif/Objectif_Title"]
 layout_mode = 0
@@ -81,27 +80,27 @@ offset_bottom = 60.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Objectif_Text" type="RichTextLabel" parent="Black_Background_ColorRect/Objectif"]
-offset_left = 372.0
-offset_top = 132.0
-offset_right = 932.0
-offset_bottom = 206.0
+offset_left = 225.0
+offset_top = 119.0
+offset_right = 1084.0
+offset_bottom = 193.0
 bbcode_enabled = true
 text = "Monter jusqu'au dernier étage en restant en vie et sortir."
-metadata/_edit_use_anchors_ = true
+fit_content = true
 
 [node name="Information" type="Node2D" parent="Black_Background_ColorRect"]
 position = Vector2(0, 1)
 
 [node name="Information_Title" type="RichTextLabel" parent="Black_Background_ColorRect/Information"]
-offset_left = 517.0
+offset_left = 505.0
 offset_top = 222.0
-offset_right = 789.0
+offset_right = 777.0
 offset_bottom = 286.0
 bbcode_enabled = true
 text = "Informations"
-metadata/_edit_use_anchors_ = true
 
 [node name="Underline_ColorRect" type="ColorRect" parent="Black_Background_ColorRect/Information/Information_Title"]
+layout_mode = 0
 offset_left = -28.0
 offset_top = 56.0
 offset_right = 263.0
@@ -109,15 +108,14 @@ offset_bottom = 60.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Information_Text" type="RichTextLabel" parent="Black_Background_ColorRect/Information"]
-offset_left = 373.0
+offset_left = 229.0
 offset_top = 310.0
-offset_right = 955.0
-offset_bottom = 526.0
+offset_right = 1093.0
+offset_bottom = 591.0
 bbcode_enabled = true
 text = "Vaincre un ennemi augmente votre expérience. Avec assez d'expérience, vous  pourrez  augmenter  les  différents attributs qui vous définissent.
 
 Vous pourrez également trouver des objets au cours de votre périple pour alléger votre peine."
-metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Node2D" parent="Black_Background_ColorRect"]
 position = Vector2(0, 1)

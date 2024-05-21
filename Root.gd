@@ -7,21 +7,28 @@ var Root_instance = null
 func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	user_interface_node.visible = false
 	Root = get_tree().root
+	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
+	Root.add_child.call_deferred(Root_instance)
+	Root_instance.to_objectif_screen.connect(_to_first_floor)
+	GameState.restart_root.connect(_to_stats_screen) #si on recommence, on commence directement dans le niveau
+	
+func _to_objective_screen():
+	Root_instance = preload("res://Menu/Objectif_Screen/Objectif_Screen.tscn").instantiate()
+	Root.add_child.call_deferred(Root_instance)
+	Root_instance.to_stats_screen.connect(_to_stats_screen)
+	
+func _to_stats_screen():
 	Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.to_intro_level.connect(_to_intro_level)
-	GameState.restart_root.connect(_to_intro_level) #si on recommence, on commence directement dans le niveau
 	
 func _to_intro_level():	
-	if Root.has_node("stats_screen"):
-		var lvl = Root.get_node("stats_screen")
-		Root.remove_child.call_deferred(lvl)
-		lvl.queue_free()
-	user_interface_node.visible = true
 	Root = get_tree().root
 	Root_instance = preload("res://Levels/Demo/Tutorial.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.get_node("loading_zones").to_first_floor.connect(_to_first_floor)
+	if user_interface_node != null:
+		user_interface_node.visible = true
 	
 func _to_first_floor():
 	EntitiesState.enemy_triggered_list.clear() 

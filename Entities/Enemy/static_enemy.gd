@@ -129,8 +129,8 @@ func _entity_take_damage(Entity_Name: String):
 
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
+		GameState.enemy_range_entered = false #Cas où joueur élimine ennemi mais le flag reste true
 		$".".queue_free()
-		return
 		
 ##################### ACTION #####################
 			

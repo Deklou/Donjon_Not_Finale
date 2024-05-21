@@ -29,6 +29,7 @@ var player_has_clicked : bool = false
 var player_has_entered_button : bool = false
 var player_has_validated : bool = false
 var mouse_movement_timeout : Timer
+signal to_objectif_screen 
 
 func _ready():
 	command_animation_player.play("fade_in")
@@ -122,6 +123,7 @@ func _process(_delta):
 		await get_tree().create_timer(0.5).timeout
 		command_animation_player.play("fade_out")
 		await get_tree().create_timer(0.7).timeout
+		to_objectif_screen.emit() #Vers Root
 		queue_free()
 
 func _on_area_2d_mouse_entered():

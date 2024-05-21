@@ -14,7 +14,7 @@ func _on_to_first_room_area_2d_body_entered(body):
 	EntitiesState.disable_player_camera.emit() #vers script joueur
 	first_room_camera.enabled = true
 func _on_to_third_room_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(1312, 224))
+	_move_to_other_room(body,Vector2(1312, 160))
 func _on_to_second_room_from_third_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(352, 2336))
 func _on_to_fourth_room_area_2d_body_entered(body):

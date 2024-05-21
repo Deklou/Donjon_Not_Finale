@@ -194,8 +194,8 @@ func _enemy_MVT():
 				_enemy_move(Vector2(sign(normalized_enemy_distance.x)*distance,0))
 			elif previous_move.y == 0:
 				_enemy_move(Vector2(0,sign(normalized_enemy_distance.y)*distance))
-			elif dummy_previous_position == self.position:
-				EntitiesState.enemy_turn_ended_list.append(dummy_id)
+		if dummy_previous_position == self.position:
+			EntitiesState.enemy_turn_ended_list.append(dummy_id)
 			
 func _enemy_move(_enemy_move_distance: Vector2):
 	previous_move = _enemy_move_distance

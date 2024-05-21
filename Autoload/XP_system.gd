@@ -8,7 +8,7 @@ func gain_xp():
 	if GameState.first_enemy_defeated == false:
 		EntitiesState.show_player_xp_level_UI.emit()
 		GameState.first_enemy_defeated = true
-	xp_result = (GameData.enemy_stats[EntitiesState.enemy_id].LVL * GameData.enemy_stats[EntitiesState.enemy_id].XP) / GameData.player_LVL
+	xp_result = (GameData.enemy_stats[EntitiesState.enemy_id].LVL + GameData.enemy_stats[EntitiesState.enemy_id].XP) / GameData.player_LVL
 	GameData.player_XP_buffer = GameData.player_XP + snapped(xp_result,0) #arrondis xp_result à l'entier
 	gain_level()
 

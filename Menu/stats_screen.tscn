@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjtet3hw20c5s"]
+[gd_scene load_steps=11 format=3 uid="uid://bjtet3hw20c5s"]
 
 [ext_resource type="Script" path="res://Menu/Stats_Screen.gd" id="1_nlobg"]
 [ext_resource type="Texture2D" uid="uid://7tqjs22vmfyd" path="res://Sprites/Menu/Start_Button.png" id="2_iuqeo"]
 [ext_resource type="Texture2D" uid="uid://cmpseegmfnfkr" path="res://Sprites/Menu/Start_Button_Green.png" id="3_72y2h"]
 [ext_resource type="Texture2D" uid="uid://c8isjtboyy53r" path="res://Sprites/Menu/Restart_Button.png" id="4_h4iew"]
 [ext_resource type="Texture2D" uid="uid://d38jaxjsfpy5y" path="res://Sprites/Menu/Restart_Button_Green.png" id="5_cmmi7"]
+[ext_resource type="Texture2D" uid="uid://dfattj7ilerxn" path="res://Sprites/Items/kojiro.png" id="6_xio4a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8r7h8"]
-size = Vector2(172, 72)
+size = Vector2(208, 65)
 
 [sub_resource type="Animation" id="Animation_hnyy6"]
 resource_name = "fade_in"
@@ -125,9 +126,9 @@ fit_content = true
 [node name="Result_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
 layout_mode = 0
 offset_left = 1064.0
-offset_top = 8.0
+offset_top = 16.0
 offset_right = 1216.0
-offset_bottom = 512.0
+offset_bottom = 520.0
 theme_override_constants/separation = 34
 
 [node name="Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
@@ -164,6 +165,50 @@ layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 
+[node name="Variable_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
+layout_mode = 2
+offset_left = 744.0
+offset_top = 16.0
+offset_right = 1088.0
+offset_bottom = 512.0
+theme_override_constants/separation = 34
+
+[node name="Variable_Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
 [node name="Button" type="Node2D" parent="Black_Background_ColorRect"]
 
 [node name="Button_Sprite_2D" type="Sprite2D" parent="Black_Background_ColorRect/Button"]
@@ -190,12 +235,17 @@ texture = ExtResource("5_cmmi7")
 position = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Black_Background_ColorRect/Button/Area2D"]
-position = Vector2(640, 652)
+position = Vector2(640, 657.5)
 shape = SubResource("RectangleShape2D_8r7h8")
 debug_color = Color(0.831373, 0.831373, 0.827451, 0.419608)
 
-[node name="ColorRect_Animation" type="ColorRect" parent="."]
+[node name="Special_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect"]
 visible = false
+position = Vector2(1168, 616)
+scale = Vector2(7, 6.75)
+texture = ExtResource("6_xio4a")
+
+[node name="ColorRect_Animation" type="ColorRect" parent="."]
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0

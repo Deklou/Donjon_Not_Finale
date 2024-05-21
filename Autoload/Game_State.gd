@@ -17,6 +17,7 @@ var default_first_enemy_defeated : bool = false
 var default_first_weapon_equiped : bool = false
 var default_silent_presence_log : bool = false
 var default_fountain_is_currently_used : bool = false #check si le joeuur est actuellement en train d'utiliser une fontaine
+var default_kojiro_was_obtained : bool = false
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
@@ -42,6 +43,7 @@ var first_enemy_defeated : bool
 var first_weapon_equiped : bool
 var silent_presence_log : bool
 var fountain_is_currently_used : bool
+var kojiro_was_obtained : bool
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -75,6 +77,7 @@ func _reset_gamestate_value():
 	first_weapon_equiped = default_first_weapon_equiped
 	silent_presence_log = default_silent_presence_log
 	fountain_is_currently_used = default_fountain_is_currently_used
+	kojiro_was_obtained = default_kojiro_was_obtained
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()
