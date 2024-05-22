@@ -1,13 +1,14 @@
 extends Node2D
 
 
-@onready var secret_exit_area_2d : Area2D = $Area2D
-signal to_the_end 
+@onready var secret_exit_area_2d : Area2D = $to_secret_area_2d
+@onready var demo_tilemap : TileMap = $"../Demo_TileMap"
+var no_enemy_left : bool = false
 signal to_secret_exit
 
 func _ready():
 	EntitiesState.enemy_is_deselected()
-	XpSystem.UI_stat_button.connect(_all_enemies_are_defeated)
+	StatsSystem.update_player_stats.connect(_all_enemies_are_defeated)
 
 func _on_to_bonus_2_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(5280, 2848))
@@ -18,9 +19,9 @@ func _on_to_first_floor_from_bonus_2_area_2d_body_entered(body):
 func _on_to_first_floor_from_bonus_3_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(4448, 1056))
 func _on_to_the_end_area_2d_body_entered(_body):
-	to_the_end.emit() #Vers Root
+	GameState.to_stats_screen.emit() #Vers Root
 	queue_free()
-func _on_area_2d_body_entered(_body):
+func _on_to_secret_area_2d_body_entered(_body):
 	to_secret_exit.emit() #vers Root
 	queue_free()
 
@@ -43,7 +44,12 @@ func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 		transition_scene.queue_free()
 
 func _all_enemies_are_defeated():
-	await get_tree().create_timer(3.0).timeout
-	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
-		Logs._add_log("Un silence assourdissant\nenvahi la salle.")
-		secret_exit_area_2d.position = Vector2(416, 352)
+	if EntitiesState.player_parent_node != null and no_enemy_left == false:
+		if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
+			no_enemy_left = true
+			await get_tree().create_timer(2.0).timeout
+			Logs._add_log("Un silence assourdissant\nenvahi la salle.")
+			EntitiesState.player_parent_node.add_child(preload("res://Objects/Figure/Figure.tscn").instantiate())
+			secret_exit_area_2d.position = Vector2(416, 352)
+			await get_tree().create_timer(4.0).timeout
+			EntitiesState.player_parent_node.add_child(preload("res://Objects/Figure/Figure.tscn").instantiate())

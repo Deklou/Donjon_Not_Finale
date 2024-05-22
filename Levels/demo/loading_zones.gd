@@ -26,11 +26,12 @@ func _on_to_intro_level_room_area_2d_body_entered(body):
 func _on_to_fourth_room_from_intro_area_2d_2_body_entered(body):
 	_move_to_other_room(body,Vector2(3104, 1312))
 func _on_to_bonus_1_room_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(2016, 2592))
+	_move_to_other_room(body,Vector2(2016, 2718))
 func _on_to_intro_level_room_from_bonus_1_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(5856, 2272))
 func _on_to_first_floor_area_2d_body_entered(_body):
 	to_first_floor.emit() #vers Root
+	queue_free() #A terme, déplacer ce script dans le niveau, pour pouvoir le queue free entièrement
 		
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:

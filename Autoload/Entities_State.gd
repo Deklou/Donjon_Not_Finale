@@ -8,7 +8,7 @@ var default_enemy_can_be_attacked_position : Vector2 = Vector2(0,0)
 var default_enemy_that_can_act : String = ""
 var default_Root = null
 var default_Root_instance = null
-var default_player_parent_node : Node = Node.new()
+var default_player_parent_node : Node = null
 var default_player_is_frozen : bool = false
 ##################### VARIABLES #####################
 signal show_enemy_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
@@ -85,7 +85,6 @@ func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour
 	if entity_name == "Enemy":
 		if randf() < GameData.player_CRT/float(100):
 			GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].HP + min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2)
-			print(min(-1,GameData.enemy_stats[EntitiesState.enemy_id].DEF - GameData.player_MT*2))
 			Logs._log_entity_deal_critical_damage("Enemy",entity_name)
 		else:
 			GameData.enemy_stats[dummy_id].HP = GameData.enemy_stats[dummy_id].HP + min(-1,GameData.enemy_stats[dummy_id].DEF - GameData.player_MT)
@@ -121,15 +120,19 @@ func enemy_is_deselected():
 		
 ##################### MORT #####################
 func player_is_dead():
-	var last_player_position = EntitiesState.player_parent_node.get_node("Grid_player_2").global_position
-	GameData.player_death_count += 1
-	Root = get_tree().root
-	Root_instance = preload("res://Menu/game_over.tscn").instantiate()
-	Root.add_child(Root_instance)
-	EntitiesState.player_parent_node.get_node("Grid_player_2").queue_free()
-	Root_instance = preload("res://Entities/Camera/Camera_Death.tscn").instantiate()
-	Root_instance.position = last_player_position
-	Root.add_child(Root_instance)
+	if GameData.secret_triggered == true:
+		EntitiesState.player_parent_node.get_node("Grid_player_2").queue_free()
+		GameState.to_stats_screen.emit() #Vers Root
+	else:
+		var last_player_position = EntitiesState.player_parent_node.get_node("Grid_player_2").global_position
+		GameData.player_death_count += 1
+		Root = get_tree().root
+		Root_instance = preload("res://Menu/game_over.tscn").instantiate()
+		Root.add_child(Root_instance)
+		EntitiesState.player_parent_node.get_node("Grid_player_2").queue_free()
+		Root_instance = preload("res://Entities/Camera/Camera_Death.tscn").instantiate()
+		Root_instance.position = last_player_position
+		Root.add_child(Root_instance)
 	hide_UI.emit() #Vers user_interface
 
 func enemy_is_dead(dummy_id: String) -> bool: #retourne si l'état est présent, et quel état

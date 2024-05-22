@@ -3,6 +3,8 @@ extends Node2D
 var first_fall : bool = true
 var inventory_acquired : bool = false
 var shortcut_opened : bool = false
+var one_enemy_left : bool = false
+var no_enemy_left : bool = false
 @onready var gardien_en_chef : CharacterBody2D = $"../Enemies/dummy_9"
 @onready var coffre_liberation : RigidBody2D = $"../Chests/Chest15"
 @onready var shortcut_scene : Node2D = $"../Tutorial_Shortcut"
@@ -11,8 +13,8 @@ var shortcut_opened : bool = false
 
 func _ready():
 	GameState.tutorial_start.emit() #vers user_interface
-	XpSystem.UI_stat_button.connect(_all_enemies_are_defeated) #pas propre mais meilleur solution que j'ai trouvé pour savoir quand tous les ennemis sont morts :/
-	#EntitiesState.disable_player_camera.emit() #vers script joueur
+	StatsSystem.update_player_stats.connect(_all_enemies_are_defeated) #pas propre mais meilleur solution que j'ai trouvé pour savoir quand tous les ennemis sont morts :/
+	EntitiesState.disable_player_camera.emit() #vers script joueur
 
 func _on_fall_area_2d_body_entered(body):
 	if body is CharacterBody2D:
@@ -49,11 +51,17 @@ func _on_silent_presence_log_area_2d_body_entered(_body):
 		coffre_liberation.global_position = Vector2(3424, 2080)
 		
 func _all_enemies_are_defeated():
-	await get_tree().create_timer(3.0).timeout
-	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 1:
-		Logs._add_log("Un étrange silence\ns'intalle.")
-	if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
-		Logs._add_log("...")
+	if EntitiesState.player_parent_node != null:
+		if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 1 and one_enemy_left == false:
+			one_enemy_left = true
+			await get_tree().create_timer(3.0).timeout
+			Logs._add_log("Un étrange silence\ns'intalle.")
+			return
+		if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0 and no_enemy_left == false:
+			no_enemy_left = true
+			await get_tree().create_timer(3.0).timeout
+			Logs._add_log("J'ai prévu que\nquelqu'un allait\nvouloir s'infliger ça T_T")
+			return
 
 func _on_tutorial_end_area_2d_body_entered(_body):
 	GameState.tutorial_end.emit() #vers user_interface

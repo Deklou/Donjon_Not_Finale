@@ -132,6 +132,8 @@ func _on_trigger_range_body_exited(body):
 ##################### DEGAT #####################
 
 func _entity_take_damage(Entity_Name: String):
+	if !is_inside_tree():
+		return 
 	if EntitiesState.enemy_id == dummy_id and Entity_Name == "Enemy":
 		damage_sprite_1.visible = true
 		await get_tree().create_timer(0.05).timeout
@@ -152,6 +154,9 @@ func _process(_delta):
 		
 func _enemy_CHOICE():
 	while EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].MVT + GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_id in EntitiesState.enemy_triggered_list and GameState.is_ennemy_turn:
+		if !is_inside_tree():
+			queue_free()
+			return
 		if dummy_range_entered == true:
 			_enemy_ACT()
 		elif GameData.enemy_stats[dummy_id].MVT > 0:
@@ -198,6 +203,8 @@ func _enemy_MVT():
 			EntitiesState.enemy_turn_ended_list.append(dummy_id)
 			
 func _enemy_move(_enemy_move_distance: Vector2):
+	if !is_inside_tree():
+		return 
 	previous_move = _enemy_move_distance
 	$RayCast2D.target_position = _enemy_move_distance
 	$RayCast2D.force_raycast_update()

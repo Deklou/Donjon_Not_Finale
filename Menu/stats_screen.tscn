@@ -65,12 +65,12 @@ color = Color(0, 0, 0, 1)
 [node name="White_ColorRect" type="ColorRect" parent="Black_Background_ColorRect/White_Line"]
 offset_left = 64.0
 offset_right = 192.0
-offset_bottom = 512.0
+offset_bottom = 680.0
 
 [node name="Black_ColorRect" type="ColorRect" parent="Black_Background_ColorRect/White_Line"]
 offset_left = 136.0
 offset_right = 160.0
-offset_bottom = 640.0
+offset_bottom = 680.0
 color = Color(0, 0, 0, 1)
 
 [node name="Category_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
@@ -79,11 +79,11 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 204.0
-offset_top = -343.0
-offset_right = 832.0
-offset_bottom = 152.0
+offset_top = -336.0
+offset_right = 1264.0
+offset_bottom = 174.0
 grow_vertical = 2
-theme_override_constants/separation = 34
+theme_override_constants/separation = 30
 
 [node name="Stage_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
 layout_mode = 2
@@ -123,13 +123,26 @@ bbcode_enabled = true
 text = "Nombre de mort"
 fit_content = true
 
+[node name="Level_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+text = "Niveau"
+fit_content = true
+
+[node name="Stats_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+
 [node name="Result_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
 layout_mode = 0
 offset_left = 1064.0
 offset_top = 16.0
-offset_right = 1216.0
-offset_bottom = 520.0
-theme_override_constants/separation = 34
+offset_right = 1280.0
+offset_bottom = 712.0
+theme_override_constants/separation = 30
 
 [node name="Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
 layout_mode = 2
@@ -146,7 +159,7 @@ fit_content = true
 [node name="Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
-text = "/20"
+text = "/35"
 fit_content = true
 
 [node name="Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
@@ -169,9 +182,9 @@ fit_content = true
 layout_mode = 2
 offset_left = 744.0
 offset_top = 16.0
-offset_right = 1088.0
-offset_bottom = 512.0
-theme_override_constants/separation = 34
+offset_right = 1080.0
+offset_bottom = 624.0
+theme_override_constants/separation = 30
 
 [node name="Variable_Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
 layout_mode = 2
@@ -204,6 +217,12 @@ fit_content = true
 text_direction = 2
 
 [node name="Variable_Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+text_direction = 2
+
+[node name="Variable_Level_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true

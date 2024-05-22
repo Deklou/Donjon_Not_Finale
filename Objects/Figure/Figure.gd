@@ -14,7 +14,7 @@ func _ready():
 	currPos.y = round(currPos.y / distance) * distance - 32
 	position = currPos
 	move_timer = Timer.new()
-	move_timer.wait_time = GameData.enemy_defeated * 2 + 1
+	move_timer.wait_time = GameData.enemy_defeated + 1
 	move_timer.one_shot = false
 	move_timer.timeout.connect(adjust_position_to_valid_case)
 	add_child(move_timer)

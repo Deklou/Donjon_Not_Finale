@@ -19,7 +19,7 @@ func _add_log(string):
 	logs.insert(0, string) # insère le log en première position
 	logs_histo.insert(0, string) # insère le log dans l'historique
 	add_logs.emit(logs)
-	await get_tree().create_timer(3.0 + logs.size()).timeout
+	await get_tree().create_timer(1.5 + logs.size()).timeout
 	if logs.size() >0:
 		remove_logs.emit()
 		logs.remove_at(logs.size()-1)

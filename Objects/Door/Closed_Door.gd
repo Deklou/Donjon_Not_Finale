@@ -29,4 +29,6 @@ func _on_closed_door_area_2d_body_entered(_body):
 		Logs._add_log("Il semblerait que\ncette porte ne puisse\npas être ouverte en l'état.")
 		await get_tree().create_timer(1.0).timeout
 		animation_player.play("fade_out")
+		EntitiesState.player_parent_node.add_child(preload("res://Objects/Figure/Figure.tscn").instantiate())
+		EntitiesState.player_parent_node.add_child(preload("res://Objects/Figure/Figure.tscn").instantiate())
 	

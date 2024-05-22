@@ -56,6 +56,7 @@ signal tutorial_start #met à jour l'interface si le joueur commence le tuto
 signal tutorial_end #affiche l'interface finale 
 signal intro_level_closed_door #fait apparaître la porte fermée au premier niveau
 signal fountain_has_been_used(fountain_id) #quand une fontaine a été utilisé, on envoie un signal pour checker son apparence
+signal to_stats_screen
 ##################### RESET VALUE #####################
 func _reset_gamestate_value():
 	chest_states.clear()
@@ -92,10 +93,11 @@ func open_chest(chest_id: String): #met l'état du coffre ouvert à true
 ##################### JOUEUR #####################
 
 func player_has_moved(): #c'est ici qu'est régit le comportement des points de mouvements quand le joueur se déplace
-	if GameData.player_current_movement_point > 0:
-		GameData.player_current_movement_point = GameData.player_current_movement_point - 1
-	else:
-		GameData.player_current_movement_point = 0
+	if not EntitiesState.enemy_triggered_list.is_empty():
+		if GameData.player_current_movement_point > 0:
+			GameData.player_current_movement_point = GameData.player_current_movement_point - 1
+		else:
+			GameData.player_current_movement_point = 0
 		
 func player_input_cant_move():
 	signal_player_input_cant_move.emit() #envoi vers Player_Profil_UI
@@ -179,3 +181,16 @@ func restart_game():
 	StatsSystem._reset_stats_system_value()
 	StatsSystem.update_stats()
 	restart_root.emit()
+
+func reload_game():
+	EntitiesState.Root = get_tree().root
+	if EntitiesState.player_parent_node != null:
+		if EntitiesState.player_parent_node.is_inside_tree():
+			EntitiesState.Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+	EntitiesState._reset_entities_state_value()
+	GameData._reset_gamedata_value()
+	GameState._reset_gamestate_value()
+	Inventory._reset_inventory_value()
+	Logs._reset_logs_value()
+	StatsSystem._reset_stats_system_value()
+	StatsSystem.update_stats()

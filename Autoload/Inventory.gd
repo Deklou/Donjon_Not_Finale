@@ -17,6 +17,8 @@ func _ready():
 func _add_item(item_name): #ajouter un item dans l'inventaire
 	inventory.append(GameData.Item[item_name].Name)
 	item_added.emit(inventory) #dès qu'un item est ajouté à l'inventaire, on émet un signal dans l'interface
+	if item_name == "Libération" or item_name == "Représailles" or item_name == "Miséricorde":
+		GameData.legendary_weapon_acquired +=1
 	
 func _remove_item(item_name): #jeter un item de l'inventaire
 	if GameState.double_remove_call == false:
@@ -52,7 +54,7 @@ func _use_item(item_name): #utiliser un item.
 		GameState.weapon_equipped_name = item_name
 		GameData.player_MT_buffer = GameData.player_STR_buffer + GameData.Item[item_name].Value[0]
 		GameData.player_CRT_buffer = GameData.player_CRT_buffer + GameData.Item[item_name].Value[1]
-	GameState.player_has_acted()
+		GameState.player_has_acted() #que pour les armes car si on utilise un objet, on le supprime également donc act deux fois
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
 	

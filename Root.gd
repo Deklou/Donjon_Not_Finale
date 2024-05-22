@@ -9,7 +9,7 @@ func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	Root = get_tree().root
 	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_objectif_screen.connect(_to_first_floor)
+	Root_instance.to_objectif_screen.connect(_to_objective_screen)
 	GameState.restart_root.connect(_to_stats_screen) #si on recommence, on commence directement dans le niveau
 	
 func _to_objective_screen():
@@ -22,22 +22,28 @@ func _to_stats_screen():
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.to_intro_level.connect(_to_intro_level)
 	
-func _to_intro_level():	
+func _to_intro_level():
+	if GameState.ending_triggered == true:
+		GameState.reload_game()
+		EntitiesState.Root = get_tree().root
+		EntitiesState.Root.get_node("Root").add_child.call_deferred(preload("res://UI/user_interface.tscn").instantiate())
 	Root = get_tree().root
 	Root_instance = preload("res://Levels/Demo/Tutorial.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	Root_instance.get_node("loading_zones").to_first_floor.connect(_to_first_floor)
 	if user_interface_node != null:
 		user_interface_node.visible = true
+	print(GameData.enemy_stats)
+	print(GameData.enemy_inventory)
 	
 func _to_first_floor():
+	if EntitiesState.player_parent_node != null:
+		Root = get_tree().root
+		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+		EntitiesState.player_parent_node.queue_free()
 	EntitiesState.enemy_triggered_list.clear() 
 	EntitiesState.enemy_turn_ended_list.clear()
 	#faudra faire une fonction qui le fait tout seul
-	if Root.has_node("Tutorial"):
-		var lvl = Root.get_node("Tutorial")
-		Root.remove_child.call_deferred(lvl)
-		lvl.queue_free()
 	user_interface_node.visible = false
 	#faire une fonction transition de niveau (donc formaliser la transition
 	var lvl_2 = preload("res://Transition/intro_to_first_floor.tscn").instantiate()
@@ -48,25 +54,26 @@ func _to_first_floor():
 	Root = get_tree().root
 	Root_instance = preload("res://Levels/Demo/First_Floor.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.get_node("loading_zones").to_the_end.connect(_to_the_end)
-	#Root_instance.to_secret.connect(_to_secret)
+	GameState.to_stats_screen.connect(_to_the_end)
+	Root_instance.get_node("loading_zones").to_secret_exit.connect(_to_secret)
 	
 func _to_the_end():
-	if Root.has_node("first_floor"):
-		var lvl = Root.get_node("first_floor")
-		Root.remove_child.call_deferred(lvl)
-		lvl.queue_free()
-	user_interface_node.visible = false
-	Root = get_tree().root
-	Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
+	if EntitiesState.player_parent_node != null:
+		Root = get_tree().root
+		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+		EntitiesState.player_parent_node.queue_free()
 	GameState.ending_triggered = true
+	EntitiesState.Root = get_tree().root
+	if EntitiesState.Root.get_node("Root").has_node("User_Interface"):
+		var scene = EntitiesState.Root.get_node("Root").get_node("User_Interface")
+		EntitiesState.Root.get_node("Root").remove_child.call_deferred(scene)
+	_to_stats_screen()
 	
 func _to_secret():
-	if Root.has_node("first_floor"):
-		var lvl = Root.get_node("first_floor")
-		Root.remove_child.call_deferred(lvl)
-		lvl.queue_free()
+	if EntitiesState.player_parent_node != null:
+		Root = get_tree().root
+		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+		EntitiesState.player_parent_node.queue_free()
 	Root = get_tree().root
 	GameData.secret_triggered = true
 	Root_instance = preload("res://Levels/demo/secret.tscn").instantiate()
