@@ -32,7 +32,7 @@ func _ready():
 	EntitiesState.show_def_stat_UI.connect(show_def_stat)
 	EntitiesState.show_player_xp_level_UI.connect(show_player_xp_level)
 	EntitiesState.show_mt_crt_dex_UI.connect(show_mt_cp_dex)
-	var logs_histo_scene = preload("res://UI/logs_histo/logs_histo.tscn").instantiate()
+	var logs_histo_scene = preload("res://UI/Logs_Histo/logs_histo.tscn").instantiate()
 	logs_histo_scene.visible = false
 	interface_left_node.add_child(logs_histo_scene, true)
 

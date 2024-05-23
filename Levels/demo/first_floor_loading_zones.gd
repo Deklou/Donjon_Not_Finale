@@ -44,7 +44,7 @@ func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 		transition_scene.queue_free()
 
 func _all_enemies_are_defeated():
-	if EntitiesState.player_parent_node != null and no_enemy_left == false:
+	if EntitiesState.player_parent_node != null and no_enemy_left == false and is_inside_tree():
 		if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 0:
 			no_enemy_left = true
 			await get_tree().create_timer(2.0).timeout

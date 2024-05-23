@@ -51,7 +51,7 @@ func _on_silent_presence_log_area_2d_body_entered(_body):
 		coffre_liberation.global_position = Vector2(3424, 2080)
 		
 func _all_enemies_are_defeated():
-	if EntitiesState.player_parent_node != null:
+	if EntitiesState.player_parent_node != null and is_inside_tree():
 		if EntitiesState.player_parent_node.get_node("Enemies").get_child_count() == 1 and one_enemy_left == false:
 			one_enemy_left = true
 			await get_tree().create_timer(3.0).timeout

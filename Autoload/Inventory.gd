@@ -19,6 +19,8 @@ func _add_item(item_name): #ajouter un item dans l'inventaire
 	item_added.emit(inventory) #dès qu'un item est ajouté à l'inventaire, on émet un signal dans l'interface
 	if item_name == "Libération" or item_name == "Représailles" or item_name == "Miséricorde":
 		GameData.legendary_weapon_acquired +=1
+	if item_name == "Kojirō":
+		GameState.kojiro_was_obtained = true
 	
 func _remove_item(item_name): #jeter un item de l'inventaire
 	if GameState.double_remove_call == false:

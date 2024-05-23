@@ -9,8 +9,7 @@ extends ColorRect
 
 func _ready():
 	Inventory.item_added.connect(update_inventory) #dès qu'on ajoute un item dans l'inventaire, on update l'interface
-	if Inventory.inventory.size() == 0 : #Si l'inventaire est vide, on ne peut accéder au sous menu
-		validation_node.visible = false
+	validation_node.visible = false
 
 func update_inventory(inventory: Array):
 	for child in vbox_node.get_children():
@@ -74,7 +73,6 @@ func _use_button(item_button,item_name): #note: en principe il suffirait juste d
 			Inventory._use_item(item_name) #on utilise l'item
 			Inventory._remove_item(item_name) #on le retire de l'inventaire
 		elif GameData.Item[item_name].Type == "Special":
-			GameState.kojiro_was_obtained = true
 			Logs._add_log("Tu veux utiliser Kojirō ?")
 		item_button = null #par précaution de pas delete un bouton déjà supprimé
 		update_inventory(Inventory.inventory)

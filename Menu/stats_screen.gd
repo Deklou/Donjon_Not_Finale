@@ -47,14 +47,16 @@ func _ready():
 	if GameData.player_death_count == 0:
 		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux !" + "[/font_size][/b]"
 	elif GameData.player_death_count == 1:
-		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux un peu mieux !" + "[/font_size][/b]"
+		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux !!" + "[/font_size][/b]"
 	elif GameData.player_death_count == 2:
-		death_label.bbcode_text = "[b][font_size=30]" + "Même les plus grands héros ont des jours difficiles.." + "[/font_size][/b]"
+		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux un peu mieux !" + "[/font_size][/b]"
 	elif GameData.player_death_count == 3:
-		death_label.bbcode_text = "[b][font_size=30]" + "La troisième c'est la bonne." + "[/font_size][/b]"
+		death_label.bbcode_text = "[b][font_size=30]" + "Même les plus grands héros ont des jours difficiles.." + "[/font_size][/b]"
 	elif GameData.player_death_count == 4:
-		death_label.bbcode_text = "[b][font_size=30]" + "Eh, chaque échec est une opportunité de s'améliorer !" + "[/font_size][/b]"
+		death_label.bbcode_text = "[b][font_size=30]" + "La troisième c'est la bonne." + "[/font_size][/b]"
 	elif GameData.player_death_count == 5:
+		death_label.bbcode_text = "[b][font_size=30]" + "Eh, chaque échec est une opportunité de s'améliorer !" + "[/font_size][/b]"
+	elif GameData.player_death_count == 6:
 		death_label.bbcode_text = "[b][font_size=30]" + "ça a l'air compliqué..." + "[/font_size][/b]"
 	else:
 		death_label.bbcode_text = "[b][font_size=30]" + "..." + "[/font_size][/b]"
@@ -80,7 +82,7 @@ func _ready():
 			label.bbcode_text = "[b][font_size=30]" + label.text + "[/font_size][/b]"
 
 func _on_area_2d_mouse_entered():
-	if GameState.ending_triggered == true:
+	if GameState.ending_triggered == true or GameData.player_death_count > 0:
 		restart_button_sprite_2d.visible = false
 		restart_button_green_sprite_2d.visible = not restart_button_sprite_2d.visible
 	else:
@@ -88,13 +90,13 @@ func _on_area_2d_mouse_entered():
 		button_green_sprite_2d.visible = not button_sprite_2d.visible
 
 func _on_area_2d_mouse_exited():
-	if GameState.ending_triggered == true:
+	if GameState.ending_triggered == true or GameData.player_death_count > 0:
 		restart_button_sprite_2d.visible = true
 	else:
 		button_sprite_2d.visible = true
 	
 func _process(_delta):
-	if GameState.ending_triggered == true:
+	if GameState.ending_triggered == true or GameData.player_death_count > 0:
 		chosen_button_type = restart_button_sprite_2d
 		chosen_button_green_type = restart_button_green_sprite_2d
 		not_chosen_button_type = button_sprite_2d
