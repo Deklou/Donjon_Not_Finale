@@ -22,7 +22,7 @@ func _ready():
 	
 func update_enemy_UI():
 	if EntitiesState.selected_id in GameData.enemy_stats and EntitiesState.enemy_id!= "":
-		EntitiesState.selected_id = EntitiesState.enemy_id
+		#EntitiesState.selected_id = EntitiesState.enemy_id
 		UI_enemy_Name.text = str(GameData.enemy_stats[EntitiesState.selected_id].Name)
 		UI_enemy_LVL.text = "Niveau: " + str(GameData.enemy_stats[EntitiesState.selected_id].LVL)
 		

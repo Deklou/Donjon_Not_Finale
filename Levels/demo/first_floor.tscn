@@ -1056,7 +1056,7 @@ dummy_name = "Gardien Rempart"
 dummy_LVL_offset = 1
 dummy_MAX_HP_offset = 7
 dummy_STR_offset = 2
-dummy_DEF_offset = -2
+dummy_DEF_offset = 2
 enemy_sprite_path = "res://Sprites/Enemy/dummy_1_sprite_3.png"
 
 [node name="dummy_18" parent="Enemies" instance=ExtResource("7_aax6t")]

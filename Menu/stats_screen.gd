@@ -73,7 +73,7 @@ func _ready():
 		level_label.visible = true
 		stats_label.visible = true
 		variable_level_result_label.text = "[b][font_size=30]" + "   " + str(GameData.player_LVL) + "[/font_size][/b]"
-		stats_label.text = "[font_size=30]" + "HP: " + str(GameData.player_MAX_HP) + "  FRC: " + str(GameData.player_STR) + "  DEX: " + str(GameData.player_DEX) + "  DEF: " + str(GameData.player_DEF) + "  MVT: " + str(GameData.default_player_MAX_movement_point) + "  ACT: " + str(GameData.player_MAX_action_point) +"[/font_size]"
+		stats_label.text = "[font_size=30]" + "HP: " + str(GameData.player_MAX_HP) + "  FRC: " + str(GameData.player_STR) + "  DEX: " + str(GameData.player_DEX) + "  DEF: " + str(GameData.player_DEF) + "  MVT: " + str(GameData.player_MAX_movement_point) + "  ACT: " + str(GameData.player_MAX_action_point) +"[/font_size]"
 		if GameData.secret_triggered == true:
 			variable_secret_result_label.text = "   1"
 		if GameState.kojiro_was_obtained == true:

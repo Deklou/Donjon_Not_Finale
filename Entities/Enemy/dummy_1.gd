@@ -34,12 +34,13 @@ var dummy_stats = {"Name": "",
 "MVT" : GameData.enemy_current_movement_point,
 "ACT" : GameData.enemy_current_action_point,
 "MAX_MVT" : GameData.enemy_MAX_movement_point,
-"MAX_ACT" : GameData.enemy_MAX_action_point
+"MAX_ACT" : GameData.enemy_MAX_action_point,
+"RANGE" : GameData.enemy_range_state,
+"POSITION" : get_position()
 }
 
 var dummy_inventory = [] #Inventaire de l'ennemi
 var mouse_click_count : int = 0 #Nombre de clics souris pour l'affichage du selecteur
-var dummy_range_entered : bool = false #Pour détecter si le joueur peut être attaqué
 var normalized_enemy_distance : Vector2
 var dummy_previous_position : Vector2
 var previous_move : Vector2
@@ -79,6 +80,7 @@ func _ready():
 	currPos.x = round(currPos.x / distance) * distance - 32
 	currPos.y = round(currPos.y / distance) * distance - 32
 	position = currPos
+	GameData.enemy_stats[dummy_id].POSITION = get_position()
 ##################### SPRITE #####################
 	if enemy_sprite_path != "":
 		var texture = load(enemy_sprite_path)
@@ -91,7 +93,7 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true:
-		EntitiesState.enemy_selected(get_position()) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
+		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
 		mouse_click_count +=1
 		if EntitiesState.selected_id != EntitiesState.enemy_id:
 			mouse_click_count = 1
@@ -106,17 +108,17 @@ func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 		
 func _on_area_2d_body_entered(body):
 	if body is Node2D:
-		dummy_range_entered = true
+		GameData.enemy_stats[dummy_id].RANGE  = true
 		GameState.enemy_range_entered = true
 		EntitiesState.enemy_id = dummy_id
 		EntitiesState.selected_id = dummy_id
 		EntitiesState.enemy_can_be_attacked_id = dummy_id
-		EntitiesState.enemy_can_be_attacked_position = get_position()
-		EntitiesState.enemy_selected(get_position())		
+		EntitiesState.enemy_can_be_attacked_position = GameData.enemy_stats[dummy_id].POSITION
+		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id)		
 		
 func _on_area_2d_body_exited(body):
 	if body is Node2D:
-		dummy_range_entered = false 
+		GameData.enemy_stats[dummy_id].RANGE  = false
 		GameState.enemy_range_entered = false
 		EntitiesState.enemy_is_deselected()
 		
@@ -134,7 +136,7 @@ func _on_trigger_range_body_exited(body):
 func _entity_take_damage(Entity_Name: String):
 	if !is_inside_tree():
 		return 
-	if EntitiesState.enemy_id == dummy_id and Entity_Name == "Enemy":
+	if EntitiesState.enemy_can_be_attacked_id == dummy_id and Entity_Name == "Enemy":
 		damage_sprite_1.visible = true
 		await get_tree().create_timer(0.05).timeout
 		damage_sprite_1.visible = false
@@ -157,13 +159,13 @@ func _enemy_CHOICE():
 		if !is_inside_tree():
 			queue_free()
 			return
-		if dummy_range_entered == true:
+		if GameData.enemy_stats[dummy_id].RANGE  == true:
 			_enemy_ACT()
 		elif GameData.enemy_stats[dummy_id].MVT > 0:
 			_enemy_MVT()
 		else:
 			EntitiesState.enemy_turn_ended_list.append(dummy_id)
-		EntitiesState.selector_follows_enemy(get_position())
+		EntitiesState.selector_follows_enemy(GameData.enemy_stats[dummy_id].POSITION)
 		await get_tree().create_timer(0.3).timeout
 		StatsSystem.update_stats()
 	if dummy_id in GameData.enemy_stats:
@@ -173,10 +175,10 @@ func _enemy_CHOICE():
 ##################### ACTION #####################
 			
 func _enemy_ACT():
-	if EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_range_entered == true and GameState.is_ennemy_turn: 
+	if EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and GameData.enemy_stats[dummy_id].RANGE == true and GameState.is_ennemy_turn: 
 		EntitiesState.selected_id = EntitiesState.enemy_id
 		EntitiesState.take_enemy_action()
-		EntitiesState.enemy_selected(get_position())
+		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id)
 
 ##################### MOUVEMENT #####################		
 
@@ -211,3 +213,4 @@ func _enemy_move(_enemy_move_distance: Vector2):
 	if not $RayCast2D.is_colliding():
 		self.position += _enemy_move_distance
 		GameState.enemy_has_moved()
+		GameData.enemy_stats[dummy_id].POSITION = get_position()

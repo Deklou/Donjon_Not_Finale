@@ -1,8 +1,8 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
-var default_player_MAX_HP : int = 30
-var default_player_HP : int = 30
+var default_player_MAX_HP : int = 300
+var default_player_HP : int = 300
 var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 5 
@@ -24,9 +24,9 @@ var default_player_STR_buffer : int = default_player_STR
 var default_player_DEX_buffer : float = default_player_DEX 
 var default_player_DEF_buffer : int = default_player_DEF 
 var default_player_MAX_movement_point: int = 1
-var default_player_MAX_action_point: int = 1
+var default_player_MAX_action_point: int = 22
 var default_player_current_movement_point: int = 1
-var default_player_current_action_point: int = 1
+var default_player_current_action_point: int = 22
 var default_enemy_MAX_HP : int = 22 
 var default_enemy_HP : int = 22 
 var default_enemy_STR : int = 6 
@@ -48,6 +48,7 @@ var default_enemy_MAX_movement_point: int = 1
 var default_enemy_MAX_action_point: int = 1 
 var default_enemy_current_movement_point: int = 1 
 var default_enemy_current_action_point: int = 1 
+var default_enemy_range_state : bool = false
 var default_turn_number : int = 1 
 var default_legendary_weapon_acquired : int 
 var default_enemy_defeated : int 
@@ -110,11 +111,11 @@ var enemy_CRT_buffer : int #% de coup critique
 var enemy_STR_buffer : int #Nombre de points de vie qu'on retire à la cible
 var enemy_DEX_buffer : float #Valeur qui conditionne les dégâts critiques et aux dégâts/activation de certaines techniques
 var enemy_DEF_buffer : int #Valeur qui sera soustraite aux dégâts reçus
-#variables relatives au tour du joueur
 var enemy_MAX_movement_point: int #points max de mouvement possibles
 var enemy_MAX_action_point: int #points max d'actions possibles
 var enemy_current_movement_point: int #points de mouvements actuels de l'ennemi
 var enemy_current_action_point: int #points d'actions actuels de l'ennemu
+var enemy_range_state : bool #vérifie si l'ennemi peut être attaqué au corps à corps
 ############################################################################################
 var turn_number : int #Nombre de tour
 var player_death_count : int = 0 #Nombre de morts du joueur
@@ -282,6 +283,7 @@ func _reset_gamedata_value():
 	enemy_MAX_action_point = default_enemy_MAX_action_point
 	enemy_current_movement_point = default_enemy_current_movement_point
 	enemy_current_action_point = default_enemy_current_action_point
+	enemy_range_state = default_enemy_range_state
 	turn_number = default_turn_number
 	legendary_weapon_acquired = default_legendary_weapon_acquired
 	enemy_defeated = default_enemy_defeated

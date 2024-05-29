@@ -14,7 +14,7 @@ var no_enemy_left : bool = false
 func _ready():
 	GameState.tutorial_start.emit() #vers user_interface
 	StatsSystem.update_player_stats.connect(_all_enemies_are_defeated) #pas propre mais meilleur solution que j'ai trouvé pour savoir quand tous les ennemis sont morts :/
-	EntitiesState.disable_player_camera.emit() #vers script joueur
+	#EntitiesState.disable_player_camera.emit() #vers script joueur
 
 func _on_fall_area_2d_body_entered(body):
 	if body is CharacterBody2D:

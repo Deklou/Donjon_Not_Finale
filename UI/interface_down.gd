@@ -35,13 +35,15 @@ func hide_attack_button():
 
 func _on_attack_button_pressed():
 	if GameState.enemy_range_entered == true and GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
-		if not EntitiesState.enemy_can_be_attacked_id in GameData.enemy_stats:
-			EntitiesState.enemy_can_be_attacked_id = EntitiesState.selected_id
-		if EntitiesState.selected_id != EntitiesState.enemy_can_be_attacked_id:
-			EntitiesState.selected_id = EntitiesState.enemy_can_be_attacked_id
-			EntitiesState.enemy_id = EntitiesState.enemy_can_be_attacked_id
-			EntitiesState.enemy_selected(EntitiesState.enemy_can_be_attacked_position)	
-		EntitiesState.take_damage_to_enemy("Enemy", EntitiesState.enemy_id)
+		if GameData.enemy_stats[EntitiesState.selected_id].RANGE == true:
+			if EntitiesState.selected_id != EntitiesState.enemy_can_be_attacked_id:
+				EntitiesState.enemy_can_be_attacked_id = EntitiesState.selected_id 
+			else:
+				EntitiesState.selected_id = EntitiesState.enemy_can_be_attacked_id
+		EntitiesState.enemy_id = EntitiesState.selected_id
+		EntitiesState.enemy_can_be_attacked_position = GameData.enemy_stats[EntitiesState.enemy_can_be_attacked_id].POSITION
+		EntitiesState.enemy_selected(EntitiesState.enemy_can_be_attacked_position, EntitiesState.enemy_can_be_attacked_id)
+		EntitiesState.take_damage_to_enemy("Enemy", EntitiesState.enemy_can_be_attacked_id)
 		GameState.player_has_acted()
-		StatsSystem.update_stats()
 		GameState.player_turn_end()
+		StatsSystem.update_stats()
