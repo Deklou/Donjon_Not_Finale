@@ -109,8 +109,6 @@ func player_has_acted(): #c'est ici qu'est régit le comportement des points d'a
 		GameData.player_current_action_point = 0
 
 func player_turn_end():
-	range_check.emit() #envoi à interface down
-	combat_check.emit() #envoi à interface down
 	if GameData.player_current_action_point == 0:
 		hide_attack_button.emit()
 	if not EntitiesState.enemy_triggered_list.is_empty():
@@ -150,8 +148,6 @@ func enemy_has_acted(): #c'est ici qu'est régit le comportement des points d'ac
 		GameData.enemy_stats[EntitiesState.enemy_that_can_act].ACT = 0
 
 func enemy_turn_end():
-	range_check.emit() #envoi à interface down
-	combat_check.emit() #envoi à interface down
 	if GameState.is_ennemy_turn == true:
 		GameState.is_ennemy_turn = false
 		GameData.turn_number = GameData.turn_number + 1

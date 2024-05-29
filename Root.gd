@@ -8,7 +8,7 @@ func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	Root = get_tree().root
 	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_objectif_screen.connect(_to_objective_screen)
+	Root_instance.to_objectif_screen.connect(_to_stats_screen)
 	GameState.restart_root.connect(_to_stats_screen) #si on recommence, on commence directement dans le niveau
 	
 func _to_objective_screen():

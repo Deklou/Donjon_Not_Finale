@@ -53,6 +53,17 @@ func update_stats():
 	
 	if EntitiesState.enemy_id in GameData.enemy_stats and GameData.enemy_stats[EntitiesState.enemy_id].HP < 1 and EntitiesState.enemy_id not in EntitiesState.enemy_states:
 		EntitiesState.enemy_death(EntitiesState.enemy_id)
-
+		
+	if not EntitiesState.enemy_triggered_list.is_empty(): #on check s'il existe un ennemi parmis ceux aggro pour lequel on est à portée d'attaque
+		GameState.enemy_range_entered = false
+		for id in EntitiesState.enemy_triggered_list:
+			if GameData.enemy_stats[id].RANGE == true:
+				GameState.enemy_range_entered = true
+	else:
+		GameState.enemy_range_entered = false
+		
+	GameState.range_check.emit() #envoi à interface down
+	GameState.combat_check.emit() #envoi à interface down
+	
 	update_player_stats.emit() #vers Player_Profil_UI
 	update_enemy_stats.emit() #vers Enemy_Profil_UI

@@ -119,7 +119,7 @@ func _on_area_2d_body_exited(body):
 func _entity_take_damage(Entity_Name: String):
 	if !is_inside_tree():
 		return 
-	if EntitiesState.enemy_id == dummy_id and Entity_Name == "Enemy":
+	if EntitiesState.enemy_can_be_attacked_id == dummy_id and Entity_Name == "Enemy":
 		damage_sprite_1.visible = true
 		await get_tree().create_timer(0.05).timeout
 		damage_sprite_1.visible = false

@@ -117,8 +117,8 @@ func _on_area_2d_body_entered(body):
 		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id)		
 		
 func _on_area_2d_body_exited(body):
-	if body is Node2D:
-		GameData.enemy_stats[dummy_id].RANGE  = false
+	if body is Node2D and dummy_id in GameData.enemy_stats:
+		GameData.enemy_stats[dummy_id].RANGE = false
 		GameState.enemy_range_entered = false
 		EntitiesState.enemy_is_deselected()
 		
