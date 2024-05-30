@@ -4,6 +4,7 @@ extends Node2D
 @export var fountain_sprite_path : String
 @onready var fountain_sprite : Sprite2D = $Fountain_Sprite2D
 @onready var water_sprite : Sprite2D = $Water_Sprite2D
+var caca = false 
 
 func _ready():
 	GameState.fountain_has_been_used.connect(_on_fountain_water_sprite_disabled)

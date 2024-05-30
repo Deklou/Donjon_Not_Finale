@@ -160,13 +160,13 @@ func enemy_turn_end():
 func restart_game():
 	EntitiesState.Root = get_tree().root
 	EntitiesState.Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+	EntitiesState.player_parent_node.queue_free()
 	var scene = EntitiesState.Root.get_node("./Game_Over")
 	EntitiesState.Root.remove_child.call_deferred(scene)
 	scene.queue_free()
 	for child in EntitiesState.Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
 		EntitiesState.Root.get_node("Root").remove_child.call_deferred(child)
 		child.queue_free()
-	#EntitiesState.Root.get_node("Root").add_child.call_deferred(preload("res://UI/user_interface.tscn").instantiate())
 	scene = EntitiesState.Root.get_node("./Camera_Death")
 	scene.queue_free()
 	EntitiesState._reset_entities_state_value()
@@ -183,6 +183,7 @@ func reload_game():
 	if EntitiesState.player_parent_node != null:
 		if EntitiesState.player_parent_node.is_inside_tree():
 			EntitiesState.Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+			EntitiesState.player_parent_node.queue_free()
 	EntitiesState._reset_entities_state_value()
 	GameData._reset_gamedata_value()
 	GameState._reset_gamestate_value()

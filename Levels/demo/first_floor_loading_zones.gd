@@ -11,13 +11,13 @@ func _ready():
 	StatsSystem.update_player_stats.connect(_all_enemies_are_defeated)
 
 func _on_to_bonus_2_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(5280, 2848))
+	_move_to_other_room(body,Vector2(3200, 320))
 func _on_to_bonus_3_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(5600, 1056))
+	_move_to_other_room(body,Vector2(1088, 0))
 func _on_to_first_floor_from_bonus_2_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(2080, 2592))
+	_move_to_other_room(body,Vector2(-3200, -320))
 func _on_to_first_floor_from_bonus_3_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(4448, 1056))
+	_move_to_other_room(body,Vector2(-1088, 0))
 func _on_to_the_end_area_2d_body_entered(_body):
 	GameState.to_stats_screen.emit() #Vers Root
 	queue_free()
@@ -34,7 +34,7 @@ func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 		animation_player_fade_in.play("fade_out")
 		EntitiesState.player_is_frozen = true
 		await get_tree().create_timer(0.3).timeout
-		player.global_position = destination
+		player.global_position += destination
 		currPos.x = round(currPos.x / 64) * 64 - 32
 		currPos.y = round(currPos.y / 64) * 64 - 32
 		await get_tree().create_timer(0.3).timeout

@@ -70,8 +70,11 @@ func _use_button(item_button,item_name): #note: en principe il suffirait juste d
 		elif GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == false:
 			Inventory._use_item(item_name) #on utilise l'item
 		elif GameData.Item[item_name].Type == "Consumable":
-			Inventory._use_item(item_name) #on utilise l'item
-			Inventory._remove_item(item_name) #on le retire de l'inventaire
+			if GameData.player_HP < GameData.player_MAX_HP:
+				Inventory._use_item(item_name) #on utilise l'item
+				Inventory._remove_item(item_name) #on le retire de l'inventaire
+			else:
+				Logs._log_item("Cannot_Heal",item_name)
 		elif GameData.Item[item_name].Type == "Special":
 			Logs._add_log("Tu veux utiliser Kojirō ?")
 		item_button = null #par précaution de pas delete un bouton déjà supprimé

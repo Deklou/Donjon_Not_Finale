@@ -18,18 +18,13 @@ func _ready():
 
 func _on_fall_area_2d_body_entered(body):
 	if body is CharacterBody2D:
-		for i in range (1,(2016 - body.global_position.y)/64):
+		for i in range (1,(2336 - body.global_position.y)/64): #2336 = coord y de l'arrivée
 			body.global_position = body.global_position + Vector2(0,64)
 			await get_tree().create_timer(0.08-0.01*i).timeout
 	if first_fall == true:
 		GameData.player_HP_buffer = int(GameData.player_HP/5.0)
 		EntitiesState.take_damage.emit("Player") #Envoi vers script joueur
 		first_fall = false
-		
-func _on_inventory_log_area_2d_body_entered(_body):
-	if inventory_acquired == false:
-		Logs._add_log("Vous avez trouvé un\nbaluchon. Vous avez du\nmal à en distinguer\nle fond.")
-		inventory_acquired = true
 		
 func _on_ui_hide_enemy_hp_area_2d_body_entered(_body):
 	EntitiesState.hide_enemy_hp_stat_UI.emit() #vers user_interface

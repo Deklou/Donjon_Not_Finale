@@ -85,6 +85,7 @@ func _use_enemy_item(item_name):
 	if GameData.enemy_stats[EntitiesState.enemy_id].HP > GameData.enemy_stats[EntitiesState.enemy_id].MAX_HP:
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].MAX_HP
 	_remove_enemy_item(item_name)
+	Logs._add_log(str(GameData.enemy_stats[EntitiesState.enemy_id].Name) + " s'est restauré " + str(GameData.Item[item_name].Value) + " PV")
 	StatsSystem.update_stats()
 	
 func _remove_enemy_item(item_name):

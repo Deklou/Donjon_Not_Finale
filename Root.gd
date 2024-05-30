@@ -27,6 +27,7 @@ func _to_stats_screen():
 	user_interface_node.visible = true
 	
 func _to_intro_level():
+	EntitiesState.player_is_frozen = true
 	if GameState.ending_triggered == true:
 		GameState.reload_game()
 	Root = get_tree().root
@@ -35,8 +36,12 @@ func _to_intro_level():
 	Root_instance.get_node("loading_zones").to_first_floor.connect(_to_first_floor)
 	if user_interface_node != null:
 		user_interface_node.visible = true
+	if is_inside_tree():
+		await get_tree().create_timer(0.5).timeout
+	EntitiesState.player_is_frozen = false
 	
 func _to_first_floor():
+	EntitiesState.player_is_frozen = true
 	if EntitiesState.player_parent_node != null:
 		Root = get_tree().root
 		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
@@ -59,6 +64,9 @@ func _to_first_floor():
 	Root.add_child.call_deferred(Root_instance)
 	GameState.to_stats_screen.connect(_to_the_end)
 	Root_instance.get_node("loading_zones").to_secret_exit.connect(_to_secret)
+	if is_inside_tree():
+		await get_tree().create_timer(0.5).timeout
+	EntitiesState.player_is_frozen = false
 	
 func _to_the_end():
 	if EntitiesState.player_parent_node != null:

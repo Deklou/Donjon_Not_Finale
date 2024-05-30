@@ -40,8 +40,10 @@ func _log_entity_deal_critical_damage(target_type: String, entity_name: String):
 
 func _log_item(action: String, item_name: String):
 	if action == "Already_Equiped":
-		Logs._add_log(GameState.weapon_equipped_name + " est déjà\néquipée")
+		Logs._add_log(GameState.weapon_equipped_name + " est déjà\néquipée.")
 	elif action == "Description":
 		Logs._add_log(GameData.Item[item_name].Description)
 	elif action == "Open_Chest":
-		Logs._add_log("Vous avez ouvert un coffre \nil contenait " + GameData.Item[item_name].Article + " " + item_name)
+		Logs._add_log("Vous avez ouvert un coffre \nil contenait " + GameData.Item[item_name].Article + " " + item_name + ".")
+	elif action == "Cannot_Heal":
+		Logs._add_log("Vous n'avez pas besoin de\nvous soigner.")

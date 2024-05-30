@@ -1,9 +1,9 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
-var default_player_MAX_HP : int = 300
-var default_player_HP : int = 300
-var default_player_STR : int = 16
+var default_player_MAX_HP : int = 30
+var default_player_HP : int = 30
+var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 5 
 var default_player_LVL : int = 1
@@ -133,7 +133,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain",
-	"Description" : "Du pain. Soigne 10 PV",
+	"Description" : "Du pain. Soigne 10 PV.",
 	"Icon": preload("res://Sprites/Items/bread.png"),
 	"Value":10,
 	"Cost": 0,
@@ -143,7 +143,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Pain rassis",
-	"Description" : "Pain rassis. Il est dans un\nétat lamentable.\nSoigne 5 PV",
+	"Description" : "Pain rassis. Il est dans un\nétat lamentable.\nSoigne 5 PV.",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":5,
 	"Cost": 0,
@@ -153,7 +153,7 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Type" : "Consumable",
 	"Sous_Type":"Soin" ,
 	"Name" : "Sandwich classique",
-	"Description" : "Sandwich. Certainement\npas la meilleure recette\nqui existe. Soigne 15 PV",
+	"Description" : "Sandwich. Certainement\npas la meilleure recette\nqui existe. Soigne 15 PV.",
 	"Icon": preload("res://Sprites/Items/stale_bread.png"),
 	"Value":15,
 	"Cost": 0,
