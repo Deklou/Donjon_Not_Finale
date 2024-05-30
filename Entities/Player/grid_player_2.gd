@@ -73,7 +73,6 @@ func handle_movement(direction_vector, animation):
 	elif GameData.player_current_movement_point == 0:
 		GameState.player_input_cant_move()
 	GameState.player_position = self.position
-	print(GameState.player_position)
 
 func get_animation_from_direction(direction_vector):
 	if direction_vector.x > 0:

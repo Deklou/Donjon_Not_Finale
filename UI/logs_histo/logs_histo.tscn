@@ -3,14 +3,12 @@
 [ext_resource type="Script" path="res://UI/Logs_Histo/Logs_Histo.gd" id="1_dnn6w"]
 
 [node name="logs_histo" type="Node2D"]
-visible = false
 script = ExtResource("1_dnn6w")
 
 [node name="UI_logs" type="ScrollContainer" parent="."]
-offset_left = 8.0
 offset_top = 8.0
-offset_right = 216.0
-offset_bottom = 296.0
+offset_right = 224.0
+offset_bottom = 280.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI_logs"]
 layout_mode = 2

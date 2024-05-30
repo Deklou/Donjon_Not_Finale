@@ -3,17 +3,16 @@ extends Control
 #On va chercher les différents label de l'interface droite
 @onready var Player_Stats_Vbox_Node : VBoxContainer = $Player_Stats
 @onready var UI_stat_LVL: RichTextLabel = $LVL
-@onready var UI_stat_XP_bar : TextureProgressBar = $XP_bar
-@onready var UI_stat_XP : Label = $XP
-@onready var UI_stat_CP : Label = $CP
-@onready var UI_stat_HP : Label = $Player_Calculated_Stats/HP
+@onready var UI_stat_XP : RichTextLabel = $XP
+@onready var UI_stat_CP : RichTextLabel = $CP
+@onready var UI_stat_HP : RichTextLabel = $Player_Calculated_Stats/HP
 @onready var UI_stat_MT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_MT/MT
 @onready var UI_stat_CRT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_CRT/CRT
-@onready var UI_stat_STR : Label = $Player_Stats/STR
-@onready var UI_stat_DEX : Label = $Player_Stats/DEX
-@onready var UI_stat_DEF : Label = $Player_Stats/DEF
-@onready var UI_stat_MVT : Label = $Player_Stats/MVT
-@onready var UI_stat_ACT : Label = $Player_Stats/ACT
+@onready var UI_stat_STR : RichTextLabel = $Player_Stats/STR
+@onready var UI_stat_DEX : RichTextLabel = $Player_Stats/DEX
+@onready var UI_stat_DEF : RichTextLabel = $Player_Stats/DEF
+@onready var UI_stat_MVT : RichTextLabel = $Player_Stats/MVT
+@onready var UI_stat_ACT : RichTextLabel = $Player_Stats/ACT
 ############### ControlNode ##################
 @onready var Button_Stats_Control : Node2D = $Player_Stats/Button_Stat
 @onready var Button_Stats_Special_Control : Node2D = $Player_Stats/Button_Stat_Special
@@ -62,10 +61,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_LVL.text = "Niveau:   " + str(GameData.player_LVL)
 	############### XP ################
 	UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
-	UI_stat_XP_bar.update_xp_progress(GameData.player_XP)
+	UI_stat_XP.tooltip_text = "Expérience. " + str(100 - GameData.player_XP) + " exp jusqu'au niveau suivant."
 	###################################
 	UI_stat_CP.text = "Point de compétence:  " + str(GameData.player_CP)
-	UI_stat_HP.text = "PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP)
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
 	UI_stat_STR.text = "FRC: " + str(GameData.player_STR)
@@ -90,9 +88,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	########################### Couleurs ###########################
 	
 	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
-		UI_stat_HP.modulate = Color(1, 0, 0)  # Rouge
+		UI_stat_HP.text = "[b][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
 	else:
-		UI_stat_HP.modulate = Color(1, 1, 1)  # Blanc
+		UI_stat_HP.text = "[b]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/b]"
 		
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:

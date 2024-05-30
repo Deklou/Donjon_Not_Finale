@@ -5,6 +5,7 @@ extends Node2D
 @onready var demo_tilemap : TileMap = $"../Demo_TileMap"
 var no_enemy_left : bool = false
 signal to_secret_exit
+signal to_tutorial_from_first_floor
 
 func _ready():
 	EntitiesState.enemy_is_deselected()
@@ -23,6 +24,9 @@ func _on_to_the_end_area_2d_body_entered(_body):
 	queue_free()
 func _on_to_secret_area_2d_body_entered(_body):
 	to_secret_exit.emit() #vers Root
+	queue_free()
+func _on_to_intro_level_area_2d_body_entered(_body):
+	to_tutorial_from_first_floor.emit() #Vers Root
 	queue_free()
 
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):

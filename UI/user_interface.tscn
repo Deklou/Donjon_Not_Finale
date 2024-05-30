@@ -1,18 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=9 format=3 uid="uid://51t4dp5dm88f"]
 
-[ext_resource type="Texture2D" uid="uid://i6djldglvotl" path="res://UI/Assets/xp_bar.png" id="1_3aabu"]
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
 [ext_resource type="Script" path="res://UI/User_Interface.gd" id="1_v8vxl"]
-[ext_resource type="Script" path="res://UI/XP_Bar.gd" id="5_46kxw"]
 [ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
 [ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="5_xsdpy"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
 [ext_resource type="Script" path="res://UI/UI_Logs.gd" id="7_iij0v"]
 [ext_resource type="Script" path="res://UI/Interface_Down.gd" id="10_lhent"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwnlq"]
-size = Vector2(144, 41)
 
 [node name="User_Interface" type="CanvasLayer"]
 script = ExtResource("1_v8vxl")
@@ -101,59 +96,45 @@ offset_top = 8.0
 offset_right = 64.0
 offset_bottom = 34.0
 size_flags_vertical = 0
+tooltip_text = "Indicateur de la force globale.
+Augmente avec l'expérience."
 bbcode_enabled = true
 text = "Niveau:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="XP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+[node name="XP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
 offset_left = 112.0
 offset_top = 8.0
-offset_right = 168.0
+offset_right = 208.0
 offset_bottom = 37.0
-theme_override_font_sizes/font_size = 18
 text = "Exp:"
 
-[node name="CP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+[node name="CP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
 offset_top = 40.0
-offset_right = 192.0
+offset_right = 216.0
 offset_bottom = 69.0
-theme_override_font_sizes/font_size = 18
+tooltip_text = "Gagné lors d'une montée de niveau.
+Peut être dépensé pour augmenter les statistiques."
 text = "Point de compétence:"
-
-[node name="XP_bar_bg" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
-custom_minimum_size = Vector2(67, 10)
-layout_mode = 0
-offset_top = 72.0
-offset_right = 66.0
-offset_bottom = 81.0
-
-[node name="XP_bar" type="TextureProgressBar" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 74.0
-offset_right = 86.0
-offset_bottom = 82.0
-texture_under = ExtResource("1_3aabu")
-texture_progress = ExtResource("1_3aabu")
-tint_under = Color(0, 0, 0, 1)
-tint_over = Color(0, 0, 0, 1)
-script = ExtResource("5_46kxw")
 
 [node name="Player_Calculated_Stats" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 anchors_preset = 0
 offset_left = 1.0
-offset_top = 88.0
+offset_top = 80.0
 offset_right = 208.0
-offset_bottom = 174.0
+offset_bottom = 168.0
 
-[node name="HP" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
+[node name="HP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 2
 offset_right = 207.0
 offset_bottom = 26.0
+tooltip_text = "Points de vie. S’ils tombent à 0, c’est la défaite."
+bbcode_enabled = true
 text = "HP:"
+fit_content = true
 
 [node name="HBoxContainer_CRT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 0
@@ -161,10 +142,13 @@ offset_left = -1.0
 offset_top = 61.0
 offset_right = 199.0
 offset_bottom = 84.0
+mouse_filter = 0
 theme_override_constants/separation = -2
 
 [node name="CRT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_CRT"]
 layout_mode = 2
+tooltip_text = "Pourcentage que l'attaque portée fasse 
+le double des dégâts totaux."
 bbcode_enabled = true
 text = "Critique:"
 fit_content = true
@@ -183,10 +167,12 @@ offset_left = -1.0
 offset_top = 29.0
 offset_right = 199.0
 offset_bottom = 52.0
+mouse_filter = 0
 theme_override_constants/separation = -2
 
 [node name="MT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
 layout_mode = 2
+tooltip_text = "Dégâts totaux infligés."
 bbcode_enabled = true
 text = "Dégâts Totaux:"
 fit_content = true
@@ -203,44 +189,44 @@ stretch_mode = 2
 layout_mode = 2
 offset_left = 1.0
 offset_top = 184.0
-offset_right = 40.0
+offset_right = 88.0
 offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 14
 
-[node name="Area2D" type="Area2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
-z_index = 1
-z_as_relative = false
-position = Vector2(7, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D"]
-z_index = 1
-z_as_relative = false
-position = Vector2(344, -32)
-shape = SubResource("RectangleShape2D_kwnlq")
-
-[node name="STR" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="STR" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 z_as_relative = false
 layout_mode = 2
+tooltip_text = "Pondère les dégâts infligés."
 text = "STR:"
+fit_content = true
 
-[node name="DEX" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="DEX" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
+tooltip_text = "Pondère le taux de coups critiques 
+ainsi que les compétences à taux d’activation."
 text = "DEX:"
+fit_content = true
 
-[node name="DEF" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="DEF" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
+tooltip_text = "Réduit les dégâts reçus."
 text = "DEF:"
+fit_content = true
 
-[node name="MVT" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
+tooltip_text = "Nombre de cases parcourables."
 text = "MVT:"
+fit_content = true
 
-[node name="ACT" type="Label" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
+tooltip_text = "Nombre d’actions possibles."
 text = "ACT:"
+fit_content = true
 
 [node name="Button_Stat" type="Node2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 visible = false
@@ -363,20 +349,18 @@ offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
 [node name="histo_logs_button" type="Button" parent="MarginContainer_left/white_bg_left/interface_left"]
-visible = false
 layout_mode = 2
-offset_left = 67.0
-offset_top = 300.0
-offset_right = 157.0
-offset_bottom = 331.0
+offset_left = 72.0
+offset_top = 283.0
+offset_right = 162.0
+offset_bottom = 314.0
 text = "Historique"
 
 [node name="UI_logs" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left"]
 layout_mode = 0
-offset_left = 8.0
 offset_top = 8.0
-offset_right = 216.0
-offset_bottom = 296.0
+offset_right = 224.0
+offset_bottom = 280.0
 script = ExtResource("7_iij0v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/UI_logs"]
@@ -391,7 +375,6 @@ layout_mode = 2
 theme_override_constants/separation = 17
 
 [node name="Enemy_Profil" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
-visible = false
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 332.0
@@ -407,9 +390,12 @@ offset_bottom = 114.0
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="HP" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
+[node name="HP" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
 layout_mode = 2
+tooltip_text = "Points de vie. S’ils tombent à 0, c’est la victoire."
+bbcode_enabled = true
 text = "HP:"
+fit_content = true
 
 [node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
 layout_mode = 2
@@ -417,6 +403,7 @@ theme_override_constants/separation = -2
 
 [node name="MT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
 layout_mode = 2
+tooltip_text = "Dégâts totaux reçus."
 bbcode_enabled = true
 text = "Dégâts Totaux:"
 fit_content = true
@@ -435,6 +422,8 @@ theme_override_constants/separation = -2
 
 [node name="CRT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_CRT"]
 layout_mode = 2
+tooltip_text = "Pourcentage que l'attaque portée fasse 
+le double des dégâts totaux."
 bbcode_enabled = true
 text = "Critique:"
 fit_content = true
@@ -450,46 +439,66 @@ stretch_mode = 2
 [node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_top = 116.0
-offset_right = 39.0
+offset_right = 112.0
 offset_bottom = 274.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 7
 
-[node name="STR" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="STR" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
+tooltip_text = "Pondère les dégâts reçus."
+bbcode_enabled = true
 text = "STR:"
+fit_content = true
 
-[node name="DEX" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="DEX" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
+tooltip_text = "Pondère le taux de coups critiques 
+ainsi que les compétences à taux d’activation."
+bbcode_enabled = true
 text = "DEX:"
+fit_content = true
 
-[node name="DEF" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="DEF" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
+tooltip_text = "Réduit les dégâts infligés."
+bbcode_enabled = true
 text = "DEF:"
+fit_content = true
 
-[node name="MVT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="MVT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
+tooltip_text = "Nombre de cases parcourables."
+bbcode_enabled = true
 text = "MVT:"
+fit_content = true
 
-[node name="ACT" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="ACT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
+tooltip_text = "Nombre d’actions possibles."
+bbcode_enabled = true
 text = "ACT:"
+fit_content = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 4.0
-offset_right = 156.0
-offset_bottom = 36.0
-theme_override_constants/separation = 5
+offset_top = -17.0
+offset_right = 200.0
+offset_bottom = 31.0
+theme_override_constants/separation = 2
 
-[node name="Name" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/HBoxContainer"]
+[node name="Name" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Nom de l'adversaire."
 text = "Nom:"
+fit_content = true
 
-[node name="LVL" type="Label" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/HBoxContainer"]
+[node name="LVL" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Indicateur de la force globale de l'adversaire."
 text = "Niveau:"
+fit_content = true
 
 [node name="Enemy_Inventory_UI" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
 visible = false
@@ -552,8 +561,6 @@ offset_bottom = 20.0
 theme_override_font_sizes/font_size = 20
 text = "Attendre"
 
-[connection signal="mouse_entered" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Area2D" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_area_2d_mouse_exited"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/minus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX/plus_DEX_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_dex_button_pressed"]
