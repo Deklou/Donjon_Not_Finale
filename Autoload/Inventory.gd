@@ -6,6 +6,7 @@ extends Node
 var inventory : Array = [] #l'inventaire est un tableau/liste, vide au départ
 signal item_added(inventory)
 signal update_enemy_inventory_UI(enemy_inventory) #signal utilisé pour update l'interface de l'inventaire enenmi
+signal entity_heal(entity_name) #signal lorsque le joueur ou un enemi se soigne
 ##################### RESET VALUE #####################
 func _reset_inventory_value():
 	inventory.clear()
@@ -47,6 +48,7 @@ func _use_item(item_name): #utiliser un item.
 		GameData.player_HP_buffer = GameData.player_HP_buffer + GameData.Item[item_name].Value
 		if GameData.player_HP_buffer > GameData.player_MAX_HP_buffer:
 			GameData.player_HP_buffer = GameData.player_MAX_HP_buffer
+		entity_heal.emit("Player") #Vers script joueur
 	elif GameData.Item[item_name].Type == "Weapon" and GameData.Item[item_name].Equiped == false: 
 		if GameState.first_weapon_equiped == false:
 			EntitiesState.show_mt_crt_dex_UI.emit() #vers user_interface
@@ -85,6 +87,7 @@ func _use_enemy_item(item_name):
 	if GameData.enemy_stats[EntitiesState.enemy_id].HP > GameData.enemy_stats[EntitiesState.enemy_id].MAX_HP:
 		GameData.enemy_stats[EntitiesState.enemy_id].HP = GameData.enemy_stats[EntitiesState.enemy_id].MAX_HP
 	_remove_enemy_item(item_name)
+	entity_heal.emit(EntitiesState.enemy_id) #Vers script ennemi
 	Logs._add_log(str(GameData.enemy_stats[EntitiesState.enemy_id].Name) + " s'est restauré " + str(GameData.Item[item_name].Value) + " PV")
 	StatsSystem.update_stats()
 	

@@ -14,6 +14,12 @@ extends Control
 @onready var UI_stat_DEF : RichTextLabel = $Player_Stats/DEF
 @onready var UI_stat_MVT : RichTextLabel = $Player_Stats/MVT
 @onready var UI_stat_ACT : RichTextLabel = $Player_Stats/ACT
+############### Icône ##################
+@onready var player_str_icon : Sprite2D = $Player_Stats_Icon/STR_Icon
+@onready var player_dex_icon : Sprite2D = $Player_Stats_Icon/DEX_Icon
+@onready var player_def_icon : Sprite2D = $Player_Stats_Icon/DEF_Icon
+@onready var player_mvt_icon : Sprite2D = $Player_Stats_Icon/MVT_Icon
+@onready var player_act_icon : Sprite2D = $Player_Stats_Icon/ACT_Icon
 ############### ControlNode ##################
 @onready var Button_Stats_Control : Node2D = $Player_Stats/Button_Stat
 @onready var Button_Stats_Special_Control : Node2D = $Player_Stats/Button_Stat_Special
@@ -77,18 +83,23 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	if not EntitiesState.enemy_triggered_list.is_empty():
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
+		player_mvt_icon.visible = true
+		player_act_icon.visible = true
 	elif GameState.fountain_is_currently_used == true:
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
+		player_mvt_icon.visible = true
+		player_act_icon.visible = true
 	else:
 		UI_stat_MVT.visible = false
 		UI_stat_ACT.visible = false
+		player_mvt_icon.visible = false
+		player_act_icon.visible = false
 	
 	########################### flèches ###########################
 	MT_Arrow_Up.visible = false
 	CRT_Arrow_Up.visible = false
 	########################### Couleurs ###########################
-	
 	if float(GameData.player_HP)*100/float(GameData.player_MAX_HP) <= 20: #décide de la couleur dès hp en fonction du %
 		UI_stat_HP.text = "[b][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(255,0,0,255)
@@ -105,6 +116,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		if GameData.player_CRT > GameData.player_base_CRT:
 			UI_stat_CRT.text = "Critique: [color=#66B2FF]" + str(GameData.player_CRT) + "[/color]"
 			CRT_Arrow_Up.visible = true
+	if GameState.is_ennemy_turn == true: #Quand le joueur est hors combat, il n'a aucune limite de déplacement et d'action
+		GameData.player_current_movement_point = GameData.player_MAX_movement_point
+		GameData.player_current_action_point = GameData.player_MAX_action_point
 ##################### LEVEL UP #####################
 func stat_modifier():
 	base_player_CP = GameData.player_CP_buffer #chaque montée de niveau, on copie les anciennes stats du joueur
@@ -269,9 +283,9 @@ func _on_validation_special_button_pressed():
 ##################### CANT MOVE #####################
 func player_input_cant_move():
 	if is_inside_tree():
-		UI_stat_MVT.modulate = Color(1, 0, 0)
+		UI_stat_MVT.text = "[b][color=#FF0000]" + "MVT: " + str(GameData.player_current_movement_point) + "[/color][/b]"
 		await get_tree().create_timer(0.1).timeout
-		UI_stat_MVT.modulate = Color(1, 1, 1)
+		UI_stat_MVT.text = "[color=#FFFFFF]" + "MVT: " + str(GameData.player_current_movement_point) + "[/color]"
 	else:
 		return
 ##################### DESCRIPTION #####################

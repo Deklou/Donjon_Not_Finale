@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdq0ux4rg1m4q"]
+[gd_scene load_steps=13 format=3 uid="uid://cdq0ux4rg1m4q"]
 
 [ext_resource type="Script" path="res://Entities/Player/grid_player_2.gd" id="1_2fju6"]
 [ext_resource type="Texture2D" uid="uid://i6dahw3f6nk2" path="res://Sprites/Player/chara_sprite.png" id="1_sd1yj"]
@@ -73,8 +73,25 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_e78m2"]
+resource_name = "heal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("heal_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuxl4"]
 _data = {
+"heal": SubResource("Animation_e78m2"),
 "walk_down": SubResource("Animation_5ocdb"),
 "walk_left": SubResource("Animation_rvrwg"),
 "walk_right": SubResource("Animation_4oyox"),
@@ -121,3 +138,11 @@ texture = ExtResource("4_6xqgt")
 [node name="damage_sprite_3" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("5_a73g1")
+
+[node name="heal_sprite" type="ColorRect" parent="."]
+visible = false
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.486275, 1, 0.321569, 0.678431)

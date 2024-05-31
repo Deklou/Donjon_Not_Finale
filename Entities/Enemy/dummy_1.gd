@@ -17,6 +17,7 @@ extends CharacterBody2D
 @onready var enemy_sprite : Sprite2D = $Sprite2D
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @export var distance = 64 #taille d'une case
 var currPos
 
@@ -75,6 +76,7 @@ func _ready():
 ##################### SIGNAL #####################
 	EntitiesState.take_damage.connect(_entity_take_damage)
 	GameState.enemy_can_act.connect(_enemy_CHOICE)
+	Inventory.entity_heal.connect(_dummy_heal)
 ##################### POSITION #####################
 	currPos = $".".position
 	currPos.x = round(currPos.x / distance) * distance - 32
@@ -132,7 +134,6 @@ func _on_trigger_range_body_exited(body):
 		EntitiesState.enemy_is_deselected()
 		
 ##################### DEGAT #####################
-
 func _entity_take_damage(Entity_Name: String):
 	if !is_inside_tree():
 		return 
@@ -144,14 +145,15 @@ func _entity_take_damage(Entity_Name: String):
 		damage_sprite_2.visible = true
 		await get_tree().create_timer(0.05).timeout
 		damage_sprite_2.visible = false
-
+##################### SOIN #####################
+func _dummy_heal(entity_name : String):
+	if entity_name == dummy_id:
+		animation_player.play("heal")
 ##################### PROCESS #####################
-
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		$".".queue_free()
 		return
-		
 ##################### CHOIX #####################
 		
 func _enemy_CHOICE():

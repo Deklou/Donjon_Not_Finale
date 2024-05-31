@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=17 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
@@ -8,8 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://boplu8thymxy5" path="res://Sprites/UI_icon/xp_bar.png" id="5_pmgmk"]
 [ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="5_xsdpy"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
+[ext_resource type="Texture2D" uid="uid://dnir1ada82hxo" path="res://Sprites/UI_icon/attack.png" id="7_g0mqc"]
 [ext_resource type="Script" path="res://UI/UI_Logs.gd" id="7_iij0v"]
+[ext_resource type="Texture2D" uid="uid://mycdocn0k0wi" path="res://Sprites/UI_icon/delimiter_1.png" id="7_yp2ct"]
+[ext_resource type="Texture2D" uid="uid://b7nh3ywii4h0q" path="res://Sprites/UI_icon/dexterity.png" id="8_1u7ne"]
+[ext_resource type="Texture2D" uid="uid://20n0desniesb" path="res://Sprites/UI_icon/shield.png" id="9_02alh"]
 [ext_resource type="Script" path="res://UI/Interface_Down.gd" id="10_lhent"]
+[ext_resource type="Texture2D" uid="uid://cx6imt3vhul04" path="res://Sprites/UI_icon/movement.png" id="10_oqlr7"]
+[ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="11_ynk02"]
 
 [node name="User_Interface" type="CanvasLayer"]
 script = ExtResource("1_v8vxl")
@@ -140,14 +146,15 @@ fit_content = true
 
 [node name="Player_HP_Bar" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 127.0
+offset_right = 214.0
+offset_bottom = 24.0
 
 [node name="Player_HP_Bar_TextureProgressBar" type="TextureProgressBar" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/Player_HP_Bar"]
 layout_mode = 0
-offset_left = 99.0
+offset_left = -30.0
 offset_top = 6.0
-offset_right = 199.0
+offset_right = 50.0
 offset_bottom = 16.0
 value = 100.0
 texture_under = ExtResource("4_a6i1v")
@@ -205,14 +212,13 @@ stretch_mode = 2
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = 1.0
+offset_left = 30.0
 offset_top = 184.0
-offset_right = 88.0
+offset_right = 117.0
 offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 14
 
 [node name="STR" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 z_as_relative = false
@@ -237,12 +243,14 @@ fit_content = true
 [node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
 tooltip_text = "Nombre de cases parcourables."
+bbcode_enabled = true
 text = "MVT:"
 fit_content = true
 
 [node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
 tooltip_text = "Nombre d’actions possibles."
+bbcode_enabled = true
 text = "ACT:"
 fit_content = true
 
@@ -348,6 +356,60 @@ offset_bottom = 226.0
 [node name="Validation_Special_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_Validation"]
 layout_mode = 2
 text = "Valider"
+
+[node name="Player_Stats_Icon" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 184.0
+offset_right = 32.0
+offset_bottom = 368.0
+
+[node name="STR_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
+position = Vector2(21, 11)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_g0mqc")
+
+[node name="DEX_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
+position = Vector2(21, 47)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("8_1u7ne")
+
+[node name="DEF_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
+position = Vector2(21, 87)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_02alh")
+
+[node name="MVT_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
+position = Vector2(21, 123)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("10_oqlr7")
+
+[node name="ACT_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
+position = Vector2(22, 160)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("11_ynk02")
+
+[node name="Delimiter" type="Control" parent="MarginContainer_right/white_bg_right/interface_right"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="delimiter_inventory_player_stats" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Delimiter"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 266.0
+offset_right = 224.0
+offset_bottom = 274.0
+
+[node name="delimiter_1" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Delimiter"]
+position = Vector2(106, 344.5)
+scale = Vector2(1.96226, 1.24999)
+texture = ExtResource("7_yp2ct")
+
+[node name="delimiter_2" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Delimiter"]
+position = Vector2(106, 447)
+scale = Vector2(1.96226, 1.24999)
+texture = ExtResource("7_yp2ct")
 
 [node name="MarginContainer_left" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -518,7 +580,7 @@ fit_content = true
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_top = -17.0
-offset_right = 192.0
+offset_right = 216.0
 offset_bottom = 31.0
 theme_override_constants/separation = 2
 

@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
 @onready var damage_sprite_3 : Sprite2D = $damage_sprite_3 #Sprite temporaire de dégâts
 @onready var player_camera : Camera2D = $Camera2D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 var currPos
 var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
@@ -24,6 +25,7 @@ func _ready():
 	EntitiesState.take_damage.connect(_player_take_damage)
 	EntitiesState.disable_player_camera.connect(_disable_player_moving_camera)
 	EntitiesState.enable_player_camera.connect(_enable_player_moving_camera)
+	Inventory.entity_heal.connect(_player_heal)
 ##################### DEPLACEMENT #####################
 	
 func _input(event):
@@ -61,7 +63,7 @@ func _on_MoveTimer_timeout():
 		handle_movement(moving_direction, get_animation_from_direction(moving_direction))
 
 func handle_movement(direction_vector, animation):
-	$AnimationPlayer.play(animation)
+	animation_player.play(animation)
 	GameState.player_position = self.position
 	if not GameState.is_ennemy_turn and GameData.player_current_movement_point > 0:
 		$RayCast2D.target_position = direction_vector
@@ -99,6 +101,11 @@ func _player_take_damage(Entity_Name: String):
 		await get_tree().create_timer(0.03).timeout
 		damage_sprite_3.visible = false
 	StatsSystem.update_stats()
+	
+##################### SOIN #####################
+func _player_heal(entity_name : String):
+	if entity_name == "Player":
+		animation_player.play("heal")
 		
 ##################### CAMERA #####################
 func _disable_player_moving_camera():
