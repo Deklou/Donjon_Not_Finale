@@ -18,9 +18,9 @@ func _on_to_third_room_area_2d_body_entered(body):
 func _on_to_second_room_from_third_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(-960, 2688))
 func _on_to_fourth_room_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(-1922,768))
+	_move_to_other_room(body,Vector2(-1920,768))
 func _on_to_third_room_from_fourth_area_2d_body_entered(body):
-	_move_to_other_room(body,Vector2(1922,-768))
+	_move_to_other_room(body,Vector2(1920,-768))
 func _on_to_intro_level_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(192, 768))
 func _on_to_fourth_room_from_intro_area_2d_2_body_entered(body):

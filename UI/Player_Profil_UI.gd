@@ -9,17 +9,14 @@ extends Control
 @onready var UI_stat_HP : RichTextLabel = $Player_Calculated_Stats/HP
 @onready var UI_stat_MT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_MT/MT
 @onready var UI_stat_CRT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_CRT/CRT
-@onready var UI_stat_STR : RichTextLabel = $Player_Stats/STR
-@onready var UI_stat_DEX : RichTextLabel = $Player_Stats/DEX
-@onready var UI_stat_DEF : RichTextLabel = $Player_Stats/DEF
-@onready var UI_stat_MVT : RichTextLabel = $Player_Stats/MVT
-@onready var UI_stat_ACT : RichTextLabel = $Player_Stats/ACT
+@onready var UI_stat_STR : RichTextLabel = $Player_Stats/STR_HBoxContainer/STR
+@onready var UI_stat_DEX : RichTextLabel = $Player_Stats/DEX_HBoxContainer/DEX
+@onready var UI_stat_DEF : RichTextLabel = $Player_Stats/DEF_HBoxContainer/DEF
+@onready var UI_stat_MVT : RichTextLabel = $Player_Stats/MVT_HBoxContainer/MVT
+@onready var UI_stat_ACT : RichTextLabel = $Player_Stats/ACT_HBoxContainer/ACT
 ############### Icône ##################
-@onready var player_str_icon : Sprite2D = $Player_Stats_Icon/STR_Icon
-@onready var player_dex_icon : Sprite2D = $Player_Stats_Icon/DEX_Icon
-@onready var player_def_icon : Sprite2D = $Player_Stats_Icon/DEF_Icon
-@onready var player_mvt_icon : Sprite2D = $Player_Stats_Icon/MVT_Icon
-@onready var player_act_icon : Sprite2D = $Player_Stats_Icon/ACT_Icon
+@onready var player_mvt_icon : TextureRect = $Player_Stats/MVT_HBoxContainer/MVT_Icon
+@onready var player_act_icon : TextureRect = $Player_Stats/ACT_HBoxContainer/ACT_Icon
 ############### ControlNode ##################
 @onready var Button_Stats_Control : Node2D = $Player_Stats/Button_Stat
 @onready var Button_Stats_Special_Control : Node2D = $Player_Stats/Button_Stat_Special

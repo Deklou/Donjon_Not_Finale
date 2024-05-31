@@ -7,11 +7,11 @@ extends Control
 @onready var UI_enemy_stat_HP_BAR : TextureProgressBar = $Enemy_Calculated_Stats/Enemy_HP_Bar/Enemy_HP_Bar_TextureProgressBar
 @onready var UI_enemy_MT_stat : RichTextLabel = $Enemy_Calculated_Stats/HBoxContainer_MT/MT
 @onready var UI_enemy_CRT_stat : RichTextLabel = $Enemy_Calculated_Stats/HBoxContainer_CRT/CRT
-@onready var UI_enemy_STR_stat : RichTextLabel = $Enemy_Stats/STR
-@onready var UI_enemy_DEX_stat : RichTextLabel = $Enemy_Stats/DEX
-@onready var UI_enemy_DEF_stat : RichTextLabel = $Enemy_Stats/DEF
-@onready var UI_MVT_stat : RichTextLabel = $Enemy_Stats/MVT
-@onready var UI_ACT_stat : RichTextLabel = $Enemy_Stats/ACT
+@onready var UI_enemy_STR_stat : RichTextLabel = $Enemy_Stats/STR_HBoxContainer/STR
+@onready var UI_enemy_DEX_stat : RichTextLabel = $Enemy_Stats/DEX_HBoxContainer/DEX
+@onready var UI_enemy_DEF_stat : RichTextLabel = $Enemy_Stats/DEF_HBoxContainer/DEF
+@onready var UI_MVT_stat : RichTextLabel = $Enemy_Stats/MVT_HBoxContainer/MVT
+@onready var UI_ACT_stat : RichTextLabel = $Enemy_Stats/ACT_HBoxContainer/ACT
 ############### icône de buff ##################
 @onready var MT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_MT/Arrow_Up
 @onready var CRT_Arrow_Up : TextureRect = $Enemy_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
@@ -66,6 +66,7 @@ func update_enemy_UI():
 	
 func show_enemy_UI():
 	ennemy_profil.visible = true
+	
 	
 func hide_enemy_UI(): #on appelle cette fonction dans le script de l'ennmi s'il est mort
 	ennemy_profil.visible = false

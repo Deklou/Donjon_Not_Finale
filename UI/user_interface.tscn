@@ -212,47 +212,93 @@ stretch_mode = 2
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = 30.0
 offset_top = 184.0
-offset_right = 117.0
+offset_right = 112.0
 offset_bottom = 370.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
+theme_override_constants/separation = 14
 
-[node name="STR" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="STR_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+
+[node name="STR_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/STR_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_g0mqc")
+expand_mode = 3
+
+[node name="STR" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/STR_HBoxContainer"]
 z_as_relative = false
 layout_mode = 2
 tooltip_text = "Pondère les dégâts infligés."
+bbcode_enabled = true
 text = "STR:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="DEX" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="DEX_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+
+[node name="DEX_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEX_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_1u7ne")
+expand_mode = 2
+
+[node name="DEX" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEX_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Pondère le taux de coups critiques 
 ainsi que les compétences à taux d’activation."
 text = "DEX:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="DEF" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="DEF_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+
+[node name="DEF_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEF_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_02alh")
+expand_mode = 3
+
+[node name="DEF" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEF_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Réduit les dégâts reçus."
 text = "DEF:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="MVT_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+
+[node name="MVT_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_oqlr7")
+expand_mode = 3
+
+[node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre de cases parcourables."
 bbcode_enabled = true
 text = "MVT:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+[node name="ACT_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
+layout_mode = 2
+
+[node name="ACT_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_ynk02")
+expand_mode = 3
+
+[node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre d’actions possibles."
 bbcode_enabled = true
 text = "ACT:"
 fit_content = true
+autowrap_mode = 0
 
 [node name="Button_Stat" type="Node2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 visible = false
@@ -357,38 +403,6 @@ offset_bottom = 226.0
 layout_mode = 2
 text = "Valider"
 
-[node name="Player_Stats_Icon" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
-layout_mode = 0
-offset_left = -8.0
-offset_top = 184.0
-offset_right = 32.0
-offset_bottom = 368.0
-
-[node name="STR_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
-position = Vector2(21, 11)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("7_g0mqc")
-
-[node name="DEX_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
-position = Vector2(21, 47)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("8_1u7ne")
-
-[node name="DEF_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
-position = Vector2(21, 87)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("9_02alh")
-
-[node name="MVT_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
-position = Vector2(21, 123)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("10_oqlr7")
-
-[node name="ACT_Icon" type="Sprite2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats_Icon"]
-position = Vector2(22, 160)
-scale = Vector2(0.13, 0.13)
-texture = ExtResource("11_ynk02")
-
 [node name="Delimiter" type="Control" parent="MarginContainer_right/white_bg_right/interface_right"]
 anchors_preset = 0
 offset_right = 40.0
@@ -459,16 +473,35 @@ theme_override_constants/separation = 17
 visible = false
 anchors_preset = 0
 offset_left = 8.0
-offset_top = 332.0
+offset_top = 343.0
 offset_right = 192.0
-offset_bottom = 644.0
+offset_bottom = 604.0
 script = ExtResource("5_xsdpy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+layout_mode = 0
+offset_top = -17.0
+offset_right = 216.0
+offset_bottom = 31.0
+theme_override_constants/separation = 2
+
+[node name="Name" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Nom de l'adversaire."
+text = "Nom:"
+fit_content = true
+
+[node name="LVL" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Indicateur de la force globale de l'adversaire."
+text = "Niveau:"
+fit_content = true
 
 [node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 30.0
+offset_top = 43.0
 offset_right = 192.0
-offset_bottom = 114.0
+offset_bottom = 121.0
 theme_override_constants/separation = 3
 alignment = 1
 
@@ -485,9 +518,9 @@ layout_mode = 2
 [node name="Enemy_HP_Bar_TextureProgressBar" type="TextureProgressBar" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/Enemy_HP_Bar"]
 layout_mode = 0
 offset_left = 99.0
-offset_top = -18.0
+offset_top = -20.0
 offset_right = 199.0
-offset_bottom = -8.0
+offset_bottom = -10.0
 value = 100.0
 texture_under = ExtResource("4_a6i1v")
 texture_progress = ExtResource("5_pmgmk")
@@ -499,7 +532,7 @@ theme_override_constants/separation = -2
 
 [node name="MT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
 layout_mode = 2
-tooltip_text = "Dégâts totaux reçus."
+tooltip_text = "Dégâts totaux infligés par l'adversaire."
 bbcode_enabled = true
 text = "Dégâts Totaux:"
 fit_content = true
@@ -534,75 +567,124 @@ stretch_mode = 2
 
 [node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
-offset_top = 116.0
+offset_top = 132.0
 offset_right = 96.0
-offset_bottom = 274.0
+offset_bottom = 275.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 7
 
-[node name="STR" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="STR_HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
-tooltip_text = "Pondère les dégâts reçus."
+
+[node name="STR_Icon" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_g0mqc")
+expand_mode = 3
+
+[node name="STR" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
+z_as_relative = false
+layout_mode = 2
+tooltip_text = "Pondère les dégâts infligés par l'adversaire."
 bbcode_enabled = true
 text = "STR:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="DEX" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="DEX_HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="DEX_Icon" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_1u7ne")
+expand_mode = 2
+
+[node name="DEX" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Pondère le taux de coups critiques 
 ainsi que les compétences à taux d’activation."
-bbcode_enabled = true
 text = "DEX:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="DEF" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="DEF_HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
-tooltip_text = "Réduit les dégâts infligés."
-bbcode_enabled = true
+
+[node name="DEF_Icon" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_02alh")
+expand_mode = 3
+
+[node name="DEF" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Réduit les dégâts reçus."
 text = "DEF:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="MVT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="MVT_HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="MVT_Icon" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_oqlr7")
+expand_mode = 3
+
+[node name="MVT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre de cases parcourables."
 bbcode_enabled = true
 text = "MVT:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="ACT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+[node name="ACT_HBoxContainer" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="ACT_Icon" type="TextureRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_ynk02")
+expand_mode = 3
+
+[node name="ACT" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre d’actions possibles."
 bbcode_enabled = true
 text = "ACT:"
 fit_content = true
+autowrap_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+[node name="Delimiter" type="Control" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -343.0
+offset_right = 32.0
+offset_bottom = -303.0
+
+[node name="delimiter_logs_enemy_stats" type="ColorRect" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Delimiter"]
 layout_mode = 0
-offset_top = -17.0
-offset_right = 216.0
-offset_bottom = 31.0
-theme_override_constants/separation = 2
+offset_top = 316.0
+offset_right = 225.0
+offset_bottom = 324.0
 
-[node name="Name" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
-layout_mode = 2
-tooltip_text = "Nom de l'adversaire."
-text = "Nom:"
-fit_content = true
+[node name="delimiter_3" type="Sprite2D" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Delimiter"]
+position = Vector2(106, 382.5)
+scale = Vector2(1.96226, 1.24999)
+texture = ExtResource("7_yp2ct")
 
-[node name="LVL" type="RichTextLabel" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/VBoxContainer"]
-layout_mode = 2
-tooltip_text = "Indicateur de la force globale de l'adversaire."
-text = "Niveau:"
-fit_content = true
+[node name="delimiter_4" type="Sprite2D" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Delimiter"]
+position = Vector2(106, 469.875)
+scale = Vector2(1.96226, 1.125)
+texture = ExtResource("7_yp2ct")
 
 [node name="Enemy_Inventory_UI" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
 visible = false
 anchors_preset = 0
-offset_left = 23.0
-offset_top = 608.0
-offset_right = 191.0
-offset_bottom = 704.0
+offset_left = 9.0
+offset_top = 632.0
+offset_right = 177.0
+offset_bottom = 719.0
 script = ExtResource("7_clhvp")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI"]
@@ -613,6 +695,11 @@ offset_bottom = 96.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI/ScrollContainer"]
 layout_mode = 2
+
+[node name="delimiter_5" type="Sprite2D" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Inventory_UI"]
+position = Vector2(97, -6.125)
+scale = Vector2(1.96226, 1.125)
+texture = ExtResource("7_yp2ct")
 
 [node name="MarginContainer_down" type="MarginContainer" parent="."]
 anchors_preset = 7
