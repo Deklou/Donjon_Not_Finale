@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=11 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
 [ext_resource type="Script" path="res://UI/User_Interface.gd" id="1_v8vxl"]
+[ext_resource type="Texture2D" uid="uid://5i20krj6irp2" path="res://Sprites/UI_icon/xp_bar_bg.png" id="4_a6i1v"]
 [ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
+[ext_resource type="Texture2D" uid="uid://boplu8thymxy5" path="res://Sprites/UI_icon/xp_bar.png" id="5_pmgmk"]
 [ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="5_xsdpy"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="7_clhvp"]
 [ext_resource type="Script" path="res://UI/UI_Logs.gd" id="7_iij0v"]
@@ -129,12 +131,28 @@ offset_bottom = 168.0
 
 [node name="HP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 2
-offset_right = 207.0
+offset_right = 95.0
 offset_bottom = 26.0
 tooltip_text = "Points de vie. S’ils tombent à 0, c’est la défaite."
 bbcode_enabled = true
 text = "HP:"
 fit_content = true
+
+[node name="Player_HP_Bar" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player_HP_Bar_TextureProgressBar" type="TextureProgressBar" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/Player_HP_Bar"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 6.0
+offset_right = 199.0
+offset_bottom = 16.0
+value = 100.0
+texture_under = ExtResource("4_a6i1v")
+texture_progress = ExtResource("5_pmgmk")
+texture_progress_offset = Vector2(2, 2)
 
 [node name="HBoxContainer_CRT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 0
@@ -349,6 +367,7 @@ offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
 [node name="histo_logs_button" type="Button" parent="MarginContainer_left/white_bg_left/interface_left"]
+visible = false
 layout_mode = 2
 offset_left = 72.0
 offset_top = 283.0
@@ -375,10 +394,11 @@ layout_mode = 2
 theme_override_constants/separation = 17
 
 [node name="Enemy_Profil" type="Control" parent="MarginContainer_left/white_bg_left/interface_left"]
+visible = false
 anchors_preset = 0
-offset_left = 24.0
+offset_left = 8.0
 offset_top = 332.0
-offset_right = 216.0
+offset_right = 192.0
 offset_bottom = 644.0
 script = ExtResource("5_xsdpy")
 
@@ -396,6 +416,20 @@ tooltip_text = "Points de vie. S’ils tombent à 0, c’est la victoire."
 bbcode_enabled = true
 text = "HP:"
 fit_content = true
+
+[node name="Enemy_HP_Bar" type="Control" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+
+[node name="Enemy_HP_Bar_TextureProgressBar" type="TextureProgressBar" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats/Enemy_HP_Bar"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = -18.0
+offset_right = 199.0
+offset_bottom = -8.0
+value = 100.0
+texture_under = ExtResource("4_a6i1v")
+texture_progress = ExtResource("5_pmgmk")
+texture_progress_offset = Vector2(2, 2)
 
 [node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil/Enemy_Calculated_Stats"]
 layout_mode = 2
@@ -439,7 +473,7 @@ stretch_mode = 2
 [node name="Enemy_Stats" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_top = 116.0
-offset_right = 112.0
+offset_right = 96.0
 offset_bottom = 274.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -484,7 +518,7 @@ fit_content = true
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_left/white_bg_left/interface_left/Enemy_Profil"]
 layout_mode = 0
 offset_top = -17.0
-offset_right = 200.0
+offset_right = 192.0
 offset_bottom = 31.0
 theme_override_constants/separation = 2
 

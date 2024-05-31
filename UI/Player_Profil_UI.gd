@@ -4,6 +4,7 @@ extends Control
 @onready var Player_Stats_Vbox_Node : VBoxContainer = $Player_Stats
 @onready var UI_stat_LVL: RichTextLabel = $LVL
 @onready var UI_stat_XP : RichTextLabel = $XP
+@onready var UI_stat_HP_BAR : TextureProgressBar = $Player_Calculated_Stats/Player_HP_Bar/Player_HP_Bar_TextureProgressBar
 @onready var UI_stat_CP : RichTextLabel = $CP
 @onready var UI_stat_HP : RichTextLabel = $Player_Calculated_Stats/HP
 @onready var UI_stat_MT : RichTextLabel = $Player_Calculated_Stats/HBoxContainer_MT/MT
@@ -63,6 +64,7 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
 	UI_stat_XP.tooltip_text = "Expérience. " + str(100 - GameData.player_XP) + " exp jusqu'au niveau suivant."
 	###################################
+	UI_stat_HP_BAR.value = float(GameData.player_HP)*100/float(GameData.player_MAX_HP)
 	UI_stat_CP.text = "Point de compétence:  " + str(GameData.player_CP)
 	UI_stat_MT.text = "Dégâts Totaux: " + str(GameData.player_MT)
 	UI_stat_CRT.text = "Critique: " + str(GameData.player_CRT)
@@ -87,11 +89,15 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	CRT_Arrow_Up.visible = false
 	########################### Couleurs ###########################
 	
-	if float(GameData.player_HP)/float(GameData.player_MAX_HP) <= 0.2: #décide de la couleur dès hp en fonction du %
+	if float(GameData.player_HP)*100/float(GameData.player_MAX_HP) <= 20: #décide de la couleur dès hp en fonction du %
 		UI_stat_HP.text = "[b][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
+		UI_stat_HP_BAR.tint_progress = Color(255,0,0,255)
+	elif GameData.player_MAX_HP == GameData.player_HP:
+		UI_stat_HP.text = "[b][color=#3EE657]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
+		UI_stat_HP_BAR.tint_progress = Color(1,230,1,255)
 	else:
 		UI_stat_HP.text = "[b]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/b]"
-		
+		UI_stat_HP_BAR.tint_progress = Color(255,255,255,255)
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:
 			UI_stat_MT.text = "Dégâts Totaux: [color=#66B2FF]" + str(GameData.player_MT) + "[/color]"
