@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbdwllirm25gs"]
+[gd_scene load_steps=24 format=3 uid="uid://cbdwllirm25gs"]
 
 [ext_resource type="Script" path="res://Menu/Command_Screen/Command_Screen.gd" id="1_fad7s"]
 [ext_resource type="Texture2D" uid="uid://ccln61k6rq53p" path="res://Sprites/Menu/Mouse_Cursor.PNG" id="2_ausf2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://gr0e6og4jbfw" path="res://Sprites/Menu/D.png" id="7_ionum"]
 [ext_resource type="Texture2D" uid="uid://dw87q7bomrpsf" path="res://Sprites/Menu/Arrow.png" id="8_r6677"]
 [ext_resource type="Texture2D" uid="uid://d26jmoxif2ikt" path="res://Sprites/Menu/Mouse_Cursor_Green.png" id="9_0n648"]
+[ext_resource type="Texture2D" uid="uid://ci5lprt1ch1h5" path="res://Sprites/Menu/Space_Bar.png" id="9_7vhly"]
 [ext_resource type="Texture2D" uid="uid://cbkkhlig0jg86" path="res://Sprites/Menu/Mouse_Green.png" id="10_5c4m8"]
 [ext_resource type="Texture2D" uid="uid://cwva18a54hl7b" path="res://Sprites/Menu/Z_Green.png" id="11_1j5to"]
 [ext_resource type="Texture2D" uid="uid://ba8fogpsacw58" path="res://Sprites/Menu/Q_Green.png" id="12_y7jeh"]
@@ -17,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://ytoydt25ybpq" path="res://Sprites/Menu/Arrow_Green.png" id="15_mppvh"]
 [ext_resource type="Texture2D" uid="uid://bqalqs3mxadf7" path="res://Sprites/Menu/Button.png" id="16_xb27o"]
 [ext_resource type="Texture2D" uid="uid://burhnvkublcje" path="res://Sprites/Menu/Button_Green.png" id="17_m2qvd"]
+[ext_resource type="Texture2D" uid="uid://cwteeyd23terw" path="res://Sprites/Menu/Space_Bar_Green.png" id="17_sbd8n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uietf"]
 size = Vector2(172, 72)
@@ -85,12 +87,12 @@ text = "Les commandes pour interagir avec le jeu"
 [node name="Mouse_Command" type="Node2D" parent="Black_Background_ColorRect"]
 
 [node name="Cursor_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Mouse_Command"]
-position = Vector2(448, 336)
+position = Vector2(1021, 271.25)
 scale = Vector2(0.679272, 0.693705)
 texture = ExtResource("2_ausf2")
 
 [node name="Mouse_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Mouse_Command"]
-position = Vector2(272, 480)
+position = Vector2(845, 415.25)
 scale = Vector2(0.629032, 0.599071)
 texture = ExtResource("3_d8dw0")
 
@@ -99,61 +101,68 @@ texture = ExtResource("3_d8dw0")
 [node name="Keyboard_Letters" type="Node2D" parent="Black_Background_ColorRect/Keyboard_Command"]
 
 [node name="Z_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Letters"]
-position = Vector2(948, 336)
+position = Vector2(318, 267.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_u5fjk")
 
 [node name="Q_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Letters"]
-position = Vector2(860, 425)
+position = Vector2(230, 356.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_ykhpv")
 
 [node name="S_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Letters"]
-position = Vector2(948, 424)
+position = Vector2(318, 355.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("6_rabbv")
 
 [node name="D_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Letters"]
-position = Vector2(1040, 427)
+position = Vector2(410, 358.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("7_ionum")
 
 [node name="Keyboard_Arrows" type="Node2D" parent="Black_Background_ColorRect/Keyboard_Command"]
 
 [node name="Arrow_Up_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(947, 246)
+position = Vector2(317.4, 178.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_r6677")
 
 [node name="Arrow_Left_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(768, 426)
+position = Vector2(138.4, 358.4)
 rotation = -1.5708
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_r6677")
 
 [node name="Arrow_Down_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(949, 512)
+position = Vector2(319.4, 444.4)
 rotation = 3.14159
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_r6677")
 
 [node name="Arrow_Right_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(1128, 426)
+position = Vector2(498.4, 358.4)
 rotation = 1.5708
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_r6677")
+
+[node name="Keyboard_Other" type="Node2D" parent="Black_Background_ColorRect/Keyboard_Command"]
+
+[node name="Space_Bar_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command/Keyboard_Other"]
+position = Vector2(320, 562)
+scale = Vector2(0.32497, 0.4)
+texture = ExtResource("9_7vhly")
 
 [node name="Mouse_Command_Green" type="Node2D" parent="Black_Background_ColorRect"]
 
 [node name="Cursor_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Mouse_Command_Green"]
 visible = false
-position = Vector2(440, 344)
+position = Vector2(1020, 283)
 scale = Vector2(0.679272, 0.693705)
 texture = ExtResource("9_0n648")
 
 [node name="Mouse_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Mouse_Command_Green"]
 visible = false
-position = Vector2(272, 480)
+position = Vector2(848, 416)
 scale = Vector2(0.629032, 0.599071)
 texture = ExtResource("10_5c4m8")
 
@@ -163,25 +172,25 @@ texture = ExtResource("10_5c4m8")
 
 [node name="Z_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Letters_Green"]
 visible = false
-position = Vector2(949, 335)
+position = Vector2(318.8, 266.625)
 scale = Vector2(0.484286, 0.482433)
 texture = ExtResource("11_1j5to")
 
 [node name="Q_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Letters_Green"]
 visible = false
-position = Vector2(858, 422)
+position = Vector2(227.8, 353.625)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("12_y7jeh")
 
 [node name="S_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Letters_Green"]
 visible = false
-position = Vector2(948, 424.215)
+position = Vector2(317.8, 355.84)
 scale = Vector2(0.467956, 0.469056)
 texture = ExtResource("13_jpcsv")
 
 [node name="D_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Letters_Green"]
 visible = false
-position = Vector2(1040, 427)
+position = Vector2(409.8, 358.625)
 scale = Vector2(0.474286, 0.477528)
 texture = ExtResource("14_huq3p")
 
@@ -189,30 +198,38 @@ texture = ExtResource("14_huq3p")
 
 [node name="Arrow_Up_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green"]
 visible = false
-position = Vector2(948, 245.15)
+position = Vector2(318.449, 178.15)
 scale = Vector2(0.533334, 0.553988)
 texture = ExtResource("15_mppvh")
 
 [node name="Arrow_Left_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green"]
 visible = false
-position = Vector2(766.999, 425.25)
+position = Vector2(137.448, 358.25)
 rotation = -1.5708
 scale = Vector2(0.554495, 0.557642)
 texture = ExtResource("15_mppvh")
 
 [node name="Arrow_Down_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green"]
 visible = false
-position = Vector2(948.25, 512.959)
+position = Vector2(318.699, 445.959)
 rotation = 3.14159
 scale = Vector2(0.537037, 0.553875)
 texture = ExtResource("15_mppvh")
 
 [node name="Arrow_Right_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green"]
 visible = false
-position = Vector2(1128.66, 426.603)
+position = Vector2(499.109, 359.603)
 rotation = 1.5708
 scale = Vector2(0.547148, 0.551119)
 texture = ExtResource("15_mppvh")
+
+[node name="Keyboard_Other_Green" type="Node2D" parent="Black_Background_ColorRect/Keyboard_Command_Green"]
+
+[node name="Space_Bar_Green_Sprite2D" type="Sprite2D" parent="Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Other_Green"]
+visible = false
+position = Vector2(318, 562.2)
+scale = Vector2(0.40367, 0.415517)
+texture = ExtResource("17_sbd8n")
 
 [node name="Button" type="Node2D" parent="Black_Background_ColorRect"]
 

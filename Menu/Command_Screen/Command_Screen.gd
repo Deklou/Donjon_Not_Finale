@@ -22,6 +22,8 @@ extends Node2D
 @onready var arrow_left_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green/Arrow_Left_Green_Sprite2D
 @onready var arrow_down_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green/Arrow_Down_Green_Sprite2D
 @onready var arrow_right_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Arrows_Green/Arrow_Right_Green_Sprite2D
+@onready var space_bar_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command/Keyboard_Other/Space_Bar_Sprite2D
+@onready var space_bar_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Other_Green/Space_Bar_Green_Sprite2D
 @onready var button_sprite_2d : Sprite2D = $Black_Background_ColorRect/Button/Button_Sprite_2D
 @onready var button_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Button/Button_Green_Sprite_2D
 var player_has_moved_mouse : bool = false
@@ -101,6 +103,12 @@ func handle_key_input(event):
 		D_green_sprite_2d.visible = false
 	arrow_right_sprite_2d.visible = D_sprite_2d.visible
 	arrow_right_green_sprite_2d.visible = D_green_sprite_2d.visible
+	if event.is_action_pressed("wait"):
+		space_bar_sprite_2d.visible = false
+		space_bar_green_sprite_2d.visible = true
+	elif event.is_action_released("wait"):
+		space_bar_sprite_2d.visible = true
+		space_bar_green_sprite_2d.visible = false
 			
 func _on_mouse_movement_timeout():
 	mouse_sprite_2d.visible = true

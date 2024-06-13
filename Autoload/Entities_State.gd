@@ -28,6 +28,7 @@ signal show_player_xp_level_UI #affiche l'expérience gagné et le niveau du jou
 signal show_mt_crt_dex_UI #affiche les valeurs calculées et la dex après avoir équipé une arme
 signal disable_player_camera #désactive la caméra embarquée dans la scène joueur
 signal enable_player_camera #active la caméra embarquée dans la scène joueur
+signal player_wait #le joueur veut attendre sans passer par l'interface
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
 var selected_id : String #identifiant dont on se sert pour afficher l'interface de l'ennemi
 var enemy_id : String #identifiant dont on se sert pour calculer les dégâts

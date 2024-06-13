@@ -285,9 +285,3 @@ func player_input_cant_move():
 		UI_stat_MVT.text = "[color=#FFFFFF]" + "MVT: " + str(GameData.player_current_movement_point) + "[/color]"
 	else:
 		return
-##################### DESCRIPTION #####################
-func _on_area_2d_mouse_entered():
-	var str_description_scene = preload("res://UI/Stats_Description/STR_Description.tscn").instantiate()
-	UI_stat_STR.add_child(str_description_scene, true)
-func _on_area_2d_mouse_exited():
-	UI_stat_STR.get_child(0).queue_free()

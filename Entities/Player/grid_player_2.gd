@@ -29,7 +29,7 @@ func _ready():
 ##################### DEPLACEMENT #####################
 	
 func _input(event):
-	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down"):	
+	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down") or event.is_action("wait"):	
 		if EntitiesState.player_is_frozen == false:
 			GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 			if event.is_action_pressed("right"):
@@ -48,6 +48,9 @@ func _input(event):
 				moving_direction = Vector2(0, distance)
 				handle_movement(moving_direction, "walk_down")
 				move_timer.start()
+				
+			elif event.is_action_pressed("wait"):
+				EntitiesState.player_wait.emit() #Vers Interfacedown
 			
 			# Arrêter le timer lorsque la touche est relâchée
 			if event.is_action_released("right") or event.is_action_released("left") or event.is_action_released("up") or event.is_action_released("down"):

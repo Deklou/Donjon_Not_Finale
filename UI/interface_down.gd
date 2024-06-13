@@ -8,6 +8,7 @@ func _ready():
 	GameState.combat_check.connect(player_has_entered_combat)
 	GameState.hide_wait_button.connect(hide_wait_button)
 	GameState.hide_attack_button.connect(hide_attack_button)
+	EntitiesState.player_wait.connect(_on_wait_button_pressed)
 	
 func _on_wait_button_pressed():
 	GameData.player_current_action_point = 0
