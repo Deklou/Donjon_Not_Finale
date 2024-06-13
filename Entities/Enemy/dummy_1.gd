@@ -134,7 +134,7 @@ func _on_trigger_range_body_exited(body):
 		EntitiesState.enemy_is_deselected()
 		
 ##################### DEGAT #####################
-func _entity_take_damage(Entity_Name: String):
+func _entity_take_damage(Entity_Name: String): #Faire une vraie animation dans le futur chef stp
 	if !is_inside_tree():
 		return 
 	if EntitiesState.enemy_can_be_attacked_id == dummy_id and Entity_Name == "Enemy":
@@ -160,15 +160,15 @@ func _enemy_CHOICE():
 	while EntitiesState.enemy_that_can_act == dummy_id and GameData.enemy_stats[dummy_id].MVT + GameData.enemy_stats[dummy_id].ACT > 0 and dummy_id not in EntitiesState.enemy_turn_ended_list and dummy_id in EntitiesState.enemy_triggered_list and GameState.is_ennemy_turn:
 		if !is_inside_tree():
 			queue_free()
-			return
 		if GameData.enemy_stats[dummy_id].RANGE  == true:
 			_enemy_ACT()
+			await get_tree().create_timer(0.2).timeout
 		elif GameData.enemy_stats[dummy_id].MVT > 0:
 			_enemy_MVT()
+			await get_tree().create_timer(0.1).timeout
 		else:
 			EntitiesState.enemy_turn_ended_list.append(dummy_id)
 		EntitiesState.selector_follows_enemy(GameData.enemy_stats[dummy_id].POSITION)
-		await get_tree().create_timer(0.3).timeout
 		StatsSystem.update_stats()
 	if dummy_id in GameData.enemy_stats:
 		GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
