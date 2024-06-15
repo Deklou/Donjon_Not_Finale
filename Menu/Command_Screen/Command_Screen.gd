@@ -1,7 +1,7 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var command_label : RichTextLabel = $Black_Background_ColorRect/Command_Label
-@onready var command_animation_player : AnimationPlayer = $ColorRect_Animation/AnimationPlayer_Fade
+@onready var command_animation_player : AnimationPlayer = $ColorRect_Animation/AnimationPlayer
 @onready var cursor_sprite_2d : Sprite2D = $Black_Background_ColorRect/Mouse_Command/Cursor_Sprite2D
 @onready var mouse_sprite_2d : Sprite2D = $Black_Background_ColorRect/Mouse_Command/Mouse_Sprite2D
 @onready var cursor_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Mouse_Command_Green/Cursor_Green_Sprite2D
@@ -26,31 +26,59 @@ extends Node2D
 @onready var space_bar_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Keyboard_Command_Green/Keyboard_Other_Green/Space_Bar_Green_Sprite2D
 @onready var button_sprite_2d : Sprite2D = $Black_Background_ColorRect/Button/Button_Sprite_2D
 @onready var button_green_sprite_2d : Sprite2D = $Black_Background_ColorRect/Button/Button_Green_Sprite_2D
+@onready var auto_turn_label : RichTextLabel = $Black_Background_ColorRect_2/Options/Options_VBoxContainer/Auto_Turn_HBoxContainer/Auto_Turn_Label
+@onready var auto_turn_checkbox : CheckBox = $Black_Background_ColorRect_2/Options/Options_VBoxContainer/Auto_Turn_HBoxContainer/Auto_Turn_CheckBox
+@onready var debug_label : RichTextLabel = $Black_Background_ColorRect_2/Options/Options_VBoxContainer/Debug_HBoxContainer/Debug_Label
+@onready var debug_checkbox : CheckBox = $Black_Background_ColorRect_2/Options/Options_VBoxContainer/Debug_HBoxContainer/Debug_CheckBox
+@onready var scroll_arrow_1 : Button = $Black_Background_ColorRect/Scroll_Button
+@onready var scroll_arrow_2 : Button = $Black_Background_ColorRect_2/Scroll_Button
+@onready var scroll_arrow_icon = preload("res://Sprites/Menu/Arrow_2.PNG")
+@onready var scroll_arrow_select_icon = preload("res://Sprites/Menu/Arrow_2_Select.PNG")
+@export var button_icon = preload("res://Sprites/Menu/Button.png")
+@export var green_button_icon = preload("res://Sprites/Menu/Button_Green.png")
+@export var back_button_icon = preload("res://Sprites/Menu/Back_To_Game.png")
+@export var back_green_button_icon = preload("res://Sprites/Menu/Back_To_Game_Green.png")
 var player_has_moved_mouse : bool = false
 var player_has_clicked : bool = false
 var player_has_entered_button : bool = false
 var player_has_validated : bool = false
 var mouse_movement_timeout : Timer
-signal to_objectif_screen 
-
+##################### READY #####################
 func _ready():
 	command_animation_player.play("fade_in")
-	command_label.bbcode_text = "[b]" + command_label.text + "[/b]"
-	command_label.bbcode_text = "[font_size=40]" + command_label.text + "[/font_size]"
+	command_label.bbcode_text = "[b][font_size=40]" + command_label.text + "[/font_size][/b]"
+	auto_turn_label.bbcode_text = "[b][font_size=40]" + auto_turn_label.text + "[/font_size][/b]"
+	debug_label.bbcode_text = "[b][font_size=40]" + debug_label.text + "[/font_size][/b]"
 	mouse_movement_timeout = Timer.new()
 	mouse_movement_timeout.wait_time = 0.1
 	mouse_movement_timeout.one_shot = true
 	mouse_movement_timeout.timeout.connect(_on_mouse_movement_timeout)
 	add_child(mouse_movement_timeout)
-	
+	if EntitiesState.player_parent_node != null:
+		button_sprite_2d.texture = back_button_icon
+		button_green_sprite_2d.texture = back_green_button_icon
+		scroll_arrow_1.visible = true
+	else:
+		button_sprite_2d.texture = button_icon
+		button_green_sprite_2d.texture = green_button_icon
+		scroll_arrow_1.visible = false
+	if GameState.auto_turn_enabled == true:
+		auto_turn_checkbox.button_pressed = true
+	else:
+		auto_turn_checkbox.button_pressed = false
+	if GameState.debug_enabled == true:
+		debug_checkbox.button_pressed = true
+	else:
+		debug_checkbox.button_pressed = true
+##################### RESET SPRITE #####################	
 func reset_all_sprite():
-	var sprite : Array = [cursor_sprite_2d,mouse_sprite_2d,Z_sprite_2d,Q_sprite_2d,S_sprite_2d,D_sprite_2d,arrow_up_sprite_2d,arrow_left_sprite_2d,arrow_down_sprite_2d,arrow_right_sprite_2d,button_sprite_2d]
+	var sprite : Array = [cursor_sprite_2d,mouse_sprite_2d,Z_sprite_2d,Q_sprite_2d,S_sprite_2d,D_sprite_2d,arrow_up_sprite_2d,arrow_left_sprite_2d,arrow_down_sprite_2d,arrow_right_sprite_2d]
 	var green_sprite : Array = [cursor_green_sprite_2d,mouse_green_sprite_2d,Z_green_sprite_2d,Q_green_sprite_2d,S_green_sprite_2d,D_green_sprite_2d,arrow_up_green_sprite_2d,arrow_left_green_sprite_2d,arrow_down_green_sprite_2d,arrow_right_green_sprite_2d,button_green_sprite_2d]
 	for node in sprite:
 		node.visible = true
 	for node in green_sprite:
 		node.visible = false
-		
+##################### INPUT #####################		
 func _input(event):
 	if player_has_entered_button == false:
 		if event is InputEventMouseMotion:
@@ -69,7 +97,7 @@ func _input(event):
 					player_has_clicked = false
 		else:
 			handle_key_input(event)
-
+##################### ZQSD ET BARRE ESPACE #####################	
 func handle_key_input(event):
 	if event.is_action_pressed("up"):
 		Z_sprite_2d.visible = false
@@ -109,11 +137,11 @@ func handle_key_input(event):
 	elif event.is_action_released("wait"):
 		space_bar_sprite_2d.visible = true
 		space_bar_green_sprite_2d.visible = false
-			
+##################### MOUVEMENT DE SOURIS #####################				
 func _on_mouse_movement_timeout():
 	mouse_sprite_2d.visible = true
 	mouse_green_sprite_2d.visible = false
-				
+##################### PROCESS #####################					
 func _process(_delta):
 	cursor_sprite_2d.visible = not player_has_clicked
 	cursor_green_sprite_2d.visible = player_has_clicked
@@ -122,22 +150,47 @@ func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true and button_sprite_2d.visible == false and player_has_validated == false:
 		reset_all_sprite()
 		player_has_validated = true
-		var thumbs_up_scene = preload("res://Menu/Thumbs_Up/Thumbs_Up.tscn").instantiate()
-		add_child.call_deferred(thumbs_up_scene)
-		thumbs_up_scene.position = Vector2(832,624)
-		button_sprite_2d.visible = true
-		await get_tree().create_timer(0.1).timeout
-		button_sprite_2d.visible = false
-		await get_tree().create_timer(0.5).timeout
-		command_animation_player.play("fade_out")
+		if EntitiesState.player_parent_node == null:
+			var thumbs_up_scene = preload("res://Menu/Thumbs_Up/Thumbs_Up.tscn").instantiate()
+			add_child.call_deferred(thumbs_up_scene)
+			thumbs_up_scene.position = Vector2(832,624)
+		command_animation_player.play("select_button")
+		if EntitiesState.player_parent_node == null:
+			await get_tree().create_timer(0.5).timeout
+			command_animation_player.play("fade_out")
 		await get_tree().create_timer(0.7).timeout
-		to_objectif_screen.emit() #Vers Root
+		GameState.to_game_from_menu.emit() #Vers Root et Interface Down
 		queue_free()
-
+##################### BOUTON DE CONFIRMATION ENTREE #####################	
 func _on_area_2d_mouse_entered():
 	reset_all_sprite()
 	button_sprite_2d.visible = false
 	button_green_sprite_2d.visible = not button_sprite_2d.visible
-
+##################### BOUTON DE CONFIRMATION SORTIE #####################	
 func _on_area_2d_mouse_exited():
 	button_sprite_2d.visible = true
+##################### SCROLL #####################	
+func _on_button_2_pressed():
+	command_animation_player.play("scroll_right")
+func _on_button_pressed():
+	command_animation_player.play("scroll_left")
+##################### SCROLL ENTREE #####################	
+func _on_scroll_button_mouse_entered():
+	scroll_arrow_1.icon = scroll_arrow_select_icon
+	scroll_arrow_2.icon = scroll_arrow_select_icon
+##################### SCROLL SORTIE #####################	
+func _on_scroll_button_mouse_exited():
+	scroll_arrow_1.icon = scroll_arrow_icon
+	scroll_arrow_2.icon = scroll_arrow_icon
+##################### AUTO TURN #####################	
+func _on_auto_turn_check_box_pressed():
+	if GameState.auto_turn_enabled == false:
+		GameState.auto_turn_enabled = true
+	else:
+		GameState.auto_turn_enabled = false
+##################### DEBUG #####################	
+func _on_debug_check_box_pressed():
+	if GameState.debug_enabled == false:
+		GameState.debug_enabled = true
+	else:
+		GameState.debug_enabled = false

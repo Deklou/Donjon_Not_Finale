@@ -18,6 +18,8 @@ var default_first_weapon_equiped : bool = false
 var default_silent_presence_log : bool = false
 var default_fountain_is_currently_used : bool = false #check si le joeuur est actuellement en train d'utiliser une fontaine
 var default_kojiro_was_obtained : bool = false
+var default_auto_turn_enabled : bool = false
+var default_debug_enabled : bool = false
 ##################### VARIABLES #####################
 #Object States
 var chest_states = {} #dictionnaire contenant tous les états des coffres
@@ -44,6 +46,8 @@ var first_weapon_equiped : bool
 var silent_presence_log : bool
 var fountain_is_currently_used : bool
 var kojiro_was_obtained : bool
+var auto_turn_enabled : bool #dicte si le passage automatique du tour est activé
+var debug_enabled : bool #dicte si le debug mode peut être acitvée
 signal range_check #vérifie si le joueur se trouve ciblé par un ennemi
 signal combat_check #vérifie si le joueur a la porté d'attaquer un ennemi
 signal hide_wait_button #cache le bouton d'attente
@@ -57,6 +61,7 @@ signal tutorial_end #affiche l'interface finale
 signal intro_level_closed_door #fait apparaître la porte fermée au premier niveau
 signal fountain_has_been_used(fountain_id) #quand une fontaine a été utilisé, on envoie un signal pour checker son apparence
 signal to_stats_screen
+signal to_game_from_menu #utilisé lorsque l'on souhaite revenir au jeu à partir d'un menu
 ##################### RESET VALUE #####################
 func _reset_gamestate_value():
 	chest_states.clear()
@@ -79,6 +84,8 @@ func _reset_gamestate_value():
 	silent_presence_log = default_silent_presence_log
 	fountain_is_currently_used = default_fountain_is_currently_used
 	kojiro_was_obtained = default_kojiro_was_obtained
+	auto_turn_enabled = default_auto_turn_enabled
+	debug_enabled = default_debug_enabled
 ##################### READY #####################
 func _ready():
 	_reset_gamestate_value()
@@ -100,6 +107,9 @@ func player_has_moved(): #c'est ici qu'est régit le comportement des points de 
 			GameData.player_current_movement_point = 0
 		
 func player_input_cant_move():
+	if GameState.auto_turn_enabled == true and GameState.enemy_range_entered == false: #Si l'autoturn est activé et qu'on ne peut attaquer, alors on passe le tour
+		GameData.player_current_action_point = 0
+		player_turn_end()
 	signal_player_input_cant_move.emit() #envoi vers Player_Profil_UI
 		
 func player_has_acted(): #c'est ici qu'est régit le comportement des points d'actions quand le joueur agit

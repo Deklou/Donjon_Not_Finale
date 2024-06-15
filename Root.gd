@@ -8,7 +8,7 @@ func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	Root = get_tree().root
 	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_objectif_screen.connect(_to_stats_screen)
+	GameState.to_game_from_menu.connect(_to_stats_screen)
 	GameState.restart_root.connect(_to_stats_screen) #si on recommence, on commence directement dans le niveau
 	
 func _to_objective_screen():
@@ -17,14 +17,15 @@ func _to_objective_screen():
 	Root_instance.to_stats_screen.connect(_to_stats_screen)
 	
 func _to_stats_screen():
-	Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_intro_level.connect(_to_intro_level)
-	EntitiesState.Root = get_tree().root
-	EntitiesState.Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
-	for child in EntitiesState.Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
-		user_interface_node = child
-	user_interface_node.visible = true
+	if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
+		Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
+		Root.add_child.call_deferred(Root_instance)
+		Root_instance.to_intro_level.connect(_to_intro_level)
+		EntitiesState.Root = get_tree().root
+		EntitiesState.Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
+		for child in EntitiesState.Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
+			user_interface_node = child
+		user_interface_node.visible = true
 	
 func _to_intro_level():
 	EntitiesState.player_is_frozen = true
@@ -100,3 +101,28 @@ func _to_secret():
 	Root_instance = load(scene_path).instantiate()
 	Root.add_child.call_deferred(Root_instance)'
 	
+var debug1_pressed = false
+var debug2_pressed = false
+	
+func _input(event):
+	if event.is_action("debug1") or event.is_action("debug2"):	
+		if event.is_action_pressed("debug1"):
+			debug1_pressed = event.is_pressed()
+		elif event.is_action_released("debug1"):
+			debug1_pressed = event.is_pressed()
+		if event.is_action_pressed("debug2"):
+			debug2_pressed = event.is_pressed()
+		elif event.is_action_released("debug2"):
+			debug1_pressed = event.is_pressed()
+			
+func _process(_delta):
+	if debug1_pressed and debug2_pressed:
+		Root = get_tree().root
+		var last_child = Root.get_child(Root.get_child_count() - 1)
+		Root.remove_child(last_child)
+		Root_instance = preload("res://Levels/Debug/debug_level.tscn").instantiate()
+		Root.add_child.call_deferred(Root_instance)
+		Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
+		for child in Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
+			user_interface_node = child
+		user_interface_node.visible = true

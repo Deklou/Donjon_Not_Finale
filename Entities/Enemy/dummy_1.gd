@@ -95,17 +95,10 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true:
-		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
-		mouse_click_count +=1
-		if EntitiesState.selected_id != EntitiesState.enemy_id:
-			mouse_click_count = 1
-		if mouse_click_count == 2:
+		if EntitiesState.selector_position == GameData.enemy_stats[dummy_id].POSITION:
 			EntitiesState.enemy_is_deselected()
-			mouse_click_count = 0
-		EntitiesState.enemy_id = dummy_id
-		EntitiesState.selected_id = dummy_id
-		StatsSystem.update_stats()
-		
+		else:
+			EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
 ##################### CONTACT JOUEUR #####################
 		
 func _on_area_2d_body_entered(body):

@@ -10,6 +10,7 @@ var default_Root = null
 var default_Root_instance = null
 var default_player_parent_node : Node = null
 var default_player_is_frozen : bool = false
+var default_selector_position : Vector2  = Vector2(0,0) #position du selecteur
 ##################### VARIABLES #####################
 signal show_enemy_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
 signal hide_enemy_UI #cache le profil de l'ennemi
@@ -41,6 +42,7 @@ var Root
 var Root_instance
 var player_parent_node : Node  #On récu^père le parent du noeud joueur, qui est le niveau dans lequel il se trouve
 var player_is_frozen : bool #permet de décider si le joueur peut se déplacer
+var selector_position : Vector2 #position du selecteur
 ##################### RESET VALUE #####################
 func _reset_entities_state_value():
 	enemy_states.clear()
@@ -55,6 +57,7 @@ func _reset_entities_state_value():
 	Root_instance = default_Root_instance
 	player_parent_node = default_player_parent_node
 	player_is_frozen = default_player_is_frozen
+	selector_position = default_selector_position
 ##################### READY #####################
 func _ready():
 	_reset_entities_state_value()

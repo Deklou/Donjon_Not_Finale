@@ -722,8 +722,8 @@ visible = false
 layout_mode = 2
 anchor_left = 0.225
 anchor_right = 0.225
-offset_left = 80.4
-offset_right = 216.4
+offset_left = 156.4
+offset_right = 292.4
 offset_bottom = 36.0
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 20
@@ -737,12 +737,20 @@ anchor_left = 0.029
 anchor_top = 0.4
 anchor_right = 0.029
 anchor_bottom = 0.4
-offset_left = 392.336
+offset_left = 468.336
 offset_top = -16.0
-offset_right = 528.336
+offset_right = 604.336
 offset_bottom = 20.0
 theme_override_font_sizes/font_size = 20
 text = "Attendre"
+
+[node name="Command_Button" type="Button" parent="MarginContainer_down/interface_down"]
+layout_mode = 0
+offset_left = 196.0
+offset_right = 326.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 20
+text = "Commandes"
 
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/plus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_plus_str_button_pressed"]
 [connection signal="pressed" from="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR/minus_STR_button" to="MarginContainer_right/white_bg_right/interface_right/Player_Profil" method="_on_minus_str_button_pressed"]
@@ -760,3 +768,4 @@ text = "Attendre"
 [connection signal="pressed" from="MarginContainer_left/white_bg_left/interface_left/histo_logs_button" to="." method="_on_histo_logs_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Attack_button" to="MarginContainer_down/interface_down" method="_on_attack_button_pressed"]
 [connection signal="pressed" from="MarginContainer_down/interface_down/Wait_button" to="MarginContainer_down/interface_down" method="_on_wait_button_pressed"]
+[connection signal="pressed" from="MarginContainer_down/interface_down/Command_Button" to="MarginContainer_down/interface_down" method="_on_command_button_pressed"]

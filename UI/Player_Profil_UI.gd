@@ -93,10 +93,10 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		player_mvt_icon.visible = false
 		player_act_icon.visible = false
 	
-	########################### flèches ###########################
+	########################### FLECHES ###########################
 	MT_Arrow_Up.visible = false
 	CRT_Arrow_Up.visible = false
-	########################### Couleurs ###########################
+	########################### COULEURS ###########################
 	if float(GameData.player_HP)*100/float(GameData.player_MAX_HP) <= 20: #décide de la couleur dès hp en fonction du %
 		UI_stat_HP.text = "[b][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(255,0,0,255)

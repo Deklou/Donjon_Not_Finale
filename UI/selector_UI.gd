@@ -5,12 +5,15 @@ func _ready():
 	EntitiesState.change_selector_position_UI.connect(change_selector_position)
 	EntitiesState.hide_selector_UI.connect(hide_selector)
 
-func show_selector(position_enemy: Vector2):
-	$sprite_selector.global_position = position_enemy
+func show_selector(enemy_position: Vector2):
+	$sprite_selector.global_position = enemy_position
+	EntitiesState.selector_position = enemy_position
 	$sprite_selector.visible = true
 	
-func change_selector_position(position_enemy : Vector2):
-	$sprite_selector.global_position = position_enemy
+func change_selector_position(enemy_position : Vector2):
+	$sprite_selector.global_position = enemy_position
+	EntitiesState.selector_position = enemy_position
 
 func hide_selector():
 	$sprite_selector.visible = false
+	EntitiesState.selector_position = Vector2(0,0) #On vient reset la position du selecteur par sécurité
