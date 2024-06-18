@@ -1,6 +1,7 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
+var default_object_name : String = ""
 var default_fountain_id : int = 0
 var default_fountain_current_point : int = 0
 var default_double_remove_call : bool = false
@@ -22,6 +23,7 @@ var default_auto_turn_enabled : bool = false
 var default_debug_enabled : bool = false
 ##################### VARIABLES #####################
 #Object States
+var object_name : String #Nom de l'objet
 var chest_states = {} #dictionnaire contenant tous les états des coffres
 var fountain_id : int #identifiant unique d'une fontaine
 var fountain_current_point : int #les points restants de la fontaine
@@ -67,6 +69,7 @@ func _reset_gamestate_value():
 	chest_states.clear()
 	fountain_attributes.clear()
 	fountain_states.clear()
+	object_name = default_object_name
 	fountain_id = default_fountain_id
 	fountain_current_point = default_fountain_current_point
 	double_remove_call = default_double_remove_call

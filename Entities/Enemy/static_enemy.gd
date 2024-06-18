@@ -77,25 +77,16 @@ func _ready():
 	position = currPos
 	GameData.enemy_stats[dummy_id].POSITION = get_position()
 ##################### INTERFACE ET SELECTEUR #####################
-
 func _on_area_2d_mouse_entered():
 	EntitiesState.selected_id = dummy_id
-
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == true:
-		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois
-		mouse_click_count +=1
-		if EntitiesState.selected_id != EntitiesState.enemy_id:
-			mouse_click_count = 1
-		if mouse_click_count == 2:
+		if EntitiesState.selector_position == GameData.enemy_stats[dummy_id].POSITION:
+			EntitiesState.enemy_id = dummy_id #Besoin de lier les deux pour cacher le selecteur
 			EntitiesState.enemy_is_deselected()
-			mouse_click_count = 0
-		EntitiesState.enemy_id = dummy_id
-		EntitiesState.selected_id = dummy_id
-		StatsSystem.update_stats()
-		
+		else:
+			EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id) #on aeppelle la fonction pour rendre visible l'interface ennemi #on remet l'état à faux pour qu'il ne soit appelé qu'une fois		
 ##################### CONTACT JOUEUR #####################
-		
 func _on_area_2d_body_entered(body):
 	if body is Node2D:
 		GameData.enemy_stats[dummy_id].RANGE = true
@@ -106,16 +97,13 @@ func _on_area_2d_body_entered(body):
 		EntitiesState.enemy_can_be_attacked_position = GameData.enemy_stats[dummy_id].POSITION
 		EntitiesState.enemy_selected(GameData.enemy_stats[dummy_id].POSITION, dummy_id)		
 		EntitiesState.enemy_triggered_list.append(dummy_id)
-		
 func _on_area_2d_body_exited(body):
 	if body is Node2D and dummy_id not in EntitiesState.enemy_states:
 		GameData.enemy_stats[dummy_id].RANGE = false 
 		GameState.enemy_range_entered = false
 		EntitiesState.enemy_is_deselected()
 		EntitiesState.enemy_triggered_list.remove_at(EntitiesState.enemy_triggered_list.find(dummy_id))
-		
 ##################### DEGAT #####################
-
 func _entity_take_damage(Entity_Name: String):
 	if !is_inside_tree():
 		return 
@@ -127,16 +115,12 @@ func _entity_take_damage(Entity_Name: String):
 		damage_sprite_2.visible = true
 		await get_tree().create_timer(0.05).timeout
 		damage_sprite_2.visible = false
-
 ##################### PROCESS #####################
-
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu
 		GameState.enemy_range_entered = false #Cas où joueur élimine ennemi mais le flag reste true
 		$".".queue_free()
-		
-##################### ACTION #####################
-			
+##################### ACTION #####################	
 func _enemy_ACT():
 	while EntitiesState.enemy_that_can_act == dummy_id and dummy_id not in EntitiesState.enemy_turn_ended_list and GameData.enemy_stats[dummy_id].RANGE == true and GameState.is_ennemy_turn:
 		EntitiesState.selected_id = EntitiesState.enemy_id
@@ -146,3 +130,10 @@ func _enemy_ACT():
 	if dummy_id in GameData.enemy_stats:
 		GameData.enemy_stats[dummy_id].MVT = GameData.enemy_stats[dummy_id].MAX_MVT
 		GameData.enemy_stats[dummy_id].ACT = GameData.enemy_stats[dummy_id].MAX_ACT
+##################### PRESENCE ECRAN #####################
+func _on_visible_on_screen_notifier_2d_screen_entered(): #Crée une interface liée à l'ennemi
+	EntitiesState.enemy_id = dummy_id #l'id dont on se sert pour lier l'ennemi à son interface
+	EntitiesState.instanciate_other_UI.emit("enemy") #Vers user_interface
+func _on_visible_on_screen_notifier_2d_screen_exited(): #Cache l'interface liée à l'ennemi
+	EntitiesState.enemy_id = dummy_id #l'id dont on se sert pour l'interface à supprimer
+	EntitiesState.delete_other_UI.emit() #Vers enemy_profil_ui.

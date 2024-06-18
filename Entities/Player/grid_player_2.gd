@@ -9,7 +9,7 @@ extends CharacterBody2D
 var currPos
 var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
-
+##################### READY #####################
 func _ready():
 	EntitiesState.player_parent_node = get_parent()
 	currPos = $".".position
@@ -27,7 +27,6 @@ func _ready():
 	EntitiesState.enable_player_camera.connect(_enable_player_moving_camera)
 	Inventory.entity_heal.connect(_player_heal)
 ##################### DEPLACEMENT #####################
-	
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down") or event.is_action("wait"):	
 		if EntitiesState.player_is_frozen == false:
@@ -59,12 +58,9 @@ func _input(event):
 		else:
 			move_timer.stop()
 			moving_direction = Vector2.ZERO
-
-
 func _on_MoveTimer_timeout():
 	if moving_direction != Vector2.ZERO:
 		handle_movement(moving_direction, get_animation_from_direction(moving_direction))
-
 func handle_movement(direction_vector, animation):
 	animation_player.play(animation)
 	GameState.player_position = self.position
@@ -78,7 +74,6 @@ func handle_movement(direction_vector, animation):
 	elif GameData.player_current_movement_point == 0:
 		GameState.player_input_cant_move()
 	GameState.player_position = self.position
-
 func get_animation_from_direction(direction_vector):
 	if direction_vector.x > 0:
 		return "walk_right"
@@ -88,7 +83,6 @@ func get_animation_from_direction(direction_vector):
 		return "walk_down"
 	elif direction_vector.y < 0:
 		return "walk_up"
-		
 ##################### DEGAT #####################
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
@@ -104,12 +98,10 @@ func _player_take_damage(Entity_Name: String):
 		await get_tree().create_timer(0.03).timeout
 		damage_sprite_3.visible = false
 	StatsSystem.update_stats()
-	
 ##################### SOIN #####################
 func _player_heal(entity_name : String):
 	if entity_name == "Player":
-		animation_player.play("heal")
-		
+		animation_player.play("heal")		
 ##################### CAMERA #####################
 func _disable_player_moving_camera():
 	player_camera.enabled = false

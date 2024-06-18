@@ -12,8 +12,10 @@ var default_player_parent_node : Node = null
 var default_player_is_frozen : bool = false
 var default_selector_position : Vector2  = Vector2(0,0) #position du selecteur
 ##################### VARIABLES #####################
-signal show_enemy_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
-signal hide_enemy_UI #cache le profil de l'ennemi
+signal instanciate_other_UI(type) #envoie signal vers userinterface pour créer l'instance de l'interface associé à l'ennemi
+signal show_other_UI #signal envoyé quand on souhaite rendre visible l'interface ennemi
+signal hide_other_UI #cache le profil de l'ennemi s'il n'est pas sélectionné
+signal delete_other_UI #supprime l'instance de l'interface dès lorsque l'ennemi ou l'objet n'est plus affiché à l'écran
 signal hide_UI #cache l'entièreté de l'interface utilisateur
 signal show_enemy_inventory_UI #affiche l'inventaire ennemi
 signal hide_enemy_inventory_UI #masque l'inventaire ennemi
@@ -62,7 +64,6 @@ func _reset_entities_state_value():
 func _ready():
 	_reset_entities_state_value()
 ##################### CHOIX ACTION ENNEMI #####################
-
 func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 	if GameData.enemy_stats[enemy_that_can_act].ACT > 0:
 		GameState.enemy_has_acted()
@@ -83,7 +84,6 @@ func take_enemy_action(): #fonction qui choisit la prochaine action de l'ennemi
 	else:
 		EntitiesState.enemy_turn_ended_list.append(enemy_that_can_act)
 		StatsSystem.update_stats()
-			
 ##################### DEGATS JOUEUR ET ENNEMI #####################	
 func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour calculer les dégâts reçus
 	if entity_name == "Enemy":
@@ -103,26 +103,22 @@ func take_damage_to_enemy(entity_name: String, dummy_id: String): #fonction pour
 			Logs._log_entity_deal_damage("Player",GameData.enemy_stats[dummy_id].Name)
 		take_damage.emit("Player") #Envoi vers script joueur
 	StatsSystem.update_stats()
-##################### SELECTION #####################
-
+##################### SELECTION ENNEMIE #####################
 func enemy_selected(position : Vector2, id : String):
 	selected_id = id
 	Inventory._load_enemy_inventory_UI() ##On charge l'interface à dès qu'on souhaite afficher les informations de l'ennemi
-	show_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
+	show_other_UI.emit() #envoi du signal vers Enemy_Profil_UI
 	show_enemy_inventory_UI.emit() #vers Enemy Inventory UI
 	show_selector_UI.emit(position) #vers selector_UI
-	StatsSystem.update_stats()
-	
+	StatsSystem.update_stats()	
 func selector_follows_enemy(position : Vector2):
 	Inventory._load_enemy_inventory_UI() #On charge l'interface à dès qu'on souhaite afficher les informations de l'ennemi
 	StatsSystem.update_stats()
 	change_selector_position_UI.emit(position) #vers selector_ui
-
 func enemy_is_deselected():
 	hide_selector_UI.emit() #vers selector_UI
-	hide_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
-	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
-		
+	hide_other_UI.emit() #envoi du signal vers Enemy_Profil_UI
+	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui		
 ##################### MORT #####################
 func player_is_dead():
 	if GameData.secret_triggered == true:
@@ -139,15 +135,11 @@ func player_is_dead():
 		Root_instance.position = last_player_position
 		Root.add_child(Root_instance)
 	hide_UI.emit() #Vers user_interface
-
 func enemy_is_dead(dummy_id: String) -> bool: #retourne si l'état est présent, et quel état
 	return enemy_states.has(dummy_id) and enemy_states[dummy_id]
-
 func enemy_death(dummy_id : String):
 	EntitiesState.enemy_states[dummy_id] = true #sert de check pour le process dans la scène de l'ennemi 
 	EntitiesState.enemy_is_deselected()
-	hide_enemy_UI.emit() #envoi du signal vers Enemy_Profil_UI
-	hide_enemy_inventory_UI.emit() #vers enemy_inventory_ui
 	XpSystem.gain_xp()
 	GameData.enemy_stats.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime sa clé et valeur dans le dictionnaire de stats
 	GameData.enemy_inventory.erase(dummy_id) #Une fois qu'on a supprimé l'ennemi du niveau, on supprime son inventaire

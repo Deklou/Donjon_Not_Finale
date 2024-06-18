@@ -69,7 +69,7 @@ func _ready():
 	if GameState.debug_enabled == true:
 		debug_checkbox.button_pressed = true
 	else:
-		debug_checkbox.button_pressed = true
+		debug_checkbox.button_pressed = false
 ##################### RESET SPRITE #####################	
 func reset_all_sprite():
 	var sprite : Array = [cursor_sprite_2d,mouse_sprite_2d,Z_sprite_2d,Q_sprite_2d,S_sprite_2d,D_sprite_2d,arrow_up_sprite_2d,arrow_left_sprite_2d,arrow_down_sprite_2d,arrow_right_sprite_2d]

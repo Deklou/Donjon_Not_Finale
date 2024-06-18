@@ -1,18 +1,16 @@
 extends Node2D
 
-@onready var first_room_camera : Camera2D = $"../first_room_camera"
+@onready var tutorial_tilemap : TileMap = $"../Demo_TileMap"
 signal to_first_floor 
 
 func _on_to_second_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(0, 704))
 	await get_tree().create_timer(0.3).timeout
-	first_room_camera.enabled = false
 	EntitiesState.enable_player_camera.emit() #vers script joueur
 func _on_to_first_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(0, -640))
 	await get_tree().create_timer(0.3).timeout
 	EntitiesState.disable_player_camera.emit() #vers script joueur
-	first_room_camera.enabled = true
 func _on_to_third_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(960,-2688))
 func _on_to_second_room_from_third_area_2d_body_entered(body):
@@ -31,7 +29,7 @@ func _on_to_intro_level_room_from_bonus_1_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(3840, -512))
 func _on_to_first_floor_area_2d_body_entered(_body):
 	to_first_floor.emit() #vers Root
-	queue_free() #A terme, déplacer ce script dans le niveau, pour pouvoir le queue free entièrement
+	tutorial_tilemap.set_layer_enabled(0, false)
 		
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:

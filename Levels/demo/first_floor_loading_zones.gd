@@ -10,7 +10,7 @@ signal to_tutorial_from_first_floor
 func _ready():
 	EntitiesState.enemy_is_deselected()
 	StatsSystem.update_player_stats.connect(_all_enemies_are_defeated)
-
+	
 func _on_to_bonus_2_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(3200, 320))
 func _on_to_bonus_3_area_2d_body_entered(body):
@@ -21,13 +21,10 @@ func _on_to_first_floor_from_bonus_3_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(-1088, 0))
 func _on_to_the_end_area_2d_body_entered(_body):
 	GameState.to_stats_screen.emit() #Vers Root
-	queue_free()
 func _on_to_secret_area_2d_body_entered(_body):
 	to_secret_exit.emit() #vers Root
-	queue_free()
 func _on_to_intro_level_area_2d_body_entered(_body):
 	to_tutorial_from_first_floor.emit() #Vers Root
-	queue_free()
 
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:

@@ -1,17 +1,23 @@
 extends Control
 
 @onready var vbox_node : VBoxContainer = $ScrollContainer/VBoxContainer
+var enemy_inventory_id : String #identifiant de l'interface, le même que l'ennemi dont elel est associée
 
 func _ready():
+	enemy_inventory_id = EntitiesState.enemy_id
 	Inventory.update_enemy_inventory_UI.connect(update_enemy_inventory)
 	EntitiesState.show_enemy_inventory_UI.connect(show_enemy_inventory)
 	EntitiesState.hide_enemy_inventory_UI.connect(hide_enemy_inventory)
 
 func show_enemy_inventory():
-	$".".visible = true
+	if enemy_inventory_id == EntitiesState.selected_id:
+		$".".visible = true
+	else:
+		$".".visible = false
 	
 func hide_enemy_inventory():
-	$".".visible = false
+	if enemy_inventory_id == EntitiesState.selected_id:
+		$".".visible = false
 
 func update_enemy_inventory(inventory: Array):
 	for child in vbox_node.get_children():

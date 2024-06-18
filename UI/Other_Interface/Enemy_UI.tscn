@@ -1,0 +1,251 @@
+[gd_scene load_steps=13 format=3 uid="uid://b0acf8p010f6n"]
+
+[ext_resource type="Script" path="res://UI/Enemy_Profil_UI.gd" id="1_bvieb"]
+[ext_resource type="Script" path="res://UI/Other_Interface/Enemy_UI.gd" id="1_kgyyl"]
+[ext_resource type="Texture2D" uid="uid://5i20krj6irp2" path="res://Sprites/UI_icon/xp_bar_bg.png" id="2_l1fad"]
+[ext_resource type="Texture2D" uid="uid://boplu8thymxy5" path="res://Sprites/UI_icon/xp_bar.png" id="3_ls703"]
+[ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="4_3wwkd"]
+[ext_resource type="Texture2D" uid="uid://dnir1ada82hxo" path="res://Sprites/UI_icon/attack.png" id="5_70dux"]
+[ext_resource type="Texture2D" uid="uid://b7nh3ywii4h0q" path="res://Sprites/UI_icon/dexterity.png" id="6_xgxy5"]
+[ext_resource type="Texture2D" uid="uid://20n0desniesb" path="res://Sprites/UI_icon/shield.png" id="7_684ed"]
+[ext_resource type="Texture2D" uid="uid://cx6imt3vhul04" path="res://Sprites/UI_icon/movement.png" id="8_aij48"]
+[ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="9_hi3va"]
+[ext_resource type="Texture2D" uid="uid://mycdocn0k0wi" path="res://Sprites/UI_icon/delimiter_1.png" id="10_j4ajf"]
+[ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="11_5my4o"]
+
+[node name="Enemy_UI" type="Node2D"]
+script = ExtResource("1_kgyyl")
+
+[node name="Enemy_Profil" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 343.0
+offset_right = 192.0
+offset_bottom = 604.0
+script = ExtResource("1_bvieb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Enemy_Profil"]
+layout_mode = 0
+offset_top = -17.0
+offset_right = 216.0
+offset_bottom = 31.0
+theme_override_constants/separation = 2
+
+[node name="Name" type="RichTextLabel" parent="Enemy_Profil/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Nom de l'adversaire."
+text = "Nom:"
+fit_content = true
+
+[node name="LVL" type="RichTextLabel" parent="Enemy_Profil/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Indicateur de la force globale de l'adversaire."
+text = "Niveau:"
+fit_content = true
+
+[node name="Enemy_Calculated_Stats" type="VBoxContainer" parent="Enemy_Profil"]
+layout_mode = 0
+offset_top = 43.0
+offset_right = 192.0
+offset_bottom = 121.0
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="HP" type="RichTextLabel" parent="Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+tooltip_text = "Points de vie. S’ils tombent à 0, c’est la victoire."
+bbcode_enabled = true
+text = "HP:"
+fit_content = true
+
+[node name="Enemy_HP_Bar" type="Control" parent="Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+
+[node name="Enemy_HP_Bar_TextureProgressBar" type="TextureProgressBar" parent="Enemy_Profil/Enemy_Calculated_Stats/Enemy_HP_Bar"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = -20.0
+offset_right = 199.0
+offset_bottom = -10.0
+value = 100.0
+texture_under = ExtResource("2_l1fad")
+texture_progress = ExtResource("3_ls703")
+texture_progress_offset = Vector2(2, 2)
+
+[node name="HBoxContainer_MT" type="HBoxContainer" parent="Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="MT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
+layout_mode = 2
+tooltip_text = "Dégâts totaux infligés par l'adversaire."
+bbcode_enabled = true
+text = "Dégâts Totaux:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Arrow_Up" type="TextureRect" parent="Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_MT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_3wwkd")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="HBoxContainer_CRT" type="HBoxContainer" parent="Enemy_Profil/Enemy_Calculated_Stats"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="CRT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_CRT"]
+layout_mode = 2
+tooltip_text = "Pourcentage que l'attaque portée fasse 
+le double des dégâts totaux."
+bbcode_enabled = true
+text = "Critique:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Arrow_Up" type="TextureRect" parent="Enemy_Profil/Enemy_Calculated_Stats/HBoxContainer_CRT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_3wwkd")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="Enemy_Stats" type="VBoxContainer" parent="Enemy_Profil"]
+layout_mode = 0
+offset_top = 132.0
+offset_right = 96.0
+offset_bottom = 275.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 7
+
+[node name="STR_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="STR_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_70dux")
+expand_mode = 3
+
+[node name="STR" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
+z_as_relative = false
+layout_mode = 2
+tooltip_text = "Pondère les dégâts infligés par l'adversaire."
+bbcode_enabled = true
+text = "STR:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DEX_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="DEX_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_xgxy5")
+expand_mode = 2
+
+[node name="DEX" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Pondère le taux de coups critiques 
+ainsi que les compétences à taux d’activation."
+text = "DEX:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DEF_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="DEF_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_684ed")
+expand_mode = 3
+
+[node name="DEF" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Réduit les dégâts reçus."
+text = "DEF:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MVT_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="MVT_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_aij48")
+expand_mode = 3
+
+[node name="MVT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Nombre de cases parcourables."
+bbcode_enabled = true
+text = "MVT:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ACT_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
+layout_mode = 2
+
+[node name="ACT_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_hi3va")
+expand_mode = 3
+
+[node name="ACT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Nombre d’actions possibles."
+bbcode_enabled = true
+text = "ACT:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Delimiter" type="Control" parent="Enemy_Profil"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -343.0
+offset_right = 32.0
+offset_bottom = -303.0
+
+[node name="delimiter_logs_enemy_stats" type="ColorRect" parent="Enemy_Profil/Delimiter"]
+layout_mode = 0
+offset_top = 316.0
+offset_right = 225.0
+offset_bottom = 324.0
+
+[node name="delimiter_3" type="Sprite2D" parent="Enemy_Profil/Delimiter"]
+position = Vector2(106, 382.5)
+scale = Vector2(1.96226, 1.24999)
+texture = ExtResource("10_j4ajf")
+
+[node name="delimiter_4" type="Sprite2D" parent="Enemy_Profil/Delimiter"]
+position = Vector2(106, 469.875)
+scale = Vector2(1.96226, 1.125)
+texture = ExtResource("10_j4ajf")
+
+[node name="Enemy_Inventory_UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 632.0
+offset_right = 177.0
+offset_bottom = 719.0
+script = ExtResource("11_5my4o")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Enemy_Inventory_UI"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 169.0
+offset_bottom = 96.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Enemy_Inventory_UI/ScrollContainer"]
+layout_mode = 2
+
+[node name="delimiter_5" type="Sprite2D" parent="Enemy_Inventory_UI"]
+position = Vector2(97, -6.125)
+scale = Vector2(1.96226, 1.125)
+texture = ExtResource("10_j4ajf")
