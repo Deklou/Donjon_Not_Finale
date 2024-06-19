@@ -2,7 +2,7 @@ extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
 var default_object_name : String = ""
-var default_fountain_id : int = 0
+var default_fountain_id : String = ""
 var default_fountain_current_point : int = 0
 var default_double_remove_call : bool = false
 var default_weapon_equipped : bool = false
@@ -25,7 +25,7 @@ var default_debug_enabled : bool = false
 #Object States
 var object_name : String #Nom de l'objet
 var chest_states = {} #dictionnaire contenant tous les états des coffres
-var fountain_id : int #identifiant unique d'une fontaine
+var fountain_id : String  #identifiant unique d'une fontaine
 var fountain_current_point : int #les points restants de la fontaine
 var fountain_attributes = {} #dictionnaire contenant tous les attributs d'une fontaine
 var fountain_states = [] #tableau contenant les fontaines déjà utilisées
