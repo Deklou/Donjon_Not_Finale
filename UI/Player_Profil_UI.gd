@@ -98,10 +98,10 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	CRT_Arrow_Up.visible = false
 	########################### COULEURS ###########################
 	if float(GameData.player_HP)*100/float(GameData.player_MAX_HP) <= 20: #décide de la couleur dès hp en fonction du %
-		UI_stat_HP.text = "[b][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
+		UI_stat_HP.text = "[b][font=res://Fonts/determination-extended.ttf][color=#FF0000]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/font][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(255,0,0,255)
 	elif GameData.player_MAX_HP == GameData.player_HP:
-		UI_stat_HP.text = "[b][color=#3EE657]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/b]"
+		UI_stat_HP.text = "[b][font=res://Fonts/determination-extended.ttf][color=#3EE657]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/font][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(1,230,1,255)
 	else:
 		UI_stat_HP.text = "[b]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/b]"
@@ -266,7 +266,6 @@ func _on_cancel_button_pressed():
 	GameState.player_has_acted()
 	StatsSystem.update_stats()
 	GameState.player_turn_end()
-
 func _on_validation_special_button_pressed():
 	GameState.Ui_Inventory_is_locked = false #on réactive l'accès à l'inventaire
 	Button_Stats_Special_Control.visible = false

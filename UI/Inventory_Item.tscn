@@ -1,9 +1,12 @@
-[gd_scene format=3 uid="uid://b85osk6sisx4e"]
+[gd_scene load_steps=2 format=3 uid="uid://b85osk6sisx4e"]
+
+[ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_gmsv4"]
 
 [node name="Inventory_Button" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_gmsv4")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1

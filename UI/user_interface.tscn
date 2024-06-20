@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=28 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
 [ext_resource type="Script" path="res://UI/User_Interface.gd" id="1_v8vxl"]
+[ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="3_aopnq"]
 [ext_resource type="Texture2D" uid="uid://5i20krj6irp2" path="res://Sprites/UI_icon/xp_bar_bg.png" id="4_a6i1v"]
 [ext_resource type="Texture2D" uid="uid://4xxhkwn7535k" path="res://Sprites/UI_icon/buff_arrow.png" id="5_lewjm"]
 [ext_resource type="Texture2D" uid="uid://boplu8thymxy5" path="res://Sprites/UI_icon/xp_bar.png" id="5_pmgmk"]
@@ -87,26 +88,30 @@ mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer_right/white_bg_right/interface_right/Validation_menu"]
 layout_mode = 2
-offset_top = 209.0
-offset_right = 209.0
-offset_bottom = 240.0
+offset_left = -6.0
+offset_top = 218.0
+offset_right = 216.0
+offset_bottom = 249.0
 
 [node name="Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Validation_menu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/separation = 15
+theme_override_constants/separation = 5
 
 [node name="Use_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Validation_menu/MarginContainer/Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Utiliser"
 
 [node name="Throw_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Validation_menu/MarginContainer/Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Jeter"
 
 [node name="Cancel_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Validation_menu/MarginContainer/Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Annuler"
 
 [node name="Player_Profil" type="Control" parent="MarginContainer_right/white_bg_right/interface_right"]
@@ -126,6 +131,7 @@ offset_bottom = 34.0
 size_flags_vertical = 0
 tooltip_text = "Indicateur de la force globale.
 Augmente avec l'expérience."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "Niveau:"
 fit_content = true
@@ -137,6 +143,7 @@ offset_left = 112.0
 offset_top = 8.0
 offset_right = 208.0
 offset_bottom = 37.0
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "Exp:"
 
 [node name="CP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
@@ -146,20 +153,22 @@ offset_right = 216.0
 offset_bottom = 69.0
 tooltip_text = "Gagné lors d'une montée de niveau.
 Peut être dépensé pour augmenter les statistiques."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "Point de compétence:"
 
 [node name="Player_Calculated_Stats" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 anchors_preset = 0
 offset_left = 1.0
-offset_top = 80.0
+offset_top = 87.0
 offset_right = 208.0
-offset_bottom = 168.0
+offset_bottom = 175.0
 
 [node name="HP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 2
 offset_right = 95.0
 offset_bottom = 26.0
 tooltip_text = "Points de vie. S’ils tombent à 0, c’est la défaite."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "HP:"
 fit_content = true
@@ -167,6 +176,7 @@ fit_content = true
 [node name="Player_HP_Bar" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 anchors_preset = 0
 offset_left = 127.0
+offset_top = -5.0
 offset_right = 214.0
 offset_bottom = 24.0
 
@@ -181,6 +191,31 @@ texture_under = ExtResource("4_a6i1v")
 texture_progress = ExtResource("5_pmgmk")
 texture_progress_offset = Vector2(2, 2)
 
+[node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 29.0
+offset_right = 199.0
+offset_bottom = 52.0
+mouse_filter = 0
+theme_override_constants/separation = -2
+
+[node name="MT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
+layout_mode = 2
+tooltip_text = "Dégâts totaux infligés."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
+bbcode_enabled = true
+text = "Dégâts Totaux:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_lewjm")
+expand_mode = 2
+stretch_mode = 2
+
 [node name="HBoxContainer_CRT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 0
 offset_left = -1.0
@@ -194,6 +229,7 @@ theme_override_constants/separation = -2
 layout_mode = 2
 tooltip_text = "Pourcentage que l'attaque portée fasse 
 le double des dégâts totaux."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "Critique:"
 fit_content = true
@@ -206,35 +242,11 @@ texture = ExtResource("5_lewjm")
 expand_mode = 2
 stretch_mode = 2
 
-[node name="HBoxContainer_MT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 29.0
-offset_right = 199.0
-offset_bottom = 52.0
-mouse_filter = 0
-theme_override_constants/separation = -2
-
-[node name="MT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
-layout_mode = 2
-tooltip_text = "Dégâts totaux infligés."
-bbcode_enabled = true
-text = "Dégâts Totaux:"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Arrow_Up" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats/HBoxContainer_MT"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_lewjm")
-expand_mode = 2
-stretch_mode = 2
-
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_top = 184.0
+offset_top = 192.0
 offset_right = 112.0
-offset_bottom = 370.0
+offset_bottom = 344.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
@@ -252,6 +264,7 @@ expand_mode = 3
 z_as_relative = false
 layout_mode = 2
 tooltip_text = "Pondère les dégâts infligés."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "STR:"
 fit_content = true
@@ -269,6 +282,7 @@ expand_mode = 2
 layout_mode = 2
 tooltip_text = "Pondère le taux de coups critiques 
 ainsi que les compétences à taux d’activation."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "DEX:"
 fit_content = true
 autowrap_mode = 0
@@ -284,6 +298,7 @@ expand_mode = 3
 [node name="DEF" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEF_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Réduit les dégâts reçus."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "DEF:"
 fit_content = true
 autowrap_mode = 0
@@ -299,6 +314,7 @@ expand_mode = 3
 [node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre de cases parcourables."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "MVT:"
 fit_content = true
@@ -315,6 +331,7 @@ expand_mode = 3
 [node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Nombre d’actions possibles."
+theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "ACT:"
 fit_content = true
@@ -326,9 +343,9 @@ position = Vector2(13, 197)
 
 [node name="HBoxContainer_STR" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 offset_left = 89.0
-offset_top = -202.0
-offset_right = 125.0
-offset_bottom = -171.0
+offset_top = -205.0
+offset_right = 141.0
+offset_bottom = -174.0
 
 [node name="plus_STR_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR"]
 layout_mode = 2
@@ -348,9 +365,9 @@ icon_alignment = 1
 
 [node name="HBoxContainer_DEX" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 offset_left = 89.0
-offset_top = -163.0
-offset_right = 125.0
-offset_bottom = -132.0
+offset_top = -174.0
+offset_right = 141.0
+offset_bottom = -143.0
 
 [node name="plus_DEX_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX"]
 layout_mode = 2
@@ -370,9 +387,9 @@ icon_alignment = 1
 
 [node name="HBoxContainer_DEF" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 offset_left = 89.0
-offset_top = -123.0
-offset_right = 125.0
-offset_bottom = -92.0
+offset_top = -142.0
+offset_right = 141.0
+offset_bottom = -111.0
 
 [node name="plus_DEF_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF"]
 layout_mode = 2
@@ -392,17 +409,20 @@ icon_alignment = 1
 
 [node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 visible = false
-offset_left = 40.0
-offset_top = -91.0
-offset_right = 177.0
-offset_bottom = -60.0
+offset_left = 42.0
+offset_top = -106.0
+offset_right = 190.0
+offset_bottom = -75.0
+theme_override_constants/separation = 0
 
 [node name="Validation_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Valider"
 
 [node name="Cancel_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Annuler"
 
 [node name="Button_Stat_Special" type="Node2D" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
@@ -410,9 +430,9 @@ visible = false
 
 [node name="HBoxContainer_MVT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
 offset_left = 102.0
-offset_top = 116.0
-offset_right = 138.0
-offset_bottom = 147.0
+offset_top = 87.0
+offset_right = 154.0
+offset_bottom = 118.0
 
 [node name="plus_MVT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT"]
 layout_mode = 2
@@ -432,9 +452,9 @@ icon_alignment = 1
 
 [node name="HBoxContainer_ACT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
 offset_left = 102.0
-offset_top = 157.0
-offset_right = 138.0
-offset_bottom = 188.0
+offset_top = 118.0
+offset_right = 154.0
+offset_bottom = 149.0
 
 [node name="plus_ACT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT"]
 layout_mode = 2
@@ -455,12 +475,13 @@ icon_alignment = 1
 [node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
 visible = false
 offset_left = 52.0
-offset_top = 195.0
+offset_top = 154.0
 offset_right = 189.0
-offset_bottom = 226.0
+offset_bottom = 180.0
 
 [node name="Validation_Special_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_Validation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Valider"
 
 [node name="Delimiter" type="Control" parent="MarginContainer_right/white_bg_right/interface_right"]
@@ -509,6 +530,7 @@ offset_left = 72.0
 offset_top = 283.0
 offset_right = 162.0
 offset_bottom = 314.0
+theme_override_fonts/font = ExtResource("3_aopnq")
 text = "Historique"
 
 [node name="UI_logs" type="ScrollContainer" parent="MarginContainer_left/white_bg_left/interface_left"]
@@ -554,6 +576,7 @@ offset_left = 156.4
 offset_right = 292.4
 offset_bottom = 36.0
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_aopnq")
 theme_override_font_sizes/font_size = 20
 text = "Attaquer
 "
@@ -569,6 +592,7 @@ offset_left = 468.336
 offset_top = -16.0
 offset_right = 604.336
 offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("3_aopnq")
 theme_override_font_sizes/font_size = 20
 text = "Attendre"
 
@@ -577,6 +601,7 @@ layout_mode = 0
 offset_left = 196.0
 offset_right = 326.0
 offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("3_aopnq")
 theme_override_font_sizes/font_size = 20
 text = "Commandes"
 

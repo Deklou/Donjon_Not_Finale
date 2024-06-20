@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://gykebj3y6qxs"]
+[gd_scene load_steps=6 format=3 uid="uid://gykebj3y6qxs"]
 
+[ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_jio17"]
 [ext_resource type="Texture2D" uid="uid://cjrdosbkwavwl" path="res://Sprites/UI_icon/hyphen.png" id="1_rj4pp"]
 
 [sub_resource type="Animation" id="Animation_hnyy6"]
@@ -41,7 +42,8 @@ _data = {
 }
 
 [node name="Logs_Label" type="Label"]
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("1_jio17")
+theme_override_font_sizes/font_size = 13
 
 [node name="Sprite_Hyphen" type="Sprite2D" parent="."]
 position = Vector2(-26, -4)
