@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=27 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
@@ -14,6 +14,28 @@
 [ext_resource type="Script" path="res://UI/Interface_Down.gd" id="10_lhent"]
 [ext_resource type="Texture2D" uid="uid://cx6imt3vhul04" path="res://Sprites/UI_icon/movement.png" id="10_oqlr7"]
 [ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="11_ynk02"]
+[ext_resource type="Theme" uid="uid://da3p0i8a65d3v" path="res://UI/user_interface.tres" id="12_874r6"]
+[ext_resource type="Texture2D" uid="uid://05btvgx5mm53" path="res://Sprites/UI_icon/stats_button_bg_2.png" id="12_j2c60"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3edtt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jat2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gebol"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_022s0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gr3g2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3fhy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2l361"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6q4ex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hlndn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yu5jq"]
 
 [node name="User_Interface" type="CanvasLayer"]
 script = ExtResource("1_v8vxl")
@@ -310,11 +332,19 @@ offset_bottom = -171.0
 
 [node name="plus_STR_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3edtt")
 text = "+"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="minus_STR_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_STR"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jat2h")
 text = "-"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="HBoxContainer_DEX" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 offset_left = 89.0
@@ -324,11 +354,19 @@ offset_bottom = -132.0
 
 [node name="plus_DEX_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gebol")
 text = "+"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="minus_DEX_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEX"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_022s0")
 text = "-"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="HBoxContainer_DEF" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 offset_left = 89.0
@@ -338,11 +376,19 @@ offset_bottom = -92.0
 
 [node name="plus_DEF_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gr3g2")
 text = "+"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="minus_DEF_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat/HBoxContainer_DEF"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q3fhy")
 text = "-"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat"]
 visible = false
@@ -370,11 +416,19 @@ offset_bottom = 147.0
 
 [node name="plus_MVT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2l361")
 text = "+"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="minus_MVT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_MVT"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6q4ex")
 text = "-"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="HBoxContainer_ACT" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
 offset_left = 102.0
@@ -384,11 +438,19 @@ offset_bottom = 188.0
 
 [node name="plus_ACT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hlndn")
 text = "+"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="minus_ACT_button" type="Button" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special/HBoxContainer_ACT"]
 layout_mode = 2
+theme = ExtResource("12_874r6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yu5jq")
 text = "-"
+icon = ExtResource("12_j2c60")
+icon_alignment = 1
 
 [node name="HBoxContainer_Validation" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/Button_Stat_Special"]
 visible = false

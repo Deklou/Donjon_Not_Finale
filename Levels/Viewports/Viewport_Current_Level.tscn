@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dudwn511ovasy"]
+
+[node name="Viewport_Current_Level" type="Node2D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]

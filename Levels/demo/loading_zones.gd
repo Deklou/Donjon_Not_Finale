@@ -1,8 +1,11 @@
 extends Node2D
 
 @onready var tutorial_tilemap : TileMap = $"../Demo_TileMap"
-signal to_first_floor 
-
+signal to_first_floor
+##################### READY  #####################
+func _ready():
+	tutorial_tilemap.set_layer_enabled(0, true) #par défaut on active les collisions
+##################### LOADING ZONE  #####################
 func _on_to_second_room_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(0, 704))
 	await get_tree().create_timer(0.3).timeout
@@ -29,8 +32,7 @@ func _on_to_intro_level_room_from_bonus_1_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(3840, -512))
 func _on_to_first_floor_area_2d_body_entered(_body):
 	to_first_floor.emit() #vers Root
-	tutorial_tilemap.set_layer_enabled(0, false)
-		
+	tutorial_tilemap.set_layer_enabled(0, false)	
 func _move_to_other_room(player : CharacterBody2D, destination : Vector2):
 	if player is CharacterBody2D:
 		var transition_scene = preload("res://Transition/_to_another_room.tscn").instantiate()
