@@ -31,7 +31,8 @@ func _to_stats_screen():
 		user_interface_node.visible = true
 	
 func _to_intro_level():
-	load_next_level("res://Levels/Demo/Tutorial.tscn")
+	_unload_previous_level("res://Transition/intro_to_first_floor.tscn")
+	_load_next_level("res://Levels/Demo/Tutorial.tscn")
 	if is_inside_tree(): #Pour que le jeu ait le temps de détecter que le joueur a un parent
 		await get_tree().create_timer(0.5).timeout
 	if EntitiesState.player_parent_node != null:
@@ -40,13 +41,18 @@ func _to_intro_level():
 func _to_first_floor():
 	_load_next_transition("res://Transition/intro_to_first_floor.tscn")
 	_unload_previous_level("res://Levels/Demo/Tutorial.tscn")
-	load_next_level("res://Levels/Demo/First_Floor.tscn")
+	_load_next_level("res://Levels/Demo/First_Floor.tscn")
 	if is_inside_tree():
 		await get_tree().create_timer(0.5).timeout
 	GameState.to_stats_screen.connect(_to_the_end)
 	if EntitiesState.player_parent_node != null:
 		EntitiesState.player_parent_node.get_node("loading_zones").to_secret_exit.connect(_to_secret)
+		EntitiesState.player_parent_node.get_node("loading_zones").to_tutorial_from_first_floor.connect(_to_intro_level_from_first_floor)
 	EntitiesState.player_is_frozen = false
+	
+func _to_intro_level_from_first_floor():
+	_unload_previous_level("res://Levels/Demo/First_Floor.tscn")
+	_load_next_level("res://Levels/Demo/Tutorial.tscn")
 	
 func _to_the_end():
 	if EntitiesState.player_parent_node != null:
@@ -88,14 +94,15 @@ func _unload_previous_level(scene_path : String):
 	if Root.has_node(scene_name):
 		Root.remove_child.call_deferred(Root.get_node(scene_name))
 		viewport_unloaded.add_child.call_deferred(level_instance)
-	if EntitiesState.player_parent_node != null: #Si on vient d'un niveau, on l'invisibilise et on supprime le joueur pour éviter les conflits entre les niveaux
-		EntitiesState.player_parent_node.visible = false
-		EntitiesState.player_parent_node.remove_child.call_deferred(EntitiesState.player_parent_node.get_node("Grid_player_2"))
-		EntitiesState.enemy_triggered_list.clear() 
+	if EntitiesState.player_parent_node != null and EntitiesState.player_parent_node.has_node("Grid_player_2") == true: #Si on vient d'un niveau, on l'invisibilise et on supprime le joueur pour éviter les conflits entre les niveaux
+		print(EntitiesState.player_parent_node.has_node("Grid_player_2"))
+		EntitiesState.player_parent_node.remove_child(EntitiesState.player_parent_node.get_node("Grid_player_2"))
+		print(EntitiesState.player_parent_node.has_node("Grid_player_2"))
+		EntitiesState.enemy_triggered_list.clear()
 		EntitiesState.enemy_turn_ended_list.clear()
 	if user_interface_node != null: #S'il existe une instance de l'interface utilisateur, on la cache
 		user_interface_node.visible = false
-##################### TRANSITION #####################		
+##################### TRANSITION #####################
 func _load_next_transition(transition_scene_path : String):
 	var scene = ResourceLoader.load(transition_scene_path)
 	if scene:
@@ -105,24 +112,30 @@ func _load_next_transition(transition_scene_path : String):
 			await get_tree().create_timer(5.0).timeout
 		transition_scene.queue_free()
 ##################### CHARGER NIVEAU #####################		
-func load_next_level(scene_path : String):
+func _load_next_level(scene_path : String):
 	EntitiesState.player_is_frozen = true
 	Root = get_tree().root
 	var scene = ResourceLoader.load(scene_path)
 	var scene_name = _scene_path_to_scene_name(scene_path)
+	var viewport_unloaded = Root.get_node("Viewport_Unloaded_Levels").get_node("SubViewport")
+	var level_instance = ResourceLoader.load(scene_path).instantiate()
 	if Root.has_node(scene_name): 
 		if EntitiesState.player_parent_node == Root.get_node(scene_name): #Si le niveau à charger et le niveau précédent sont les mêmes, on supprime la première instance
 			Root.remove_child.call_deferred(Root.get_node(scene_name))
-	if scene:
-		var next_level_scene = scene.instantiate()
-		Root.add_child.call_deferred(next_level_scene)
-		if user_interface_node != null:
-			user_interface_node.visible = true
-		if is_inside_tree():
-			await get_tree().create_timer(0.5).timeout
-		EntitiesState.player_is_frozen = false
-		if EntitiesState.player_parent_node != null:
-			EntitiesState.player_parent_node.add_child(preload("res://UI/Selector_UI.tscn").instantiate())
+	if viewport_unloaded.has_node(scene_name): #Si le niveau à charger se trouve dans le viewport des niveaux déchargés, alors on le recharge
+		viewport_unloaded.remove_child.call_deferred(viewport_unloaded.get_node(scene_name))
+		Root.add_child.call_deferred(level_instance)
+	else: #Si le niveau n'a pas encore été chargé une seule fois, on le charge
+		if scene:
+			var next_level_scene = scene.instantiate()
+			Root.add_child.call_deferred(next_level_scene)
+	if user_interface_node != null:
+		user_interface_node.visible = true
+	if is_inside_tree():
+		await get_tree().create_timer(0.5).timeout
+	EntitiesState.player_is_frozen = false
+	if EntitiesState.player_parent_node != null:
+		EntitiesState.player_parent_node.add_child(preload("res://UI/Selector_UI.tscn").instantiate())	
 ##################### DEBUG #####################			
 var debug1_pressed = false
 var debug2_pressed = false
@@ -139,14 +152,5 @@ func _input(event):
 				debug1_pressed = event.is_pressed()
 func _process(_delta):
 	if debug1_pressed and debug2_pressed:
-		Root = get_tree().root
-		var last_child = Root.get_child(Root.get_child_count() - 1)
-		Root.remove_child(last_child)
-		Root_instance = preload("res://Levels/Debug/debug_level.tscn").instantiate()
-		Root.add_child.call_deferred(Root_instance)
-		Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
-		for child in Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
-			user_interface_node = child
-		user_interface_node.visible = true
-		if EntitiesState.player_parent_node != null:
-			EntitiesState.player_parent_node.add_child(preload("res://UI/Selector_UI.tscn").instantiate())
+		_unload_previous_level("res://Levels/Debug/debug_level.tscn")
+		_load_next_level("res://Levels/Debug/debug_level.tscn")

@@ -43,7 +43,7 @@ _data = {
 
 [node name="Logs_Label" type="Label"]
 theme_override_fonts/font = ExtResource("1_jio17")
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 14
 
 [node name="Sprite_Hyphen" type="Sprite2D" parent="."]
 position = Vector2(-26, -4)
