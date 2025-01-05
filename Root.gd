@@ -6,8 +6,6 @@ var user_interface_node = null
 
 func _ready(): #premier appel du jeu, le joueur commence au niveau 0
 	Root = get_tree().root
-	Root_instance = preload("res://Levels/Viewports/Viewport_Unloaded_Levels.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
 	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
 	Root.add_child.call_deferred(Root_instance)
 	GameState.to_game_from_menu.connect(_to_objective_screen)
@@ -20,7 +18,7 @@ func _to_objective_screen():
 		Root_instance.to_stats_screen.connect(_to_stats_screen)
 	
 func _to_stats_screen():
-	if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
+	#if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
 		Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
 		Root.add_child.call_deferred(Root_instance)
 		Root_instance.to_intro_level.connect(_to_intro_level)
@@ -89,18 +87,15 @@ func _unload_previous_level(scene_path : String):
 	EntitiesState.player_is_frozen = true
 	Root = get_tree().root
 	var scene_name = _scene_path_to_scene_name(scene_path)
-	var viewport_unloaded = Root.get_node("Viewport_Unloaded_Levels").get_node("SubViewport")
-	var level_instance = ResourceLoader.load(scene_path).instantiate()
-	if Root.has_node(scene_name):
+	if Root.has_node(scene_name): #Si la hiérarchie possède la scène qu'on veut supprimer, on la supprime
 		Root.remove_child.call_deferred(Root.get_node(scene_name))
-		viewport_unloaded.add_child.call_deferred(level_instance)
 	if EntitiesState.player_parent_node != null and EntitiesState.player_parent_node.has_node("Grid_player_2") == true: #Si on vient d'un niveau, on l'invisibilise et on supprime le joueur pour éviter les conflits entre les niveaux
-		print(EntitiesState.player_parent_node.has_node("Grid_player_2"))
+		print("ROOT.GD " + str(EntitiesState.player_parent_node.has_node("Grid_player_2")))
 		EntitiesState.player_parent_node.remove_child(EntitiesState.player_parent_node.get_node("Grid_player_2"))
-		print(EntitiesState.player_parent_node.has_node("Grid_player_2"))
+		print("ROOT.GD " + str(EntitiesState.player_parent_node.has_node("Grid_player_2")))
 		EntitiesState.enemy_triggered_list.clear()
 		EntitiesState.enemy_turn_ended_list.clear()
-	if user_interface_node != null: #S'il existe une instance de l'interface utilisateur, on la cache
+	if user_interface_node != null: #S'il existe une instance de l'interface utilisateur, on la cache (pourquoi on la supprime pas ?)
 		user_interface_node.visible = false
 ##################### TRANSITION #####################
 func _load_next_transition(transition_scene_path : String):
@@ -117,14 +112,9 @@ func _load_next_level(scene_path : String):
 	Root = get_tree().root
 	var scene = ResourceLoader.load(scene_path)
 	var scene_name = _scene_path_to_scene_name(scene_path)
-	var viewport_unloaded = Root.get_node("Viewport_Unloaded_Levels").get_node("SubViewport")
-	var level_instance = ResourceLoader.load(scene_path).instantiate()
 	if Root.has_node(scene_name): 
 		if EntitiesState.player_parent_node == Root.get_node(scene_name): #Si le niveau à charger et le niveau précédent sont les mêmes, on supprime la première instance
 			Root.remove_child.call_deferred(Root.get_node(scene_name))
-	if viewport_unloaded.has_node(scene_name): #Si le niveau à charger se trouve dans le viewport des niveaux déchargés, alors on le recharge
-		viewport_unloaded.remove_child.call_deferred(viewport_unloaded.get_node(scene_name))
-		Root.add_child.call_deferred(level_instance)
 	else: #Si le niveau n'a pas encore été chargé une seule fois, on le charge
 		if scene:
 			var next_level_scene = scene.instantiate()

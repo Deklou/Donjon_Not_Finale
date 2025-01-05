@@ -73,160 +73,201 @@ offset_right = 160.0
 offset_bottom = 680.0
 color = Color(0, 0, 0, 1)
 
-[node name="Category_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 204.0
-offset_top = -336.0
-offset_right = 1264.0
-offset_bottom = 174.0
-grow_vertical = 2
+[node name="Title" type="Node2D" parent="Black_Background_ColorRect"]
+
+[node name="TitleLabel" type="RichTextLabel" parent="Black_Background_ColorRect/Title"]
+offset_left = 536.0
+offset_top = 16.0
+offset_right = 576.0
+offset_bottom = 56.0
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Black_Background_ColorRect"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 128.0
+offset_right = 1216.0
+offset_bottom = 576.0
+
+[node name="Category_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 30
 
-[node name="Stage_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="HBox_Stage" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Stage_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Stage"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Etage fini"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Weapon_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Stage"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Stage"]
+layout_mode = 2
+bbcode_enabled = true
+text = "/1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBox_Weapon" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Weapon_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Weapon"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Armes légendaires obtenues"
 fit_content = true
-scroll_active = false
+autowrap_mode = 0
 
-[node name="Enemy_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Weapon"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Weapon"]
+layout_mode = 2
+bbcode_enabled = true
+text = "/3"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBox_Enemy" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Enemy_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Enemy"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Ennemis vaincus"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Secret_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Enemy"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Enemy"]
+layout_mode = 2
+bbcode_enabled = true
+text = "/35"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBox_Secret" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Secret_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Secret"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Secret"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Time_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Secret"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Secret"]
+layout_mode = 2
+bbcode_enabled = true
+text = "/1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBox_Time" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Time_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Time"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Temps"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Death_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Time"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Time"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBox_Death" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Death_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
 layout_mode = 2
 bbcode_enabled = true
 text = "Nombre de mort"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Level_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="Variable_Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="HBox_Level" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Level_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Level"]
 visible = false
 layout_mode = 2
 bbcode_enabled = true
 text = "Niveau"
 fit_content = true
+autowrap_mode = 0
 
-[node name="Stats_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Category_VBoxContainer"]
+[node name="Variable_Level_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Level"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+text_direction = 2
+
+[node name="Stats_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
-
-[node name="Result_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
-layout_mode = 0
-offset_left = 1064.0
-offset_top = 16.0
-offset_right = 1280.0
-offset_bottom = 712.0
-theme_override_constants/separation = 30
-
-[node name="Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "/1"
-fit_content = true
-
-[node name="Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "/3"
-fit_content = true
-
-[node name="Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "/35"
-fit_content = true
-
-[node name="Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "/1"
-fit_content = true
-
-[node name="Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-
-[node name="Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Result_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-
-[node name="Variable_VBoxContainer" type="VBoxContainer" parent="Black_Background_ColorRect"]
-layout_mode = 2
-offset_left = 744.0
-offset_top = 16.0
-offset_right = 1080.0
-offset_bottom = 624.0
-theme_override_constants/separation = 30
-
-[node name="Variable_Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
-
-[node name="Variable_Level_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/Variable_VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-fit_content = true
-text_direction = 2
 
 [node name="Button" type="Node2D" parent="Black_Background_ColorRect"]
 
@@ -265,6 +306,7 @@ scale = Vector2(7, 6.75)
 texture = ExtResource("6_xio4a")
 
 [node name="ColorRect_Animation" type="ColorRect" parent="."]
+visible = false
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0

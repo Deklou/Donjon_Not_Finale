@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://jlk8v5wqc3fm"]
-
-[node name="Viewport_Unloaded_Levels" type="Node2D"]
-
-[node name="SubViewport" type="SubViewport" parent="."]
