@@ -13,9 +13,11 @@ signal to_stats_screen
 func _ready():
 	command_animation_player.play("fade_in")
 	objectif_title_label.bbcode_text = "[b][font_size=40]" + objectif_title_label.text + "[/font_size][/b]"
-	objectif_text_label.bbcode_text = "[font_size=30]" + objectif_text_label.text + "[/font_size]"
+	objectif_text_label.bbcode_text = "[font_size=30]" + "Monter jusqu'au" + "[color=#ffe600]" + " dernier étage " + "[/color]" + "en restant en vie et sortir." + "[/font_size]"
 	information_title_label.bbcode_text = "[b][font_size=40]" + information_title_label.text + "[/font_size][/b]"
-	information_text_label.bbcode_text = "[font_size=30]" + information_text_label.text + "[/font_size]"
+	information_text_label.bbcode_text = "[font_size=30]" + "Vaincre un ennemi augmente votre" + "[color=#ffe600]" + " expérience" + "[/color]" + ". Avec assez d'expérience, vous  pourrez  augmenter  les  différents attributs qui vous définissent.
+
+Vous pourrez également trouver des objets au cours de votre périple pour alléger votre peine." + "[/font_size]"
 
 func _on_area_2d_mouse_entered():
 	button_sprite_2d.visible = false

@@ -87,7 +87,7 @@ func get_animation_from_direction(direction_vector):
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
 		damage_sprite_1.visible = true
-		await get_tree().create_timesr(0.03).timeout
+		await get_tree().create_timer(0.03).timeout
 		damage_sprite_1.visible = false
 		await get_tree().create_timer(0.03).timeout
 		damage_sprite_2.visible = true

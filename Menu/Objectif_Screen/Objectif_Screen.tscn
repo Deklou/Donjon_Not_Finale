@@ -85,7 +85,6 @@ offset_top = 119.0
 offset_right = 1084.0
 offset_bottom = 193.0
 bbcode_enabled = true
-text = "Monter jusqu'au dernier étage en restant en vie et sortir."
 fit_content = true
 
 [node name="Information" type="Node2D" parent="Black_Background_ColorRect"]
@@ -113,9 +112,6 @@ offset_top = 310.0
 offset_right = 1093.0
 offset_bottom = 591.0
 bbcode_enabled = true
-text = "Vaincre un ennemi augmente votre expérience. Avec assez d'expérience, vous  pourrez  augmenter  les  différents attributs qui vous définissent.
-
-Vous pourrez également trouver des objets au cours de votre périple pour alléger votre peine."
 
 [node name="Button" type="Node2D" parent="Black_Background_ColorRect"]
 position = Vector2(0, 1)
@@ -139,6 +135,7 @@ shape = SubResource("RectangleShape2D_rk82m")
 debug_color = Color(0.831373, 0.831373, 0.827451, 0.419608)
 
 [node name="ColorRect_Animation" type="ColorRect" parent="."]
+visible = false
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0
