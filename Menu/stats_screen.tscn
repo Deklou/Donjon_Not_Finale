@@ -98,7 +98,7 @@ theme_override_constants/separation = 30
 
 [node name="HBox_Stage" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Stage_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Stage"]
 layout_mode = 2
@@ -108,6 +108,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Stage_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Stage"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -123,7 +124,7 @@ autowrap_mode = 0
 
 [node name="HBox_Weapon" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Weapon_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Weapon"]
 layout_mode = 2
@@ -133,6 +134,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Weapon_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Weapon"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -148,7 +150,7 @@ autowrap_mode = 0
 
 [node name="HBox_Enemy" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Enemy_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Enemy"]
 layout_mode = 2
@@ -158,6 +160,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Enemy_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Enemy"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -173,7 +176,7 @@ autowrap_mode = 0
 
 [node name="HBox_Secret" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Secret_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Secret"]
 layout_mode = 2
@@ -183,6 +186,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Secret_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Secret"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -198,7 +202,7 @@ autowrap_mode = 0
 
 [node name="HBox_Time" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Time_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Time"]
 layout_mode = 2
@@ -208,6 +212,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Time_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Time"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -222,7 +227,7 @@ autowrap_mode = 0
 
 [node name="HBox_Death" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Death_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
 layout_mode = 2
@@ -232,12 +237,14 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Death_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Death"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -246,7 +253,7 @@ text_direction = 2
 
 [node name="HBox_Level" type="HBoxContainer" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 0
 
 [node name="Level_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Level"]
 visible = false
@@ -257,6 +264,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Variable_Level_Result_Label" type="RichTextLabel" parent="Black_Background_ColorRect/ScrollContainer/Category_VBoxContainer/HBox_Level"]
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -306,7 +314,6 @@ scale = Vector2(7, 6.75)
 texture = ExtResource("6_xio4a")
 
 [node name="ColorRect_Animation" type="ColorRect" parent="."]
-visible = false
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0

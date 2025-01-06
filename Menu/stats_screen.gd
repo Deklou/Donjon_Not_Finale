@@ -36,19 +36,6 @@ var player_has_validated : bool = false
 signal to_intro_level
 
 func _ready():
-	command_animation_player.play("fade_in")
-	stage_label.bbcode_text = "[font_size=30]" + stage_label.text + "[/font_size]"
-	weapon_label.bbcode_text = "[font_size=30]" + weapon_label.text + "[/font_size]"
-	enemy_label.bbcode_text = "[font_size=30]" + enemy_label.text + "[/font_size]"
-	secret_label.bbcode_text = "[font_size=30]" + secret_label.text + "[/font_size]"
-	time_label.bbcode_text = "[font_size=30]" + time_label.text + "[/font_size]"
-	level_label.bbcode_text = "[font_size=30]" + level_label.text + "[/font_size]"
-	
-	stage_result_label.bbcode_text = "[font_size=30]" + stage_result_label.text + "[/font_size]"
-	weapon_result_label.bbcode_text = "[font_size=30]" + weapon_result_label.text + "[/font_size]"
-	enemy_result_label.bbcode_text = "[font_size=30]" + enemy_result_label.text + "[/font_size]"
-	secret_result_label.bbcode_text = "[font_size=30]" + secret_result_label.text + "[/font_size]"
-	time_result_label.bbcode_text = "[font_size=30]" + time_result_label.text + "[/font_size]"
 	
 	if GameData.player_death_count == 0:
 		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux !" + "[/font_size][/b]"
@@ -66,23 +53,38 @@ func _ready():
 		death_label.bbcode_text = "[b][font_size=30]" + "ça a l'air compliqué..." + "[/font_size][/b]"
 	else:
 		death_label.bbcode_text = "[b][font_size=30]" + "..." + "[/font_size][/b]"
+	
 	if GameState.ending_triggered == true:
+		level_label.visible = true
+		stats_label.visible = true
 		title_label.bbcode_text = "[b][font_size=50]" + "RESULTATS" + "[/font_size][/b]"
-		death_label.bbcode_text = "[font_size=30]" + "Nombre de mort" + "[/font_size]"
 		variable_stage_result_label.text =  "[font_size=30]" + "   1" + "[/font_size]"
 		variable_weapon_result_label.text =  "[font_size=30]" + "   " + str(GameData.legendary_weapon_acquired) + "[/font_size]"
 		variable_enemy_result_label.text =  "[font_size=30]" + "   " + str(GameData.enemy_defeated) + "[/font_size]"
 		variable_secret_result_label.text =  "[font_size=30]" + "   0" + "[/font_size]"
 		variable_time_result_label.text =  "[font_size=30]" + " " + str(int(int(GameData.timer) / 3600.0)) + "h " + str((int(GameData.timer) % 3600) / 60) + "min " + str(int(GameData.timer) % 60) + "s" + "[/font_size]"
 		variable_death_result_label.text =  "[font_size=30]" + "   " + str(GameData.player_death_count) + "[/font_size]"
-		level_label.visible = true
-		stats_label.visible = true
 		variable_level_result_label.text = "[font_size=30]" + "   " + str(GameData.player_LVL) + "[/font_size]"
+		death_label.bbcode_text = "[font_size=30]" + "Nombre de mort                                                                                   " + variable_death_result_label.text + "[/font_size]"
 		stats_label.text = "[font_size=30]" + "HP: " + str(GameData.player_MAX_HP) + "  FRC: " + str(GameData.player_STR) + "  DEX: " + str(GameData.player_DEX) + "  DEF: " + str(GameData.player_DEF) + "  MVT: " + str(GameData.player_MAX_movement_point) + "  ACT: " + str(GameData.player_MAX_action_point) +"[/font_size]"
 		if GameData.secret_triggered == true:
 			variable_secret_result_label.text = "   1"
 		if GameState.kojiro_was_obtained == true:
 			special_sprite_2d.visible = true
+	
+	command_animation_player.play("fade_in")
+	stage_label.bbcode_text = "[font_size=30]" + stage_label.text + "                                                                                               " + variable_stage_result_label.text + "[/font_size]"
+	weapon_label.bbcode_text = "[font_size=30]" + weapon_label.text + "                                                            " + variable_weapon_result_label.text + "[/font_size]"
+	enemy_label.bbcode_text = "[font_size=30]" + enemy_label.text + "                                                                                " + variable_enemy_result_label.text + "[/font_size]"
+	secret_label.bbcode_text = "[font_size=30]" + secret_label.text + "                                                                                                    " + variable_enemy_result_label.text + "[/font_size]"
+	time_label.bbcode_text = "[font_size=30]" + time_label.text + "                                                                                      " + variable_time_result_label.text + "[/font_size]"
+	level_label.bbcode_text = "[font_size=30]" + level_label.text + "                                                                                                     " + variable_level_result_label.text + "[/font_size]"
+	
+	stage_result_label.bbcode_text = "[font_size=30]" + stage_result_label.text + "[/font_size]"
+	weapon_result_label.bbcode_text = "[font_size=30]" + weapon_result_label.text + "[/font_size]"
+	enemy_result_label.bbcode_text = "[font_size=30]" + enemy_result_label.text + "[/font_size]"
+	secret_result_label.bbcode_text = "[font_size=30]" + secret_result_label.text + "[/font_size]"
+	time_result_label.bbcode_text = "[font_size=30]" + time_result_label.text + "[/font_size]"
 
 func _on_area_2d_mouse_entered():
 	if GameState.ending_triggered == true or GameData.player_death_count > 0:
