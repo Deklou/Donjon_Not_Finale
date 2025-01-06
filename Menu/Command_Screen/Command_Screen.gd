@@ -155,9 +155,8 @@ func _process(_delta):
 			add_child.call_deferred(thumbs_up_scene)
 			thumbs_up_scene.position = Vector2(832,624)
 		command_animation_player.play("select_button")
-		if EntitiesState.player_parent_node == null:
-			await get_tree().create_timer(0.5).timeout
-			command_animation_player.play("fade_out")
+		await get_tree().create_timer(0.3).timeout
+		command_animation_player.play("fade_out")
 		await get_tree().create_timer(0.7).timeout
 		GameState.to_game_from_menu.emit() #Vers Root et Interface Down
 		queue_free()
