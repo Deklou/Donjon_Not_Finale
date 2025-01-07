@@ -37,22 +37,8 @@ signal to_intro_level
 
 func _ready():
 	
-	if GameData.player_death_count == 0:
-		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux !" + "[/font_size][/b]"
-	elif GameData.player_death_count == 1:
-		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux !!" + "[/font_size][/b]"
-	elif GameData.player_death_count == 2:
-		death_label.bbcode_text = "[b][font_size=30]" + "Faites de votre mieux un peu mieux !" + "[/font_size][/b]"
-	elif GameData.player_death_count == 3:
-		death_label.bbcode_text = "[b][font_size=30]" + "Même les plus grands héros ont des jours difficiles.." + "[/font_size][/b]"
-	elif GameData.player_death_count == 4:
-		death_label.bbcode_text = "[b][font_size=30]" + "La troisième c'est la bonne." + "[/font_size][/b]"
-	elif GameData.player_death_count == 5:
-		death_label.bbcode_text = "[b][font_size=30]" + "Eh, chaque échec est une opportunité de s'améliorer !" + "[/font_size][/b]"
-	elif GameData.player_death_count == 6:
-		death_label.bbcode_text = "[b][font_size=30]" + "ça a l'air compliqué..." + "[/font_size][/b]"
-	else:
-		death_label.bbcode_text = "[b][font_size=30]" + "..." + "[/font_size][/b]"
+	var index = min(GameData.player_death_count, GameData.death_string.size() - 1)
+	death_label.bbcode_text = "[b][font_size=30]" + GameData.death_string[index] + "[/font_size][/b]"
 	
 	if GameState.ending_triggered == true:
 		level_label.visible = true

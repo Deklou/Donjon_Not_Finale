@@ -1,8 +1,8 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
-var default_player_MAX_HP : int = 300
-var default_player_HP : int = 300
+var default_player_MAX_HP : int = 3
+var default_player_HP : int = 3
 var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 0
@@ -231,6 +231,19 @@ var Item = { #Item est un dictoonnaire, lui même composé de dictionnaire qui r
 	"Article" : "",
 	}
 }
+
+##################### PHRASE DE DECES #####################
+
+var death_string = [
+		"Faites de votre mieux !",
+		"Faites de votre mieux !!",
+		"Faites de votre mieux un peu mieux !",
+		"Même les plus grands héros ont des jours difficiles..",
+		"La cinquième c'est la bonne.",
+		"Eh, chaque échec est une opportunité de s'améliorer !",
+		"Il est peut être temps de prendre une pause...",
+		"..." 
+	]
 
 ##################### RESET VALUE #####################
 func _reset_gamedata_value():
