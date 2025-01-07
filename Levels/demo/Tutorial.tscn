@@ -1203,7 +1203,7 @@ shape = SubResource("RectangleShape2D_qhbwy")
 debug_color = Color(0.607843, 0.537255, 0, 0.419608)
 
 [node name="Grid_player_2" parent="." instance=ExtResource("1_n8rk7")]
-position = Vector2(6048, 1904)
+position = Vector2(6248, 584)
 
 [node name="Closed_Door" parent="." instance=ExtResource("10_c4kfm")]
 position = Vector2(2304, 1024)

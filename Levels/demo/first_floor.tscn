@@ -918,7 +918,7 @@ scale = Vector2(2, 2.3125)
 texture = ExtResource("8_4s77d")
 
 [node name="Grid_player_2" parent="." instance=ExtResource("2_nur5j")]
-position = Vector2(3552, 1968)
+position = Vector2(352, 248)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -1066,7 +1066,7 @@ dummy_DEF_offset = 2
 enemy_sprite_path = "res://Sprites/Enemy/dummy_1_sprite_3.png"
 
 [node name="dummy_17" parent="Enemies" instance=ExtResource("7_aax6t")]
-position = Vector2(3744, 2320)
+position = Vector2(3728, 2256)
 dummy_id = "2-17"
 dummy_name = "Gardien Rempart"
 dummy_LVL_offset = 1
@@ -1076,7 +1076,7 @@ dummy_DEF_offset = 2
 enemy_sprite_path = "res://Sprites/Enemy/dummy_1_sprite_3.png"
 
 [node name="dummy_18" parent="Enemies" instance=ExtResource("7_aax6t")]
-position = Vector2(3656, 2440)
+position = Vector2(3576, 2064)
 dummy_id = "2-18"
 dummy_name = "Gardien Féroce"
 dummy_LVL_offset = 1

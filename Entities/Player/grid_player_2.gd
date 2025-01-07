@@ -86,22 +86,12 @@ func get_animation_from_direction(direction_vector):
 ##################### DEGAT #####################
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
-		damage_sprite_1.visible = true
-		await get_tree().create_timer(0.03).timeout
-		damage_sprite_1.visible = false
-		await get_tree().create_timer(0.03).timeout
-		damage_sprite_2.visible = true
-		await get_tree().create_timer(0.03).timeout
-		damage_sprite_2.visible = false
-		await get_tree().create_timer(0.03).timeout
-		damage_sprite_3.visible = true
-		await get_tree().create_timer(0.03).timeout
-		damage_sprite_3.visible = false
+		animation_player.play("take_damage")
 	StatsSystem.update_stats()
 ##################### SOIN #####################
 func _player_heal(entity_name : String):
 	if entity_name == "Player":
-		animation_player.play("heal")		
+		animation_player.play("heal")
 ##################### CAMERA #####################
 func _disable_player_moving_camera():
 	player_camera.enabled = false

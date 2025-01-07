@@ -15,6 +15,7 @@ extends CharacterBody2D
 @export var enemy_item_3 : String  # Nom de l'objet 3 dans l'inventaire de l'ennemi
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @export var distance = 64 #taille d'une case
 var currPos
 
@@ -108,13 +109,7 @@ func _entity_take_damage(Entity_Name: String):
 	if !is_inside_tree():
 		return 
 	if EntitiesState.enemy_can_be_attacked_id == dummy_id and Entity_Name == "Enemy":
-		damage_sprite_1.visible = true
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_1.visible = false
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_2.visible = true
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_2.visible = false
+		animation_player.play("take_damage")
 ##################### PROCESS #####################
 func _process(_delta):
 	if EntitiesState.enemy_is_dead(dummy_id): #Si l'ennemi est vaincu

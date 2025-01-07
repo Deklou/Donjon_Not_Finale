@@ -123,13 +123,7 @@ func _entity_take_damage(Entity_Name: String): #Faire une vraie animation dans l
 	if !is_inside_tree():
 		return 
 	if EntitiesState.enemy_can_be_attacked_id == dummy_id and Entity_Name == "Enemy":
-		damage_sprite_1.visible = true
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_1.visible = false
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_2.visible = true
-		await get_tree().create_timer(0.05).timeout
-		damage_sprite_2.visible = false
+		animation_player.play("take_damage")
 ##################### SOIN #####################
 func _dummy_heal(entity_name : String):
 	if entity_name == dummy_id:

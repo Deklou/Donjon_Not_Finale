@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdq0ux4rg1m4q"]
+[gd_scene load_steps=14 format=3 uid="uid://cdq0ux4rg1m4q"]
 
 [ext_resource type="Script" path="res://Entities/Player/grid_player_2.gd" id="1_2fju6"]
 [ext_resource type="Texture2D" uid="uid://i6dahw3f6nk2" path="res://Sprites/Player/chara_sprite.png" id="1_sd1yj"]
@@ -8,6 +8,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr2mh"]
 size = Vector2(64, 64)
+
+[sub_resource type="Animation" id="Animation_e78m2"]
+resource_name = "heal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("heal_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_5ocdb"]
 resource_name = "walk_down"
@@ -73,25 +89,51 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_e78m2"]
-resource_name = "heal"
-length = 0.5
+[sub_resource type="Animation" id="Animation_uo34b"]
+resource_name = "take_damage"
+length = 0.15
+step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("heal_sprite:visible")
+tracks/0/path = NodePath("damage_sprite_1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.03),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false, true, false]
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_sprite_2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06, 0.09),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_sprite_3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.12, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuxl4"]
 _data = {
 "heal": SubResource("Animation_e78m2"),
+"take_damage": SubResource("Animation_uo34b"),
 "walk_down": SubResource("Animation_5ocdb"),
 "walk_left": SubResource("Animation_rvrwg"),
 "walk_right": SubResource("Animation_4oyox"),
