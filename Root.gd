@@ -19,7 +19,7 @@ func _to_objective_screen():
 	
 func _to_stats_screen():
 	#if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
-		Root_instance = preload("res://Menu/stats_screen.tscn").instantiate()
+		Root_instance = preload("res://Menu/Stats_Screen/stats_screen.tscn").instantiate()
 		Root.add_child.call_deferred(Root_instance)
 		Root_instance.to_intro_level.connect(_to_intro_level)
 		EntitiesState.Root = get_tree().root
