@@ -165,13 +165,14 @@ offset_bottom = 175.0
 
 [node name="HP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 layout_mode = 2
-offset_right = 95.0
+offset_right = 79.0
 offset_bottom = 26.0
 tooltip_text = "Points de vie. S’ils tombent à 0, c’est la défaite."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "HP:"
 fit_content = true
+autowrap_mode = 0
 
 [node name="Player_HP_Bar" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Calculated_Stats"]
 anchors_preset = 0
@@ -313,7 +314,8 @@ expand_mode = 3
 
 [node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre de cases parcourables."
+tooltip_text = "Nombre de cases parcourables 
+en un tour."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "MVT:"
@@ -330,7 +332,8 @@ expand_mode = 3
 
 [node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre d’actions possibles."
+tooltip_text = "Nombre d’actions possibles 
+en un tour."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "ACT:"

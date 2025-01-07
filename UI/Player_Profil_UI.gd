@@ -104,7 +104,7 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_HP.text = "[b][font=res://Fonts/determination-extended.ttf][color=#3EE657]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/color][/font][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(1,230,1,255)
 	else:
-		UI_stat_HP.text = "[b]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/b]"
+		UI_stat_HP.text = "[b][font=res://Fonts/determination-extended.ttf]PV: " + str(GameData.player_HP) + "/" + str(GameData.player_MAX_HP) + "[/font][/b]"
 		UI_stat_HP_BAR.tint_progress = Color(255,255,255,255)
 	if GameState.weapon_equipped == true:
 		if GameData.player_MT > GameData.player_STR:
@@ -124,12 +124,14 @@ func stat_modifier():
 	base_player_DEF = GameData.player_DEF
 	Button_Stats_Control.visible = true
 	if is_inside_tree():
-		for i in range(0,3):
-			UI_stat_LVL.text = "[b]" + "Niveau:   " + str(GameData.player_LVL) + "[/b]"
+		for i in range(0,4):
+			UI_stat_LVL.clear()
+			UI_stat_LVL.text = "[font=res://Fonts/determination-extended.ttf][font_size=20]" + "Niveau:   " + str(GameData.player_LVL) + "[/font_size][/font]"
 			UI_stat_LVL.modulate = Color(1, 1, 0) #Jaune
 			await get_tree().create_timer(0.3).timeout
+			UI_stat_LVL.clear()
 			UI_stat_LVL.modulate = Color(1, 1, 1) #Blanc
-			UI_stat_LVL.text = "Niveau:   " + str(GameData.player_LVL)
+			UI_stat_LVL.text = "[font=res://Fonts/determination-extended.ttf]" + "Niveau:   " + str(GameData.player_LVL) + "[/font]"
 			await get_tree().create_timer(0.1).timeout
 	else:
 		return
