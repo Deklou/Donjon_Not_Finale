@@ -29,7 +29,7 @@ func _to_stats_screen():
 		user_interface_node.visible = true
 	
 func _to_intro_level():
-	_unload_previous_level("res://Transition/intro_to_first_floor.tscn")
+	_unload_level("res://Transition/intro_to_first_floor.tscn")
 	_load_next_level("res://Levels/Demo/Tutorial.tscn")
 	if is_inside_tree(): #Pour que le jeu ait le temps de détecter que le joueur a un parent
 		await get_tree().create_timer(0.5).timeout
@@ -38,7 +38,7 @@ func _to_intro_level():
 
 func _to_first_floor():
 	_load_next_transition("res://Transition/intro_to_first_floor.tscn")
-	_unload_previous_level("res://Levels/Demo/Tutorial.tscn")
+	_unload_level("res://Levels/Demo/Tutorial.tscn")
 	_load_next_level("res://Levels/Demo/First_Floor.tscn")
 	if is_inside_tree():
 		await get_tree().create_timer(0.5).timeout
@@ -49,7 +49,7 @@ func _to_first_floor():
 	EntitiesState.player_is_frozen = false
 	
 func _to_intro_level_from_first_floor():
-	_unload_previous_level("res://Levels/Demo/First_Floor.tscn")
+	_unload_level("res://Levels/Demo/First_Floor.tscn")
 	_load_next_level("res://Levels/Demo/Tutorial.tscn")
 	
 func _to_the_end():
@@ -83,20 +83,27 @@ func _scene_path_to_scene_name(scene_path):
 		if last_slash_pos != -1:
 			return left_part.right(scene_path.length() - last_slash_pos - 6) #On veut récupérer le nom de la scène pour la retrouver dans l'arbre	
 ##################### DECHARGER NIVEAU #####################	
-func _unload_previous_level(scene_path : String):
+func _unload_level(scene_path : String):
 	EntitiesState.player_is_frozen = true
 	Root = get_tree().root
 	var scene_name = _scene_path_to_scene_name(scene_path)
 	if Root.has_node(scene_name): #Si la hiérarchie possède la scène qu'on veut supprimer, on la supprime
 		Root.remove_child.call_deferred(Root.get_node(scene_name))
 	if EntitiesState.player_parent_node != null and EntitiesState.player_parent_node.has_node("Grid_player_2") == true: #Si on vient d'un niveau, on l'invisibilise et on supprime le joueur pour éviter les conflits entre les niveaux
-		print("ROOT.GD " + str(EntitiesState.player_parent_node.has_node("Grid_player_2")))
 		EntitiesState.player_parent_node.remove_child(EntitiesState.player_parent_node.get_node("Grid_player_2"))
-		print("ROOT.GD " + str(EntitiesState.player_parent_node.has_node("Grid_player_2")))
 		EntitiesState.enemy_triggered_list.clear()
 		EntitiesState.enemy_turn_ended_list.clear()
 	if user_interface_node != null: #S'il existe une instance de l'interface utilisateur, on la cache (pourquoi on la supprime pas ?)
 		user_interface_node.visible = false
+##################### DECHARGER PARENT JOUEUR #####################
+func _unload_previous_level():
+	EntitiesState.player_is_frozen = true
+	Root = get_tree().root
+	var parent_path : String = EntitiesState.player_parent_node.get_path()
+	if Root.has_node(parent_path):
+		Root.remove_child.call_deferred(Root.get_node(parent_path))
+	EntitiesState.enemy_triggered_list.clear()
+	EntitiesState.enemy_turn_ended_list.clear()
 ##################### TRANSITION #####################
 func _load_next_transition(transition_scene_path : String):
 	var scene = ResourceLoader.load(transition_scene_path)
@@ -142,5 +149,5 @@ func _input(event):
 				debug1_pressed = event.is_pressed()
 func _process(_delta):
 	if debug1_pressed and debug2_pressed:
-		_unload_previous_level("res://Levels/Debug/debug_level.tscn")
+		_unload_previous_level()
 		_load_next_level("res://Levels/Debug/debug_level.tscn")

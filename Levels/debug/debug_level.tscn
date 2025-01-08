@@ -777,9 +777,15 @@ position = Vector2(1248, 568)
 
 [node name="dummy_1" parent="." instance=ExtResource("4_0nsxj")]
 position = Vector2(1376, 168)
+dummy_id = "test_1"
+dummy_name = "A"
 
 [node name="dummy_2" parent="." instance=ExtResource("4_0nsxj")]
 position = Vector2(1664, 360)
+dummy_id = "test_2"
+dummy_name = "B"
 
 [node name="dummy_3" parent="." instance=ExtResource("4_0nsxj")]
 position = Vector2(1792, 656)
+dummy_id = "test_3"
+dummy_name = "C"
