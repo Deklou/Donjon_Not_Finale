@@ -1,8 +1,8 @@
 extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
-var default_player_MAX_HP : int = 30
-var default_player_HP : int = 30
+var default_player_MAX_HP : int = 3
+var default_player_HP : int = 3
 var default_player_STR : int = 6
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 0

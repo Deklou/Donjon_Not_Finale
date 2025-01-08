@@ -21,7 +21,6 @@ func _on_to_first_floor_from_bonus_3_area_2d_body_entered(body):
 	_move_to_other_room(body,Vector2(-1088, 0))
 func _on_to_the_end_area_2d_body_entered(_body):
 	demo_tilemap.set_layer_enabled(0, false) #par défaut on active les collisions
-	print("first floor loading zones.gd trigger fin")
 	GameState.to_stats_screen.emit() #Vers Root
 func _on_to_secret_area_2d_body_entered(_body):
 	demo_tilemap.set_layer_enabled(0, false) #par défaut on active les collisions

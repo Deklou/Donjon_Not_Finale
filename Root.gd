@@ -18,15 +18,16 @@ func _to_objective_screen():
 		Root_instance.to_stats_screen.connect(_to_stats_screen)
 	
 func _to_stats_screen():
-	#if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
-		Root_instance = preload("res://Menu/Stats_Screen/stats_screen.tscn").instantiate()
-		Root.add_child.call_deferred(Root_instance)
-		Root_instance.to_intro_level.connect(_to_intro_level)
-		EntitiesState.Root = get_tree().root
-		EntitiesState.Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
-		for child in EntitiesState.Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
-			user_interface_node = child
-		user_interface_node.visible = true
+	Root_instance = preload("res://Menu/Stats_Screen/stats_screen.tscn").instantiate()
+	Root.add_child.call_deferred(Root_instance)
+	Root_instance.to_intro_level.connect(_to_intro_level)
+	EntitiesState.Root = get_tree().root
+	for child in EntitiesState.Root.get_node("Root").get_children(): #On vérifie que Root n'a pas déjà des enfants
+		EntitiesState.Root.get_node("Root").remove_child(child)
+	EntitiesState.Root.get_node("Root").add_child(preload("res://UI/user_interface.tscn").instantiate())
+	for child in EntitiesState.Root.get_node("Root").get_children(): #je fais ça car il arrive que l'interface change de nom dans l'arbre...
+		user_interface_node = child
+	user_interface_node.visible = true
 	
 func _to_intro_level():
 	_unload_level("res://Transition/intro_to_first_floor.tscn")
@@ -38,6 +39,7 @@ func _to_intro_level():
 
 func _to_first_floor():
 	_load_next_transition("res://Transition/intro_to_first_floor.tscn")
+	await get_tree().create_timer(4.0).timeout #pour que player_is_frozen reste bien à true pendant la transi 
 	_unload_level("res://Levels/Demo/Tutorial.tscn")
 	_load_next_level("res://Levels/Demo/First_Floor.tscn")
 	if is_inside_tree():
@@ -46,7 +48,6 @@ func _to_first_floor():
 	if EntitiesState.player_parent_node != null:
 		EntitiesState.player_parent_node.get_node("loading_zones").to_secret_exit.connect(_to_secret)
 		EntitiesState.player_parent_node.get_node("loading_zones").to_tutorial_from_first_floor.connect(_to_intro_level_from_first_floor)
-	EntitiesState.player_is_frozen = false
 	
 func _to_intro_level_from_first_floor():
 	_unload_level("res://Levels/Demo/First_Floor.tscn")
@@ -106,6 +107,7 @@ func _unload_previous_level():
 	EntitiesState.enemy_turn_ended_list.clear()
 ##################### TRANSITION #####################
 func _load_next_transition(transition_scene_path : String):
+	EntitiesState.player_is_frozen = true
 	var scene = ResourceLoader.load(transition_scene_path)
 	if scene:
 		var transition_scene = scene.instantiate()
@@ -115,7 +117,6 @@ func _load_next_transition(transition_scene_path : String):
 		transition_scene.queue_free()
 ##################### CHARGER NIVEAU #####################		
 func _load_next_level(scene_path : String):
-	EntitiesState.player_is_frozen = true
 	Root = get_tree().root
 	var scene = ResourceLoader.load(scene_path)
 	var scene_name = _scene_path_to_scene_name(scene_path)
@@ -130,9 +131,9 @@ func _load_next_level(scene_path : String):
 		user_interface_node.visible = true
 	if is_inside_tree():
 		await get_tree().create_timer(0.5).timeout
-	EntitiesState.player_is_frozen = false
 	if EntitiesState.player_parent_node != null:
-		EntitiesState.player_parent_node.add_child(preload("res://UI/Selector_UI.tscn").instantiate())	
+		EntitiesState.player_parent_node.add_child(preload("res://UI/Selector_UI.tscn").instantiate())
+	EntitiesState.player_is_frozen = false
 ##################### DEBUG #####################			
 var debug1_pressed = false
 var debug2_pressed = false
