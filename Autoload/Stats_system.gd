@@ -24,6 +24,8 @@ func update_stats():
 	GameData.player_STR = GameData.player_STR_buffer
 	GameData.player_DEX = GameData.player_DEX_buffer
 	GameData.player_DEF = GameData.player_DEF_buffer
+	GameData.player_MAX_movement_point = GameData.player_MAX_movement_point_buffer
+	GameData.player_MAX_action_point = GameData.player_MAX_action_point_buffer
 	
 	if GameData.player_HP < 1 and game_over_boolean :
 		EntitiesState.player_is_dead()

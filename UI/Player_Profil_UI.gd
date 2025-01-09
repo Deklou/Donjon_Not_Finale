@@ -137,23 +137,25 @@ func stat_modifier():
 		return
 	GameState.level_up = false
 	update_player_UI()
+##################### LEVEL UP SPECIAL #####################
 func stat_special_modifier():
+	GameState.fountain_current_point = GameState.fountain_attributes[GameState.fountain_id]
+	GameData.player_current_movement_point = GameData.player_MAX_movement_point_buffer
+	GameData.player_current_action_point = GameData.player_MAX_action_point_buffer
 	if GameState.fountain_is_currently_used == true:
 		GameState.level_up = false
-		base_player_MVT = GameData.player_MAX_movement_point
-		base_player_ACT = GameData.player_MAX_action_point
+		base_player_MVT = GameData.player_MAX_movement_point_buffer
+		base_player_ACT = GameData.player_MAX_action_point_buffer
 		Button_Stats_Special_Control.visible = true
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
 	else:
 		GameState.level_up = true
-		GameData.player_MAX_movement_point = base_player_MVT
-		GameData.player_MAX_action_point = base_player_ACT
+		GameData.player_MAX_movement_point_buffer = base_player_MVT
+		GameData.player_MAX_action_point_buffer = base_player_ACT
 		Button_Stats_Special_Control.visible = false
 		Hbox_Special_Validation.visible = false
-	GameState.fountain_current_point = GameState.fountain_attributes[GameState.fountain_id]
-	GameData.player_current_movement_point = GameData.player_MAX_movement_point
-	GameData.player_current_action_point = GameData.player_MAX_action_point
+	StatsSystem.update_stats()
 	update_player_UI()
 ##################### LEVEL UP BUTTON #####################
 func _on_plus_str_button_pressed():
@@ -214,40 +216,40 @@ func _on_minus_def_button_pressed():
 		GameState.player_turn_end()
 		
 func _on_plus_mvt_button_pressed():
-	if base_player_MVT + GameState.fountain_current_point > GameData.player_MAX_movement_point:
+	if GameState.fountain_current_point > 0:
 		Hbox_Special_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
-		GameData.player_MAX_movement_point += 1
+		GameData.player_MAX_movement_point_buffer += 1
 		GameState.fountain_current_point += -1
-		GameData.player_current_movement_point = GameData.player_MAX_movement_point
+		GameData.player_current_movement_point = GameData.player_MAX_movement_point_buffer
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 func _on_minus_mvt_button_pressed():
-	if GameData.player_MAX_movement_point > base_player_MVT:
+	if GameState.fountain_current_point >= 0 and GameData.player_MAX_movement_point_buffer > base_player_MVT:
 		Hbox_Special_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
-		GameData.player_MAX_movement_point += -1
+		GameData.player_MAX_movement_point_buffer += -1
 		GameState.fountain_current_point += 1
-		GameData.player_current_movement_point = GameData.player_MAX_movement_point
+		GameData.player_current_movement_point = GameData.player_MAX_movement_point_buffer
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 
 func _on_plus_act_button_pressed():
-	if base_player_ACT + GameState.fountain_current_point > GameData.player_MAX_action_point:
+	if GameState.fountain_current_point > 0:
 		Hbox_Special_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
-		GameData.player_MAX_action_point += 1
+		GameData.player_MAX_action_point_buffer += 1
 		GameState.fountain_current_point += -1
-		GameData.player_current_action_point = GameData.player_MAX_action_point
+		GameData.player_current_action_point = GameData.player_MAX_action_point_buffer
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 func _on_minus_act_button_pressed():
-	if GameData.player_MAX_action_point > base_player_ACT:
+	if GameState.fountain_current_point >= 0 and GameData.player_MAX_action_point_buffer > base_player_ACT:
 		Hbox_Special_Validation.visible = true
 		GameState.Ui_Inventory_is_locked = true #on désactive l'accès à l'inventaire
-		GameData.player_MAX_action_point += -1
+		GameData.player_MAX_action_point_buffer += -1
 		GameState.fountain_current_point += 1
-		GameData.player_current_action_point = GameData.player_MAX_action_point
+		GameData.player_current_action_point = GameData.player_MAX_action_point_buffer
 		StatsSystem.update_stats()
 		GameState.player_turn_end()
 ##################### VALIDATION #####################
@@ -275,10 +277,13 @@ func _on_validation_special_button_pressed():
 	GameState.fountain_is_currently_used = false
 	base_player_MVT = GameData.player_MAX_movement_point
 	base_player_ACT = GameData.player_MAX_action_point
-	GameState.fountain_states.append(GameState.fountain_id)
-	GameState.fountain_has_been_used.emit(GameState.fountain_id) #vers script fontaine
+	if GameState.fountain_current_point == 0: #Si la fontaine est vide
+		GameState.fountain_states.append(GameState.fountain_id)
+		GameState.fountain_has_been_used.emit(GameState.fountain_id) #vers script fontaine
+	else:
+		GameState.fountain_attributes[GameState.fountain_id] = GameState.fountain_current_point #On sauvegarde les points restants
 	StatsSystem.update_stats()
-##################### CANT MOVE #####################
+##################### CAN T MOVE #####################
 func player_input_cant_move():
 	if is_inside_tree():
 		UI_stat_MVT.text = "[b][color=#FF0000]" + "MVT: " + str(GameData.player_current_movement_point) + "[/color][/b]"

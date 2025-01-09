@@ -23,10 +23,12 @@ var default_player_CRT_buffer : int = default_player_CRT
 var default_player_STR_buffer : int = default_player_STR 
 var default_player_DEX_buffer : float = default_player_DEX 
 var default_player_DEF_buffer : int = default_player_DEF 
-var default_player_MAX_movement_point: int = 1
-var default_player_MAX_action_point: int = 22
-var default_player_current_movement_point: int = 1
-var default_player_current_action_point: int = 22
+var default_player_MAX_movement_point : int = 1
+var default_player_MAX_action_point : int = 22
+var default_player_current_movement_point : int = 1
+var default_player_current_action_point : int = 22
+var default_player_MAX_movement_point_buffer : int = default_player_MAX_movement_point
+var default_player_MAX_action_point_buffer : int = default_player_MAX_action_point
 var default_enemy_MAX_HP : int = 22 
 var default_enemy_HP : int = 22 
 var default_enemy_STR : int = 6 
@@ -87,6 +89,8 @@ var player_MAX_movement_point: int #points max de mouvement possibles
 var player_MAX_action_point: int #points max d'actions possibles
 var player_current_movement_point: int #points de mouvements actuels du joueur
 var player_current_action_point: int #points d'actions actuels du joueur
+var player_MAX_movement_point_buffer : int #nécéssaire car le joueur peut augmenter et baisser cette stat
+var player_MAX_action_point_buffer : int  #nécéssaire car le joueur peut augmenter et baisser cette stat
 ############################################################################################
 #Stats de base des ennemis
 var enemy_stats = {} #Dictionnaire qui contiendra des sous dictionnaires contenant les stats de chaque ennemi
@@ -273,6 +277,8 @@ func _reset_gamedata_value():
 	player_MAX_action_point = default_player_MAX_action_point
 	player_current_movement_point = default_player_current_movement_point
 	player_current_action_point = default_player_current_action_point
+	player_MAX_movement_point_buffer = default_player_MAX_movement_point_buffer
+	player_MAX_action_point_buffer = default_player_MAX_action_point_buffer
 	enemy_stats.clear()
 	enemy_inventory.clear()
 	enemy_MAX_HP = default_enemy_MAX_HP
