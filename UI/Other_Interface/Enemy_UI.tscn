@@ -255,8 +255,9 @@ offset_bottom = 96.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Enemy_Inventory_UI/ScrollContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="delimiter_5" type="Sprite2D" parent="Enemy_Inventory_UI"]
-position = Vector2(97, -6.125)
+position = Vector2(97, -14.125)
 scale = Vector2(1.96226, 1.125)
 texture = ExtResource("10_j4ajf")

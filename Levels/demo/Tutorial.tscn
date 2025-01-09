@@ -1063,12 +1063,13 @@ enemy_item_1 = "Pain rassis"
 enemy_sprite_path = "res://Sprites/Enemy/dummy_1_sprite_2.png"
 
 [node name="dummy_6" parent="Enemies" instance=ExtResource("8_gehed")]
-position = Vector2(6448, 1264)
+position = Vector2(6416, 1952)
 dummy_id = "7"
 dummy_name = "Gardien"
 dummy_MAX_HP_offset = -4
 dummy_DEX_offset = -5
 enemy_item_1 = "Bâton"
+enemy_item_2 = "Pain"
 enemy_sprite_path = "res://Sprites/Enemy/dummy_1_sprite_2.png"
 
 [node name="dummy_7" parent="Enemies" instance=ExtResource("8_gehed")]
@@ -1203,7 +1204,7 @@ shape = SubResource("RectangleShape2D_qhbwy")
 debug_color = Color(0.607843, 0.537255, 0, 0.419608)
 
 [node name="Grid_player_2" parent="." instance=ExtResource("1_n8rk7")]
-position = Vector2(6136, 1720)
+position = Vector2(6184, 1800)
 
 [node name="Closed_Door" parent="." instance=ExtResource("10_c4kfm")]
 position = Vector2(2304, 1024)

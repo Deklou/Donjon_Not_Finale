@@ -21,6 +21,7 @@ func hide_enemy_inventory():
 
 func update_enemy_inventory(inventory: Array):
 	for child in vbox_node.get_children():
+		child.visible = false
 		child.queue_free()
 	for item_name in inventory:
 		var item_label = preload("res://UI/Inventory_Enemy_Item.tscn").instantiate()
