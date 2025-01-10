@@ -13,14 +13,13 @@ func _ready():
 
 func update_inventory(inventory: Array):
 	for child in vbox_node.get_children():
-		child.queue_free() # Supprimer tous les enfants du VBoxContainer avant de les recréer
+		child.free() # Supprimer tous les enfants du VBoxContainer avant de les recréer
 	for item_name in inventory: #Pour chaque objet de l'inventaire, on appelle la scène de l'item
 		var item_button = preload("res://UI/Inventory_Item.tscn").instantiate()
 		var item_icon = item_button.get_node("Icon")
 		vbox_node.add_child(item_button)
 		item_button.text = item_name
 		item_button.name = item_name #pour debug plus facilement
-		
 		if GameData.Item[item_name].Type == "Weapon":
 			item_icon.texture = preload("res://Sprites/UI_icon/weapon.png")
 			if GameState.weapon_equipped == true and GameState.weapon_equipped_name == item_name:
@@ -30,8 +29,15 @@ func update_inventory(inventory: Array):
 			item_icon.texture = preload("res://Sprites/UI_icon/consumable.png")
 		elif GameData.Item[item_name].Type == "Special":
 			item_icon.texture = GameData.Item[item_name].Icon
-			
+		
 		item_button.pressed.connect(func():validation_menu(item_button, item_name)) #si on sélectionne l'objet
+	
+	for child in vbox_node.get_children():
+		print("UI_Inventory.gd child= " + str(child))
+	print("_______________________________________")
+	print("UI_Inventory.gd Inventaire= " + str(Inventory.inventory))
+	print("_______________________________________")
+
 
 func validation_menu(item_button, item_name):
 	if GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
@@ -54,14 +60,15 @@ func validation_menu(item_button, item_name):
 			throw_button.text = "Jeter"
 		
 		validation_node.visible = true #on fait apparaître le sous menu
-	
+		
 		use_button.pressed.connect(func():_use_button(item_button,item_name))
 		throw_button.pressed.connect(func():_remove_button(item_button,item_name))
 		cancel_button.pressed.connect(func():_cancel_button())
 		
 func _use_button(item_button,item_name): #note: en principe il suffirait juste d'appeler la fonction _remove_button, mais godot veut pas
+	#print("UI_Inventory.gd itembutton = " + str(item_button) + " " + str(item_name))
 	if item_button !=null and GameData.player_current_action_point > 0:  #vérifie si l'item existe
-		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true: 
+		if GameData.Item[item_name].Type == "Weapon" and GameState.weapon_equipped == true:
 			if GameState.weapon_equipped_name == item_name: #Si une arme est équipée, alors on arrête la fonction
 				Logs._log_item("Already_Equiped",item_name)
 				return

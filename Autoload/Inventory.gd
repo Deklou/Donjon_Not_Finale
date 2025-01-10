@@ -49,7 +49,7 @@ func _use_item(item_name): #utiliser un item.
 		if GameData.player_HP_buffer > GameData.player_MAX_HP_buffer:
 			GameData.player_HP_buffer = GameData.player_MAX_HP_buffer
 		entity_heal.emit("Player") #Vers script joueur
-	elif GameData.Item[item_name].Type == "Weapon" and GameData.Item[item_name].Equiped == false: 
+	elif GameData.Item[item_name].Type == "Weapon" and GameData.Item[item_name].Equiped == false:
 		if GameState.first_weapon_equiped == false:
 			EntitiesState.show_mt_crt_dex_UI.emit() #vers user_interface
 			GameState.first_weapon_equiped = true
