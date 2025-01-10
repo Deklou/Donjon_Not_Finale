@@ -24,7 +24,7 @@ func update_enemy_inventory(inventory: Array):
 		child.visible = false
 		child.queue_free()
 	for item_name in inventory:
-		var item_label = preload("res://UI/Inventory_Enemy_Item.tscn").instantiate()
+		var item_label = preload("res://UI/Inventory_Item.tscn").instantiate()
 		var item_icon = item_label.get_node("Icon")
 		if not item_name.is_empty(): #Pour éviter de définir le nom d'un noeud vide. 
 			item_label.text = item_name
