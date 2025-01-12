@@ -54,6 +54,8 @@ var base_player_ACT : int
 ############### bandes noires ##################
 @onready var black_stripe_top : ColorRect = $Stripes/Black_Stripe_Top
 @onready var black_stripe_bottom : ColorRect = $Stripes/Black_Stripe_Bottom
+@onready var stripe_animation_player : AnimationPlayer = $Stripes/Stripes_AnimationPlayer
+var black_stripes_are_visible : bool = false #check si les bandes en dehors de l'écran ou non
 ##################### READY #####################
 func _ready(): 
 	StatsSystem.update_player_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
@@ -85,8 +87,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_ACT.visible = true
 		player_mvt_icon.visible = true
 		player_act_icon.visible = true
-		black_stripe_top.visible = true
-		black_stripe_bottom.visible = true
+		if not black_stripes_are_visible:
+			stripe_animation_player.play("combat_start_V1")
+		black_stripes_are_visible = true
 	elif GameState.fountain_is_currently_used == true:
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
@@ -97,8 +100,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_ACT.visible = false
 		player_mvt_icon.visible = false
 		player_act_icon.visible = false
-		black_stripe_top.visible = false
-		black_stripe_bottom.visible = false
+		if black_stripes_are_visible:
+			stripe_animation_player.play("combat_end_V1")
+		black_stripes_are_visible = false
 	
 	########################### FLECHES ###########################
 	MT_Arrow_Up.visible = false

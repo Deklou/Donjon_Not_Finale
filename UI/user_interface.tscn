@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://51t4dp5dm88f"]
+[gd_scene load_steps=33 format=3 uid="uid://51t4dp5dm88f"]
 
 [ext_resource type="Script" path="res://UI/UI_Inventory.gd" id="1_3hr7y"]
 [ext_resource type="Script" path="res://UI/Player_Profil_UI.gd" id="1_685e6"]
@@ -17,6 +17,126 @@
 [ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="11_ynk02"]
 [ext_resource type="Theme" uid="uid://da3p0i8a65d3v" path="res://UI/user_interface.tres" id="12_874r6"]
 [ext_resource type="Texture2D" uid="uid://05btvgx5mm53" path="res://Sprites/UI_icon/stats_button_bg_2.png" id="12_j2c60"]
+
+[sub_resource type="Animation" id="Animation_nx46a"]
+resource_name = "combat_start_V1"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black_Stripe_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, -336), Vector2(-832, -272)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Black_Stripe_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, 448), Vector2(-832, 384)]
+}
+
+[sub_resource type="Animation" id="Animation_387g6"]
+resource_name = "combat_end_V1"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black_Stripe_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, -272), Vector2(-832, -336)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Black_Stripe_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, 384), Vector2(-832, 448)]
+}
+
+[sub_resource type="Animation" id="Animation_aromj"]
+resource_name = "combat_end_V2"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black_Stripe_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, -272), Vector2(-8, -272)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Black_Stripe_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-832, 384), Vector2(-1656, 384)]
+}
+
+[sub_resource type="Animation" id="Animation_51opc"]
+resource_name = "combat_start_V2"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black_Stripe_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-8, -272), Vector2(-832, -272)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Black_Stripe_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1656, 384), Vector2(-832, 384)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2np13"]
+_data = {
+"combat_end_V1": SubResource("Animation_387g6"),
+"combat_end_V2": SubResource("Animation_aromj"),
+"combat_start_V1": SubResource("Animation_nx46a"),
+"combat_start_V2": SubResource("Animation_51opc")
+}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3edtt"]
 
@@ -129,21 +249,25 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Black_Stripe_Top" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Stripes"]
-visible = false
 layout_mode = 0
-offset_left = -832.0
+offset_left = -8.0
 offset_top = -272.0
-offset_right = -16.0
+offset_right = 808.0
 offset_bottom = -208.0
 color = Color(0, 0, 0, 1)
 
 [node name="Black_Stripe_Bottom" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Stripes"]
-visible = false
-offset_left = -832.0
+layout_mode = 0
+offset_left = -1656.0
 offset_top = 384.0
-offset_right = -16.0
+offset_right = -840.0
 offset_bottom = 448.0
 color = Color(0, 0, 0, 1)
+
+[node name="Stripes_AnimationPlayer" type="AnimationPlayer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Stripes"]
+libraries = {
+"": SubResource("AnimationLibrary_2np13")
+}
 
 [node name="LVL" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
