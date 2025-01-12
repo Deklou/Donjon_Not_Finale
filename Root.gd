@@ -102,7 +102,9 @@ func _unload_previous_level():
 	Root = get_tree().root
 	var parent_path : String = EntitiesState.player_parent_node.get_path()
 	if Root.has_node(parent_path):
-		Root.remove_child.call_deferred(Root.get_node(parent_path))
+		var node_to_remove = Root.get_node(parent_path)
+		Root.remove_child(node_to_remove)
+		node_to_remove.queue_free()
 	EntitiesState.enemy_triggered_list.clear()
 	EntitiesState.enemy_turn_ended_list.clear()
 ##################### TRANSITION #####################
