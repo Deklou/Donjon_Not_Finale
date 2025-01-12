@@ -123,6 +123,28 @@ offset_bottom = 704.0
 mouse_filter = 2
 script = ExtResource("1_685e6")
 
+[node name="Stripes" type="Control" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Black_Stripe_Top" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Stripes"]
+visible = false
+layout_mode = 0
+offset_left = -832.0
+offset_top = -272.0
+offset_right = -16.0
+offset_bottom = -208.0
+color = Color(0, 0, 0, 1)
+
+[node name="Black_Stripe_Bottom" type="ColorRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Stripes"]
+visible = false
+offset_left = -832.0
+offset_top = 384.0
+offset_right = -16.0
+offset_bottom = 448.0
+color = Color(0, 0, 0, 1)
+
 [node name="LVL" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
 offset_top = 8.0

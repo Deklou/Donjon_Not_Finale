@@ -51,6 +51,9 @@ var base_player_ACT : int
 ############### icône de buff ##################
 @onready var MT_Arrow_Up : TextureRect = $Player_Calculated_Stats/HBoxContainer_MT/Arrow_Up
 @onready var CRT_Arrow_Up : TextureRect = $Player_Calculated_Stats/HBoxContainer_CRT/Arrow_Up
+############### bandes noires ##################
+@onready var black_stripe_top : ColorRect = $Stripes/Black_Stripe_Top
+@onready var black_stripe_bottom : ColorRect = $Stripes/Black_Stripe_Bottom
 ##################### READY #####################
 func _ready(): 
 	StatsSystem.update_player_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
@@ -77,11 +80,13 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	UI_stat_MVT.text = "MVT: " + str(GameData.player_current_movement_point)
 	UI_stat_ACT.text = "ACT: " + str(GameData.player_current_action_point)
 	
-	if not EntitiesState.enemy_triggered_list.is_empty():
+	if not EntitiesState.enemy_triggered_list.is_empty(): #Lorsque le joueur est en combat
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
 		player_mvt_icon.visible = true
 		player_act_icon.visible = true
+		black_stripe_top.visible = true
+		black_stripe_bottom.visible = true
 	elif GameState.fountain_is_currently_used == true:
 		UI_stat_MVT.visible = true
 		UI_stat_ACT.visible = true
@@ -92,6 +97,8 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 		UI_stat_ACT.visible = false
 		player_mvt_icon.visible = false
 		player_act_icon.visible = false
+		black_stripe_top.visible = false
+		black_stripe_bottom.visible = false
 	
 	########################### FLECHES ###########################
 	MT_Arrow_Up.visible = false
