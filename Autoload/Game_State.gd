@@ -124,6 +124,7 @@ func player_has_acted(): #c'est ici qu'est régit le comportement des points d'a
 func player_turn_end():
 	if GameData.player_current_action_point == 0:
 		hide_attack_button.emit()
+		EntitiesState.last_selected_id = EntitiesState.selected_id #On garde en mémoire le dernier ennemi selectionné à la fin du tour du joueur
 	if not EntitiesState.enemy_triggered_list.is_empty():
 		if GameState.is_ennemy_turn == false and GameData.player_current_movement_point == 0 and GameData.player_current_action_point == 0:
 			GameState.is_ennemy_turn = true
@@ -166,6 +167,8 @@ func enemy_turn_end():
 		GameData.turn_number = GameData.turn_number + 1
 		GameData.player_current_movement_point = GameData.player_MAX_movement_point
 		GameData.player_current_action_point = GameData.player_MAX_action_point
+		EntitiesState.selected_id = EntitiesState.last_selected_id #l'ennemi selectionné au prochain du joueur est celui précédemment séléctionné
+		EntitiesState.selector_follows_enemy(GameData.enemy_stats[EntitiesState.selected_id].POSITION)
 	StatsSystem.update_stats()
 
 ##################### RESTART #####################

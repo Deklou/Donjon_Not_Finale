@@ -2,6 +2,7 @@ extends Node
 
 ##################### VARIABLE PAR DEFAUT #####################
 var default_selected_id : String = ""
+var default_last_selected_id : String = ""
 var default_enemy_id : String = ""
 var default_enemy_can_be_attacked_id : String = ""
 var default_enemy_can_be_attacked_position : Vector2 = Vector2(0,0)
@@ -34,6 +35,7 @@ signal enable_player_camera #active la caméra embarquée dans la scène joueur
 signal player_wait #le joueur veut attendre sans passer par l'interface
 var enemy_states = {} #dictionnaire contenant tous les états (vivants ou morts) des ennemis
 var selected_id : String #identifiant dont on se sert pour afficher l'interface de l'ennemi
+var last_selected_id : String #identifiant du dernier ennemi sélectionné à la fin du tour joueur
 var enemy_id : String #identifiant dont on se sert pour calculer les dégâts
 var enemy_can_be_attacked_id : String #identifiant de l'ennemi qui peut être attaqué par le joueur
 var enemy_can_be_attacked_position : Vector2 #Position de l'ennemi qui peut être attaqué
@@ -49,6 +51,7 @@ var selector_position : Vector2 #position du selecteur
 func _reset_entities_state_value():
 	enemy_states.clear()
 	selected_id = default_selected_id
+	last_selected_id = default_last_selected_id
 	enemy_id = default_enemy_id
 	enemy_can_be_attacked_id = default_enemy_can_be_attacked_id
 	enemy_can_be_attacked_position = default_enemy_can_be_attacked_position

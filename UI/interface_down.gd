@@ -38,6 +38,8 @@ func _on_attack_button_pressed():
 		if not EntitiesState.enemy_triggered_list.is_empty():
 			EntitiesState.enemy_can_be_attacked_id = EntitiesState.enemy_triggered_list[0]
 			EntitiesState.selected_id = EntitiesState.enemy_can_be_attacked_id
+	if not EntitiesState.selected_id in GameData.enemy_stats: #si l'entité selectionné n'est pas un ennemi
+		EntitiesState.selected_id = EntitiesState.enemy_can_be_attacked_id
 	if GameState.is_ennemy_turn == false and GameData.player_current_action_point > 0:
 		if GameData.enemy_stats[EntitiesState.selected_id].RANGE == true:
 			if EntitiesState.selected_id != EntitiesState.enemy_can_be_attacked_id:
