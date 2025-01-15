@@ -43,6 +43,8 @@ func validation_menu(item_button, item_name):
 		if GameData.Item[item_name].Type == "Weapon": #si l'objet est un équipement, on met à jour le nom des boutons en fontion
 			if GameData.Item[item_name].Equiped == false: #on ne veut pas afficher la description de l'objet quand il est déjà équipé
 				Logs._log_item("Description",item_name) #la description des objets est visible dans les logs
+				await get_tree().create_timer(0.7).timeout
+				Logs._log_item("Statistiques",item_name) #les statistiques de l'arme sont visibles dans les logs
 				use_button.text = "Equiper"
 			if GameData.Item[item_name].Equiped == true: #si une arme est équipée, alors on souhaite l'enlever avant de la jeter
 				throw_button.text = "Enlever"

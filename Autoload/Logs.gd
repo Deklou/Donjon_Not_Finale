@@ -43,6 +43,13 @@ func _log_item(action: String, item_name: String):
 		Logs._add_log(GameState.weapon_equipped_name + " est déjà\néquipée.")
 	elif action == "Description":
 		Logs._add_log(GameData.Item[item_name].Description)
+	elif action == "Statistiques":
+		if GameData.Item[item_name].Type != "Weapon": #Si l'item n'est pas une arme on quitte la fonction
+			return
+		if GameData.Item[item_name].Value[0] != 0: #Si l'arme possède une puissance non nulle
+			Logs._add_log("Dégâts totaux +" + str(GameData.Item[item_name].Value[0]))
+		if GameData.Item[item_name].Value[1] != 0: #Si l'arme possède un taux de coup critique non nul
+			Logs._add_log("Critique +" + str(GameData.Item[item_name].Value[1]))
 	elif action == "Open_Chest":
 		Logs._add_log("Vous avez ouvert un coffre \nil contenait " + GameData.Item[item_name].Article + " " + item_name + ".")
 	elif action == "Cannot_Heal":
