@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://UI/UI_Logs.gd" id="7_iij0v"]
 [ext_resource type="Texture2D" uid="uid://mycdocn0k0wi" path="res://Sprites/UI_icon/delimiter_1.png" id="7_yp2ct"]
 [ext_resource type="Texture2D" uid="uid://b7nh3ywii4h0q" path="res://Sprites/UI_icon/dexterity.png" id="8_1u7ne"]
+[ext_resource type="Texture2D" uid="uid://wpfpaif1bca0" path="res://Sprites/UI_icon/attack_v2.png" id="8_j6n1c"]
 [ext_resource type="Texture2D" uid="uid://20n0desniesb" path="res://Sprites/UI_icon/shield.png" id="9_02alh"]
 [ext_resource type="Script" path="res://UI/Interface_Down.gd" id="10_lhent"]
 [ext_resource type="Texture2D" uid="uid://cx6imt3vhul04" path="res://Sprites/UI_icon/movement.png" id="10_oqlr7"]
-[ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="11_ynk02"]
 [ext_resource type="Theme" uid="uid://da3p0i8a65d3v" path="res://UI/user_interface.tres" id="12_874r6"]
 [ext_resource type="Texture2D" uid="uid://05btvgx5mm53" path="res://Sprites/UI_icon/stats_button_bg_2.png" id="12_j2c60"]
 
@@ -392,26 +392,27 @@ stretch_mode = 2
 
 [node name="Player_Stats" type="VBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_top = 192.0
+offset_top = 182.0
 offset_right = 112.0
-offset_bottom = 344.0
+offset_bottom = 334.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 0
 
 [node name="STR_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
 
 [node name="STR_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/STR_HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("7_g0mqc")
-expand_mode = 3
+texture = ExtResource("8_j6n1c")
 
 [node name="STR" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/STR_HBoxContainer"]
 z_as_relative = false
 layout_mode = 2
-tooltip_text = "Pondère les dégâts infligés."
+size_flags_vertical = 4
+tooltip_text = "Force: 
+Pondère les dégâts infligés."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "STR:"
@@ -424,16 +425,18 @@ layout_mode = 2
 [node name="DEX_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEX_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("8_1u7ne")
-expand_mode = 2
 
 [node name="DEX" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEX_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Pondère le taux de coups critiques 
+size_flags_vertical = 4
+tooltip_text = "Dextérité:
+Pondère le taux de coups critiques 
 ainsi que les compétences à taux d’activation."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "DEX:"
 fit_content = true
 autowrap_mode = 0
+tab_size = 0
 
 [node name="DEF_HBoxContainer" type="HBoxContainer" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats"]
 layout_mode = 2
@@ -441,11 +444,12 @@ layout_mode = 2
 [node name="DEF_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEF_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("9_02alh")
-expand_mode = 3
 
 [node name="DEF" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/DEF_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Réduit les dégâts reçus."
+size_flags_vertical = 4
+tooltip_text = "Défense: 
+Réduit les dégâts reçus."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 text = "DEF:"
 fit_content = true
@@ -457,11 +461,12 @@ layout_mode = 2
 [node name="MVT_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_oqlr7")
-expand_mode = 3
 
 [node name="MVT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/MVT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre de cases parcourables 
+size_flags_vertical = 4
+tooltip_text = "Mouvement:
+Nombre de cases parcourables 
 en un tour."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
@@ -474,12 +479,13 @@ layout_mode = 2
 
 [node name="ACT_Icon" type="TextureRect" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("11_ynk02")
-expand_mode = 3
+texture = ExtResource("7_g0mqc")
 
 [node name="ACT" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil/Player_Stats/ACT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre d’actions possibles 
+size_flags_vertical = 4
+tooltip_text = "Action:
+Nombre d’actions possibles 
 en un tour."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true

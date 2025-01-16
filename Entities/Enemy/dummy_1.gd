@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var raycast_2D : RayCast2D = $RayCast2D
 @export var distance = 64 #taille d'une case
 var currPos
 var dummy_stats = {"Name": "",
@@ -183,9 +184,9 @@ func _enemy_move(_enemy_move_distance: Vector2):
 	if !is_inside_tree():
 		return 
 	previous_move = _enemy_move_distance
-	$RayCast2D.target_position = _enemy_move_distance
-	$RayCast2D.force_raycast_update()
-	if not $RayCast2D.is_colliding():
+	raycast_2D.target_position = _enemy_move_distance
+	raycast_2D.force_raycast_update()
+	if not raycast_2D.is_colliding():
 		self.position += _enemy_move_distance
 		GameState.enemy_has_moved()
 		GameData.enemy_stats[dummy_id].POSITION = get_position()

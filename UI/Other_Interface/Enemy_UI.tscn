@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dnir1ada82hxo" path="res://Sprites/UI_icon/attack.png" id="5_70dux"]
 [ext_resource type="Texture2D" uid="uid://b7nh3ywii4h0q" path="res://Sprites/UI_icon/dexterity.png" id="6_xgxy5"]
 [ext_resource type="Texture2D" uid="uid://20n0desniesb" path="res://Sprites/UI_icon/shield.png" id="7_684ed"]
+[ext_resource type="Texture2D" uid="uid://wpfpaif1bca0" path="res://Sprites/UI_icon/attack_v2.png" id="7_coetl"]
 [ext_resource type="Texture2D" uid="uid://cx6imt3vhul04" path="res://Sprites/UI_icon/movement.png" id="8_aij48"]
-[ext_resource type="Texture2D" uid="uid://cg1lwwvehdexe" path="res://Sprites/UI_icon/action.png" id="9_hi3va"]
 [ext_resource type="Texture2D" uid="uid://mycdocn0k0wi" path="res://Sprites/UI_icon/delimiter_1.png" id="10_j4ajf"]
 [ext_resource type="Script" path="res://UI/Enemy_Inventory_UI.gd" id="11_5my4o"]
 
@@ -121,25 +121,26 @@ stretch_mode = 2
 
 [node name="Enemy_Stats" type="VBoxContainer" parent="Enemy_Profil"]
 layout_mode = 0
-offset_top = 145.0
+offset_top = 129.0
 offset_right = 96.0
-offset_bottom = 263.0
+offset_bottom = 301.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/separation = 7
+theme_override_constants/separation = 0
 
 [node name="STR_HBoxContainer" type="HBoxContainer" parent="Enemy_Profil/Enemy_Stats"]
 layout_mode = 2
 
 [node name="STR_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_70dux")
-expand_mode = 3
+texture = ExtResource("7_coetl")
 
 [node name="STR" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/STR_HBoxContainer"]
 z_as_relative = false
 layout_mode = 2
-tooltip_text = "Pondère les dégâts infligés par l'adversaire."
+size_flags_vertical = 4
+tooltip_text = "Force: 
+Pondère les dégâts infligés par l'adversaire."
 theme_override_fonts/normal_font = ExtResource("3_bltf7")
 bbcode_enabled = true
 text = "STR:"
@@ -152,11 +153,12 @@ layout_mode = 2
 [node name="DEX_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("6_xgxy5")
-expand_mode = 2
 
 [node name="DEX" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/DEX_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Pondère le taux de coups critiques 
+size_flags_vertical = 4
+tooltip_text = "Dextérité:
+Pondère le taux de coups critiques 
 ainsi que les compétences à taux d’activation."
 theme_override_fonts/normal_font = ExtResource("3_bltf7")
 text = "DEX:"
@@ -169,11 +171,12 @@ layout_mode = 2
 [node name="DEF_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("7_684ed")
-expand_mode = 3
 
 [node name="DEF" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/DEF_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Réduit les dégâts reçus."
+size_flags_vertical = 4
+tooltip_text = "Défense: 
+Réduit les dégâts reçus."
 theme_override_fonts/normal_font = ExtResource("3_bltf7")
 text = "DEF:"
 fit_content = true
@@ -185,11 +188,13 @@ layout_mode = 2
 [node name="MVT_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("8_aij48")
-expand_mode = 3
 
 [node name="MVT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/MVT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre de cases parcourables."
+size_flags_vertical = 4
+tooltip_text = "Mouvement:
+Nombre de cases parcourables 
+par l'adversaire en un tour."
 theme_override_fonts/normal_font = ExtResource("3_bltf7")
 bbcode_enabled = true
 text = "MVT:"
@@ -201,12 +206,14 @@ layout_mode = 2
 
 [node name="ACT_Icon" type="TextureRect" parent="Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("9_hi3va")
-expand_mode = 3
+texture = ExtResource("5_70dux")
 
 [node name="ACT" type="RichTextLabel" parent="Enemy_Profil/Enemy_Stats/ACT_HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Nombre d’actions possibles."
+size_flags_vertical = 4
+tooltip_text = "Action: 
+Nombre d’actions possibles 
+par l'adversaire en un tour."
 theme_override_fonts/normal_font = ExtResource("3_bltf7")
 bbcode_enabled = true
 text = "ACT:"
