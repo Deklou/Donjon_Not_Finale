@@ -286,11 +286,12 @@ autowrap_mode = 0
 
 [node name="XP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
 layout_mode = 2
-offset_left = 112.0
+offset_left = 104.0
 offset_top = 8.0
-offset_right = 208.0
+offset_right = 344.0
 offset_bottom = 37.0
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
+bbcode_enabled = true
 text = "Exp:"
 
 [node name="CP" type="RichTextLabel" parent="MarginContainer_right/white_bg_right/interface_right/Player_Profil"]
@@ -314,7 +315,8 @@ offset_bottom = 175.0
 layout_mode = 2
 offset_right = 79.0
 offset_bottom = 26.0
-tooltip_text = "Points de vie. S’ils tombent à 0, c’est la défaite."
+tooltip_text = "Points de vie. S’ils tombent à 0, 
+c’est la défaite."
 theme_override_fonts/normal_font = ExtResource("3_aopnq")
 bbcode_enabled = true
 text = "HP:"

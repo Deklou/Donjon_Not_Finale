@@ -1,5 +1,6 @@
 extends Node
 
+signal gain_xp_UI
 signal UI_stat_button
 signal UI_stat_special_button
 var xp_result : float
@@ -10,6 +11,8 @@ func gain_xp():
 		GameState.first_enemy_defeated = true
 	xp_result = (GameData.enemy_stats[EntitiesState.enemy_id].LVL + GameData.enemy_stats[EntitiesState.enemy_id].XP) / GameData.player_LVL
 	GameData.player_XP_buffer = GameData.player_XP + snapped(xp_result,0) #arrondis xp_result à l'entier
+	StatsSystem.update_stats()
+	gain_xp_UI.emit() #Vers player_profil_ui
 	gain_level()
 
 func gain_level():
@@ -20,5 +23,6 @@ func gain_level():
 		GameData.player_CP_buffer = GameData.player_CP_buffer + GameData.player_XP_over_level
 		GameData.player_LVL_buffer = GameData.player_LVL_buffer + GameData.player_XP_over_level
 		GameData.player_MAX_HP_buffer = GameData.player_MAX_HP_buffer + GameData.player_XP_over_level
+		await get_tree().create_timer(1).timeout
 		UI_stat_button.emit() #On envoie ce signal à l'interface du joueur (Player_Profil_UI) pour créer les boutons + et -
 	StatsSystem.update_stats()

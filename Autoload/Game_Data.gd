@@ -3,11 +3,13 @@ extends Node
 ##################### VARIABLE PAR DEFAUT #####################
 var default_player_MAX_HP : int = 30
 var default_player_HP : int = 30
-var default_player_STR : int = 6
+var default_player_STR : int = 10
 var default_player_DEX : float = 5 
 var default_player_DEF : int = 5
 var default_player_LVL : int = 1
 var default_player_XP : int = 0
+var default_player_base_XP : int = 0
+var default_xp_call : bool = false
 var default_player_CP : int = 0 
 var default_player_MT : int = default_player_STR
 var default_player_CRT : int = 0
@@ -67,6 +69,8 @@ var player_DEF : int #Valeur qui sera soustraite aux dégâts reçus
 #variables relatives au niveau du joueur
 var player_LVL : int #Niveau
 var player_XP : int #expérience
+var player_base_XP : int #expérience actuelle du joueur avant gain d'exp
+var xp_call : bool # booléen qui se charge d'appeler la fonction d'xp de l'interface une seule fois
 var player_CP : int #point de compétence
 #variables calculées du joueur
 var player_MT : int #dégâts totaux
@@ -258,6 +262,8 @@ func _reset_gamedata_value():
 	player_DEF = default_player_DEF
 	player_LVL = default_player_LVL
 	player_XP = default_player_XP
+	player_base_XP = default_player_base_XP
+	xp_call = default_xp_call
 	player_CP = default_player_CP
 	player_MT = default_player_MT
 	player_CRT = default_player_CRT

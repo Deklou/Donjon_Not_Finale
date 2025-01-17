@@ -59,6 +59,7 @@ var black_stripes_are_visible : bool = false #check si les bandes en dehors de l
 ##################### READY #####################
 func _ready(): 
 	StatsSystem.update_player_stats.connect(update_player_UI) #dès qu'on met à jour les stats d'une entité, on met à jour l'interface
+	XpSystem.gain_xp_UI.connect(update_xp) #dès que le joueur gagne de l'exp
 	XpSystem.UI_stat_button.connect(stat_modifier) 
 	XpSystem.UI_stat_special_button.connect(stat_special_modifier)
 	GameState.show_mvt_act_stats.connect(update_player_UI)
@@ -69,8 +70,9 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	if GameState.level_up == false:
 		UI_stat_LVL.text = "Niveau:   " + str(GameData.player_LVL)
 	############### XP ################
-	UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
-	UI_stat_XP.tooltip_text = "Expérience. " + str(100 - GameData.player_XP) + " exp jusqu'au niveau suivant."
+	if GameData.xp_call == true:
+		UI_stat_XP.text = "Exp:   " + str(GameData.player_XP)
+		UI_stat_XP.tooltip_text = "Expérience. " + str(100 - GameData.player_XP) + " exp jusqu'au niveau suivant."
 	###################################
 	UI_stat_HP_BAR.value = float(GameData.player_HP)*100/float(GameData.player_MAX_HP)
 	UI_stat_CP.text = "Point de compétence:  " + str(GameData.player_CP)
@@ -127,6 +129,19 @@ func update_player_UI(): #update l'interface avec les valeurs du joueur
 	if GameState.is_ennemy_turn == true: #Quand le joueur est hors combat, il n'a aucune limite de déplacement et d'action
 		GameData.player_current_movement_point = GameData.player_MAX_movement_point
 		GameData.player_current_action_point = GameData.player_MAX_action_point
+##################### EXP #####################		
+func update_xp():
+	GameData.xp_call = false
+	var xp : int = abs(GameData.player_XP - GameData.player_base_XP) % 100
+	var player_base_xp : int = GameData.player_base_XP
+	UI_stat_XP.text = "Exp:   " + str(player_base_xp) + "[color=#FFFF00]   +" + str(xp) + "[/color]"
+	await get_tree().create_timer(0.5).timeout
+	for i in range(1,xp):
+		UI_stat_XP.text = "Exp:   " + str(player_base_xp + i) + "[color=#FFFF00]   +" + str(xp - i) + "[/color]"
+		await get_tree().create_timer(0.02).timeout
+	GameData.player_base_XP = GameData.player_XP
+	GameData.xp_call = true
+	update_player_UI()
 ##################### LEVEL UP #####################
 func stat_modifier():
 	base_player_CP = GameData.player_CP_buffer #chaque montée de niveau, on copie les anciennes stats du joueur

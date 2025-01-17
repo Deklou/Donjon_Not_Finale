@@ -164,14 +164,14 @@ func enemy_has_acted(): #c'est ici qu'est régit le comportement des points d'ac
 func enemy_turn_end():
 	if GameState.is_ennemy_turn == true:
 		if not EntitiesState.selected_id in GameData.enemy_stats: #si l'entité selectionné n'est pas un ennemi
-			EntitiesState.selected_id = EntitiesState.enemy_can_be_attacked_id
+			EntitiesState.selected_id = EntitiesState.enemy_id
 		if not EntitiesState.last_selected_id in GameData.enemy_stats: #si le joueur n'a jamais sélectionné d'ennemi durant son tour
 			EntitiesState.last_selected_id = EntitiesState.selected_id
 		GameState.is_ennemy_turn = false
 		GameData.turn_number = GameData.turn_number + 1
 		GameData.player_current_movement_point = GameData.player_MAX_movement_point
 		GameData.player_current_action_point = GameData.player_MAX_action_point
-		EntitiesState.selected_id = EntitiesState.last_selected_id #l'ennemi selectionné au prochain du joueur est celui précédemment séléctionné
+		EntitiesState.selected_id = EntitiesState.last_selected_id #l'ennemi selectionné au prochain tour du joueur est celui précédemment séléctionné
 		EntitiesState.selector_follows_enemy(GameData.enemy_stats[EntitiesState.selected_id].POSITION)
 	StatsSystem.update_stats()
 
