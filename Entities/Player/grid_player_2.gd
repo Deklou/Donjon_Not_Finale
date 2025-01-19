@@ -33,19 +33,19 @@ func _input(event):
 			GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 			if event.is_action_pressed("right"):
 				moving_direction = Vector2(distance, 0)
-				handle_movement(moving_direction, "walk_right")
+				handle_movement(moving_direction, "face_right")
 				move_timer.start()
 			elif event.is_action_pressed("left"):
 				moving_direction = Vector2(-distance, 0)
-				handle_movement(moving_direction, "walk_left")
+				handle_movement(moving_direction, "face_left")
 				move_timer.start()
 			elif event.is_action_pressed("up"):
 				moving_direction = Vector2(0, -distance)
-				handle_movement(moving_direction, "walk_up")
+				handle_movement(moving_direction, "face_up")
 				move_timer.start()
 			elif event.is_action_pressed("down"):
 				moving_direction = Vector2(0, distance)
-				handle_movement(moving_direction, "walk_down")
+				handle_movement(moving_direction, "face_down")
 				move_timer.start()
 				
 			elif event.is_action_pressed("wait"):
@@ -76,13 +76,13 @@ func handle_movement(direction_vector, animation):
 	GameState.player_position = self.position
 func get_animation_from_direction(direction_vector):
 	if direction_vector.x > 0:
-		return "walk_right"
+		return "walk_right_V2"
 	elif direction_vector.x < 0:
-		return "walk_left"
+		return "walk_left_V2"
 	elif direction_vector.y > 0:
-		return "walk_down"
+		return "walk_down_V2"
 	elif direction_vector.y < 0:
-		return "walk_up"
+		return "walk_up_V2"
 ##################### DEGAT #####################
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
