@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var distance = 64 #taille d'une case
+@onready var player_sprite_v2 : Sprite2D = $Player_Sprite_V2
 @onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
 @onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
 @onready var damage_sprite_3 : Sprite2D = $damage_sprite_3 #Sprite temporaire de dégâts
@@ -9,6 +10,7 @@ extends CharacterBody2D
 var currPos
 var moving_direction = Vector2.ZERO  # Direction actuelle du mouvement
 var move_timer = Timer.new()  # Timer pour le mouvement continu
+var sprite_tween : Tween
 ##################### READY #####################
 func _ready():
 	EntitiesState.player_parent_node = get_parent()
@@ -30,25 +32,30 @@ func _ready():
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down") or event.is_action("wait"):	
 		if EntitiesState.player_is_frozen == false:
+			##################### TWEEN #####################
 			GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 			if event.is_action_pressed("right"):
 				moving_direction = Vector2(distance, 0)
-				handle_movement(moving_direction, "face_right")
+				handle_movement(moving_direction, "walk_right_V2")
 				move_timer.start()
+				tween()
 			elif event.is_action_pressed("left"):
 				moving_direction = Vector2(-distance, 0)
-				handle_movement(moving_direction, "face_left")
+				handle_movement(moving_direction, "walk_left_V2")
 				move_timer.start()
+				tween()
 			elif event.is_action_pressed("up"):
 				moving_direction = Vector2(0, -distance)
-				handle_movement(moving_direction, "face_up")
+				handle_movement(moving_direction, "walk_up_V2")
 				move_timer.start()
+				tween()
 			elif event.is_action_pressed("down"):
 				moving_direction = Vector2(0, distance)
-				handle_movement(moving_direction, "face_down")
+				handle_movement(moving_direction, "walk_down_V2")
 				move_timer.start()
+				tween()
 				
-			elif event.is_action_pressed("wait"):
+			elif event.is_action_pressed("wait"): #raccourcis clavier d'attente ? 
 				EntitiesState.player_wait.emit() #Vers Interfacedown
 			
 			# Arrêter le timer lorsque la touche est relâchée
@@ -74,6 +81,7 @@ func handle_movement(direction_vector, animation):
 	elif GameData.player_current_movement_point == 0:
 		GameState.player_input_cant_move()
 	GameState.player_position = self.position
+	tween()
 func get_animation_from_direction(direction_vector):
 	if direction_vector.x > 0:
 		return "walk_right_V2"
@@ -83,6 +91,11 @@ func get_animation_from_direction(direction_vector):
 		return "walk_down_V2"
 	elif direction_vector.y < 0:
 		return "walk_up_V2"
+func tween():
+	sprite_tween = self.create_tween()
+	sprite_tween.stop()
+	sprite_tween.tween_property(player_sprite_v2, "position", self.position + Vector2(0,-32), 0.2).set_trans(Tween.TRANS_LINEAR)
+	sprite_tween.play()
 ##################### DEGAT #####################
 func _player_take_damage(Entity_Name: String):
 	if Entity_Name == "Player":
