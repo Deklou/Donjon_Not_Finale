@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 @export var distance = 64 #taille d'une case
 @onready var player_sprite_v2 : Sprite2D = $Player_Sprite_V2
-@onready var damage_sprite_1 : Sprite2D = $damage_sprite_1 #Sprite temporaire de dégâts
-@onready var damage_sprite_2 : Sprite2D = $damage_sprite_2 #Sprite temporaire de dégâts
-@onready var damage_sprite_3 : Sprite2D = $damage_sprite_3 #Sprite temporaire de dégâts
 @onready var player_camera : Camera2D = $Camera2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 var currPos
@@ -32,7 +29,6 @@ func _ready():
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down") or event.is_action("wait"):	
 		if EntitiesState.player_is_frozen == false:
-			##################### TWEEN #####################
 			GameState.player_turn_end() #on appelle cette fonction ici car sinon les boutons d'attaque et d'attente apparaissent après avoir bougé
 			if event.is_action_pressed("right"):
 				moving_direction = Vector2(distance, 0)
@@ -91,7 +87,8 @@ func get_animation_from_direction(direction_vector):
 		return "walk_down_V2"
 	elif direction_vector.y < 0:
 		return "walk_up_V2"
-func tween():
+##################### TWEEN #####################
+func tween(): #besoin de créer le tween et le stopper au même endroit où il est utilisé, d'où la fonction
 	sprite_tween = self.create_tween()
 	sprite_tween.stop()
 	sprite_tween.tween_property(player_sprite_v2, "position", self.position + Vector2(0,-32), 0.2).set_trans(Tween.TRANS_LINEAR)

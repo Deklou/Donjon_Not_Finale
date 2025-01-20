@@ -1,11 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://cdq0ux4rg1m4q"]
+[gd_scene load_steps=20 format=3 uid="uid://cdq0ux4rg1m4q"]
 
 [ext_resource type="Script" path="res://Entities/Player/grid_player_2.gd" id="1_2fju6"]
 [ext_resource type="Texture2D" uid="uid://i6dahw3f6nk2" path="res://Sprites/Player/chara_sprite.png" id="1_sd1yj"]
 [ext_resource type="Texture2D" uid="uid://1noylvdils1q" path="res://Sprites/Player/chara_sprite_-_Copy-removebg-preview.png" id="3_7er36"]
-[ext_resource type="Texture2D" uid="uid://db5in2p1yixis" path="res://Sprites/Enemy/damage_frame_1.png" id="3_bdfdx"]
-[ext_resource type="Texture2D" uid="uid://criwc4s3g653j" path="res://Sprites/Enemy/damage_frame_2.png" id="4_6xqgt"]
-[ext_resource type="Texture2D" uid="uid://b46k3o8vws1gc" path="res://Sprites/Enemy/dummy_1_sprite.png" id="5_a73g1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr2mh"]
 size = Vector2(64, 64)
@@ -76,18 +73,18 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_e78m2"]
 resource_name = "heal"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("heal_sprite:visible")
+tracks/0/path = NodePath("Player_Sprite_V2:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.25),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false]
+"update": 0,
+"values": [Color(0.107435, 0.890369, 0, 1), Color(1, 1, 1, 1), Color(0.105882, 0.890196, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_uo34b"]
@@ -97,38 +94,14 @@ step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("damage_sprite_1:visible")
+tracks/0/path = NodePath("Player_Sprite_V2:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.03),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("damage_sprite_2:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.06, 0.09),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("damage_sprite_3:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.12, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_5ocdb"]
@@ -290,6 +263,7 @@ visible = false
 texture = ExtResource("1_sd1yj")
 hframes = 3
 vframes = 2
+frame = 3
 
 [node name="Player_Sprite_V2" type="Sprite2D" parent="."]
 top_level = true
@@ -298,6 +272,7 @@ position = Vector2(0, -32)
 texture = ExtResource("3_7er36")
 hframes = 6
 vframes = 2
+frame = 11
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -314,23 +289,3 @@ enabled = false
 target_position = Vector2(0, 64)
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="damage_sprite_1" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_bdfdx")
-
-[node name="damage_sprite_2" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_6xqgt")
-
-[node name="damage_sprite_3" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_a73g1")
-
-[node name="heal_sprite" type="ColorRect" parent="."]
-visible = false
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-color = Color(0.486275, 1, 0.321569, 0.678431)
