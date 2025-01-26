@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdq0ux4rg1m4q"]
+[gd_scene load_steps=21 format=3 uid="uid://cdq0ux4rg1m4q"]
 
 [ext_resource type="Script" path="res://Entities/Player/grid_player_2.gd" id="1_2fju6"]
 [ext_resource type="Texture2D" uid="uid://i6dahw3f6nk2" path="res://Sprites/Player/chara_sprite.png" id="1_sd1yj"]
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [9]
+"values": [11]
 }
 
 [sub_resource type="Animation" id="Animation_f7i5t"]
@@ -85,6 +85,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(0.107435, 0.890369, 0, 1), Color(1, 1, 1, 1), Color(0.105882, 0.890196, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sq0g1"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player_Sprite_V2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 0, 6, 0]
 }
 
 [sub_resource type="Animation" id="Animation_uo34b"]
@@ -165,7 +180,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [10, 11, 9]
+"values": [12, 13, 11]
 }
 
 [sub_resource type="Animation" id="Animation_4oyox"]
@@ -229,7 +244,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [7, 8, 6]
+"values": [9, 10, 6]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuxl4"]
@@ -239,6 +254,7 @@ _data = {
 "face_right": SubResource("Animation_f7i5t"),
 "face_up": SubResource("Animation_dmigr"),
 "heal": SubResource("Animation_e78m2"),
+"idle": SubResource("Animation_sq0g1"),
 "take_damage": SubResource("Animation_uo34b"),
 "walk_down": SubResource("Animation_5ocdb"),
 "walk_down_V2": SubResource("Animation_h7dm0"),
@@ -270,9 +286,8 @@ top_level = true
 texture_filter = 1
 position = Vector2(0, -32)
 texture = ExtResource("3_7er36")
-hframes = 6
-vframes = 2
-frame = 11
+hframes = 8
+vframes = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

@@ -25,6 +25,7 @@ func _ready():
 	EntitiesState.disable_player_camera.connect(_disable_player_moving_camera)
 	EntitiesState.enable_player_camera.connect(_enable_player_moving_camera)
 	Inventory.entity_heal.connect(_player_heal)
+	tween()
 ##################### DEPLACEMENT #####################
 func _input(event):
 	if event.is_action("right") or event.is_action("left") or event.is_action("up") or event.is_action("down") or event.is_action("wait"):	

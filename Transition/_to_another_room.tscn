@@ -41,12 +41,13 @@ _data = {
 [node name="_to_another_room" type="CanvasLayer"]
 
 [node name="black_color_rect" type="ColorRect" parent="."]
+z_as_relative = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer_Fade" type="AnimationPlayer" parent="black_color_rect"]
 libraries = {
