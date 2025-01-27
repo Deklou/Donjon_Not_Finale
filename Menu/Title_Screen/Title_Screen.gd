@@ -11,32 +11,38 @@ extends CanvasLayer
 @onready var confirmation_menu_node : Node2D = $Confirmation_Menu_Node
 ############### ANIMATION PLAYER ##################
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+############### SCENES ##################
+var transition_scene = preload("res://Transition/Fade_1.tscn")
+var option_scene = preload("res://Menu/Command_Screen/Command_Screen.tscn")
+var cursor_scene = preload("res://Menu/Cursor/Title_Screen_Cursor.tscn")
+var letter_o_scene = preload("res://Menu/Title_Screen/Title_Screen_Effect/Letter_O_Effect.tscn")
 ############### Variables ##################
 var new_game_button_position = Vector2(0,0)
 var continue_button_position = Vector2(0,0)
 var settings_button_position = Vector2(0,0)
 var quit_button_position = Vector2(0,0)
 var o_button_position = Vector2(0,0)
-var transition_scene_instance = null
-var transition_scene_animation_player = null
-var cursor_scene_instance = null
+var cursor_instance = null
+var letter_o_instance = null
+var letter_o_scene_animation_player: AnimationPlayer = null
 var button_tween : Tween
-var letter_o_scene_instance = null
-var letter_o_scene_animation_player = null
 
 func _ready():
+	var transition_instance = _add_scene_instance(transition_scene)
+	var transition_scene_animation_player: AnimationPlayer = transition_instance.get_node("AnimationPlayer")
+	transition_scene_animation_player.play("fade_in")
+	cursor_instance = _add_scene_instance(cursor_scene)
+	letter_o_instance = _add_scene_instance(letter_o_scene)
+	letter_o_scene_animation_player = letter_o_instance.get_node("AnimationPlayer")
 	new_game_button_position = new_game_button.position
 	continue_button_position = continue_button.position
 	settings_button_position = settings_button.position
 	quit_button_position = quit_button.position
 	o_button_position = o_button.position
-	transition_scene_instance = preload("res://Transition/Fade_1.tscn").instantiate()
-	cursor_scene_instance = preload("res://Menu/Cursor/Title_Screen_Cursor.tscn").instantiate()
-	add_child(cursor_scene_instance)
-	cursor_scene_instance.visible = false
-	add_child(transition_scene_instance)
-	transition_scene_animation_player = transition_scene_instance.get_node("AnimationPlayer")
-	transition_scene_animation_player.play("fade_in")
+func _add_scene_instance(scene: PackedScene) -> Node:
+	var instance = scene.instantiate()
+	add_child(instance)
+	return instance
 ##################### BOUTON SELECT #####################
 func _on_new_game_button_mouse_entered():
 	tween_select(new_game_button,new_game_button_position, "select")
@@ -73,13 +79,15 @@ func tween_select(button: Button, button_position: Vector2,mode: String): #besoi
 ##################### CURSOR #####################
 func cursor_select(button_position: Vector2):
 	get_tree().create_timer(0.2)
-	cursor_scene_instance.position = button_position + Vector2(-100,0)
-	cursor_scene_instance.visible = false
+	cursor_instance.position = button_position + Vector2(-100,0)
+	cursor_instance.visible = false #Mettre sur true si on veut faire fonctionner le curseur
 func cursor_deselect(button_position: Vector2):
 	get_tree().create_timer(0.2)
-	cursor_scene_instance.position = button_position + Vector2(-70,0)
-	cursor_scene_instance.visible = false
+	cursor_instance.position = button_position + Vector2(-70,0)
+	cursor_instance.visible = false
 ##################### BUTTON PRESSED #####################
+func _on_settings_button_pressed():
+	var option_instance = _add_scene_instance(option_scene)
 func _on_quit_button_pressed():
 	confirmation_menu_node.visible = true
 func _on_confirmation_no_button_pressed():
@@ -95,11 +103,9 @@ func _on_e_button_pressed():
 	button_tween.tween_property(e_button, "position", e_button.position + Vector2(64,0), 0.1).set_trans(Tween.TRANS_LINEAR)
 	button_tween.play()
 func _on_o_button_pressed():
-	letter_o_scene_instance = preload("res://Menu/Title_Screen/Title_Screen_Effect/Letter_O_Effect.tscn").instantiate()
-	letter_o_scene_animation_player = letter_o_scene_instance.get_node("AnimationPlayer")
-	add_child(letter_o_scene_instance)
-	move_child(letter_o_scene_instance,2) #Sinon le O ne s'assombrit pas en quittant 
-	letter_o_scene_instance.position = Vector2(183,65)
+	move_child(letter_o_instance,2) #Sinon le O ne s'assombrit pas en quittant
+	letter_o_instance.position = Vector2(183,65) #position du premier O
+	letter_o_instance.visible = true 
 	letter_o_scene_animation_player.play("Letter_O_Effect")
 
 

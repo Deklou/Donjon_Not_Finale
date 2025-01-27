@@ -50,6 +50,7 @@ _data = {
 }
 
 [node name="TitleScreenCursor" type="Node2D"]
+visible = false
 position = Vector2(128, 64)
 script = ExtResource("1_167b0")
 
