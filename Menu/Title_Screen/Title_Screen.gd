@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var settings_button : Button = $Standard_Button_VBox/Settings_Button
 @onready var quit_button : Button = $Standard_Button_VBox/Quit_Button
 ############### TITLE BUTTON ##################
+@onready var d_button : Button = $Title_HBox/Donjon_HBox/D_Button
 @onready var o_button : Button = $Title_HBox/Donjon_HBox/O_Button
 @onready var e_button : Button = $Title_HBox/Finale_HBox/E_Button
 ############### MENU CONFIRMATION ##################
@@ -87,7 +88,7 @@ func cursor_deselect(button_position: Vector2):
 	cursor_instance.visible = false
 ##################### BUTTON PRESSED #####################
 func _on_settings_button_pressed():
-	var option_instance = _add_scene_instance(option_scene)
+	_add_scene_instance(option_scene)
 func _on_quit_button_pressed():
 	confirmation_menu_node.visible = true
 func _on_confirmation_no_button_pressed():
@@ -96,21 +97,20 @@ func _on_confirmation_yes_button_pressed():
 	get_tree().quit()
 ##################### TITLE BUTTON PRESSED #####################
 func _on_d_button_pressed():
+	d_button.disabled = true
 	animation_player.play("Title_D_Effect_On")
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "Title_D_Effect_On":
+		d_button.disabled = false
 func _on_e_button_pressed():
 	button_tween = self.create_tween()
 	button_tween.stop()
 	button_tween.tween_property(e_button, "position", e_button.position + Vector2(64,0), 0.1).set_trans(Tween.TRANS_LINEAR)
 	button_tween.play()
 func _on_o_button_pressed():
+	print("title screen o button position = " + str(o_button.position))
+	print("title screen hbox position = " + str($Title_HBox.position))
 	move_child(letter_o_instance,2) #Sinon le O ne s'assombrit pas en quittant
-	letter_o_instance.position = Vector2(183,65) #position du premier O
+	letter_o_instance.position = o_button.position + $Title_HBox.position + Vector2(4,0)#position du premier O
 	letter_o_instance.visible = true 
 	letter_o_scene_animation_player.play("Letter_O_Effect")
-
-
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "Title_D_Effect_On":
-		print("title screen caca")
-		#emit signal
-		#et quand le signal est reçu delock le bouton

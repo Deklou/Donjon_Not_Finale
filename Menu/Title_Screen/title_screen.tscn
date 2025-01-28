@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgxkji0salglt"]
+[gd_scene load_steps=8 format=3 uid="uid://cgxkji0salglt"]
 
 [ext_resource type="Script" path="res://Menu/Title_Screen/Title_Screen.gd" id="1_7rbrw"]
 [ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_sabbf"]
-[ext_resource type="Theme" uid="uid://bpufx3nqujwwh" path="res://Themes/Button/Title_Screen.tres" id="2_2uw7o"]
-[ext_resource type="Theme" uid="uid://bmqswjcl61tr8" path="res://Themes/Button/Title_Screen_E.tres" id="2_fjlsy"]
+[ext_resource type="Theme" uid="uid://egmjag0l1k7r" path="res://Themes/Button/Title_Screen_Title.tres" id="2_74s6i"]
 [ext_resource type="Theme" uid="uid://c0auhrwrxs4ra" path="res://Themes/Button/Title_Screen_2.tres" id="2_kg2u7"]
 
 [sub_resource type="Animation" id="Animation_rt5v1"]
@@ -46,7 +45,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.5, 4, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-320, 160), Vector2(32, 160), Vector2(120, 160), Vector2(120, 160), Vector2(-320, 160)]
+"values": [Vector2(-320, 160), Vector2(32, 160), Vector2(123, 160), Vector2(123, 160), Vector2(-320, 160)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1y6qv"]
@@ -75,19 +74,18 @@ offset_top = 67.0
 offset_right = 519.0
 offset_bottom = 176.0
 grow_horizontal = 2
-theme = ExtResource("2_fjlsy")
 theme_override_constants/separation = 60
 
 [node name="Donjon_HBox" type="HBoxContainer" parent="Title_HBox"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_2uw7o")
+theme = ExtResource("2_74s6i")
+theme_override_constants/separation = -8
 
 [node name="D_Button" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "D
@@ -95,28 +93,24 @@ text = "D
 
 [node name="O_Button" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "O"
 
 [node name="N_Button" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "N"
 
 [node name="J_Button" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "J"
 
 [node name="O_Button2" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "O
@@ -124,7 +118,6 @@ text = "O
 
 [node name="N_Button2" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "N
@@ -132,10 +125,11 @@ text = "N
 
 [node name="Not_HBox" type="HBoxContainer" parent="Title_HBox"]
 layout_mode = 2
+theme = ExtResource("2_74s6i")
+theme_override_constants/separation = -8
 
 [node name="N_Button" type="Button" parent="Title_HBox/Not_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "N
@@ -143,24 +137,23 @@ text = "N
 
 [node name="O_Button" type="Button" parent="Title_HBox/Not_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "O"
 
 [node name="T_Button" type="Button" parent="Title_HBox/Not_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "T"
 
 [node name="Finale_HBox" type="HBoxContainer" parent="Title_HBox"]
 layout_mode = 2
+theme = ExtResource("2_74s6i")
+theme_override_constants/separation = -8
 
 [node name="F_Button" type="Button" parent="Title_HBox/Finale_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "F
@@ -168,28 +161,24 @@ text = "F
 
 [node name="I_Button" type="Button" parent="Title_HBox/Finale_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "I"
 
 [node name="N_Button" type="Button" parent="Title_HBox/Finale_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "N"
 
 [node name="A_Button" type="Button" parent="Title_HBox/Finale_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "A"
 
 [node name="L_Button" type="Button" parent="Title_HBox/Finale_HBox"]
 layout_mode = 2
-theme = ExtResource("2_fjlsy")
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "L
@@ -297,6 +286,7 @@ text = "NON
 [node name="Title_Effect_Node2D" type="Node2D" parent="."]
 
 [node name="D_Effect_RichTextLabel" type="RichTextLabel" parent="Title_Effect_Node2D"]
+modulate = Color(1, 1, 1, 0)
 offset_left = -320.0
 offset_top = 160.0
 offset_bottom = 208.0

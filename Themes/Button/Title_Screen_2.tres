@@ -13,6 +13,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/styles/focus = SubResource("StyleBoxFlat_ieljc")
 Button/styles/hover = SubResource("StyleBoxFlat_7xnc1")
