@@ -492,6 +492,7 @@ theme = SubResource("Theme_3y5dh")
 icon = ExtResource("2_w8i5u")
 
 [node name="ColorRect_Animation" type="ColorRect" parent="."]
+visible = false
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 1280.0

@@ -1,0 +1,154 @@
+[gd_scene load_steps=7 format=3 uid="uid://df5jlhf5sl7po"]
+
+[ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_363hm"]
+[ext_resource type="Script" path="res://Menu/Options_Screen/Options_Screen.gd" id="1_xkk8t"]
+[ext_resource type="Theme" uid="uid://c0auhrwrxs4ra" path="res://Themes/Button/Title_Screen_2.tres" id="2_l17qo"]
+[ext_resource type="Texture2D" uid="uid://bo6fiap3rk6d3" path="res://Sprites/Menu/frame_1.png" id="4_1l4ck"]
+[ext_resource type="Texture2D" uid="uid://clrn3gorpdcf" path="res://Sprites/Menu/arrow_1.png" id="5_q7jar"]
+[ext_resource type="Texture2D" uid="uid://0sibdqjbnpt0" path="res://Sprites/Menu/Space_Bar_1.png" id="6_jeqwe"]
+
+[node name="OptionsScreen" type="CanvasLayer"]
+script = ExtResource("1_xkk8t")
+
+[node name="Black_Background_ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Command_Ttitle_RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -536.0
+offset_top = 49.0
+offset_right = 536.0
+offset_bottom = 113.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("1_363hm")
+theme_override_font_sizes/normal_font_size = 50
+text = "Les commandes pour intéragir avec le jeu"
+autowrap_mode = 0
+
+[node name="Back_Button" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 640.0
+offset_right = 214.0
+offset_bottom = 695.0
+theme = ExtResource("2_l17qo")
+theme_override_fonts/font = ExtResource("1_363hm")
+theme_override_font_sizes/font_size = 50
+text = "Retour"
+
+[node name="Keyboard_Command" type="Node2D" parent="."]
+
+[node name="Keyboard_Letters" type="Node2D" parent="Keyboard_Command"]
+
+[node name="Z_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
+
+[node name="Z_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/Z_Letter"]
+position = Vector2(318, 269)
+scale = Vector2(3.475, 3.46042)
+texture = ExtResource("4_1l4ck")
+
+[node name="Z_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/Z_Letter"]
+offset_left = 304.0
+offset_top = 247.0
+offset_right = 352.0
+offset_bottom = 303.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_363hm")
+theme_override_font_sizes/normal_font_size = 55
+text = "Z"
+scroll_active = false
+
+[node name="Q_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
+
+[node name="Q_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/Q_Letter"]
+position = Vector2(223, 360)
+scale = Vector2(3.475, 3.46042)
+texture = ExtResource("4_1l4ck")
+
+[node name="Q_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/Q_Letter"]
+offset_left = 209.0
+offset_top = 336.0
+offset_right = 257.0
+offset_bottom = 392.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_363hm")
+theme_override_font_sizes/normal_font_size = 55
+text = "Q"
+scroll_active = false
+
+[node name="S_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
+
+[node name="S_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/S_Letter"]
+position = Vector2(318, 360)
+scale = Vector2(3.475, 3.46042)
+texture = ExtResource("4_1l4ck")
+
+[node name="S_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/S_Letter"]
+offset_left = 304.0
+offset_top = 338.0
+offset_right = 352.0
+offset_bottom = 394.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_363hm")
+theme_override_font_sizes/normal_font_size = 55
+text = "S"
+scroll_active = false
+
+[node name="D_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
+
+[node name="D_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/D_Letter"]
+position = Vector2(411, 360)
+scale = Vector2(3.475, 3.46042)
+texture = ExtResource("4_1l4ck")
+
+[node name="D_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/D_Letter"]
+offset_left = 398.0
+offset_top = 337.0
+offset_right = 446.0
+offset_bottom = 393.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_363hm")
+theme_override_font_sizes/normal_font_size = 55
+text = "D
+"
+scroll_active = false
+
+[node name="Keyboard_Arrows" type="Node2D" parent="Keyboard_Command"]
+
+[node name="Arrow_Up_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
+position = Vector2(318, 184)
+scale = Vector2(3.50118, 3.41373)
+texture = ExtResource("5_q7jar")
+
+[node name="Arrow_Left_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
+position = Vector2(136, 360)
+rotation = -1.5708
+scale = Vector2(3.50118, 3.41373)
+texture = ExtResource("5_q7jar")
+
+[node name="Arrow_Right_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
+position = Vector2(496, 360)
+rotation = 1.5708
+scale = Vector2(3.50118, 3.41373)
+texture = ExtResource("5_q7jar")
+
+[node name="Arrow_Down_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
+position = Vector2(318, 444)
+rotation = 3.14159
+scale = Vector2(3.50118, 3.41373)
+texture = ExtResource("5_q7jar")
+
+[node name="Keyboard_Other" type="Node2D" parent="Keyboard_Command"]
+
+[node name="Space_Bar_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Other"]
+position = Vector2(318, 536)
+scale = Vector2(3.26696, 2.95)
+texture = ExtResource("6_jeqwe")
+
+[connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]

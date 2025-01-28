@@ -14,7 +14,7 @@ extends CanvasLayer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 ############### SCENES ##################
 var transition_scene = preload("res://Transition/Fade_1.tscn")
-var option_scene = preload("res://Menu/Command_Screen/Command_Screen.tscn")
+var option_scene = preload("res://Menu/Options_Screen/Options_Screen.tscn")
 var cursor_scene = preload("res://Menu/Cursor/Title_Screen_Cursor.tscn")
 var letter_o_scene = preload("res://Menu/Title_Screen/Title_Screen_Effect/Letter_O_Effect.tscn")
 ############### Variables ##################
