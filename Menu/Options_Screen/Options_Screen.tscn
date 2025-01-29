@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://df5jlhf5sl7po"]
+[gd_scene load_steps=27 format=3 uid="uid://df5jlhf5sl7po"]
 
 [ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_363hm"]
 [ext_resource type="Script" path="res://Menu/Options_Screen/Options_Screen.gd" id="1_xkk8t"]
@@ -7,167 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://clrn3gorpdcf" path="res://Sprites/Menu/arrow_1.png" id="5_q7jar"]
 [ext_resource type="Texture2D" uid="uid://d1rk0bh4j6tvv" path="res://Sprites/Menu/Space_Bar_2.png" id="6_3v4gk"]
 [ext_resource type="Texture2D" uid="uid://0sibdqjbnpt0" path="res://Sprites/Menu/Space_Bar_1.png" id="6_jeqwe"]
+[ext_resource type="Texture2D" uid="uid://dgkwos7ufw7in" path="res://Sprites/Menu/Click_Particle.png" id="7_8onhm"]
+[ext_resource type="Texture2D" uid="uid://bs0d4vhxsjhm4" path="res://Sprites/Menu/Mouse_Cursor_2.png" id="7_twjh5"]
 [ext_resource type="Texture2D" uid="uid://dgfepklpsxtxw" path="res://Sprites/Menu/frame_2.png" id="7_y1s27"]
-
-[sub_resource type="Animation" id="Animation_q6bb0"]
-resource_name = "z_pressed"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_y1s27")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.986752, 0.986752, 0.986752, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360654, 0.938043, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_cayry"]
-resource_name = "z_released"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_1l4ck")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_cmkw8"]
-resource_name = "q_pressed"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_y1s27")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_RichTextLabel:theme_override_colors/default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_pcaa3"]
-resource_name = "s_pressed"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_y1s27")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_RichTextLabel:theme_override_colors/default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
-}
+[ext_resource type="Texture2D" uid="uid://bgaul4gll6ro0" path="res://Sprites/Menu/Mouse_2.png" id="8_gd4d2"]
 
 [sub_resource type="Animation" id="Animation_8jmw8"]
 resource_name = "d_pressed"
@@ -249,6 +92,46 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_cmkw8"]
+resource_name = "q_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_81eb7"]
 resource_name = "q_released"
 length = 0.05
@@ -287,6 +170,46 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pcaa3"]
+resource_name = "s_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tomxx"]
@@ -361,10 +284,195 @@ tracks/0/keys = {
 "values": [ExtResource("6_jeqwe")]
 }
 
+[sub_resource type="Animation" id="Animation_q6bb0"]
+resource_name = "z_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.986752, 0.986752, 0.986752, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360654, 0.938043, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cayry"]
+resource_name = "z_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1l4ck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wn0c2"]
+resource_name = "click_pressed"
+length = 0.05
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Cursor_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4di4l"]
+resource_name = "click_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Cursor_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_c2khg"]
+resource_name = "mouse_moved"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lq3dh"]
+resource_name = "mouse_still"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xttrl"]
 _data = {
+"click_pressed": SubResource("Animation_wn0c2"),
+"click_released": SubResource("Animation_4di4l"),
 "d_pressed": SubResource("Animation_8jmw8"),
 "d_released": SubResource("Animation_fps4m"),
+"mouse_moved": SubResource("Animation_c2khg"),
+"mouse_still": SubResource("Animation_lq3dh"),
 "q_pressed": SubResource("Animation_cmkw8"),
 "q_released": SubResource("Animation_81eb7"),
 "s_pressed": SubResource("Animation_pcaa3"),
@@ -401,9 +509,9 @@ text = "Les commandes pour intéragir avec le jeu"
 autowrap_mode = 0
 
 [node name="Back_Button" type="Button" parent="."]
-offset_left = 40.0
+offset_left = 88.0
 offset_top = 640.0
-offset_right = 214.0
+offset_right = 262.0
 offset_bottom = 695.0
 theme = ExtResource("2_l17qo")
 theme_override_fonts/font = ExtResource("1_363hm")
@@ -519,9 +627,30 @@ position = Vector2(318, 536)
 scale = Vector2(3.26696, 2.95)
 texture = ExtResource("6_jeqwe")
 
+[node name="Mouse_Command" type="Node2D" parent="."]
+
+[node name="Cursor_Particle_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
+visible = false
+modulate = Color(0.360784, 0.937255, 0, 1)
+position = Vector2(688.5, 226.938)
+scale = Vector2(1.98438, 2.28864)
+texture = ExtResource("7_8onhm")
+
+[node name="Cursor_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
+position = Vector2(720, 288)
+scale = Vector2(2.95991, 3.11235)
+texture = ExtResource("7_twjh5")
+
+[node name="Mouse_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
+position = Vector2(710.091, 504)
+scale = Vector2(3.51106, 3.49522)
+texture = ExtResource("8_gd4d2")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_xttrl")
 }
 
+[connection signal="mouse_entered" from="Back_Button" to="." method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="Back_Button" to="." method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]
