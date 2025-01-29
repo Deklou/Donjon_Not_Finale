@@ -1,11 +1,379 @@
-[gd_scene load_steps=7 format=3 uid="uid://df5jlhf5sl7po"]
+[gd_scene load_steps=20 format=3 uid="uid://df5jlhf5sl7po"]
 
 [ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_363hm"]
 [ext_resource type="Script" path="res://Menu/Options_Screen/Options_Screen.gd" id="1_xkk8t"]
 [ext_resource type="Theme" uid="uid://c0auhrwrxs4ra" path="res://Themes/Button/Title_Screen_2.tres" id="2_l17qo"]
 [ext_resource type="Texture2D" uid="uid://bo6fiap3rk6d3" path="res://Sprites/Menu/frame_1.png" id="4_1l4ck"]
 [ext_resource type="Texture2D" uid="uid://clrn3gorpdcf" path="res://Sprites/Menu/arrow_1.png" id="5_q7jar"]
+[ext_resource type="Texture2D" uid="uid://d1rk0bh4j6tvv" path="res://Sprites/Menu/Space_Bar_2.png" id="6_3v4gk"]
 [ext_resource type="Texture2D" uid="uid://0sibdqjbnpt0" path="res://Sprites/Menu/Space_Bar_1.png" id="6_jeqwe"]
+[ext_resource type="Texture2D" uid="uid://dgfepklpsxtxw" path="res://Sprites/Menu/frame_2.png" id="7_y1s27"]
+
+[sub_resource type="Animation" id="Animation_q6bb0"]
+resource_name = "z_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.986752, 0.986752, 0.986752, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360654, 0.938043, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cayry"]
+resource_name = "z_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1l4ck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Z_Letter/Z_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cmkw8"]
+resource_name = "q_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pcaa3"]
+resource_name = "s_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8jmw8"]
+resource_name = "d_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/D_Letter/D_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_y1s27")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/D_Letter/D_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.360784, 0.937255, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fps4m"]
+resource_name = "d_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/D_Letter/D_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1l4ck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/D_Letter/D_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_81eb7"]
+resource_name = "q_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1l4ck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/Q_Letter/Q_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tomxx"]
+resource_name = "s_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1l4ck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Keyboard_Command/Keyboard_Letters/S_Letter/S_RichTextLabel:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rlcff"]
+resource_name = "space_bar_pressed"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Other/Space_Bar_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_3v4gk")]
+}
+
+[sub_resource type="Animation" id="Animation_aqdlk"]
+resource_name = "space_bar_released"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Keyboard_Command/Keyboard_Other/Space_Bar_Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_jeqwe")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xttrl"]
+_data = {
+"d_pressed": SubResource("Animation_8jmw8"),
+"d_released": SubResource("Animation_fps4m"),
+"q_pressed": SubResource("Animation_cmkw8"),
+"q_released": SubResource("Animation_81eb7"),
+"s_pressed": SubResource("Animation_pcaa3"),
+"s_released": SubResource("Animation_tomxx"),
+"space_bar_pressed": SubResource("Animation_rlcff"),
+"space_bar_released": SubResource("Animation_aqdlk"),
+"z_pressed": SubResource("Animation_q6bb0"),
+"z_released": SubResource("Animation_cayry")
+}
 
 [node name="OptionsScreen" type="CanvasLayer"]
 script = ExtResource("1_xkk8t")
@@ -150,5 +518,10 @@ texture = ExtResource("5_q7jar")
 position = Vector2(318, 536)
 scale = Vector2(3.26696, 2.95)
 texture = ExtResource("6_jeqwe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xttrl")
+}
 
 [connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]
