@@ -26,6 +26,7 @@ Logs="*res://Autoload/Logs.gd"
 EntitiesState="*res://Autoload/Entities_State.gd"
 XpSystem="*res://Autoload/XP_system.gd"
 StatsSystem="*res://Autoload/Stats_system.gd"
+Signals="*res://Autoload/Signals.gd"
 
 [display]
 

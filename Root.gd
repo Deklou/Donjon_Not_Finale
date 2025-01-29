@@ -1,26 +1,46 @@
 extends Node2D
-
-var Root = null
-var Root_instance = null
+############### SCENES ##################
+var transition_scene = preload("res://Transition/Fade_1.tscn")
+var title_screen_scene = preload("res://Menu/Title_Screen/title_screen.tscn")
+var option_scene = preload("res://Menu/Options_Screen/Options_Screen.tscn")
+############### VARIABLES ##################
+var transition_scene_animation_player: AnimationPlayer = null
+var transition_instance = null
+var root = null
+var root_instance = null
+var current_scene_instance
 var user_interface_node = null
 
-func _ready(): #premier appel du jeu, le joueur commence au niveau 0
-	Root = get_tree().root
-	Root_instance = preload("res://Menu/Command_Screen/Command_Screen.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
-	GameState.to_game_from_menu.connect(_to_objective_screen)
-	GameState.restart_root.connect(_to_stats_screen) #si on recommence, on commence directement dans le niveau
+##################### READY #####################
+func _ready(): #premier appel du jeu, c'est l'écran titre
+	_to_start_screen()
+##################### SCENES FONCTIONS #####################
+func _to_start_screen():
+	_add_scene_to_root(title_screen_scene)
+	if not Signals.title_screen_to_options.is_connected(_to_options_screen):
+		Signals.title_screen_to_options.connect(_to_options_screen)
+func _to_options_screen():
+	_add_scene_to_root(option_scene)
+	if not Signals.options_back.is_connected(_to_start_screen):
+		Signals.options_back.connect(_to_start_screen)
+##################### SCENE GESTION #####################	
+func _add_scene_to_root(scene: PackedScene) -> Node:
+	root = get_tree().root
+	root_instance = scene.instantiate()
+	root.add_child.call_deferred(root_instance)
+	return root_instance
+
 	
 func _to_objective_screen():
 	if EntitiesState.player_parent_node == null: #si le joueur n'a pas été instancié
-		Root_instance = preload("res://Menu/Objectif_Screen/Objectif_Screen.tscn").instantiate()
-		Root.add_child.call_deferred(Root_instance)
-		Root_instance.to_stats_screen.connect(_to_stats_screen)
+		root_instance = preload("res://Menu/Objectif_Screen/Objectif_Screen.tscn").instantiate()
+		root.add_child.call_deferred(root_instance)
+		root_instance.to_stats_screen.connect(_to_stats_screen)
 	
 func _to_stats_screen():
-	Root_instance = preload("res://Menu/Stats_Screen/stats_screen.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
-	Root_instance.to_intro_level.connect(_to_intro_level)
+	root_instance = preload("res://Menu/Stats_Screen/stats_screen.tscn").instantiate()
+	root.add_child.call_deferred(root_instance)
+	root_instance.to_intro_level.connect(_to_intro_level)
 	EntitiesState.Root = get_tree().root
 	for child in EntitiesState.Root.get_node("Root").get_children(): #On vérifie que Root n'a pas déjà des enfants
 		EntitiesState.Root.get_node("Root").remove_child(child)
@@ -55,8 +75,8 @@ func _to_intro_level_from_first_floor():
 	
 func _to_the_end():
 	if EntitiesState.player_parent_node != null:
-		Root = get_tree().root
-		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+		root = get_tree().root
+		root.remove_child.call_deferred(EntitiesState.player_parent_node)
 		EntitiesState.player_parent_node.queue_free()
 	GameState.ending_triggered = true
 	EntitiesState.Root = get_tree().root
@@ -67,13 +87,13 @@ func _to_the_end():
 	
 func _to_secret():
 	if EntitiesState.player_parent_node != null:
-		Root = get_tree().root
-		Root.remove_child.call_deferred(EntitiesState.player_parent_node)
+		root = get_tree().root
+		root.remove_child.call_deferred(EntitiesState.player_parent_node)
 		EntitiesState.player_parent_node.queue_free()
-	Root = get_tree().root
+	root = get_tree().root
 	GameData.secret_triggered = true
-	Root_instance = preload("res://Levels/Demo/secret.tscn").instantiate()
-	Root.add_child.call_deferred(Root_instance)
+	root_instance = preload("res://Levels/Demo/secret.tscn").instantiate()
+	root.add_child.call_deferred(root_instance)
 	GameState.ending_triggered = true
 ##################### SCENE NOM #####################		
 func _scene_path_to_scene_name(scene_path):
@@ -86,10 +106,10 @@ func _scene_path_to_scene_name(scene_path):
 ##################### DECHARGER NIVEAU #####################	
 func _unload_level(scene_path : String):
 	EntitiesState.player_is_frozen = true
-	Root = get_tree().root
+	root = get_tree().root
 	var scene_name = _scene_path_to_scene_name(scene_path)
-	if Root.has_node(scene_name): #Si la hiérarchie possède la scène qu'on veut supprimer, on la supprime
-		Root.remove_child.call_deferred(Root.get_node(scene_name))
+	if root.has_node(scene_name): #Si la hiérarchie possède la scène qu'on veut supprimer, on la supprime
+		root.remove_child.call_deferred(root.get_node(scene_name))
 	if EntitiesState.player_parent_node != null and EntitiesState.player_parent_node.has_node("Grid_player_2") == true: #Si on vient d'un niveau, on l'invisibilise et on supprime le joueur pour éviter les conflits entre les niveaux
 		EntitiesState.player_parent_node.remove_child(EntitiesState.player_parent_node.get_node("Grid_player_2"))
 		EntitiesState.enemy_triggered_list.clear()
@@ -99,11 +119,11 @@ func _unload_level(scene_path : String):
 ##################### DECHARGER PARENT JOUEUR #####################
 func _unload_previous_level():
 	EntitiesState.player_is_frozen = true
-	Root = get_tree().root
+	root = get_tree().root
 	var parent_path : String = EntitiesState.player_parent_node.get_path()
-	if Root.has_node(parent_path):
-		var node_to_remove = Root.get_node(parent_path)
-		Root.remove_child(node_to_remove)
+	if root.has_node(parent_path):
+		var node_to_remove = root.get_node(parent_path)
+		root.remove_child(node_to_remove)
 		node_to_remove.queue_free()
 	EntitiesState.enemy_triggered_list.clear()
 	EntitiesState.enemy_turn_ended_list.clear()
@@ -113,22 +133,22 @@ func _load_next_transition(transition_scene_path : String):
 	var scene = ResourceLoader.load(transition_scene_path)
 	if scene:
 		var transition_scene = scene.instantiate()
-		Root.add_child.call_deferred(transition_scene)
+		root.add_child.call_deferred(transition_scene)
 		if is_inside_tree():
 			await get_tree().create_timer(5.0).timeout
 		transition_scene.queue_free()
 ##################### CHARGER NIVEAU #####################		
 func _load_next_level(scene_path : String):
-	Root = get_tree().root
+	root = get_tree().root
 	var scene = ResourceLoader.load(scene_path)
 	var scene_name = _scene_path_to_scene_name(scene_path)
-	if Root.has_node(scene_name): 
-		if EntitiesState.player_parent_node == Root.get_node(scene_name): #Si le niveau à charger et le niveau précédent sont les mêmes, on supprime la première instance
-			Root.remove_child.call_deferred(Root.get_node(scene_name))
+	if root.has_node(scene_name): 
+		if EntitiesState.player_parent_node == root.get_node(scene_name): #Si le niveau à charger et le niveau précédent sont les mêmes, on supprime la première instance
+			root.remove_child.call_deferred(root.get_node(scene_name))
 	else: #Si le niveau n'a pas encore été chargé une seule fois, on le charge
 		if scene:
 			var next_level_scene = scene.instantiate()
-			Root.add_child.call_deferred(next_level_scene)
+			root.add_child.call_deferred(next_level_scene)
 	if user_interface_node != null:
 		user_interface_node.visible = true
 	if is_inside_tree():
