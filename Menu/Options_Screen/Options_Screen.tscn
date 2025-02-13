@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://df5jlhf5sl7po"]
+[gd_scene load_steps=29 format=3 uid="uid://df5jlhf5sl7po"]
 
 [ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="1_363hm"]
 [ext_resource type="Script" path="res://Menu/Options_Screen/Options_Screen.gd" id="1_xkk8t"]
@@ -8,13 +8,109 @@
 [ext_resource type="Texture2D" uid="uid://d1rk0bh4j6tvv" path="res://Sprites/Menu/Space_Bar_2.png" id="6_3v4gk"]
 [ext_resource type="Texture2D" uid="uid://0sibdqjbnpt0" path="res://Sprites/Menu/Space_Bar_1.png" id="6_jeqwe"]
 [ext_resource type="Texture2D" uid="uid://dgkwos7ufw7in" path="res://Sprites/Menu/Click_Particle.png" id="7_8onhm"]
+[ext_resource type="Texture2D" uid="uid://c7c2rll16s44t" path="res://Sprites/Menu/arrow_3.png" id="7_begel"]
 [ext_resource type="Texture2D" uid="uid://bs0d4vhxsjhm4" path="res://Sprites/Menu/Mouse_Cursor_2.png" id="7_twjh5"]
 [ext_resource type="Texture2D" uid="uid://dgfepklpsxtxw" path="res://Sprites/Menu/frame_2.png" id="7_y1s27"]
 [ext_resource type="Texture2D" uid="uid://bgaul4gll6ro0" path="res://Sprites/Menu/Mouse_2.png" id="8_gd4d2"]
+[ext_resource type="Texture2D" uid="uid://cdwdhvb6a50nr" path="res://Sprites/Menu/Mouse_3.png" id="9_ujvp6"]
+
+[sub_resource type="Animation" id="Animation_wn0c2"]
+resource_name = "click_pressed"
+length = 0.01
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mouse_Command/Cursor_Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(910, 282)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mouse_Command/Mouse_Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_ujvp6")]
+}
+
+[sub_resource type="Animation" id="Animation_4di4l"]
+resource_name = "click_released"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Cursor_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mouse_Command/Cursor_Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(920, 280)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mouse_Command/Mouse_Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_gd4d2")]
+}
 
 [sub_resource type="Animation" id="Animation_8jmw8"]
 resource_name = "d_pressed"
 length = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,14 +138,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
+"update": 1,
+"values": [ExtResource("7_begel")]
 }
 
 [sub_resource type="Animation" id="Animation_fps4m"]
@@ -82,10 +178,42 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Right_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_q7jar")]
+}
+
+[sub_resource type="Animation" id="Animation_c2khg"]
+resource_name = "mouse_moved"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lq3dh"]
+resource_name = "mouse_still"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -95,6 +223,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_cmkw8"]
 resource_name = "q_pressed"
 length = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -122,14 +251,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
+"update": 1,
+"values": [ExtResource("7_begel")]
 }
 
 [sub_resource type="Animation" id="Animation_81eb7"]
@@ -162,19 +291,20 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Left_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [ExtResource("5_q7jar")]
 }
 
 [sub_resource type="Animation" id="Animation_pcaa3"]
 resource_name = "s_pressed"
 length = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -202,14 +332,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
+"update": 1,
+"values": [ExtResource("7_begel")]
 }
 
 [sub_resource type="Animation" id="Animation_tomxx"]
@@ -242,14 +372,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Down_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [ExtResource("5_q7jar")]
 }
 
 [sub_resource type="Animation" id="Animation_rlcff"]
@@ -287,6 +417,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_q6bb0"]
 resource_name = "z_pressed"
 length = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -314,14 +445,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360654, 0.938043, 0, 1)]
+"update": 1,
+"values": [ExtResource("7_begel")]
 }
 
 [sub_resource type="Animation" id="Animation_cayry"]
@@ -354,115 +485,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:modulate")
+tracks/2/path = NodePath("Keyboard_Command/Keyboard_Arrows/Arrow_Up_Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_wn0c2"]
-resource_name = "click_pressed"
-length = 0.05
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mouse_Command/Cursor_Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.0002),
-"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4di4l"]
-resource_name = "click_released"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mouse_Command/Cursor_Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mouse_Command/Cursor_Particle_Sprite2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_c2khg"]
-resource_name = "mouse_moved"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.360784, 0.937255, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lq3dh"]
-resource_name = "mouse_still"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mouse_Command/Mouse_Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [ExtResource("5_q7jar")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xttrl"]
@@ -525,15 +555,15 @@ text = "Retour"
 [node name="Z_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
 
 [node name="Z_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/Z_Letter"]
-position = Vector2(318, 269)
+position = Vector2(438.965, 277.965)
 scale = Vector2(3.475, 3.46042)
 texture = ExtResource("4_1l4ck")
 
 [node name="Z_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/Z_Letter"]
-offset_left = 304.0
-offset_top = 247.0
-offset_right = 352.0
-offset_bottom = 303.0
+offset_left = 424.965
+offset_top = 255.965
+offset_right = 472.965
+offset_bottom = 311.965
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("1_363hm")
 theme_override_font_sizes/normal_font_size = 55
@@ -543,15 +573,15 @@ scroll_active = false
 [node name="Q_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
 
 [node name="Q_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/Q_Letter"]
-position = Vector2(223, 360)
+position = Vector2(343.965, 368.965)
 scale = Vector2(3.475, 3.46042)
 texture = ExtResource("4_1l4ck")
 
 [node name="Q_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/Q_Letter"]
-offset_left = 209.0
-offset_top = 336.0
-offset_right = 257.0
-offset_bottom = 392.0
+offset_left = 329.965
+offset_top = 344.965
+offset_right = 377.965
+offset_bottom = 400.965
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("1_363hm")
 theme_override_font_sizes/normal_font_size = 55
@@ -561,15 +591,15 @@ scroll_active = false
 [node name="S_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
 
 [node name="S_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/S_Letter"]
-position = Vector2(318, 360)
+position = Vector2(438.965, 368.965)
 scale = Vector2(3.475, 3.46042)
 texture = ExtResource("4_1l4ck")
 
 [node name="S_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/S_Letter"]
-offset_left = 304.0
-offset_top = 338.0
-offset_right = 352.0
-offset_bottom = 394.0
+offset_left = 424.965
+offset_top = 346.965
+offset_right = 472.965
+offset_bottom = 402.965
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("1_363hm")
 theme_override_font_sizes/normal_font_size = 55
@@ -579,15 +609,15 @@ scroll_active = false
 [node name="D_Letter" type="Node2D" parent="Keyboard_Command/Keyboard_Letters"]
 
 [node name="D_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Letters/D_Letter"]
-position = Vector2(411, 360)
+position = Vector2(531.965, 368.965)
 scale = Vector2(3.475, 3.46042)
 texture = ExtResource("4_1l4ck")
 
 [node name="D_RichTextLabel" type="RichTextLabel" parent="Keyboard_Command/Keyboard_Letters/D_Letter"]
-offset_left = 398.0
-offset_top = 337.0
-offset_right = 446.0
-offset_bottom = 393.0
+offset_left = 518.965
+offset_top = 345.965
+offset_right = 566.965
+offset_bottom = 401.965
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("1_363hm")
 theme_override_font_sizes/normal_font_size = 55
@@ -598,24 +628,24 @@ scroll_active = false
 [node name="Keyboard_Arrows" type="Node2D" parent="Keyboard_Command"]
 
 [node name="Arrow_Up_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(318, 184)
+position = Vector2(438.965, 192.965)
 scale = Vector2(3.50118, 3.41373)
 texture = ExtResource("5_q7jar")
 
 [node name="Arrow_Left_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(136, 360)
+position = Vector2(256.965, 368.965)
 rotation = -1.5708
 scale = Vector2(3.50118, 3.41373)
 texture = ExtResource("5_q7jar")
 
 [node name="Arrow_Right_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(496, 360)
+position = Vector2(616.965, 368.965)
 rotation = 1.5708
 scale = Vector2(3.50118, 3.41373)
 texture = ExtResource("5_q7jar")
 
 [node name="Arrow_Down_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Arrows"]
-position = Vector2(318, 444)
+position = Vector2(438.965, 452.965)
 rotation = 3.14159
 scale = Vector2(3.50118, 3.41373)
 texture = ExtResource("5_q7jar")
@@ -623,27 +653,26 @@ texture = ExtResource("5_q7jar")
 [node name="Keyboard_Other" type="Node2D" parent="Keyboard_Command"]
 
 [node name="Space_Bar_Sprite2D" type="Sprite2D" parent="Keyboard_Command/Keyboard_Other"]
-position = Vector2(318, 536)
-scale = Vector2(3.26696, 2.95)
+position = Vector2(440, 560)
+scale = Vector2(3.86152, 3.07083)
 texture = ExtResource("6_jeqwe")
 
 [node name="Mouse_Command" type="Node2D" parent="."]
 
 [node name="Cursor_Particle_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
 visible = false
-modulate = Color(0.360784, 0.937255, 0, 1)
-position = Vector2(688.5, 226.938)
-scale = Vector2(1.98438, 2.28864)
+position = Vector2(864, 200)
+scale = Vector2(2.86719, 3.03523)
 texture = ExtResource("7_8onhm")
 
 [node name="Cursor_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
-position = Vector2(720, 288)
-scale = Vector2(2.95991, 3.11235)
+position = Vector2(920, 280)
+scale = Vector2(4.72995, 4.6331)
 texture = ExtResource("7_twjh5")
 
 [node name="Mouse_Sprite2D" type="Sprite2D" parent="Mouse_Command"]
-position = Vector2(710.091, 504)
-scale = Vector2(3.51106, 3.49522)
+position = Vector2(1040, 528)
+scale = Vector2(3.85074, 4.14653)
 texture = ExtResource("8_gd4d2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

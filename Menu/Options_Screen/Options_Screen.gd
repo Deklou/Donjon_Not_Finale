@@ -11,6 +11,7 @@ var transition_instance = null
 var back_button_position = Vector2(0,0)
 var mouse_movement_timeout : Timer
 var button_tween : Tween
+var space_bar_pressed_event : bool = false
 
 ##################### READY #####################
 func _ready():
