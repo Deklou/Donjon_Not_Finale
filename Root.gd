@@ -4,6 +4,7 @@ var transition_scene = preload("res://Transition/Fade_1.tscn")
 var title_screen_scene = preload("res://Menu/Title_Screen/title_screen.tscn")
 var option_scene = preload("res://Menu/Options_Screen/Options_Screen.tscn")
 var objectif_scene = preload("res://Menu/Objectif_Screen/Objectif_Screen.tscn")
+var command_scene = preload("res://Menu/Command_Screen/Command_Screen.tscn")
 ############### VARIABLES ##################
 var transition_scene_animation_player: AnimationPlayer = null
 var transition_instance = null
@@ -28,6 +29,10 @@ func _to_options_screen():
 		Signals.options_back.connect(_to_start_screen)
 func _to_objectif_screen():
 	_add_scene_to_root(objectif_scene)
+	if not Signals.to_command_screen.is_connected(_to_command_screen):
+		Signals.to_command_screen.connect(_to_command_screen)
+func _to_command_screen():
+	_add_scene_to_root(command_scene)
 ##################### SCENE GESTION #####################	
 func _add_scene_to_root(scene: PackedScene) -> Node:
 	root = get_tree().root

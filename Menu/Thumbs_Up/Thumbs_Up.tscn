@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://wr3myycavuxa"]
+[gd_scene load_steps=6 format=3 uid="uid://wr3myycavuxa"]
 
 [ext_resource type="Script" path="res://Menu/Thumbs_Up/Thumbs_Up.gd" id="1_iwieh"]
-[ext_resource type="Texture2D" uid="uid://ct5g83sj1yjs4" path="res://Sprites/Menu/Capture-removebg-preview.png" id="2_ax6rw"]
-[ext_resource type="Texture2D" uid="uid://d1qyeiucmc86r" path="res://Sprites/Menu/inner_circle.png" id="3_wt2yx"]
-[ext_resource type="Texture2D" uid="uid://d11na1jrha28d" path="res://Sprites/Menu/outer_circle.png" id="4_4k48j"]
+[ext_resource type="Texture2D" uid="uid://e76dba1gb6lq" path="res://Sprites/Menu/thumbs_up.png" id="2_rwqmh"]
+[ext_resource type="Texture2D" uid="uid://bgdqnrtp1uyrf" path="res://Sprites/Menu/circle_2.png" id="3_y006a"]
 
 [sub_resource type="Animation" id="Animation_nv1pe"]
 resource_name = "dezoom"
@@ -18,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.993659, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.1, 0.1), Vector2(0.4, 0.4)]
+"values": [Vector2(9, 9), Vector2(1, 1), Vector2(4, 4)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -30,7 +29,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.00391204, 0.997571),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.1, 0.1)]
+"values": [Vector2(14, 14), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -42,7 +41,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.2, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(3, 3)]
+"values": [Vector2(1, 1), Vector2(30, 30)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -90,20 +89,21 @@ _data = {
 script = ExtResource("1_iwieh")
 
 [node name="Thumbs_Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_ax6rw")
+scale = Vector2(5.77958, 5.77958)
+texture = ExtResource("2_rwqmh")
 
 [node name="Inner_Circle_Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_wt2yx")
+position = Vector2(-9, 8)
+scale = Vector2(8.818, 8.818)
+texture = ExtResource("3_y006a")
 
 [node name="Outer_Circle_Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-4, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_4k48j")
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("3_y006a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 2.5
 libraries = {
 "": SubResource("AnimationLibrary_bwdd1")
 }
+speed_scale = 2.5

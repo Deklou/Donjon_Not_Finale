@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 ############### SCENES ##################
 var transition_scene = preload("res://Transition/Fade_1.tscn")
-############### Variables ##################
+############### VARIABLES ##################
 var transition_scene_animation_player: AnimationPlayer = null
 var transition_instance = null
 var back_button_position = Vector2(0,0)
