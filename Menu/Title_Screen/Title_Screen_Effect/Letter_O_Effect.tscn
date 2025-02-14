@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://chfwjb7ib45bh"]
+[gd_scene load_steps=6 format=3 uid="uid://chfwjb7ib45bh"]
 
+[ext_resource type="Script" path="res://Menu/Title_Screen/Title_Screen_Effect/Letter_O_Effect.gd" id="1_oimu1"]
 [ext_resource type="Theme" uid="uid://bmqswjcl61tr8" path="res://Themes/Button/Title_Screen_E.tres" id="2_m6o4q"]
 [ext_resource type="FontFile" uid="uid://bt3ibxabl67vp" path="res://Fonts/determination-extended.ttf" id="3_ag8tx"]
 
@@ -39,6 +40,7 @@ _data = {
 
 [node name="LetterOEffect" type="Node2D"]
 visible = false
+script = ExtResource("1_oimu1")
 
 [node name="O_Button" type="Button" parent="."]
 offset_right = 58.0
@@ -66,3 +68,5 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_a1xy2")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

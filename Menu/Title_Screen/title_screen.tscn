@@ -93,6 +93,8 @@ text = "D
 
 [node name="O_Button" type="Button" parent="Title_HBox/Donjon_HBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_sabbf")
 theme_override_font_sizes/font_size = 100
 text = "O"
@@ -317,6 +319,7 @@ libraries = {
 [connection signal="pressed" from="Title_HBox/Finale_HBox/E_Button" to="." method="_on_e_button_pressed"]
 [connection signal="mouse_entered" from="Standard_Button_VBox/New_Game_Button" to="." method="_on_new_game_button_mouse_entered"]
 [connection signal="mouse_exited" from="Standard_Button_VBox/New_Game_Button" to="." method="_on_new_game_button_mouse_exited"]
+[connection signal="pressed" from="Standard_Button_VBox/New_Game_Button" to="." method="_on_new_game_button_pressed"]
 [connection signal="mouse_entered" from="Standard_Button_VBox/Continue_Button" to="." method="_on_continue_button_mouse_entered"]
 [connection signal="mouse_exited" from="Standard_Button_VBox/Continue_Button" to="." method="_on_continue_button_mouse_exited"]
 [connection signal="mouse_entered" from="Standard_Button_VBox/Settings_Button" to="." method="_on_settings_button_mouse_entered"]

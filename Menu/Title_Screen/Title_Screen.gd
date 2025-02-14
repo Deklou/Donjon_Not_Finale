@@ -14,7 +14,6 @@ extends CanvasLayer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 ############### SCENES ##################
 var transition_scene = preload("res://Transition/Fade_1.tscn")
-var option_scene = preload("res://Menu/Options_Screen/Options_Screen.tscn")
 var cursor_scene = preload("res://Menu/Cursor/Title_Screen_Cursor.tscn")
 var letter_o_scene = preload("res://Menu/Title_Screen/Title_Screen_Effect/Letter_O_Effect.tscn")
 ############### Variables ##################
@@ -35,8 +34,6 @@ func _ready():
 	transition_scene_animation_player = transition_instance.get_node("AnimationPlayer")
 	_open_scene()
 	cursor_instance = _add_scene_instance(cursor_scene)
-	letter_o_instance = _add_scene_instance(letter_o_scene)
-	letter_o_scene_animation_player = letter_o_instance.get_node("AnimationPlayer")
 	new_game_button_position = new_game_button.position
 	continue_button_position = continue_button.position
 	settings_button_position = settings_button.position
@@ -100,7 +97,11 @@ func cursor_deselect(button_position: Vector2):
 	cursor_instance.visible = false
 ##################### BUTTON PRESSED #####################
 func _on_settings_button_pressed():
-	Signals.title_screen_to_options.emit() #Vers Root
+	Signals.title_screen_to_options.emit() #vers Root
+	_close_scene()
+	queue_free()
+func _on_new_game_button_pressed():
+	Signals.title_screen_to_new_game.emit() #vers Root
 	_close_scene()
 	queue_free()
 func _on_quit_button_pressed():
@@ -122,9 +123,12 @@ func _on_e_button_pressed():
 	button_tween.tween_property(e_button, "position", e_button.position + Vector2(64,0), 0.1).set_trans(Tween.TRANS_LINEAR)
 	button_tween.play()
 func _on_o_button_pressed(): #refaire la fonction pour inclure les autres O
-	print("title screen o button position = " + str(o_button.position))
-	print("title screen hbox position = " + str($Title_HBox.position))
-	move_child(letter_o_instance,2) #Sinon le O ne s'assombrit pas en quittant
-	letter_o_instance.position = o_button.position + $Title_HBox.position + Vector2(4,0)#position du premier O
+	letter_o_instance = _add_scene_instance(letter_o_scene)
+	letter_o_scene_animation_player = letter_o_instance.get_node("AnimationPlayer")
+	move_child(letter_o_instance,2) #Sinon le O se trouve devant l'animation de fondu
+	letter_o_instance.position = o_button.position + $Title_HBox.position + Vector2(5,0)#position du premier O
 	letter_o_instance.visible = true 
 	letter_o_scene_animation_player.play("Letter_O_Effect")
+
+
+

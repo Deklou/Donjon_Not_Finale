@@ -3,6 +3,7 @@ extends Node2D
 var transition_scene = preload("res://Transition/Fade_1.tscn")
 var title_screen_scene = preload("res://Menu/Title_Screen/title_screen.tscn")
 var option_scene = preload("res://Menu/Options_Screen/Options_Screen.tscn")
+var objectif_scene = preload("res://Menu/Objectif_Screen/Objectif_Screen.tscn")
 ############### VARIABLES ##################
 var transition_scene_animation_player: AnimationPlayer = null
 var transition_instance = null
@@ -19,10 +20,14 @@ func _to_start_screen():
 	_add_scene_to_root(title_screen_scene)
 	if not Signals.title_screen_to_options.is_connected(_to_options_screen):
 		Signals.title_screen_to_options.connect(_to_options_screen)
+	if not Signals.title_screen_to_new_game.is_connected(_to_objectif_screen):
+		Signals.title_screen_to_new_game.connect(_to_objectif_screen)
 func _to_options_screen():
 	_add_scene_to_root(option_scene)
 	if not Signals.options_back.is_connected(_to_start_screen):
 		Signals.options_back.connect(_to_start_screen)
+func _to_objectif_screen():
+	_add_scene_to_root(objectif_scene)
 ##################### SCENE GESTION #####################	
 func _add_scene_to_root(scene: PackedScene) -> Node:
 	root = get_tree().root
